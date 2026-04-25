@@ -3,26 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KING'S DOMAIN | FULL COVER VERSION</title>
+    <title>King's Domain | Full Cover</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     
     <style>
         /* ============================================================
-           MASTER SETTINGS - CHANGE YOUR LINKS HERE
+           1. ART SETTINGS (Change your images here)
            ============================================================ */
         :root {
-            --Wallpaper-URL: url('https://wallpapers.com/images/hd/persona-5-background-030o8u3u29n532no.jpg');
-            --Banner-URL: url('https://images8.alphacoders.com/132/1325171.jpeg');
+            --Wallpaper: url('https://wallpapers.com/images/hd/persona-5-background-030o8u3u29n532no.jpg');
+            --Banner: url('https://images8.alphacoders.com/132/1325171.jpeg');
             --p5-pink-red: #ff1f44;
-            --p5-black: #000000;
         }
 
         /* ============================================================
-           DESIGN CODE
+           2. DESIGN CODE
            ============================================================ */
         body {
-            margin: 0; padding: 0; background-color: var(--p5-black);
-            background-image: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), var(--Wallpaper-URL);
+            margin: 0; padding: 0; background-color: #000;
+            background-image: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), var(--Wallpaper);
             background-size: cover; background-attachment: fixed; background-position: center;
             color: white; font-family: 'Segoe UI', sans-serif; overflow-x: hidden;
         }
@@ -37,7 +36,7 @@
 
         .hero-banner {
             width: 100%; height: 320px; border-radius: 20px; 
-            background: linear-gradient(to right, rgba(0,0,0,1) 40%, transparent), var(--Banner-URL);
+            background: linear-gradient(to right, rgba(0,0,0,1) 40%, transparent), var(--Banner);
             background-size: cover; background-position: center;
             display: flex; flex-direction: column; justify-content: center;
             padding-left: 60px; box-sizing: border-box; border: 1px solid rgba(255,255,255,0.1); margin-bottom: 25px;
@@ -46,22 +45,22 @@
 
         #gameSearch {
             width: 100%; padding: 15px 25px; background: #141414; 
-            border: 1px solid #222; border-radius: 8px; color: white; margin-bottom: 30px; outline: none;
+            border: 1px solid #222; border-radius: 8px; color: white; margin-bottom: 30px; outline: none; box-sizing: border-box;
         }
 
-        /* GRID SETTINGS */
+        /* THE GRID */
         .grid {
             display: grid;
             grid-template-columns: repeat(5, 1fr); 
             gap: 20px;
         }
 
-        /* CARD SETTINGS - THE COVER FIX */
+        /* THE CARD (COVER STYLE) */
         .card {
             background: #141414;
             border-radius: 12px;
-            height: 380px; /* Tall vertical rectangle */
-            position: relative; /* Needed to place text on top */
+            height: 380px; /* Vertical Rectangle */
+            position: relative;
             overflow: hidden;
             border: 1px solid #1a1a1a;
             cursor: pointer;
@@ -71,32 +70,27 @@
         .card:hover {
             border-color: var(--p5-pink-red);
             transform: translateY(-8px);
-            box-shadow: 0 10px 20px rgba(255, 31, 68, 0.3);
+            box-shadow: 0 10px 20px rgba(255, 31, 68, 0.4);
         }
 
-        /* THE IMAGE COVER FIX */
+        /* IMAGE STRETCHED TO COVER */
         .card img {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* THIS MAKES THE IMAGE COVER THE CARD */
+            object-fit: cover; /* This makes it a full cover */
             display: block;
-            transition: transform 0.5s ease;
         }
 
-        .card:hover img {
-            transform: scale(1.1); /* Slight zoom on hover */
-        }
-
-        /* TEXT OVERLAY (Bottom Bar) */
+        /* TEXT ON TOP OF IMAGE */
         .card p {
             position: absolute;
             bottom: 0;
             width: 100%;
-            background: rgba(0, 0, 0, 0.8); /* Dark bar behind text */
+            background: rgba(0, 0, 0, 0.85); /* Black bar */
             margin: 0;
             padding: 15px 0;
             text-align: center;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 700;
             color: white;
             border-top: 1px solid var(--p5-pink-red);
@@ -137,6 +131,7 @@
             <a href="#"><i class="fab fa-youtube"></i></a>
             <a href="#"><i class="fab fa-x-twitter"></i></a>
         </div>
+        <div style="font-size: 10px; color: #444; letter-spacing: 2px;">© 2024 KING'S DOMAIN</div>
     </footer>
 
     <div id="player-view">
@@ -149,22 +144,37 @@
     </div>
 
     <script>
+        // 3. GAME DATA
         const games = [
-
-            { name: "HellTaker", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQv1_j234jQIQ_uuusHgxrkTMKLn77KXX9jlA&s", url: "helltaker.html" },
             
-            {  name: "Slime Rancher", img: "https://sm.ign.com/ign_es/cover/s/slime-ranc/slime-rancher_j318.jpg", url: "slimerancher.html" },
-             
-        { name: "Slope",img: "https://play-lh.googleusercontent.com/uGn_6O3Y94G56555444333222111", url: "https://kkgames.github.io/slope/"}
-            { 
-                name: "1v1.LOL", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzY3zN8N_X1Nf5YpPZ5o8E9h-pL-lqS-mEig&s", url: "https://1v1.lol" 
+            { name: "HellTaker", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQv1_j234jQIQ_uuusHgxrkTMKLn77KXX9jlA&s", url: "helltaker.html" },
+            {
+            
+                name: "Slime Rancher", 
+                img: "https://sm.ign.com/ign_es/cover/s/slime-ranc/slime-rancher_j318.jpg", 
+                url: "slimerancher.html" 
             },
             { 
-                name: "BitLife", img: "https://play-lh.googleusercontent.com/H_f-R6U9p6M7L9f5B_R_3E5b6q9Z5F6", url: "https://bitlifeonline.io" 
+                name: "Slope", 
+                img: "https://classroom-6x.lol/_next/image?url=https%3A%2F%2Fcdn.shst.at%2Fimages%2Fgames%2Fslope.png&w=128&q=75", 
+                url: "https://kkgames.github.io/slope/" 
             },
             { 
-                name: "Drive Mad", img: "https://cdn.shst.at/images/games/drive-mad.png", url: "https://kkgames.github.io/drive-mad/" 
-            }                                   
+                name: "1v1.LOL", 
+                img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzY3zN8N_X1Nf5YpPZ5o8E9h-pL-lqS-mEig&s", 
+                url: "https://1v1.lol" 
+            },
+            { 
+                name: "BitLife", 
+                img: "https://play-lh.googleusercontent.com/H_f-R6U9p6M7L9f5B_R_3E5b6q9Z5F6", 
+                url: "https://bitlifeonline.io" 
+            },
+            { 
+                name: "Tunnel Rush", 
+                img: "https://edumaps.net/wp-content/uploads/2022/12/tunnel-rush.png", 
+                url: "https://kkgames.github.io/tunnel-rush/" 
+            }
+        ];
 
         const grid = document.getElementById('gameGrid');
         const frame = document.getElementById('gameFrame');
@@ -174,9 +184,8 @@
             data.forEach(game => {
                 const card = document.createElement('div');
                 card.className = 'card';
-                // Note: Simplified HTML structure here to let the image fill the box
                 card.innerHTML = `
-                    <img src="${game.img}" alt="${game.name}">
+                    <img src="${game.img}">
                     <p>${game.name}</p>
                 `;
                 card.onclick = () => {
@@ -184,6 +193,7 @@
                     document.getElementById('player-view').style.display = 'flex';
                     frame.src = game.url;
                     document.getElementById('playing-title').innerText = game.name;
+                    window.scrollTo(0,0);
                 };
                 grid.appendChild(card);
             });
@@ -206,6 +216,7 @@
             else if (frame.webkitRequestFullscreen) frame.webkitRequestFullscreen();
         }
 
+        // Run on load
         render(games);
     </script>
 </body>
