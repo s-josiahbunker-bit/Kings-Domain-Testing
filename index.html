@@ -3,217 +3,222 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>King's Domain | Unblocked Hub</title>
+    <title>KING'S DOMAIN | UNBLOCKED</title>
+    
+    <!-- Bold Gaming Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@700&display=swap" rel="stylesheet">
+    
     <style>
-        /* 1. THE AESTHETIC WALLPAPER */
+        /* 1. CORE AESTHETIC */
         body {
             margin: 0;
             padding: 0;
-            background-color: #050505;
-            /* Gaming Grid Wallpaper */
+            background-color: #000;
+            /* Classic Gaming Grid Background */
             background-image: 
-                radial-gradient(circle at 2px 2px, #1a1a1a 1px, transparent 0);
+                linear-gradient(to right, #111 1px, transparent 1px),
+                linear-gradient(to bottom, #111 1px, transparent 1px);
             background-size: 40px 40px;
-            background-attachment: fixed;
-            font-family: 'Oswald', 'Segoe UI', sans-serif;
-            color: #ffffff;
+            color: white;
+            font-family: 'Oswald', sans-serif;
             overflow-x: hidden;
         }
 
-        /* 2. NEON NAVBAR */
-        .navbar {
+        /* 2. HEADER/NAV */
+        .header {
             background: #000;
-            padding: 10px 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 2px solid #ff0000;
-            box-shadow: 0 0 15px rgba(255, 0, 0, 0.4);
+            padding: 10px 0;
+            text-align: center;
+            border-bottom: 4px solid #ff0000;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
             position: sticky;
             top: 0;
             z-index: 1000;
         }
-        .logo { 
-            font-size: 28px; 
-            font-weight: 900; 
-            color: #ff0000; 
+        .logo {
+            font-family: 'Anton', sans-serif;
+            font-size: 35px;
+            color: #ff0000;
             text-transform: uppercase;
-            text-shadow: 2px 2px #550000;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px #000, 0 0 10px #ff0000;
+            text-decoration: none;
         }
 
-        /* 3. LONG ROUNDED BANNER */
-        .banner-wrap {
-            padding: 30px 20px 0 20px;
+        /* 3. LONG ROUNDED BANNER (Classic Aesthetic) */
+        .banner-container {
+            padding: 20px 5%;
             display: flex;
             justify-content: center;
         }
         .hero-banner {
             width: 100%;
-            max-width: 1200px; /* Long length */
-            height: 200px;
-            background: linear-gradient(45deg, rgba(255,0,0,0.2), rgba(0,0,0,0.8)), 
+            max-width: 1200px;
+            height: 160px;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
                         url('https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2070');
             background-size: cover;
             background-position: center;
-            border-radius: 20px;
-            border: 2px solid #ff0000;
+            border-radius: 15px;
+            border: 3px solid #ff0000;
             display: flex;
-            flex-direction: column;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
             box-shadow: 0 0 25px rgba(255, 0, 0, 0.3);
-            text-align: center;
         }
-        .hero-banner h1 { font-size: 50px; margin: 0; text-transform: uppercase; font-style: italic; }
-        .hero-banner p { font-size: 18px; color: #ff4d4d; letter-spacing: 2px; }
+        .hero-banner h1 {
+            font-family: 'Anton', sans-serif;
+            font-size: 50px;
+            margin: 0;
+            color: #fff;
+            text-shadow: 4px 4px 0px #ff0000;
+        }
 
         /* 4. SEARCH BAR */
-        .search-section {
+        .search-wrap {
             display: flex;
             justify-content: center;
-            padding: 30px 20px;
+            padding: 10px 0 30px 0;
         }
-        #search-box {
-            width: 100%;
-            max-width: 600px;
-            padding: 15px 25px;
-            border-radius: 10px;
-            border: 2px solid #333;
+        #search-input {
+            width: 90%;
+            max-width: 500px;
+            padding: 12px 20px;
+            border-radius: 5px;
+            border: 2px solid #ff0000;
             background: #111;
-            color: white;
+            color: #fff;
+            font-family: 'Oswald', sans-serif;
             font-size: 18px;
             outline: none;
-            transition: 0.3s;
-        }
-        #search-box:focus {
-            border-color: #ff0000;
-            box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
         }
 
-        /* 5. GAME GRID */
-        .grid-container {
+        /* 5. GAME GRID (CLASSIC STYLE) */
+        .grid-wrapper {
             max-width: 1300px;
             margin: 0 auto;
             padding: 0 20px 50px 20px;
         }
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
         }
+
         .card {
             background: #111;
-            border-radius: 12px;
-            overflow: hidden;
             border: 2px solid #222;
+            border-radius: 8px;
+            overflow: hidden;
             cursor: pointer;
-            transition: 0.2s ease;
+            transition: 0.2s;
             position: relative;
         }
         .card:hover {
-            transform: scale(1.05);
             border-color: #ff0000;
-            box-shadow: 0 0 20px rgba(255, 0, 0, 0.4);
-            z-index: 2;
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.4);
+            z-index: 5;
         }
         .card img {
             width: 100%;
             aspect-ratio: 1/1;
             object-fit: cover;
-            filter: brightness(0.8);
+            display: block;
         }
-        .card:hover img { filter: brightness(1); }
         .card p {
-            padding: 10px;
             margin: 0;
+            padding: 8px;
             text-align: center;
-            font-weight: bold;
-            font-size: 14px;
             background: #000;
+            font-size: 14px;
+            color: #ccc;
+            border-top: 1px solid #222;
+        }
+        .card:hover p {
+            color: #ff0000;
         }
 
-        /* 6. GAME PLAYER OVERLAY */
-        #player {
+        /* 6. GAME PLAYER (INTERNAL) */
+        #game-screen {
             display: none;
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             background: #000;
-            z-index: 9999;
+            z-index: 2000;
             flex-direction: column;
         }
         .player-nav {
-            padding: 10px 20px;
             background: #111;
+            padding: 10px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 2px solid #ff0000;
+            border-bottom: 3px solid #ff0000;
         }
         .back-btn {
             background: #ff0000;
             color: white;
             border: none;
-            padding: 10px 25px;
-            border-radius: 5px;
+            padding: 8px 20px;
+            border-radius: 4px;
             cursor: pointer;
-            font-weight: 900;
-            text-transform: uppercase;
+            font-family: 'Anton', sans-serif;
+            font-size: 16px;
         }
         iframe {
             flex-grow: 1;
             border: none;
-            width: 100%;
-            height: 100%;
+            background: #fff; /* Helps some games load textures */
         }
     </style>
-    <!-- Importing a gaming font -->
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <!-- HOME PAGE -->
-    <div id="home">
-        <div class="navbar">
-            <div class="logo">KING'S DOMAIN</div>
+    <!-- HOME VIEW -->
+    <div id="home-view">
+        <div class="header">
+            <a href="#" class="logo" onclick="location.reload()">KING'S DOMAIN</a>
         </div>
 
-        <div class="banner-wrap">
+        <div class="banner-container">
             <div class="hero-banner">
-                <h1>KING'S DOMAIN</h1>
-                <p>UNBLOCKED & FREE</p>
+                <h1>UNBLOCKED GAMES</h1>
             </div>
         </div>
 
-        <div class="search-section">
-            <input type="text" id="search-box" placeholder="SEARCH FOR A GAME..." onkeyup="filterGames()">
+        <div class="search-wrap">
+            <input type="text" id="search-input" placeholder="SEARCH GAMES..." onkeyup="filter()">
         </div>
 
-        <div class="grid-container">
+        <div class="grid-wrapper">
             <div class="grid" id="game-grid">
-                <!-- Games Load Here -->
+                <!-- Games go here -->
             </div>
         </div>
     </div>
 
-    <!-- FULLSCREEN PLAYER -->
-    <div id="player">
+    <!-- PLAYER VIEW -->
+    <div id="game-screen">
         <div class="player-nav">
-            <button class="back-btn" onclick="closeGame()">Back to Home</button>
-            <span id="playing-title" style="font-weight:bold; color:red;">GAME NAME</span>
-            <div style="width:100px;"></div>
+            <button class="back-btn" onclick="closeGame()">BACK</button>
+            <span id="game-title" style="font-family:'Anton'; color:white; font-size:20px;">GAME NAME</span>
+            <div style="width: 100px;"></div>
         </div>
-        <iframe id="game-frame" src=""></iframe>
+        <iframe id="game-frame" src="" allowfullscreen sandbox="allow-scripts allow-same-origin allow-forms"></iframe>
     </div>
 
     <script>
-        // DATA - Put your King's Domain assets here
+        // DATA
         const games = [
             { name: "Slope", img: "https://classroom-6x.lol/_next/image?url=https%3A%2F%2Fcdn.shst.at%2Fimages%2Fgames%2Fslope.png&w=128&q=75", url: "https://kkgames.github.io/slope/" },
             { name: "1v1.LOL", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzY3zN8N_X1Nf5YpPZ5o8E9h-pL-lqS-mEig&s", url: "https://1v1.lol" },
             { name: "Tunnel Rush", img: "https://edumaps.net/wp-content/uploads/2022/12/tunnel-rush.png", url: "https://kkgames.github.io/tunnel-rush/" },
             { name: "BitLife", img: "https://play-lh.googleusercontent.com/H_f-R6U9p6M7L9f5B_R_3E5b6q9Z5F6", url: "https://bitlifeonline.io" },
             { name: "Drive Mad", img: "https://cdn.shst.at/images/games/drive-mad.png", url: "https://kkgames.github.io/drive-mad/" },
-            { name: "EGG CAR", img: "https://play-lh.googleusercontent.com/I6PZpT0x", url: "https://kkgames.github.io/egg-car/" }
+            { name: "Egg Car", img: "https://play-lh.googleusercontent.com/I6PZpT0x", url: "https://kkgames.github.io/egg-car/" },
+            { name: "Retro Bowl", img: "https://play-lh.googleusercontent.com/TM_fGfS", url: "https://kkgames.github.io/retro-bowl/" },
+            { name: "Local Game", img: "https://via.placeholder.com/150/ff0000/000000?text=HTML+GAME", url: "game.html" }
         ];
 
         const grid = document.getElementById('game-grid');
@@ -225,28 +230,27 @@
                 card.className = 'card';
                 card.innerHTML = `<img src="${game.img}"><p>${game.name}</p>`;
                 card.onclick = () => {
-                    document.getElementById('home').style.display = 'none';
-                    document.getElementById('player').style.display = 'flex';
+                    document.getElementById('home-view').style.display = 'none';
+                    document.getElementById('game-screen').style.display = 'flex';
                     document.getElementById('game-frame').src = game.url;
-                    document.getElementById('playing-title').innerText = game.name;
+                    document.getElementById('game-title').innerText = game.name;
                 };
                 grid.appendChild(card);
             });
         }
 
-        function filterGames() {
-            const val = document.getElementById('search-box').value.toLowerCase();
-            const filtered = games.filter(g => g.name.toLowerCase().includes(val));
+        function filter() {
+            const query = document.getElementById('search-input').value.toLowerCase();
+            const filtered = games.filter(g => g.name.toLowerCase().includes(query));
             render(filtered);
         }
 
         function closeGame() {
-            document.getElementById('home').style.display = 'block';
-            document.getElementById('player').style.display = 'none';
+            document.getElementById('home-view').style.display = 'block';
+            document.getElementById('game-screen').style.display = 'none';
             document.getElementById('game-frame').src = '';
         }
 
-        // Run site
         render(games);
     </script>
 </body>
