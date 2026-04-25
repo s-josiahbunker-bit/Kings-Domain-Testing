@@ -3,19 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KING'S DOMAIN | PRO PLAYER</title>
+    <title>KING'S DOMAIN</title>
     <!-- Icons and Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
 
     <style>
         /* ==========================================
-           1. MASTER CUSTOMIZATION
+           1. MASTER SETTINGS
            ========================================== */
         :root {
             --Wallpaper: url('https://wallpapers.com/images/hd/persona-5-background-030o8u3u29n532no.jpg');
             --Banner-Art: url('https://images8.alphacoders.com/132/1325171.jpeg');
-            --Take-Your-Heart-Logo: url('https://i.ibb.co/vYm6vS6/Take-Your-Heart.png');
+            /* THE NEW MENU IMAGE URL */
+            --Menu-Icon-URL: url('https://i.ibb.co/68v8T3G/p5-menu.jpg'); 
+            
             --p5-pink-red: #ff1f44; 
             --p5-black: #000000;
             --p5-card-bg: #141414;
@@ -35,17 +37,26 @@
             padding: 10px 60px; background: #000; border-bottom: 2px solid var(--p5-pink-red);
             position: sticky; top: 0; z-index: 1000;
         }
-        .nav-left { display: flex; align-items: center; gap: 20px; }
-        .menu-icon {
-            width: 55px; height: 55px;
-            background-image: var(--Take-Your-Heart-Logo);
-            background-size: contain; background-repeat: no-repeat;
-            cursor: pointer; transition: 0.3s;
+        .nav-left { display: flex; align-items: center; gap: 25px; }
+
+        /* THE NEW MENU IMAGE STYLING */
+        .menu-button {
+            height: 50px; /* Adjust height */
+            width: auto;
+            cursor: pointer;
+            transition: 0.3s;
+            /* This line makes the black background of the image transparent */
+            mix-blend-mode: screen; 
+            filter: drop-shadow(0 0 2px var(--p5-pink-red));
         }
-        .menu-icon:hover { transform: scale(1.2) rotate(-5deg); filter: drop-shadow(0 0 10px var(--p5-pink-red)); }
+        .menu-button:hover {
+            transform: scale(1.1);
+            filter: drop-shadow(0 0 12px var(--p5-pink-red));
+        }
+
         .logo-text { color: var(--p5-pink-red); font-weight: 900; font-size: 20px; text-transform: uppercase; }
 
-        /* 3. SIDEBAR */
+        /* 3. SIDEBAR (Auto-close enabled) */
         #sidebar {
             position: fixed; top: 0; left: -320px; width: 300px; height: 100%;
             background: rgba(0,0,0,0.98); border-right: 3px solid var(--p5-pink-red);
@@ -73,7 +84,7 @@
             border: 1px solid #222; border-radius: 8px; color: white; margin-bottom: 30px; outline: none; box-sizing: border-box;
         }
 
-        /* 5. GRID & CARDS */
+        /* 5. GRID & CARDS (FULL COVER) */
         .grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; }
         .card {
             background: var(--p5-card-bg); border-radius: 12px; height: 380px; 
@@ -86,38 +97,17 @@
             margin: 0; padding: 15px 0; text-align: center; font-size: 12px; font-weight: 700; border-top: 1px solid var(--p5-pink-red);
         }
 
-        /* 6. FIXED GAME PLAYER (FULL SIZE) */
+        /* 6. GAME PLAYER (LARGE SIZE) */
         #player-view { 
-            display: none; 
-            position: fixed; 
-            top: 0; left: 0; 
-            width: 100%; 
-            height: 100%; 
-            background: black; 
-            z-index: 10000; 
-            flex-direction: column; 
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            background: black; z-index: 10000; flex-direction: column; 
         }
-
         .player-bar { 
-            height: 60px; /* Set a fixed height for the bar */
-            min-height: 60px;
-            padding: 0 40px; 
-            background: #000; 
-            border-bottom: 2px solid var(--p5-pink-red); 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center;
-            box-sizing: border-box;
+            height: 60px; min-height: 60px; padding: 0 40px; background: #000; 
+            border-bottom: 2px solid var(--p5-pink-red); display: flex; 
+            justify-content: space-between; align-items: center; box-sizing: border-box;
         }
-
-        /* THE FIX: Force Iframe to fill 100% of remaining height */
-        #gameFrame { 
-            width: 100%; 
-            height: calc(100% - 60px); /* Fill screen minus the top bar */
-            border: none; 
-            background: #000;
-        }
-
+        #gameFrame { width: 100%; height: calc(100% - 60px); border: none; background: #000; }
         .p-btn { background: var(--p5-pink-red); color: white; border: none; padding: 10px 20px; font-weight: bold; cursor: pointer; border-radius: 5px; }
 
         footer { background: #000; padding: 40px; border-top: 2px solid var(--p5-pink-red); text-align: center; }
@@ -126,20 +116,21 @@
 <body>
 
     <!-- SIDEBAR -->
-    <div id="sidebar">
+    <div id="sidebar" onmouseleave="closeMenu()">
         <div style="text-align:center; margin-bottom:40px;">
+            <!-- Take your heart logo inside menu -->
             <img src="https://i.ibb.co/vYm6vS6/Take-Your-Heart.png" style="width:130px;">
         </div>
-        <div class="sidebar-item" onclick="goHome(); toggleMenu();"><i class="fas fa-home"></i> Home</div>
-        <div class="sidebar-item" onclick="openProxy(); toggleMenu();"><i class="fas fa-ghost"></i> Best Proxy</div>
-        <div class="sidebar-item" onclick="window.location.reload();"><i class="fas fa-sync"></i> Refresh Site</div>
-        <div class="sidebar-item" onclick="toggleMenu();" style="color:var(--p5-pink-red); margin-top:20px;">[ CLOSE ]</div>
+        <div class="sidebar-item" onclick="goHome(); closeMenu();"><i class="fas fa-home"></i> Home</div>
+        <div class="sidebar-item" onclick="openProxy(); closeMenu();"><i class="fas fa-ghost"></i> Proxy</div>
+        <div class="sidebar-item" onclick="closeMenu();" style="color:var(--p5-pink-red); margin-top:20px; border-bottom: none;">[ CLOSE ]</div>
     </div>
 
     <!-- NAVBAR -->
     <nav>
         <div class="nav-left">
-            <div class="menu-icon" onclick="toggleMenu()"></div>
+            <!-- THE IMAGE YOU PROVIDED AS THE BUTTON -->
+            <img src="https://i.ibb.co/68v8T3G/p5-menu.jpg" class="menu-button" onclick="toggleMenu()" alt="Menu">
             <div class="logo-text">KING'S DOMAIN</div>
         </div>
         <div style="font-size: 13px; opacity: 0.8;">Unblocked Games</div>
@@ -148,7 +139,7 @@
     <div id="home-view" class="container">
         <header class="hero-banner">
             <h1>WELCOME BACK</h1>
-            <p>Ready to steal some time? Select a game.</p>
+            <p>Select a game to begin your mission.</p>
         </header>
         <input type="text" id="gameSearch" placeholder="Search for games..." onkeyup="filter()">
         <div class="grid" id="gameGrid"></div>
@@ -165,7 +156,6 @@
             <span id="playing-title" style="font-weight:900; text-transform:uppercase;">GAME</span>
             <button class="p-btn" onclick="goFull()">FULLSCREEN</button>
         </div>
-        <!-- Iframe is now set to 100% width and calc height -->
         <iframe id="gameFrame" src="" allowfullscreen></iframe>
     </div>
 
@@ -184,13 +174,15 @@
         const sidebar = document.getElementById('sidebar');
 
         function toggleMenu() { sidebar.classList.toggle('active'); }
+        function closeMenu() { sidebar.classList.remove('active'); }
+        
         function goHome() { closeGame(); }
 
         function openProxy() {
             document.getElementById('home-view').style.display = 'none';
             document.getElementById('player-view').style.display = 'flex';
             frame.src = PROXY_URL;
-            document.getElementById('playing-title').innerText = "WEB PROXY";
+            document.getElementById('playing-title').innerText = "PROXY";
         }
 
         function render(data) {
