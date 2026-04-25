@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <base href="https://cdn.jsdelivr.net/gh/web-ports/slime-ranchers@f0c5856ac43cf0cfbab4c58139282fc75f9b1861/">
+    <meta charset="utf-8">
+    <title>Slime Rancher | King's Domain</title>
+    <style>
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background-color: #000; }
+        #gameContainer { width: 100vw; height: 100vh; }
+        #loading-text {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            color: white; font-family: cursive; font-size: 24px; text-align: center; z-index: 10;
+            -webkit-text-stroke: 1px black;
+        }
+    </style>
+    <script src="TemplateData/UnityProgress.js"></script>
+    <script src="Build/UnityLoader.js"></script>
+</head>
+<body>
+    <div id="loading-text">LOADING SLIME RANCHER... <br><span id="mb-info">0 MB / 54.5 MB</span></div>
+    <div id="gameContainer"></div>
+
+    <script>
+        // Custom XHR fix for Blob loading
+        const ogxhr = window.XMLHttpRequest;
+        window.XMLHttpRequest = function() {
+            const xhr = new ogxhr();
+            const open = xhr.open;
+            xhr.open = function(method, url, ...rest) {
+                if (url.includes("blob:")) {
+                    return open.call(this, method, "blob:"+url.split("blob:")[1], ...rest);
+                }
+                return open.call(this, method, url, ...rest);
+            };
+            return xhr;
+        };
+
+        var infoText = document.querySelector("#mb-info");
+        let loadedBytes = 0;
+
+        async function fetchWithProgress(url) {
+            const response = await fetch(url);
+            const reader = response.body.getReader();
+            let chunks = [];
+            let received = 0;
+
+            while (true) {
+                const {done, value} = await reader.read();
+                if (done) break;
+                received += value.length;
+                loadedBytes += value.length;
+                chunks.push(value);
+                infoText.innerHTML = (loadedBytes / (1024 * 1024)).toFixed(2) + " MB / 54.5 MB";
+            }
+
+            let fullBuffer = new Uint8Array(received);
+            let offset = 0;
+            for (let chunk of chunks) {
+                fullBuffer.set(chunk, offset);
+                offset += chunk.length;
+            }
+            return fullBuffer.buffer;
+        }
+
+        async function mergeFiles(fileParts) {
+            const buffers = await Promise.all(fileParts.map(part => fetchWithProgress(part)));
+            return URL.createObjectURL(new Blob(buffers));
+        }
+
+        function getParts(file, start, end) {
+            let parts = [];
+            for (let i = start; i <= end; i++) { parts.push(file + ".part" + i); }
+            return parts;
+        }
+
+        (async () => {
+            const dataUrl = await mergeFiles(getParts("Build/slimeBUILDS.data.unityweb", 1, 3));
+
+            const json = {
+                "dataUrl": dataUrl,
+                "wasmCodeUrl": "slimeBUILDS.wasm.code.unityweb",
+                "wasmFrameworkUrl": "slimeBUILDS.framework.unityweb",
+                "TOTAL_MEMORY": 536870912,
+                "graphicsAPI": ["WebGL 2.0", "WebGL 1.0"],
+                "webglContextAttributes": {"preserveDrawingBuffer": false},
+                "splashScreenStyle": "Dark"
+            };
+
+            UnityLoader.instantiate("gameContainer", json, {
+                onRuntimeInitialized: function() {
+                    document.querySelector("#loading-text").remove();
+                },
+            });
+        })();
+    </script>
+</body>
+</html>
