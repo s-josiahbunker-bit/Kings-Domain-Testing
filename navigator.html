@@ -191,7 +191,7 @@
         }
 
         async function fetchAPI(type) {
-            let url = `https://api.themoviedb.org/3/trending/all/day?api_key=${cce36626c4c9d64a54c0731adcaa1d8f}`;
+            let url = `https://api.themoviedb.org/3/trending/all/day?api_key=${TMDB_KEY}`;
             if(type === 'anime') url = `https://api.themoviedb.org/3/discover/tv?api_key=${TMDB_KEY}&with_genres=16&with_original_language=ja`;
             
             try {
