@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KING'S DOMAIN | PHANTOM HUB</title>
+    
+    <!-- Tab Icon (Favicon) -->
+    <link rel="icon" type="image/png" href="https://i.ibb.co/vYm6vS6/Take-Your-Heart.png">
+    
+    <!-- External Assets -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Oswald:wght@700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ==========================================
+           1. MASTER ART SETTINGS (Change links here)
+           ========================================== */
+        :root {
+            --Home-Wallpaper: url('https://wallpapers.com/images/hd/persona-5-background-030o8u3u29n532no.jpg');
+            --Movie-Wallpaper: url('https://wallpaperaccess.com/full/1531383.jpg');
+            --Proxy-Wallpaper: url('https://images.alphacoders.com/836/836569.png');
+            --Banner-Art: url('https://images8.alphacoders.com/132/1325171.jpeg');
+            
+            --Menu-Img: url('https://i.ibb.co/68v8T3G/p5-menu.jpg'); 
+            --Eye-Img: url('https://i.ibb.co/L9YmS4H/p5-eye.png');
+            --Movie-Img: url('https://i.ibb.co/Qv6y8Z4/p5-movie.png');
+            
+            --p5-pink-red: #ff1f44; /* THE PINKISH RED */
+            --p5-black: #000000;
+            --p5-card-bg: #141414;
+        }
+
+        /* ==========================================
+           2. CORE DESIGN
+           ========================================== */
+        body, html { margin: 0; padding: 0; height: 100%; background-color: var(--p5-black); color: white; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        
+        #bg-layer {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), var(--Home-Wallpaper); 
+            background-size: cover; background-attachment: fixed; background-position: center;
+            z-index: -1; transition: background-image 0.6s ease;
+        }
+
+        /* VERTICAL NAV STRIP */
+        .v-nav {
+            position: fixed; left: 0; top: 0; height: 100%; width: 85px; 
+            background: #000; border-right: 2px solid var(--p5-pink-red);
+            display: flex; flex-direction: column; align-items: center; 
+            padding-top: 20px; gap: 20px; z-index: 1000;
+        }
+        .nav-btn {
+            width: 60px; height: 60px; background-size: contain; background-repeat: no-repeat; background-position: center;
+            cursor: pointer; transition: 0.3s; 
+        }
+        .btn-menu { background-image: var(--Menu-Img); mix-blend-mode: screen; }
+        .btn-movies { background-image: var(--Movie-Img); mix-blend-mode: screen; }
+        .btn-settings { background-image: var(--Eye-Img); height: 50px; }
+        .nav-btn:hover { transform: scale(1.2); filter: drop-shadow(0 0 10px var(--p5-pink-red)); }
+
+        /* SIDEBAR (Absolute Left) */
+        #sidebar {
+            position: fixed; top: 0; left: -320px; width: 310px; height: 100%;
+            background: rgba(0,0,0,0.98); border-right: 4px solid var(--p5-pink-red);
+            z-index: 2001; transition: 0.5s cubic-bezier(0.77, 0, 0.175, 1); 
+            padding: 50px 20px; box-sizing: border-box; box-shadow: 20px 0 50px rgba(0,0,0,0.9);
+        }
+        #sidebar.active { left: 0; }
+        .sidebar-header { color: var(--p5-pink-red); font-weight: 900; font-size: 24px; text-transform: uppercase; margin-bottom: 20px; border-bottom: 2px solid #222; padding-bottom: 10px; }
+        .sidebar-item { display: flex; align-items: center; gap: 15px; padding: 15px; color: white; text-decoration: none; font-weight: 900; font-size: 20px; text-transform: uppercase; transition: 0.3s; cursor: pointer; border-bottom: 1px solid #111; }
+        .sidebar-item:hover { color: var(--p5-pink-red); padding-left: 30px; }
+
+        /* TOP LOGO BAR */
+        .top-bar { margin-left: 85px; padding: 15px 50px; background: rgba(0,0,0,0.5); display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .logo-text { color: var(--p5-pink-red); font-weight: 900; font-size: 18px; text-transform: uppercase; letter-spacing: 2px; }
+
+        /* MAIN CONTENT */
+        .container { margin-left: 85px; padding: 40px 60px; max-width: 1200px; }
+        .hero-banner {
+            width: 100%; height: 320px; border-radius: 20px; margin-bottom: 30px;
+            background: linear-gradient(to right, rgba(0,0,0,1) 40%, transparent), var(--Banner-Art);
+            background-size: cover; background-position: center;
+            display: flex; flex-direction: column; justify-content: center; padding-left: 60px; box-sizing: border-box; border: 1px solid rgba(255,255,255,0.1);
+        }
+        .hero-banner h1 { font-size: 44px; margin: 0; font-weight: 900; text-transform: uppercase; }
+
+        #searchBox { width: 100%; padding: 16px 25px; background: var(--p5-card-bg); border: 1px solid #222; border-radius: 8px; color: white; margin-bottom: 30px; outline: none; box-sizing: border-box; }
+        
+        /* GRID & CARDS (Vertical Rectangle) */
+        .grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; }
+        .card { background: var(--p5-card-bg); border-radius: 12px; height: 380px; position: relative; overflow: hidden; border: 1px solid #1a1a1a; cursor: pointer; transition: 0.3s; }
+        .card:hover { border-color: var(--p5-pink-red); transform: translateY(-8px); box-shadow: 0 5px 15px rgba(255, 31, 68, 0.4); }
+        .card img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .card p { position: absolute; bottom: 0; width: 100%; background: rgba(0, 0, 0, 0.85); margin: 0; padding: 15px 0; text-align: center; font-size: 12px; font-weight: 700; border-top: 1px solid var(--p5-pink-red); }
+
+        /* PROXY SEARCH UI */
+        #proxy-page { display: none; flex-direction: column; align-items: center; justify-content: center; height: 60vh; text-align: center; }
+        .proxy-input { width: 100%; max-width: 500px; padding: 20px; font-size: 20px; background: #000; border: 3px solid var(--p5-pink-red); color: white; transform: skewX(-5deg); outline: none; box-shadow: 10px 10px 0px var(--p5-pink-red); font-weight: 900; }
+
+        /* PLAYER */
+        #player-view { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: black; z-index: 10000; flex-direction: column; }
+        .player-bar { height: 60px; padding: 0 40px; background: #000; border-bottom: 2px solid var(--p5-pink-red); display: flex; justify-content: space-between; align-items: center; box-sizing: border-box; }
+        #gameFrame { width: 100%; height: calc(100% - 60px); border: none; background: #000; }
+        .p-btn { background: var(--p5-pink-red); color: white; border: none; padding: 10px 20px; font-weight: bold; cursor: pointer; border-radius: 5px; }
+
+        /* FOOTER */
+        footer { margin-left: 85px; padding: 40px; border-top: 1px solid #222; text-align: center; }
+        .socials { display: flex; justify-content: center; gap: 30px; margin-bottom: 15px; }
+        .socials a { color: white; font-size: 24px; transition: 0.3s; }
+        .socials a:hover { color: var(--p5-pink-red); transform: scale(1.3); filter: drop-shadow(0 0 10px var(--p5-pink-red)); }
+    </style>
+</head>
+<body>
+
+    <div id="bg-layer"></div>
+
+    <!-- VERTICAL NAV -->
+    <nav class="v-nav">
+        <div class="nav-btn btn-menu" title="Menu" onclick="toggleSidebar()"></div>
+        <div class="nav-btn btn-movies" title="Movie Hub" onclick="changeLibrary('movies')"></div>
+        <div class="nav-btn btn-settings" title="Proxy Navigator" onclick="openProxy()"></div>
+    </nav>
+
+    <!-- SIDEBAR -->
+    <div id="sidebar" onmouseleave="closeSidebar()">
+        <div style="text-align:center; margin-bottom:30px;"><img src="https://i.ibb.co/vYm6vS6/Take-Your-Heart.png" style="width:120px;"></div>
+        <div class="sidebar-header">NAVIGATOR</div>
+        <div class="sidebar-item" onclick="changeLibrary('games'); closeSidebar();"><i class="fas fa-home"></i> Home</div>
+        <div class="sidebar-item" onclick="changeLibrary('movies'); closeSidebar();"><i class="fas fa-film"></i> Movies</div>
+        <div class="sidebar-item" onclick="changeLibrary('anime'); closeSidebar();"><i class="fas fa-dragon"></i> Anime</div>
+        <div class="sidebar-item" onclick="openProxy(); closeSidebar();"><i class="fas fa-user-secret"></i> Proxy</div>
+    </div>
+
+    <!-- TOP BAR -->
+    <div class="top-bar">
+        <div class="logo-text">KING'S DOMAIN</div>
+        <div style="font-size: 11px; opacity: 0.5;">PHANTOM_HUB_MASTER</div>
+    </div>
+
+    <!-- HOME VIEW -->
+    <div id="home-view" class="container">
+        <div id="grid-content">
+            <header class="hero-banner">
+                <h1 id="banner-text">WELCOME BACK</h1>
+                <p id="banner-sub">Targets acquired. Select a mission.</p>
+            </header>
+            <input type="text" id="searchBox" placeholder="Search targets..." onkeyup="filterSearch()">
+            <div class="grid" id="mainGrid"></div>
+        </div>
+
+        <!-- PROXY PAGE -->
+        <div id="proxy-page">
+            <h1 style="color:var(--p5-pink-red); font-size: 50px; margin-bottom: 20px; text-transform: uppercase; font-weight: 900;">Phantom Proxy</h1>
+            <input type="text" id="proxyInput" class="proxy-input" placeholder="ENTER URL OR SEARCH MISSION..." onkeydown="if(event.key==='Enter') startProxy()">
+            <p style="margin-top:20px; color:#555; letter-spacing: 2px;">SECURE_TUNNEL_ESTABLISHED</p>
+        </div>
+    </div>
+
+    <footer>
+        <div class="socials">
+            <a href="#"><i class="fab fa-discord"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+            <a href="#"><i class="fab fa-x-twitter"></i></a>
+            <a href="#"><i class="fab fa-facebook"></i></a>
+        </div>
+        <div style="font-size: 10px; color: #444;">© 2024 KING'S DOMAIN</div>
+    </footer>
+
+    <!-- PLAYER -->
+    <div id="player-view">
+        <div class="player-bar">
+            <button class="p-btn" onclick="closePlayer()">← BACK</button>
+            <span id="playing-title" style="font-weight:900; text-transform:uppercase;">DESTINATION</span>
+            <button class="p-btn" onclick="goFull()">FULLSCREEN</button>
+        </div>
+        <iframe id="gameFrame" src="" allowfullscreen></iframe>
+    </div>
+
+    <script>
+        // ==========================================
+        // 3. LOGIC & API SETTINGS
+        // ==========================================
+        const TMDB_KEY = "PASTE_YOUR_TMDB_KEY_HERE"; 
+        const PROXY_ENGINE = "https://t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.rammerhead.org/";
+        
+        let currentMode = "games";
+        let apiData = [];
+
+        const games = [
+            { name: "Slime Rancher", img: "https://sm.ign.com/ign_es/cover/s/slime-ranc/slime-rancher_j318.jpg", url: "slimerancher.html" },
+            { name: "Helltaker", img: "https://files.catbox.moe/k9d5o6.png", url: "helltaker.html" },
+            { name: "Tuff Client", img: "https://files.catbox.moe/rbt7f1.png", url: "tuffclient.html" },
+            { name: "Slope", img: "https://sm.ign.com/ign_br/game/s/slope/slope_69qy.jpg", url: "https://kkgames.github.io/slope/" }
+        ];
+
+        const sidebar = document.getElementById('sidebar');
+        const mainGrid = document.getElementById('mainGrid');
+        const frame = document.getElementById('gameFrame');
+        const bgLayer = document.getElementById('bg-layer');
+
+        function toggleSidebar() { sidebar.classList.toggle('active'); }
+        function closeSidebar() { sidebar.classList.remove('active'); }
+
+        async function changeLibrary(mode) {
+            currentMode = mode;
+            document.getElementById('grid-content').style.display = 'block';
+            document.getElementById('proxy-page').style.display = 'none';
+
+            if(mode === 'games') {
+                bgLayer.style.backgroundImage = "linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), var(--Home-Wallpaper)";
+                document.getElementById('banner-text').innerText = "WELCOME BACK";
+                render(games);
+            } else {
+                bgLayer.style.backgroundImage = "linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), var(--Movie-Wallpaper)";
+                document.getElementById('banner-text').innerText = mode.toUpperCase() + " HUB";
+                await fetchAPI(mode);
+            }
+        }
+
+        async function fetchAPI(type) {
+            let url = `https://api.themoviedb.org/3/trending/all/day?api_key=${TMDB_KEY}`;
+            if(type === 'anime') url = `https://api.themoviedb.org/3/discover/tv?api_key=${TMDB_KEY}&with_genres=16&with_original_language=ja`;
+            
+            try {
+                const res = await fetch(url);
+                const data = await res.json();
+                apiData = data.results.map(i => ({
+                    name: i.title || i.name,
+                    img: `https://image.tmdb.org/t/p/w500${i.poster_path}`,
+                    // THE VIDSRC PLAYER FIX
+                    url: i.media_type === 'movie' ? `https://vidsrc.xyz/embed/movie?tmdb=${i.id}` : `https://vidsrc.xyz/embed/tv?tmdb=${i.id}&season=1&episode=1`
+                }));
+                render(apiData);
+            } catch(e) { render([{name: "API KEY REQUIRED", img: "", url: ""}]); }
+        }
+
+        function openProxy() {
+            document.getElementById('grid-content').style.display = 'none';
+            document.getElementById('proxy-page').style.display = 'flex';
+            bgLayer.style.backgroundImage = "linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), var(--Proxy-Wallpaper)";
+        }
+
+        function startProxy() {
+            let val = document.getElementById('proxyInput').value;
+            if(!val) return;
+            document.getElementById('home-view').style.display = 'none';
+            document.getElementById('player-view').style.display = 'flex';
+            frame.src = PROXY_ENGINE;
+            document.getElementById('playing-title').innerText = "PROXY ACTIVE";
+        }
+
+        function render(data) {
+            mainGrid.innerHTML = '';
+            data.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `<img src="${item.img}"><p>${item.name}</p>`;
+                card.onclick = () => {
+                    document.getElementById('home-view').style.display = 'none';
+                    document.getElementById('player-view').style.display = 'flex';
+                    frame.src = item.url;
+                    document.getElementById('playing-title').innerText = item.name;
+                };
+                mainGrid.appendChild(card);
+            });
+        }
+
+        function filterSearch() {
+            const val = document.getElementById('searchBox').value.toLowerCase();
+            const data = (currentMode === 'games' ? games : apiData);
+            render(data.filter(i => i.name.toLowerCase().includes(val)));
+        }
+
+        function closePlayer() {
+            document.getElementById('home-view').style.display = 'block';
+            document.getElementById('player-view').style.display = 'none';
+            frame.src = '';
+        }
+
+        function goFull() { if (frame.requestFullscreen) frame.requestFullscreen(); else if (frame.webkitRequestFullscreen) frame.webkitRequestFullscreen(); }
+
+        render(games);
+    </script>
+</body>
+</html>
