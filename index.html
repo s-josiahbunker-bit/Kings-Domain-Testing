@@ -4,31 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>King's Domain | Unblocked</title>
-    <!-- Social Icons Link -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
-        /* 1. PINKISH-RED THEME COLORS */
         :root {
-            --p5-pink-red: #ff1f44; 
+            --p5-pink-red: #ff1f44;
             --p5-black: #000000;
             --p5-card-bg: #121212;
         }
 
         body {
             margin: 0;
-            padding: 0;
             background-color: var(--p5-black);
-            background-image: 
-                linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)),
-                url('https://wallpapers.com/images/hd/persona-5-background-030o8u3u29n532no.jpg');
+            background-image: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), 
+                              url('https://wallpapers.com/images/hd/persona-5-background-030o8u3u29n532no.jpg');
             background-size: cover;
             background-attachment: fixed;
-            background-position: center;
             color: white;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Segoe UI', sans-serif;
         }
 
-        /* 2. NAVBAR: LOGO LEFT, TEXT RIGHT */
+        /* Nav */
         nav {
             display: flex;
             justify-content: space-between;
@@ -38,29 +33,11 @@
             border-bottom: 2px solid var(--p5-pink-red);
         }
 
-        .logo {
-            color: var(--p5-pink-red);
-            font-weight: 800;
-            font-size: 22px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
+        .logo { color: var(--p5-pink-red); font-weight: 800; font-size: 22px; text-transform: uppercase; }
 
-        .unblocked-text {
-            color: white;
-            font-size: 14px;
-            font-weight: 400;
-            opacity: 0.9;
-        }
+        /* Main Container */
+        .container { max-width: 1250px; margin: 0 auto; padding: 40px 80px; }
 
-        /* 3. MAIN WRAPPER */
-        .container {
-            max-width: 1250px;
-            margin: 0 auto;
-            padding: 40px 80px 100px 80px; /* Extra bottom padding for footer */
-        }
-
-        /* 4. BANNER */
         .hero-banner {
             width: 100%;
             height: 320px;
@@ -68,7 +45,6 @@
             background: linear-gradient(to right, rgba(0,0,0,1) 40%, transparent), 
                         url('https://images8.alphacoders.com/132/1325171.jpeg');
             background-size: cover;
-            background-position: top center;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -78,24 +54,6 @@
             margin-bottom: 30px;
         }
 
-        .hero-banner h1 {
-            font-size: 48px;
-            margin: 0;
-            font-weight: 800;
-            letter-spacing: -1px;
-        }
-
-        .hero-banner p {
-            font-size: 16px;
-            color: #ccc;
-            margin-top: 8px;
-        }
-
-        /* 5. SEARCH BAR */
-        .search-container {
-            margin-bottom: 35px;
-        }
-
         #gameSearch {
             width: 100%;
             padding: 15px 25px;
@@ -103,12 +61,11 @@
             border: 1px solid #252525;
             border-radius: 8px;
             color: white;
-            font-size: 15px;
+            margin-bottom: 35px;
             outline: none;
-            box-sizing: border-box;
         }
 
-        /* 6. GRID & TALL CARDS */
+        /* Grid & Tall Cards */
         .grid {
             display: grid;
             grid-template-columns: repeat(5, 1fr); 
@@ -127,15 +84,9 @@
             cursor: pointer;
             transition: all 0.2s ease;
             overflow: hidden;
-            text-decoration: none;
-            color: white;
         }
 
-        .card:hover {
-            border-color: var(--p5-pink-red);
-            transform: translateY(-5px);
-            background: #1a1a1a;
-        }
+        .card:hover { border-color: var(--p5-pink-red); transform: translateY(-5px); }
 
         .card-img-wrapper {
             flex-grow: 1;
@@ -143,12 +94,18 @@
             align-items: center;
             justify-content: center;
             width: 100%;
+            padding: 20px;
+            box-sizing: border-box;
         }
 
+        /* This controls how the icon looks */
         .card img {
-            width: 55px; 
+            max-width: 80px;  /* Increase this number to make icons bigger */
+            max-height: 80px;
+            width: auto;
             height: auto;
-            opacity: 0.9;
+            object-fit: contain; /* Keeps icon from stretching */
+            filter: drop-shadow(0 0 5px rgba(0,0,0,0.5));
         }
 
         .card p {
@@ -159,166 +116,15 @@
             text-align: center;
             font-size: 13px;
             font-weight: 700;
+            border-top: 1px solid #1a1a1a;
         }
 
-        /* 7. SOCIAL FOOTER */
-        footer {
-            background: rgba(0, 0, 0, 0.95);
-            padding: 40px 80px;
-            border-top: 2px solid var(--p5-pink-red);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 30px;
-        }
-
-        .social-links a {
-            color: white;
-            font-size: 28px;
-            text-decoration: none;
-            transition: 0.3s;
-        }
-
-        /* Hover effect: Glows pink-red */
-        .social-links a:hover {
-            color: var(--p5-pink-red);
-            transform: scale(1.2);
-            filter: drop-shadow(0 0 8px var(--p5-pink-red));
-        }
-
-        .copyright {
-            font-size: 12px;
-            color: #555;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        /* GAME PLAYER */
-        #player-view {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: black;
-            z-index: 10000;
-            flex-direction: column;
-        }
-
-        .back-bar {
-            padding: 15px 40px;
-            background: #000;
-            border-bottom: 2px solid var(--p5-pink-red);
-            display: flex;
-            align-items: center;
-        }
-
-        .back-btn {
-            background: var(--p5-pink-red);
-            color: white;
-            border: none;
-            padding: 10px 25px;
-            font-weight: bold;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
+        /* Player View */
+        #player-view { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: black; z-index: 10000; flex-direction: column; }
+        .back-bar { padding: 15px 40px; background: #000; border-bottom: 2px solid var(--p5-pink-red); }
+        .back-btn { background: var(--p5-pink-red); color: white; border: none; padding: 10px 25px; font-weight: bold; cursor: pointer; border-radius: 5px; }
         iframe { flex-grow: 1; border: none; }
 
-        @media (max-width: 1000px) {
-            .grid { grid-template-columns: repeat(2, 1fr); }
-            nav, .container, footer { padding: 15px 30px; }
-        }
-    </style>
-</head>
-<body>
-
-    <nav>
-        <div class="logo">KING'S DOMAIN</div>
-        <div class="unblocked-text">Unblocked Games</div>
-    </nav>
-
-    <div id="home-screen" class="container">
-        
-        <header class="hero-banner">
-            <h1>WELCOME BACK</h1>
-            <p>The best unblocked games, updated daily.</p>
-        </header>
-
-        <div class="search-container">
-            <input type="text" id="gameSearch" placeholder="Search for games..." onkeyup="filter()">
-        </div>
-
-        <div class="grid" id="gameGrid"></div>
-    </div>
-
-    <!-- NEW SOCIAL FOOTER -->
-    <footer>
-        <div class="social-links">
-            <!-- Replace the '#' with your actual links -->
-            <a href="#" target="_blank" title="Discord"><i class="fab fa-discord"></i></a>
-            <a href="#" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
-            <a href="#" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
-            <a href="#" target="_blank" title="X (Twitter)"><i class="fab fa-x-twitter"></i></a>
-        </div>
-        <div class="copyright">© 2024 King's Domain - All Rights Reserved</div>
-    </footer>
-
-    <div id="player-view">
-        <div class="back-bar">
-            <button class="back-btn" onclick="closeGame()">← BACK TO HOME</button>
-        </div>
-        <iframe id="gameFrame" src=""></iframe>
-    </div>
-
-    <script>
-        const games = [
-            { name: "Slope", img: "https://classroom-6x.lol/_next/image?url=https%3A%2F%2Fcdn.shst.at%2Fimages%2Fgames%2Fslope.png&w=128&q=75", url: "https://kkgames.github.io/slope/" },
-            { name: "1v1.LOL", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzY3zN8N_X1Nf5YpPZ5o8E9h-pL-lqS-mEig&s", url: "https://1v1.lol" },
-            { name: "BitLife", img: "https://play-lh.googleusercontent.com/H_f-R6U9p6M7L9f5B_R_3E5b6q9Z5F6", url: "https://bitlifeonline.io" },
-            { name: "Tunnel Rush", img: "https://edumaps.net/wp-content/uploads/2022/12/tunnel-rush.png", url: "https://kkgames.github.io/tunnel-rush/" },
-            { name: "Drive Mad", img: "https://cdn.shst.at/images/games/drive-mad.png", url: "https://kkgames.github.io/drive-mad/" }
-        ];
-
-        const grid = document.getElementById('gameGrid');
-
-        function render(data) {
-            grid.innerHTML = '';
-            data.forEach(game => {
-                const card = document.createElement('div');
-                card.className = 'card';
-                card.innerHTML = `
-                    <div class="card-img-wrapper">
-                        <img src="${game.img}" alt="${game.name}">
-                    </div>
-                    <p>${game.name}</p>
-                `;
-                card.onclick = () => {
-                    document.getElementById('home-screen').style.display = 'none';
-                    document.getElementById('player-view').style.display = 'flex';
-                    document.getElementById('gameFrame').src = game.url;
-                    window.scrollTo(0,0);
-                };
-                grid.appendChild(card);
-            });
-        }
-
-        function filter() {
-            const val = document.getElementById('gameSearch').value.toLowerCase();
-            const filtered = games.filter(g => g.name.toLowerCase().includes(val));
-            render(filtered);
-        }
-
-        function closeGame() {
-            document.getElementById('home-screen').style.display = 'block';
-            document.getElementById('player-view').style.display = 'none';
-            document.getElementById('gameFrame').src = '';
-        }
-
-        render(games);
-    </script>
-</body>
-</html>
+        footer { background: rgba(0, 0, 0, 0.95); padding: 40px 80px; border-top: 2px solid var(--p5-pink-red); display: flex; flex-direction: column; align-items: center; gap: 20px; }
+        .social-links { display: flex; gap: 30px; }
+        .social-links a { color
