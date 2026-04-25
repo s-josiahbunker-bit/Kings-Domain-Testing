@@ -9,10 +9,10 @@
         body {
             margin: 0;
             padding: 0;
-            /* CHANGE SITE WALLPAPER BELOW */
+            /* YOU CAN CHANGE THE MAIN SITE WALLPAPER HERE */
             background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
                               url('https://images.unsplash.com/photo-1614850523296-d8c1af93d400?q=80&w=2070');
-            background-attachment: fixed; /* Background stays still while you scroll */
+            background-attachment: fixed; 
             background-size: cover;
             background-position: center;
             font-family: 'Segoe UI', sans-serif;
@@ -22,7 +22,7 @@
         /* 2. NAVIGATION */
         .navbar {
             background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px); /* Blur effect behind nav */
+            backdrop-filter: blur(10px);
             padding: 15px 5%;
             display: flex;
             justify-content: center;
@@ -33,63 +33,64 @@
         }
         .logo { font-size: 26px; font-weight: bold; color: #ff4757; letter-spacing: 3px; }
 
-        /* 3. ROUNDED RECTANGLE BANNER */
+        /* 3. LONGER ROUNDED RECTANGLE BANNER */
         .banner-container {
-            padding: 20px 5% 0 5%;
+            padding: 30px 5% 0 5%;
             display: flex;
             justify-content: center;
         }
         .hero-banner {
-            width: 100%;
-            max-width: 1000px;
-            height: 150px;
-            /* CHANGE BANNER IMAGE BELOW */
+            width: 95%; /* Responsive width */
+            max-width: 1150px; /* INCREASED LENGTH HERE */
+            height: 180px; /* Adjusted height for the new length */
+            /* CHANGE THE BANNER IMAGE (THE IMAGE INSIDE THE RECTANGLE) HERE */
             background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
                         url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2070');
             background-size: cover;
             background-position: center;
-            border-radius: 25px; /* Rounded Corners */
+            border-radius: 25px; 
             border: 2px solid #ff4757;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            box-shadow: 0 10px 30px rgba(255, 71, 87, 0.3); /* Glow effect */
+            box-shadow: 0 10px 40px rgba(255, 71, 87, 0.4);
+            text-align: center;
         }
-        .hero-banner h1 { font-size: 32px; margin: 0; }
-        .hero-banner p { margin: 5px 0 0 0; color: #ccc; }
+        .hero-banner h1 { font-size: 40px; margin: 0; letter-spacing: 2px; }
+        .hero-banner p { margin: 8px 0 0 0; color: #eee; font-size: 18px; }
 
         /* 4. SEARCH BAR SECTION */
         .search-area {
             text-align: center;
-            padding: 25px 0;
+            padding: 30px 0;
         }
         #game-search {
-            width: 80%;
-            max-width: 500px;
-            padding: 14px 25px;
+            width: 85%;
+            max-width: 550px;
+            padding: 15px 30px;
             border-radius: 50px;
             border: 2px solid #ff4757;
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.98);
             color: #000;
-            font-size: 16px;
+            font-size: 17px;
             font-weight: bold;
             outline: none;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.6);
         }
 
         /* 5. GAME GRID */
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
             gap: 25px;
-            padding: 0 10% 50px 10%;
+            padding: 0 5% 60px 5%;
             max-width: 1200px;
             margin: 0 auto;
         }
         .game-card {
-            background: rgba(20, 20, 20, 0.8);
-            backdrop-filter: blur(5px);
+            background: rgba(20, 20, 20, 0.85);
+            backdrop-filter: blur(8px);
             border-radius: 15px;
             overflow: hidden;
             border: 1px solid #444;
@@ -98,9 +99,9 @@
             text-align: center;
         }
         .game-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-10px) scale(1.02);
             border-color: #ff4757;
-            box-shadow: 0 10px 20px rgba(255, 71, 87, 0.3);
+            box-shadow: 0 10px 25px rgba(255, 71, 87, 0.4);
         }
         .game-card img {
             width: 100%;
@@ -108,10 +109,10 @@
             object-fit: cover;
         }
         .game-card p {
-            padding: 12px;
+            padding: 14px;
             margin: 0;
             font-weight: bold;
-            font-size: 14px;
+            font-size: 15px;
         }
 
         /* 6. PLAYER VIEW */
@@ -124,31 +125,34 @@
             flex-direction: column;
         }
         .back-bar {
-            padding: 10px 5%;
+            padding: 12px 5%;
             background: #111;
             display: flex;
             align-items: center;
             justify-content: space-between;
+            border-bottom: 2px solid #ff4757;
         }
         .btn-back {
             background: #ff4757;
             color: white;
             border: none;
-            padding: 10px 25px;
-            border-radius: 5px;
+            padding: 12px 25px;
+            border-radius: 6px;
             cursor: pointer;
             font-weight: bold;
+            font-size: 14px;
         }
         iframe {
             flex-grow: 1;
             border: none;
             width: 100%;
+            background: #000;
         }
     </style>
 </head>
 <body>
 
-    <!-- HOME SCREEN -->
+    <!-- HOME VIEW -->
     <div id="home-view">
         <div class="navbar">
             <div class="logo">KING'S DOMAIN</div>
@@ -156,8 +160,8 @@
 
         <div class="banner-container">
             <div class="hero-banner">
-                <h1>UNBLOCKED GAMES</h1>
-                <p>Fast & Free Forever</p>
+                <h1>KING'S DOMAIN</h1>
+                <p>The Ultimate Unblocked Experience</p>
             </div>
         </div>
 
@@ -166,22 +170,23 @@
         </div>
 
         <div class="grid" id="game-grid">
-            <!-- Games Loaded by JS -->
+            <!-- Games Loaded by JavaScript -->
         </div>
     </div>
 
-    <!-- PLAYER SCREEN -->
+    <!-- PLAYER VIEW -->
     <div id="player-view">
         <div class="back-bar">
             <button class="btn-back" onclick="closeGame()">← BACK TO HOME</button>
-            <h2 id="current-title" style="margin:0;">Playing Game</h2>
+            <h2 id="current-title" style="margin:0; font-size: 18px;">Playing Game</h2>
             <div style="width: 100px;"></div>
         </div>
         <iframe id="game-iframe" src=""></iframe>
     </div>
 
     <script>
-        // YOUR GAME DATABASE
+        // GAME DATABASE
+        // Replace these image and url links with the ones from King's Domain
         const games = [
             { name: "Slope", img: "https://classroom-6x.lol/_next/image?url=https%3A%2F%2Fcdn.shst.at%2Fimages%2Fgames%2Fslope.png&w=128&q=75", url: "https://kkgames.github.io/slope/" },
             { name: "1v1.LOL", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzY3zN8N_X1Nf5YpPZ5o8E9h-pL-lqS-mEig&s", url: "https://1v1.lol" },
@@ -203,6 +208,7 @@
                     document.getElementById('player-view').style.display = 'flex';
                     document.getElementById('game-iframe').src = game.url;
                     document.getElementById('current-title').innerText = game.name;
+                    window.scrollTo(0,0);
                 };
                 grid.appendChild(card);
             });
@@ -217,9 +223,10 @@
         function closeGame() {
             document.getElementById('home-view').style.display = 'block';
             document.getElementById('player-view').style.display = 'none';
-            document.getElementById('game-iframe').src = '';
+            document.getElementById('game-frame').src = '';
         }
 
+        // Initialize the site
         render(games);
     </script>
 </body>
