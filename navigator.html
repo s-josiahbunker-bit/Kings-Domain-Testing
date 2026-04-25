@@ -41,12 +41,19 @@
         /* LAYOUT */
         .top-bar { margin-left: 85px; padding: 15px 50px; background: rgba(0,0,0,0.5); display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); }
         .logo-text { color: var(--p5-pink-red); font-weight: 900; font-size: 20px; text-transform: uppercase; letter-spacing: 2px; }
-        .container { margin-left: 85px; padding: 40px 60px; max-width: 1250px; }
+        .container { margin-left: 85px; padding: 40px 60px; max-width: 1200px; }
         
         .hero-banner { width: 100%; height: 320px; border-radius: 20px; margin-bottom: 30px; background: linear-gradient(to right, rgba(0,0,0,1) 40%, transparent), var(--Banner-Art); background-size: cover; background-position: center; display: flex; flex-direction: column; justify-content: center; padding-left: 60px; box-sizing: border-box; border: 1px solid rgba(255,255,255,0.1); }
         .hero-banner h1 { font-size: 44px; margin: 0; font-weight: 900; text-transform: uppercase; }
 
+        /* SEARCH BARS */
         #searchBox { width: 100%; padding: 16px 25px; background: var(--p5-card-bg); border: 1px solid #222; border-radius: 8px; color: white; margin-bottom: 30px; outline: none; }
+        
+        /* SPECIAL MOVIE STREAMING BAR */
+        #movieStreamingBar { display: none; margin-bottom: 30px; position: relative; transform: skewX(-5deg); }
+        .stream-input { width: 100%; padding: 20px; font-size: 18px; background: #000; border: 3px solid var(--p5-pink-red); color: white; outline: none; font-weight: 900; text-transform: uppercase; box-shadow: 8px 8px 0px var(--p5-pink-red); }
+        .stream-input::placeholder { color: #555; }
+
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 20px; }
         .card { background: var(--p5-card-bg); border-radius: 12px; height: 380px; position: relative; overflow: hidden; border: 1px solid #1a1a1a; cursor: pointer; transition: 0.3s; }
         .card:hover { border-color: var(--p5-pink-red); transform: translateY(-8px); box-shadow: 0 5px 15px rgba(255, 31, 68, 0.4); }
@@ -78,22 +85,28 @@
 
     <div class="top-bar">
         <div class="logo-text">KING'S DOMAIN</div>
-        <div style="font-size: 11px; opacity: 0.5;">PHANTOM_CONNECTED</div>
+        <div id="status-text" style="font-size: 11px; opacity: 0.5;">PHANTOM_CONNECTED</div>
     </div>
 
     <div id="home-view" class="container">
         <div id="grid-content">
             <header class="hero-banner">
                 <h1 id="banner-text">WELCOME BACK</h1>
-                <p>Ready to steal some time?</p>
+                <p id="banner-sub">Targets acquired. Select a mission.</p>
             </header>
-            <input type="text" id="searchBox" placeholder="Search targets..." onkeyup="filter()">
+
+            <!-- BUILT-IN MOVIE STREAMING SEARCH -->
+            <div id="movieStreamingBar">
+                <input type="text" id="streamInput" class="stream-input" placeholder="Search Master Database (Movies & Shows)..." onkeydown="if(event.key==='Enter') searchMasterMovie()">
+            </div>
+
+            <input type="text" id="searchBox" placeholder="Filter current page..." onkeyup="filter()">
             <div class="grid" id="mainGrid"></div>
         </div>
 
         <div id="proxy-page">
             <h1 style="color:var(--p5-pink-red); font-size: 50px; margin-bottom: 20px;">PHANTOM PROXY</h1>
-            <input type="text" id="proxyInput" class="proxy-input" placeholder="Enter URL or Search..." onkeydown="if(event.key==='Enter') startProxy()">
+            <input type="text" id="proxyInput" class="proxy-input" placeholder="Type URL or Search..." onkeydown="if(event.key==='Enter') startProxy()">
         </div>
     </div>
 
@@ -106,26 +119,24 @@
         <iframe id="gameFrame" src="" allowfullscreen></iframe>
     </div>
 
-    <!-- ==========================================
-         2. LOGIC (JavaScript) 
-         ========================================== -->
     <script>
         const PROXY_ENGINE = "https://t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.rammerhead.org/";
+        const MOVIE_MASTER = "https://movie-web.app/search/movie/";
+        
         let currentMode = "games";
 
-        // ADD NEW GAMES HERE
         const games = [
             { name: "Slime Rancher", img: "https://sm.ign.com/ign_es/cover/s/slime-ranc/slime-rancher_j318.jpg", url: "slimerancher.html" },
             { name: "Helltaker", img: "https://files.catbox.moe/k9d5o6.png", url: "helltaker.html" },
             { name: "Tuff Client", img: "https://files.catbox.moe/rbt7f1.png", url: "tuffclient.html" },
-            { name: "Slope", img: "https://sm.ign.com/ign_br/game/s/slope/slope_69qy.jpg", url: "https://kkgames.github.io/slope/" }
+            { name: "Slope", img: "https://sm.ign.com/ign_br/game/s/slope/slope_69qy.jpg", url: "https://kkgames.github.io/slope/" },
+            { name: "1v1.LOL", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzY3zN8N_X1Nf5YpPZ5o8E9h-pL-lqS-mEig&s", url: "https://1v1.lol" }
         ];
 
-        // ADD NEW MOVIES HERE
         const movies = [
-            { name: "SEARCH ANY MOVIE", img: "https://i.ibb.co/vYm6vS6/Take-Your-Heart.png", url: "https://movie-web.app" },
-            { name: "FlixZone", img: "https://files.catbox.moe/5m9qly.png", url: "https://flixzone.co/home" },
-            { name: "HiAnime", img: "https://files.catbox.moe/u3a033.png", url: "https://hianime.ws/home" }
+            { name: "FlixZone Home", img: "https://files.catbox.moe/5m9qly.png", url: "https://flixzone.co/home" },
+            { name: "HiAnime Home", img: "https://files.catbox.moe/u3a033.png", url: "https://hianime.ws/home" },
+            { name: "One Piece", img: "https://m.media-amazon.com/images/M/MV5BMTNjNGU4NTUtY2VjYS00Y2Q1LTlhMjMtZjhjZmVmNzVjOTcxXkEyXkFqcGdeQXVyMTEyMjM2NDc2._V1_FMjpg_UX1000_.jpg", url: "https://hianime.ws/search?keyword=one+piece" }
         ];
 
         const mainGrid = document.getElementById('mainGrid');
@@ -138,6 +149,10 @@
             currentMode = type;
             document.getElementById('grid-content').style.display = 'block';
             document.getElementById('proxy-page').style.display = 'none';
+            
+            // Toggle the Streaming Bar
+            document.getElementById('movieStreamingBar').style.display = (type === 'movies' ? 'block' : 'none');
+            
             if(type === 'games') {
                 document.body.style.backgroundImage = "linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), var(--Home-Wallpaper)";
                 document.getElementById('banner-text').innerText = "WELCOME BACK";
@@ -147,6 +162,16 @@
                 document.getElementById('banner-text').innerText = "MOVIE HUB";
                 render(movies);
             }
+        }
+
+        // MASTER MOVIE SEARCH LOGIC
+        function searchMasterMovie() {
+            let query = document.getElementById('streamInput').value;
+            if(!query) return;
+            document.getElementById('home-view').style.display = 'none';
+            document.getElementById('player-view').style.display = 'flex';
+            frame.src = MOVIE_MASTER + encodeURIComponent(query);
+            document.getElementById('playing-title').innerText = "STREAMING: " + query;
         }
 
         function openProxy() {
