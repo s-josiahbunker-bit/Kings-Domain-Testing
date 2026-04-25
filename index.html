@@ -5,227 +5,144 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>King's Domain | Unblocked</title>
     <style>
-        /* BASE STYLES */
+        /* CSS - THE LOOK */
         body {
             margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', sans-serif;
-            background-color: #0a0a0a;
+            background-color: #0f0f0f;
             color: white;
-            overflow-x: hidden;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            text-align: center;
         }
 
-        /* NAVIGATION */
-        .navbar {
-            background: #000;
-            padding: 15px 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 3px solid #ff4757;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-        .logo { font-size: 24px; font-weight: bold; color: #ff4757; cursor: pointer; text-transform: uppercase; }
-
-        /* THE BANNER SECTION */
-        .hero-banner {
+        /* BANNER */
+        .banner {
             width: 100%;
-            height: 400px;
-            /* CHANGE THE BANNER IMAGE URL BELOW */
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
-                        url('https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=2070');
+            height: 300px;
+            /* REPLACE THE LINK BELOW WITH YOUR BANNER IMAGE */
+            background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1200&q=80');
             background-size: cover;
             background-position: center;
             display: flex;
-            flex-direction: column;
-            justify-content: center;
             align-items: center;
-            text-align: center;
-            border-bottom: 5px solid #ff4757;
+            justify-content: center;
+            border-bottom: 4px solid #ff4757;
         }
-        .hero-banner h1 { font-size: 60px; margin: 0; color: #fff; text-shadow: 0 0 20px #ff4757; }
-        .hero-banner p { font-size: 20px; color: #ccc; margin-top: 10px; }
 
-        /* HOME CONTENT (GRID) */
-        #home-view { display: block; padding: 40px 5%; }
-        
+        .banner h1 { font-size: 50px; text-shadow: 2px 2px 10px rgba(0,0,0,0.8); margin: 0; }
+
+        /* GRID */
+        .container { padding: 40px; }
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            gap: 25px;
-            max-width: 1200px;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 20px;
+            max-width: 1000px;
             margin: 0 auto;
         }
 
-        .game-card {
-            background: #161616;
-            border-radius: 15px;
-            overflow: hidden;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border: 2px solid #222;
-        }
-
-        .game-card:hover {
-            transform: scale(1.05);
-            border-color: #ff4757;
-            box-shadow: 0 0 20px rgba(255, 71, 87, 0.4);
-        }
-
-        .game-card img {
-            width: 100%;
-            aspect-ratio: 1/1;
-            object-fit: cover;
-        }
-
-        .game-card p {
-            text-align: center;
-            padding: 12px;
-            margin: 0;
-            font-weight: bold;
-            font-size: 16px;
-        }
-
-        /* GAME PLAYER (IFRAME VIEW) */
-        #player-view {
-            display: none; /* Hidden at start */
-            width: 100%;
-            height: 95vh;
-            flex-direction: column;
-            align-items: center;
-            background: #000;
-        }
-
-        .player-controls {
-            width: 100%;
-            padding: 10px 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-sizing: border-box;
-            background: #111;
-        }
-
-        .back-btn {
-            background: #ff4757;
-            color: white;
-            border: none;
-            padding: 10px 25px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 14px;
-        }
-
-        iframe {
-            width: 95%;
-            height: 80%;
-            margin-top: 20px;
-            border: 2px solid #333;
+        .card {
+            background: #1a1a1a;
             border-radius: 10px;
-            background: #000;
+            overflow: hidden;
+            border: 1px solid #333;
+            cursor: pointer;
+            transition: 0.3s;
         }
+
+        .card:hover { transform: translateY(-5px); border-color: #ff4757; }
+        .card img { width: 100%; aspect-ratio: 1/1; object-fit: cover; }
+        .card p { padding: 10px; margin: 0; font-weight: bold; }
+
+        /* GAME PLAYER (MODAL) */
+        #game-overlay {
+            display: none; /* Hidden until a game is clicked */
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 1000;
+            flex-direction: column;
+        }
+
+        .controls { padding: 15px; background: #000; display: flex; justify-content: space-between; align-items: center; }
+        .btn-back { background: #ff4757; color: white; border: none; padding: 10px 20px; cursor: pointer; border-radius: 5px; font-weight: bold; }
+        
+        iframe { width: 100%; height: 100%; border: none; }
     </style>
 </head>
 <body>
 
-    <!-- NAV BAR -->
-    <div class="navbar">
-        <div class="logo" onclick="goHome()">KING'S DOMAIN</div>
-        <div style="color:#888; font-size: 14px;">Play Anywhere</div>
-    </div>
-
-    <!-- HOME VIEW (Banner + Games) -->
+    <!-- HOME VIEW -->
     <div id="home-view">
-        <div class="hero-banner">
+        <div class="banner">
             <h1>KING'S DOMAIN</h1>
-            <p>The Ultimate Collection of Unblocked Games</p>
         </div>
 
-        <h2 style="margin: 40px 0 20px 0; border-left: 5px solid #ff4757; padding-left: 15px;">POPULAR GAMES</h2>
-        
-        <div class="grid" id="game-grid">
-            <!-- JavaScript will load games here -->
+        <div class="container">
+            <h2>Select a Game</h2>
+            <div class="grid" id="game-grid">
+                <!-- Games will appear here -->
+            </div>
         </div>
     </div>
 
-    <!-- PLAYER VIEW (Game Window) -->
-    <div id="player-view">
-        <div class="player-controls">
-            <button class="back-btn" onclick="goHome()">← BACK TO HOME</button>
-            <h2 id="current-game-title" style="margin:0; font-size: 18px;">Game Title</h2>
-            <div style="width: 100px;"></div> <!-- Spacer -->
+    <!-- GAME PLAYER VIEW -->
+    <div id="game-overlay">
+        <div class="controls">
+            <button class="btn-back" onclick="closeGame()">← BACK TO HOME</button>
+            <span id="now-playing">Game Title</span>
+            <div style="width: 100px;"></div>
         </div>
-        <iframe id="game-frame" src="" frameborder="0" allowfullscreen></iframe>
+        <iframe id="game-iframe" src=""></iframe>
     </div>
 
     <script>
-        // GAME DATABASE
-        // Replace 'url' with the actual link to play the game
-        // Replace 'image' with the image URL from King's Domain
-        const games = [
+        // DATA - Put your links here
+        const gamesList = [
             {
-                title: "Slope",
-                image: "https://classroom-6x.lol/_next/image?url=https%3A%2F%2Fcdn.shst.at%2Fimages%2Fgames%2Fslope.png&w=128&q=75",
+                name: "Slope",
+                img: "https://classroom-6x.lol/_next/image?url=https%3A%2F%2Fcdn.shst.at%2Fimages%2Fgames%2Fslope.png&w=128&q=75",
                 url: "https://kkgames.github.io/slope/"
             },
             {
-                title: "1v1.LOL",
-                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzY3zN8N_X1Nf5YpPZ5o8E9h-pL-lqS-mEig&s",
-                url: "https://1v1.lol"
-            },
-            {
-                title: "Tunnel Rush",
-                image: "https://edumaps.net/wp-content/uploads/2022/12/tunnel-rush.png",
+                name: "Tunnel Rush",
+                img: "https://edumaps.net/wp-content/uploads/2022/12/tunnel-rush.png",
                 url: "https://kkgames.github.io/tunnel-rush/"
             },
             {
-                title: "BitLife",
-                image: "https://play-lh.googleusercontent.com/H_f-R6U9p6M7L9f5B_R_3E5b6q9Z5F6",
-                url: "https://bitlifeonline.io"
+                name: "1v1.LOL",
+                img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzY3zN8N_X1Nf5YpPZ5o8E9h-pL-lqS-mEig&s",
+                url: "https://1v1.lol"
             },
             {
-                title: "Drive Mad",
-                image: "https://cdn.shst.at/images/games/drive-mad.png",
+                name: "Drive Mad",
+                img: "https://cdn.shst.at/images/games/drive-mad.png",
                 url: "https://kkgames.github.io/drive-mad/"
             }
         ];
 
-        const homeView = document.getElementById('home-view');
-        const playerView = document.getElementById('player-view');
-        const gameFrame = document.getElementById('game-frame');
-        const gameTitleDisplay = document.getElementById('current-game-title');
+        // LOGIC - Loading the grid
         const grid = document.getElementById('game-grid');
+        const overlay = document.getElementById('game-overlay');
+        const iframe = document.getElementById('game-iframe');
+        const titleText = document.getElementById('now-playing');
 
-        // Create the game icons
-        games.forEach(game => {
-            const card = document.createElement('div');
-            card.className = 'game-card';
-            card.innerHTML = `
-                <img src="${game.image}" alt="${game.title}">
-                <p>${game.title}</p>
-            `;
-            // When clicked, run the function to start the game
-            card.onclick = () => launchGame(game.url, game.title);
-            grid.appendChild(card);
+        gamesList.forEach(game => {
+            const div = document.createElement('div');
+            div.className = 'card';
+            div.innerHTML = `<img src="${game.img}"><p>${game.name}</p>`;
+            div.onclick = () => {
+                titleText.innerText = game.name;
+                iframe.src = game.url;
+                overlay.style.display = 'flex';
+                document.body.style.overflow = 'hidden'; // Stop scrolling
+            };
+            grid.appendChild(div);
         });
 
-        // FUNCTION TO START GAME
-        function launchGame(url, title) {
-            homeView.style.display = 'none';    // Hide the Banner and Grid
-            playerView.style.display = 'flex'; // Show the Player screen
-            gameFrame.src = url;               // Put the game link in the iframe
-            gameTitleDisplay.innerText = title; // Change the title at the top
-            window.scrollTo(0,0);              // Scroll to top
-        }
-
-        // FUNCTION TO GO BACK
-        function goHome() {
-            homeView.style.display = 'block';  // Show Banner and Grid again
-            playerView.style.display = 'none'; // Hide the Player
-            gameFrame.src = "";                // Stop the game from running
+        function closeGame() {
+            overlay.style.display = 'none';
+            iframe.src = ""; // Stop the game
+            document.body.style.overflow = 'auto'; // Allow scrolling
         }
     </script>
 </body>
