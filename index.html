@@ -3,230 +3,250 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>King's Domain | Premium Unblocked</title>
+    <title>King's Domain | Unblocked Hub</title>
     <style>
-        /* 1. WALLPAPER SETTINGS */
+        /* 1. THE AESTHETIC WALLPAPER */
         body {
             margin: 0;
             padding: 0;
-            /* YOU CAN CHANGE THE MAIN SITE WALLPAPER HERE */
-            background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
-                              url('https://images.unsplash.com/photo-1614850523296-d8c1af93d400?q=80&w=2070');
-            background-attachment: fixed; 
-            background-size: cover;
-            background-position: center;
-            font-family: 'Segoe UI', sans-serif;
-            color: white;
+            background-color: #050505;
+            /* Gaming Grid Wallpaper */
+            background-image: 
+                radial-gradient(circle at 2px 2px, #1a1a1a 1px, transparent 0);
+            background-size: 40px 40px;
+            background-attachment: fixed;
+            font-family: 'Oswald', 'Segoe UI', sans-serif;
+            color: #ffffff;
+            overflow-x: hidden;
         }
 
-        /* 2. NAVIGATION */
+        /* 2. NEON NAVBAR */
         .navbar {
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
-            padding: 15px 5%;
+            background: #000;
+            padding: 10px 5%;
             display: flex;
-            justify-content: center;
-            border-bottom: 2px solid #ff4757;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #ff0000;
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.4);
             position: sticky;
             top: 0;
             z-index: 1000;
         }
-        .logo { font-size: 26px; font-weight: bold; color: #ff4757; letter-spacing: 3px; }
+        .logo { 
+            font-size: 28px; 
+            font-weight: 900; 
+            color: #ff0000; 
+            text-transform: uppercase;
+            text-shadow: 2px 2px #550000;
+        }
 
-        /* 3. LONGER ROUNDED RECTANGLE BANNER */
-        .banner-container {
-            padding: 30px 5% 0 5%;
+        /* 3. LONG ROUNDED BANNER */
+        .banner-wrap {
+            padding: 30px 20px 0 20px;
             display: flex;
             justify-content: center;
         }
         .hero-banner {
-            width: 95%; /* Responsive width */
-            max-width: 1150px; /* INCREASED LENGTH HERE */
-            height: 180px; /* Adjusted height for the new length */
-            /* CHANGE THE BANNER IMAGE (THE IMAGE INSIDE THE RECTANGLE) HERE */
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
-                        url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2070');
+            width: 100%;
+            max-width: 1200px; /* Long length */
+            height: 200px;
+            background: linear-gradient(45deg, rgba(255,0,0,0.2), rgba(0,0,0,0.8)), 
+                        url('https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2070');
             background-size: cover;
             background-position: center;
-            border-radius: 25px; 
-            border: 2px solid #ff4757;
+            border-radius: 20px;
+            border: 2px solid #ff0000;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            box-shadow: 0 10px 40px rgba(255, 71, 87, 0.4);
+            box-shadow: 0 0 25px rgba(255, 0, 0, 0.3);
             text-align: center;
         }
-        .hero-banner h1 { font-size: 40px; margin: 0; letter-spacing: 2px; }
-        .hero-banner p { margin: 8px 0 0 0; color: #eee; font-size: 18px; }
+        .hero-banner h1 { font-size: 50px; margin: 0; text-transform: uppercase; font-style: italic; }
+        .hero-banner p { font-size: 18px; color: #ff4d4d; letter-spacing: 2px; }
 
-        /* 4. SEARCH BAR SECTION */
-        .search-area {
-            text-align: center;
-            padding: 30px 0;
+        /* 4. SEARCH BAR */
+        .search-section {
+            display: flex;
+            justify-content: center;
+            padding: 30px 20px;
         }
-        #game-search {
-            width: 85%;
-            max-width: 550px;
-            padding: 15px 30px;
-            border-radius: 50px;
-            border: 2px solid #ff4757;
-            background: rgba(255, 255, 255, 0.98);
-            color: #000;
-            font-size: 17px;
-            font-weight: bold;
+        #search-box {
+            width: 100%;
+            max-width: 600px;
+            padding: 15px 25px;
+            border-radius: 10px;
+            border: 2px solid #333;
+            background: #111;
+            color: white;
+            font-size: 18px;
             outline: none;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.6);
+            transition: 0.3s;
+        }
+        #search-box:focus {
+            border-color: #ff0000;
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
         }
 
         /* 5. GAME GRID */
+        .grid-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 20px 50px 20px;
+        }
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
-            gap: 25px;
-            padding: 0 5% 60px 5%;
-            max-width: 1200px;
-            margin: 0 auto;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 20px;
         }
-        .game-card {
-            background: rgba(20, 20, 20, 0.85);
-            backdrop-filter: blur(8px);
-            border-radius: 15px;
+        .card {
+            background: #111;
+            border-radius: 12px;
             overflow: hidden;
-            border: 1px solid #444;
+            border: 2px solid #222;
             cursor: pointer;
-            transition: 0.3s ease-in-out;
-            text-align: center;
+            transition: 0.2s ease;
+            position: relative;
         }
-        .game-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            border-color: #ff4757;
-            box-shadow: 0 10px 25px rgba(255, 71, 87, 0.4);
+        .card:hover {
+            transform: scale(1.05);
+            border-color: #ff0000;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.4);
+            z-index: 2;
         }
-        .game-card img {
+        .card img {
             width: 100%;
             aspect-ratio: 1/1;
             object-fit: cover;
+            filter: brightness(0.8);
         }
-        .game-card p {
-            padding: 14px;
+        .card:hover img { filter: brightness(1); }
+        .card p {
+            padding: 10px;
             margin: 0;
+            text-align: center;
             font-weight: bold;
-            font-size: 15px;
+            font-size: 14px;
+            background: #000;
         }
 
-        /* 6. PLAYER VIEW */
-        #player-view {
+        /* 6. GAME PLAYER OVERLAY */
+        #player {
             display: none;
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             background: #000;
-            z-index: 2000;
+            z-index: 9999;
             flex-direction: column;
         }
-        .back-bar {
-            padding: 12px 5%;
+        .player-nav {
+            padding: 10px 20px;
             background: #111;
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            border-bottom: 2px solid #ff4757;
+            align-items: center;
+            border-bottom: 2px solid #ff0000;
         }
-        .btn-back {
-            background: #ff4757;
+        .back-btn {
+            background: #ff0000;
             color: white;
             border: none;
-            padding: 12px 25px;
-            border-radius: 6px;
+            padding: 10px 25px;
+            border-radius: 5px;
             cursor: pointer;
-            font-weight: bold;
-            font-size: 14px;
+            font-weight: 900;
+            text-transform: uppercase;
         }
         iframe {
             flex-grow: 1;
             border: none;
             width: 100%;
-            background: #000;
+            height: 100%;
         }
     </style>
+    <!-- Importing a gaming font -->
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <!-- HOME VIEW -->
-    <div id="home-view">
+    <!-- HOME PAGE -->
+    <div id="home">
         <div class="navbar">
             <div class="logo">KING'S DOMAIN</div>
         </div>
 
-        <div class="banner-container">
+        <div class="banner-wrap">
             <div class="hero-banner">
                 <h1>KING'S DOMAIN</h1>
-                <p>The Ultimate Unblocked Experience</p>
+                <p>UNBLOCKED & FREE</p>
             </div>
         </div>
 
-        <div class="search-area">
-            <input type="text" id="game-search" placeholder="Search for a game..." onkeyup="filterGames()">
+        <div class="search-section">
+            <input type="text" id="search-box" placeholder="SEARCH FOR A GAME..." onkeyup="filterGames()">
         </div>
 
-        <div class="grid" id="game-grid">
-            <!-- Games Loaded by JavaScript -->
+        <div class="grid-container">
+            <div class="grid" id="game-grid">
+                <!-- Games Load Here -->
+            </div>
         </div>
     </div>
 
-    <!-- PLAYER VIEW -->
-    <div id="player-view">
-        <div class="back-bar">
-            <button class="btn-back" onclick="closeGame()">← BACK TO HOME</button>
-            <h2 id="current-title" style="margin:0; font-size: 18px;">Playing Game</h2>
-            <div style="width: 100px;"></div>
+    <!-- FULLSCREEN PLAYER -->
+    <div id="player">
+        <div class="player-nav">
+            <button class="back-btn" onclick="closeGame()">Back to Home</button>
+            <span id="playing-title" style="font-weight:bold; color:red;">GAME NAME</span>
+            <div style="width:100px;"></div>
         </div>
-        <iframe id="game-iframe" src=""></iframe>
+        <iframe id="game-frame" src=""></iframe>
     </div>
 
     <script>
-        // GAME DATABASE
-        // Replace these image and url links with the ones from King's Domain
+        // DATA - Put your King's Domain assets here
         const games = [
             { name: "Slope", img: "https://classroom-6x.lol/_next/image?url=https%3A%2F%2Fcdn.shst.at%2Fimages%2Fgames%2Fslope.png&w=128&q=75", url: "https://kkgames.github.io/slope/" },
             { name: "1v1.LOL", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzY3zN8N_X1Nf5YpPZ5o8E9h-pL-lqS-mEig&s", url: "https://1v1.lol" },
             { name: "Tunnel Rush", img: "https://edumaps.net/wp-content/uploads/2022/12/tunnel-rush.png", url: "https://kkgames.github.io/tunnel-rush/" },
             { name: "BitLife", img: "https://play-lh.googleusercontent.com/H_f-R6U9p6M7L9f5B_R_3E5b6q9Z5F6", url: "https://bitlifeonline.io" },
-            { name: "Drive Mad", img: "https://cdn.shst.at/images/games/drive-mad.png", url: "https://kkgames.github.io/drive-mad/" }
+            { name: "Drive Mad", img: "https://cdn.shst.at/images/games/drive-mad.png", url: "https://kkgames.github.io/drive-mad/" },
+            { name: "EGG CAR", img: "https://play-lh.googleusercontent.com/I6PZpT0x", url: "https://kkgames.github.io/egg-car/" }
         ];
 
         const grid = document.getElementById('game-grid');
 
-        function render(data) {
+        function render(list) {
             grid.innerHTML = '';
-            data.forEach(game => {
+            list.forEach(game => {
                 const card = document.createElement('div');
-                card.className = 'game-card';
+                card.className = 'card';
                 card.innerHTML = `<img src="${game.img}"><p>${game.name}</p>`;
                 card.onclick = () => {
-                    document.getElementById('home-view').style.display = 'none';
-                    document.getElementById('player-view').style.display = 'flex';
-                    document.getElementById('game-iframe').src = game.url;
-                    document.getElementById('current-title').innerText = game.name;
-                    window.scrollTo(0,0);
+                    document.getElementById('home').style.display = 'none';
+                    document.getElementById('player').style.display = 'flex';
+                    document.getElementById('game-frame').src = game.url;
+                    document.getElementById('playing-title').innerText = game.name;
                 };
                 grid.appendChild(card);
             });
         }
 
         function filterGames() {
-            const term = document.getElementById('game-search').value.toLowerCase();
-            const filtered = games.filter(g => g.name.toLowerCase().includes(term));
+            const val = document.getElementById('search-box').value.toLowerCase();
+            const filtered = games.filter(g => g.name.toLowerCase().includes(val));
             render(filtered);
         }
 
         function closeGame() {
-            document.getElementById('home-view').style.display = 'block';
-            document.getElementById('player-view').style.display = 'none';
+            document.getElementById('home').style.display = 'block';
+            document.getElementById('player').style.display = 'none';
             document.getElementById('game-frame').src = '';
         }
 
-        // Initialize the site
+        // Run site
         render(games);
     </script>
 </body>
