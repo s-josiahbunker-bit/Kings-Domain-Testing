@@ -3,106 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KING'S DOMAIN | NAVIGATOR</title>
-    <!-- Icons and Fonts -->
+    <title>KING'S DOMAIN | MULTIMEDIA</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
 
     <style>
         /* ==========================================
-           1. MASTER CUSTOMIZATION
+           1. MASTER CUSTOMIZATION (Edit links here)
            ========================================== */
         :root {
             --Wallpaper: url('https://wallpapers.com/images/hd/persona-5-background-030o8u3u29n532no.jpg');
             --Banner-Art: url('https://images8.alphacoders.com/132/1325171.jpeg');
+            
             --Menu-Icon: url('https://i.ibb.co/68v8T3G/p5-menu.jpg'); 
             --Eye-Icon: url('https://i.ibb.co/L9YmS4H/p5-eye.png');
+            --Movie-Icon: url('https://i.ibb.co/vYm6vS6/Take-Your-Heart.png'); /* Temporarily placeholder, replaced by the Projector image below */
             
             --p5-pink-red: #ff1f44; 
             --p5-black: #000000;
             --p5-card-bg: #141414;
         }
 
-        body, html { margin: 0; padding: 0; height: 100%; background-color: var(--p5-black); }
+        body, html { margin: 0; padding: 0; height: 100%; background-color: var(--p5-black); color: white; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        body { background-image: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), var(--Wallpaper); background-size: cover; background-attachment: fixed; background-position: center; }
 
-        body {
-            background-image: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), var(--Wallpaper);
-            background-size: cover; background-attachment: fixed; background-position: center;
-            color: white; font-family: 'Inter', sans-serif; overflow-x: hidden;
+        /* 2. VERTICAL NAV */
+        .v-nav {
+            position: fixed; left: 0; top: 0; height: 100%; width: 85px; 
+            background: #000; border-right: 2px solid var(--p5-pink-red);
+            display: flex; flex-direction: column; align-items: center; 
+            padding-top: 20px; gap: 20px; z-index: 1001;
         }
 
-        /* 2. NAVBAR (MATCHING YOUR IMAGE LAYOUT) */
-        nav {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 10px 60px; background: #000; border-bottom: 2px solid var(--p5-pink-red);
-            position: sticky; top: 0; z-index: 1000;
-        }
-        .nav-left { display: flex; align-items: center; gap: 20px; }
-        
-        /* ICONS STYLING */
-        .p5-icon {
-            height: 50px; width: 60px;
+        .nav-btn {
+            width: 60px; height: 60px;
             background-size: contain; background-repeat: no-repeat; background-position: center;
             cursor: pointer; transition: 0.3s;
         }
-        .m-icon { background-image: var(--Menu-Icon); mix-blend-mode: screen; }
-        .s-icon { background-image: var(--Eye-Icon); width: 50px; }
+        .btn-menu { background-image: var(--Menu-Icon); mix-blend-mode: screen; }
+        .btn-settings { background-image: var(--Eye-Icon); height: 50px; }
+        /* THE MOVIE PROJECTOR ICON */
+        .btn-movies { background-image: url('https://i.ibb.co/Qv6y8Z4/p5-movie.png'); mix-blend-mode: screen; }
         
-        .p5-icon:hover { transform: scale(1.1); filter: drop-shadow(0 0 10px var(--p5-pink-red)); }
+        .nav-btn:hover { transform: scale(1.15); filter: drop-shadow(0 0 10px var(--p5-pink-red)); }
 
-        .logo-text { color: var(--p5-pink-red); font-weight: 900; font-size: 18px; text-transform: uppercase; }
-        .nav-right-text { font-size: 13px; color: white; opacity: 0.8; }
-
-        /* 3. SIDEBAR (AUTO-CLOSE) */
+        /* 3. SIDEBAR (Auto-close) */
         #sidebar {
             position: fixed; top: 0; left: -320px; width: 300px; height: 100%;
             background: rgba(0,0,0,0.98); border-right: 3px solid var(--p5-pink-red);
             z-index: 2001; transition: 0.5s ease; padding: 60px 20px; box-sizing: border-box;
         }
-        #sidebar.active { left: 0; }
-        
+        #sidebar.active { left: 85px; }
         .sidebar-header { color: var(--p5-pink-red); font-weight: 900; font-size: 22px; text-transform: uppercase; margin-bottom: 20px; border-bottom: 1px solid #222; }
 
-        .sidebar-item {
-            display: flex; align-items: center; gap: 15px; padding: 15px; color: white; text-decoration: none; 
-            font-weight: 900; font-size: 18px; text-transform: uppercase; transition: 0.3s; cursor: pointer;
-        }
-        .sidebar-item:hover { color: var(--p5-pink-red); padding-left: 20px; }
-
-        /* PROXY SETTINGS BOXES */
-        .proxy-selector {
-            border: 1px solid #333; border-radius: 8px; padding: 10px; margin-bottom: 10px; cursor: pointer; transition: 0.2s;
-        }
-        .proxy-selector:hover { border-color: var(--p5-pink-red); }
-        .proxy-selector.active { background: var(--p5-pink-red); border-color: white; }
-
         /* 4. MAIN CONTENT */
-        .container { max-width: 1200px; margin: 0 auto; padding: 30px 60px; }
+        .top-bar { margin-left: 85px; padding: 15px 50px; background: rgba(0,0,0,0.5); display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .logo-text { color: var(--p5-pink-red); font-weight: 900; font-size: 20px; text-transform: uppercase; letter-spacing: 2px; }
+
+        .container { margin-left: 85px; padding: 40px 60px; max-width: 1200px; }
         .hero-banner {
-            width: 100%; height: 320px; border-radius: 20px; margin-bottom: 25px;
+            width: 100%; height: 320px; border-radius: 20px; margin-bottom: 30px;
             background: linear-gradient(to right, rgba(0,0,0,1) 40%, transparent), var(--Banner-Art);
             background-size: cover; background-position: center;
             display: flex; flex-direction: column; justify-content: center; padding-left: 60px; box-sizing: border-box; border: 1px solid rgba(255,255,255,0.1);
         }
         .hero-banner h1 { font-size: 44px; margin: 0; font-weight: 900; text-transform: uppercase; }
 
-        #gameSearch {
-            width: 100%; padding: 16px 25px; background: var(--p5-card-bg); 
-            border: 1px solid #222; border-radius: 8px; color: white; margin-bottom: 30px; outline: none; box-sizing: border-box;
-        }
+        #searchBox { width: 100%; padding: 16px 25px; background: var(--p5-card-bg); border: 1px solid #222; border-radius: 8px; color: white; margin-bottom: 30px; outline: none; }
 
-        /* 5. GRID & CARDS (FULL COVER) */
+        /* 5. GRID & CARDS */
         .grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; }
         .card {
             background: var(--p5-card-bg); border-radius: 12px; height: 380px; 
             position: relative; overflow: hidden; border: 1px solid #1a1a1a; cursor: pointer; transition: 0.3s;
         }
-        .card:hover { border-color: var(--p5-pink-red); transform: translateY(-8px); }
+        .card:hover { border-color: var(--p5-pink-red); transform: translateY(-8px); box-shadow: 0 5px 15px rgba(255, 31, 68, 0.4); }
         .card img { width: 100%; height: 100%; object-fit: cover; display: block; }
-        .card p {
-            position: absolute; bottom: 0; width: 100%; background: rgba(0, 0, 0, 0.85); 
-            margin: 0; padding: 15px 0; text-align: center; font-size: 12px; font-weight: 700; border-top: 1px solid var(--p5-pink-red);
-        }
+        .card p { position: absolute; bottom: 0; width: 100%; background: rgba(0, 0, 0, 0.85); margin: 0; padding: 15px 0; text-align: center; font-size: 12px; font-weight: 700; border-top: 1px solid var(--p5-pink-red); }
 
         /* 6. PLAYER VIEW */
         #player-view { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: black; z-index: 10000; flex-direction: column; }
@@ -110,60 +87,53 @@
         #gameFrame { width: 100%; height: calc(100% - 60px); border: none; background: #000; }
         .p-btn { background: var(--p5-pink-red); color: white; border: none; padding: 10px 20px; font-weight: bold; cursor: pointer; border-radius: 5px; }
 
-        footer { background: #000; padding: 40px; border-top: 2px solid var(--p5-pink-red); text-align: center; }
+        .proxy-selector { border: 1px solid #333; border-radius: 8px; padding: 12px; margin-bottom: 10px; cursor: pointer; transition: 0.2s; font-weight: bold; }
+        .proxy-selector.active { background: var(--p5-pink-red); border-color: white; }
     </style>
 </head>
 <body>
 
-    <!-- SIDEBAR -->
-    <div id="sidebar" onmouseleave="closeAll()">
-        <!-- MAIN MENU -->
-        <div id="menu-side">
-            <div class="sidebar-header">Main Menu</div>
-            <div class="sidebar-item" onclick="goHome(); closeAll();"><i class="fas fa-home"></i> Home</div>
-            <div class="sidebar-item" onclick="openProxy(); closeAll();"><i class="fas fa-ghost"></i> Proxy</div>
-        </div>
-
-        <!-- SETTINGS MENU -->
-        <div id="settings-side" style="display:none;">
-            <div class="sidebar-header">Navigator</div>
-            <div id="opt-ddg" class="proxy-selector active" onclick="setProxy('https://duckduckgo.com', 'opt-ddg')">DuckDuckGo</div>
-            <div id="opt-sp" class="proxy-selector" onclick="setProxy('https://www.startpage.com', 'opt-sp')">StartPage</div>
-            <div id="opt-uv" class="proxy-selector" onclick="setProxy('https://uv.student-portal.workers.dev', 'opt-uv')">Ultraviolet</div>
-            <div id="opt-sj" class="proxy-selector" onclick="setProxy('https://scramjet.org', 'opt-sj')">Scramjet</div>
-        </div>
-    </div>
-
-    <!-- NAVBAR -->
-    <nav>
-        <div class="nav-left">
-            <!-- MENU BUTTON -->
-            <div class="p5-icon m-icon" onclick="toggleSidebar('menu')"></div>
-            <!-- SETTINGS BUTTON (EYE) -->
-            <div class="p5-icon s-icon" onclick="toggleSidebar('settings')"></div>
-            <div class="logo-text">KING'S DOMAIN</div>
-        </div>
-        <div class="nav-right-text">Unblocked Games</div>
+    <!-- VERTICAL NAVIGATION -->
+    <nav class="v-nav">
+        <div class="nav-btn btn-menu" title="Games" onclick="showLibrary('games')"></div>
+        <div class="nav-btn btn-movies" title="Movies & Anime" onclick="showLibrary('movies')"></div>
+        <div class="nav-btn btn-settings" title="Proxy Settings" onclick="toggleSidebar('settings')"></div>
     </nav>
 
-    <div id="home-view" class="container">
-        <header class="hero-banner">
-            <h1>WELCOME BACK</h1>
-            <p>Select your destination, Phantom Thief.</p>
-        </header>
-        <input type="text" id="gameSearch" placeholder="Search for games..." onkeyup="filter()">
-        <div class="grid" id="gameGrid"></div>
+    <!-- SIDEBAR -->
+    <div id="sidebar" onmouseleave="closeAll()">
+        <div id="settings-side">
+            <div class="sidebar-header">Navigator</div>
+            <div id="opt-ddg" class="proxy-selector active" onclick="setProxy('https://duckduckgo.com', 'opt-ddg')">DuckDuckGo</div>
+            <div id="opt-uv" class="proxy-selector" onclick="setProxy('https://uv.student-portal.workers.dev', 'opt-uv')">Ultraviolet</div>
+            <div id="opt-sp" class="proxy-selector" onclick="setProxy('https://www.startpage.com', 'opt-sp')">StartPage</div>
+            <div class="sidebar-header" style="margin-top:20px;">Actions</div>
+            <div class="proxy-selector" onclick="openProxy()">Launch Proxy</div>
+        </div>
     </div>
 
-    <footer>
-        <div style="font-size: 10px; color: #444; letter-spacing: 2px;">© 2024 KING'S DOMAIN</div>
-    </footer>
+    <!-- TOP BAR -->
+    <div class="top-bar">
+        <div class="logo-text">KING'S DOMAIN</div>
+        <div id="view-indicator" style="font-size: 12px; opacity: 0.6; text-transform: uppercase; letter-spacing: 2px;">Games Library</div>
+    </div>
+
+    <!-- MAIN VIEW -->
+    <div id="home-view" class="container">
+        <header class="hero-banner">
+            <h1 id="banner-title">WELCOME BACK</h1>
+            <p id="banner-sub">Ready to steal some time? Select a target.</p>
+        </header>
+
+        <input type="text" id="searchBox" placeholder="Search targets..." onkeyup="filter()">
+        <div class="grid" id="mainGrid"></div>
+    </div>
 
     <!-- PLAYER -->
     <div id="player-view">
         <div class="player-bar">
-            <button class="p-btn" onclick="goHome()">← BACK</button>
-            <span id="playing-title" style="font-weight:900;">DESTINATION</span>
+            <button class="p-btn" onclick="closePlayer()">← BACK</button>
+            <span id="playing-title" style="font-weight:900; text-transform:uppercase;">DESTINATION</span>
             <button class="p-btn" onclick="goFull()">FULLSCREEN</button>
         </div>
         <iframe id="gameFrame" src="" allowfullscreen></iframe>
@@ -171,22 +141,51 @@
 
     <script>
         let currentProxy = "https://duckduckgo.com";
+        let currentMode = "games";
 
         const games = [
             { name: "Slime Rancher", img: "https://sm.ign.com/ign_es/cover/s/slime-ranc/slime-rancher_j318.jpg", url: "slimerancher.html" },
             { name: "Helltaker", img: "https://files.catbox.moe/k9d5o6.png", url: "helltaker.html" },
-            { name: "Slope", img: "https://sm.ign.com/ign_br/game/s/slope/slope_69qy.jpg", url: "https://kkgames.github.io/slope/" },
-            { name: "1v1.LOL", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzY3zN8N_X1Nf5YpPZ5o8E9h-pL-lqS-mEig&s", url: "https://1v1.lol" }
+            { name: "Tuff Client", img: "https://files.catbox.moe/rbt7f1.png", url: "tuffclient.html" },
+            { name: "Slope", img: "https://sm.ign.com/ign_br/game/s/slope/slope_69qy.jpg", url: "https://kkgames.github.io/slope/" }
         ];
 
-        const sidebar = document.getElementById('sidebar');
+        const movies = [
+            { name: "FlixZone Home", img: "https://files.catbox.moe/5m9qly.png", url: "https://flixzone.co/home" },
+            { name: "HiAnime Home", img: "https://files.catbox.moe/u3a033.png", url: "https://hianime.ws/home" },
+            { name: "Naruto Shippuden", img: "https://m.media-amazon.com/images/M/MV5BZGFiMWFhNDAtMzUyZS00NmQ2LTg0N2UtN2FmNzAxY2MzMTY1XkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg", url: "https://hianime.ws/search?keyword=naruto" },
+            { name: "The Batman", img: "https://m.media-amazon.com/images/M/MV5BMDdmMTBiNTYtMDIzNi00NGVlLWIzMDYtZTk3MTQ3NGQxZGEwXkEyXkFqcGdeQXVyMzMwOTU5MDk@._V1_.jpg", url: "https://flixzone.co/search/the-batman" },
+            { name: "Spider-Man", img: "https://m.media-amazon.com/images/M/MV5BZWMyYzFjYTYtNTRjYi00OGExLWE2YzgtOGRmYjAxZTU3NzBiXkEyXkFqcGdeQXVyMzQ0MzA0NTM@._V1_.jpg", url: "https://flixzone.co/search/spider-man" }
+        ];
 
-        function toggleSidebar(type) {
-            sidebar.classList.add('active');
-            document.getElementById('menu-side').style.display = (type === 'menu' ? 'block' : 'none');
-            document.getElementById('settings-side').style.display = (type === 'settings' ? 'block' : 'none');
+        const mainGrid = document.getElementById('mainGrid');
+        const sidebar = document.getElementById('sidebar');
+        const frame = document.getElementById('gameFrame');
+
+        function showLibrary(mode) {
+            currentMode = mode;
+            document.getElementById('view-indicator').innerText = mode + " Library";
+            document.getElementById('banner-title').innerText = (mode === 'games' ? "GAMES LIST" : "MOVIE HUB");
+            render(mode === 'games' ? games : movies);
         }
 
+        function render(data) {
+            mainGrid.innerHTML = '';
+            data.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `<img src="${item.img}"><p>${item.name}</p>`;
+                card.onclick = () => {
+                    document.getElementById('home-view').style.display = 'none';
+                    document.getElementById('player-view').style.display = 'flex';
+                    frame.src = item.url;
+                    document.getElementById('playing-title').innerText = item.name;
+                };
+                mainGrid.appendChild(card);
+            });
+        }
+
+        function toggleSidebar() { sidebar.classList.toggle('active'); }
         function closeAll() { sidebar.classList.remove('active'); }
 
         function setProxy(url, id) {
@@ -198,45 +197,30 @@
         function openProxy() {
             document.getElementById('home-view').style.display = 'none';
             document.getElementById('player-view').style.display = 'flex';
-            document.getElementById('gameFrame').src = currentProxy;
+            frame.src = currentProxy;
             document.getElementById('playing-title').innerText = "PROXY";
-        }
-
-        function render(data) {
-            const grid = document.getElementById('gameGrid');
-            grid.innerHTML = '';
-            data.forEach(game => {
-                const card = document.createElement('div');
-                card.className = 'card';
-                card.innerHTML = `<img src="${game.img}"><p>${game.name}</p>`;
-                card.onclick = () => {
-                    document.getElementById('home-view').style.display = 'none';
-                    document.getElementById('player-view').style.display = 'flex';
-                    document.getElementById('gameFrame').src = game.url;
-                    document.getElementById('playing-title').innerText = game.name;
-                };
-                grid.appendChild(card);
-            });
+            closeAll();
         }
 
         function filter() {
-            const val = document.getElementById('gameSearch').value.toLowerCase();
-            render(games.filter(g => g.name.toLowerCase().includes(val)));
+            const val = document.getElementById('searchBox').value.toLowerCase();
+            const data = (currentMode === 'games' ? games : movies);
+            render(data.filter(i => i.name.toLowerCase().includes(val)));
         }
 
-        function goHome() {
+        function closePlayer() {
             document.getElementById('home-view').style.display = 'block';
             document.getElementById('player-view').style.display = 'none';
-            document.getElementById('gameFrame').src = '';
+            frame.src = '';
         }
 
         function goFull() {
-            const frame = document.getElementById('gameFrame');
             if (frame.requestFullscreen) frame.requestFullscreen();
             else if (frame.webkitRequestFullscreen) frame.webkitRequestFullscreen();
         }
 
-        render(games);
+        // Init
+        showLibrary('games');
     </script>
 </body>
 </html>
