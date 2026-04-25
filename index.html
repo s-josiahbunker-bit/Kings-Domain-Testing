@@ -3,143 +3,146 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KING'S DOMAIN | UNBLOCKED</title>
+    <title>KING'S DOMAIN</title>
     
-    <!-- Bold Gaming Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@700&display=swap" rel="stylesheet">
+    <!-- Clean Gaming Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;500&family=Inter:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
-        /* 1. CORE AESTHETIC */
+        /* 1. CORE AESTHETIC: SOLID BLACK */
         body {
             margin: 0;
             padding: 0;
-            background-color: #000;
-            /* Classic Gaming Grid Background */
-            background-image: 
-                linear-gradient(to right, #111 1px, transparent 1px),
-                linear-gradient(to bottom, #111 1px, transparent 1px);
-            background-size: 40px 40px;
-            color: white;
-            font-family: 'Oswald', sans-serif;
+            background-color: #000000; /* More black */
+            color: #ffffff;
+            font-family: 'Inter', sans-serif; /* Cleaner, less bold font */
             overflow-x: hidden;
         }
 
-        /* 2. HEADER/NAV */
+        /* 2. HEADER: LEFT ALIGNED */
         .header {
             background: #000;
-            padding: 10px 0;
-            text-align: center;
-            border-bottom: 4px solid #ff0000;
-            box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+            padding: 20px 5%;
+            display: flex;
+            justify-content: flex-start; /* Logo to the left */
+            border-bottom: 2px solid #ff0000;
             position: sticky;
             top: 0;
             z-index: 1000;
         }
         .logo {
-            font-family: 'Anton', sans-serif;
-            font-size: 35px;
+            font-family: 'Oswald', sans-serif;
+            font-weight: 500; /* Less bold */
+            font-size: 28px;
             color: #ff0000;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            text-shadow: 2px 2px #000, 0 0 10px #ff0000;
+            letter-spacing: 4px;
             text-decoration: none;
         }
 
-        /* 3. LONG ROUNDED BANNER (Classic Aesthetic) */
+        /* 3. BANNER: SHORTER WIDTH, TALLER HEIGHT */
         .banner-container {
-            padding: 20px 5%;
+            padding: 40px 5% 20px 5%;
             display: flex;
             justify-content: center;
         }
         .hero-banner {
             width: 100%;
-            max-width: 1200px;
-            height: 160px;
-            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
+            max-width: 800px; /* Shorter in width */
+            height: 300px;    /* Taller in height */
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
                         url('https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2070');
             background-size: cover;
             background-position: center;
             border-radius: 15px;
-            border: 3px solid #ff0000;
+            border: 1px solid #333;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 0 25px rgba(255, 0, 0, 0.3);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
         .hero-banner h1 {
-            font-family: 'Anton', sans-serif;
-            font-size: 50px;
+            font-family: 'Oswald', sans-serif;
+            font-weight: 300; /* Less bold */
+            font-size: 42px;
+            letter-spacing: 10px;
             margin: 0;
             color: #fff;
-            text-shadow: 4px 4px 0px #ff0000;
+            text-align: center;
+            border-top: 1px solid #ff0000;
+            border-bottom: 1px solid #ff0000;
+            padding: 10px 20px;
         }
 
         /* 4. SEARCH BAR */
         .search-wrap {
             display: flex;
             justify-content: center;
-            padding: 10px 0 30px 0;
+            padding: 20px 0;
         }
         #search-input {
-            width: 90%;
-            max-width: 500px;
-            padding: 12px 20px;
-            border-radius: 5px;
-            border: 2px solid #ff0000;
-            background: #111;
+            width: 80%;
+            max-width: 400px;
+            padding: 10px 15px;
+            border-radius: 0; /* Sharp edges for aesthetic */
+            border: 1px solid #333;
+            background: #000;
             color: #fff;
-            font-family: 'Oswald', sans-serif;
-            font-size: 18px;
+            font-family: 'Inter', sans-serif;
             outline: none;
+            transition: 0.3s;
+        }
+        #search-input:focus {
+            border-color: #ff0000;
         }
 
-        /* 5. GAME GRID (CLASSIC STYLE) */
+        /* 5. GAME GRID */
         .grid-wrapper {
-            max-width: 1300px;
+            max-width: 1100px;
             margin: 0 auto;
-            padding: 0 20px 50px 20px;
+            padding: 20px 5% 60px 5%;
         }
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            gap: 15px;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 20px;
         }
 
         .card {
-            background: #111;
-            border: 2px solid #222;
-            border-radius: 8px;
+            background: #000;
+            border: 1px solid #222;
+            border-radius: 4px;
             overflow: hidden;
             cursor: pointer;
-            transition: 0.2s;
-            position: relative;
+            transition: 0.3s;
         }
         .card:hover {
             border-color: #ff0000;
-            transform: scale(1.05);
-            box-shadow: 0 0 15px rgba(255, 0, 0, 0.4);
-            z-index: 5;
+            transform: translateY(-5px);
         }
         .card img {
             width: 100%;
             aspect-ratio: 1/1;
             object-fit: cover;
-            display: block;
+            filter: grayscale(40%);
+            transition: 0.3s;
+        }
+        .card:hover img {
+            filter: grayscale(0%);
         }
         .card p {
             margin: 0;
-            padding: 8px;
+            padding: 10px;
             text-align: center;
-            background: #000;
-            font-size: 14px;
-            color: #ccc;
-            border-top: 1px solid #222;
+            font-size: 13px;
+            font-weight: 400; /* Less bold */
+            color: #888;
         }
         .card:hover p {
-            color: #ff0000;
+            color: #fff;
         }
 
-        /* 6. GAME PLAYER (INTERNAL) */
+        /* 6. PLAYER VIEW */
         #game-screen {
             display: none;
             position: fixed;
@@ -149,27 +152,32 @@
             flex-direction: column;
         }
         .player-nav {
-            background: #111;
-            padding: 10px 20px;
+            background: #000;
+            padding: 15px 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 3px solid #ff0000;
+            border-bottom: 1px solid #222;
         }
         .back-btn {
-            background: #ff0000;
-            color: white;
-            border: none;
+            background: none;
+            color: #ff0000;
+            border: 1px solid #ff0000;
             padding: 8px 20px;
-            border-radius: 4px;
             cursor: pointer;
-            font-family: 'Anton', sans-serif;
-            font-size: 16px;
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: 0.3s;
+        }
+        .back-btn:hover {
+            background: #ff0000;
+            color: #000;
         }
         iframe {
             flex-grow: 1;
             border: none;
-            background: #fff; /* Helps some games load textures */
+            background: #000;
         }
     </style>
 </head>
@@ -178,22 +186,22 @@
     <!-- HOME VIEW -->
     <div id="home-view">
         <div class="header">
-            <a href="#" class="logo" onclick="location.reload()">KING'S DOMAIN</a>
+            <a href="#" class="logo">KING'S DOMAIN</a>
         </div>
 
         <div class="banner-container">
             <div class="hero-banner">
-                <h1>UNBLOCKED GAMES</h1>
+                <h1>GAMES</h1>
             </div>
         </div>
 
         <div class="search-wrap">
-            <input type="text" id="search-input" placeholder="SEARCH GAMES..." onkeyup="filter()">
+            <input type="text" id="search-input" placeholder="Search Directory..." onkeyup="filter()">
         </div>
 
         <div class="grid-wrapper">
             <div class="grid" id="game-grid">
-                <!-- Games go here -->
+                <!-- Games injected via JS -->
             </div>
         </div>
     </div>
@@ -201,24 +209,21 @@
     <!-- PLAYER VIEW -->
     <div id="game-screen">
         <div class="player-nav">
-            <button class="back-btn" onclick="closeGame()">BACK</button>
-            <span id="game-title" style="font-family:'Anton'; color:white; font-size:20px;">GAME NAME</span>
-            <div style="width: 100px;"></div>
+            <button class="back-btn" onclick="closeGame()">Return</button>
+            <span id="game-title" style="font-family:'Oswald'; color:#fff; font-size:18px; letter-spacing: 2px;">GAME TITLE</span>
+            <div style="width: 80px;"></div>
         </div>
         <iframe id="game-frame" src="" allowfullscreen sandbox="allow-scripts allow-same-origin allow-forms"></iframe>
     </div>
 
     <script>
-        // DATA
         const games = [
             { name: "Slope", img: "https://classroom-6x.lol/_next/image?url=https%3A%2F%2Fcdn.shst.at%2Fimages%2Fgames%2Fslope.png&w=128&q=75", url: "https://kkgames.github.io/slope/" },
             { name: "1v1.LOL", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzY3zN8N_X1Nf5YpPZ5o8E9h-pL-lqS-mEig&s", url: "https://1v1.lol" },
             { name: "Tunnel Rush", img: "https://edumaps.net/wp-content/uploads/2022/12/tunnel-rush.png", url: "https://kkgames.github.io/tunnel-rush/" },
             { name: "BitLife", img: "https://play-lh.googleusercontent.com/H_f-R6U9p6M7L9f5B_R_3E5b6q9Z5F6", url: "https://bitlifeonline.io" },
-            { name: "Drive Mad", img: "https://cdn.shst.at/images/games/drive-mad.png", url: "https://kkgames.github.io/drive-mad/" },
-            { name: "Egg Car", img: "https://play-lh.googleusercontent.com/I6PZpT0x", url: "https://kkgames.github.io/egg-car/" },
             { name: "Retro Bowl", img: "https://play-lh.googleusercontent.com/TM_fGfS", url: "https://kkgames.github.io/retro-bowl/" },
-            { name: "Local Game", img: "https://via.placeholder.com/150/ff0000/000000?text=HTML+GAME", url: "game.html" }
+            { name: "Local HTML Game", img: "https://via.placeholder.com/150/111/ff0000?text=GAME", url: "game.html" }
         ];
 
         const grid = document.getElementById('game-grid');
