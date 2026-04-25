@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <!-- Assets are hosted on jsDelivr CDN -->
+    <base href="https://cdn.jsdelivr.net/gh/web-ports/slime-ranchers@f0c5856ac43cf0cfbab4c58139282fc75f9b1861/">
+    <meta charset="utf-8">
+    <title>Slime Rancher | King's Domain</title>
+    <style>
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background-color: #000; }
+        #gameContainer { width: 100vw; height: 100vh; }
+        #loading-text {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            color: white; font-family: sans-serif; font-weight: bold; text-align: center; z-index: 10;
+        }
+    </style>
+    <script src="TemplateData/UnityProgress.js"></script>
+    <script src="Build/UnityLoader.js"></script>
+</head>
+<body>
+    <div id="loading-text">LOADING SLIME RANCHER... <br><span id="progress">0%</span></div>
+    <div id="gameContainer"></div>
+
+    <script>
+        var loadingText = document.querySelector("#progress");
+        
+        // This handles the specialized loading for Slime Rancher parts
+        async function fetchWithProgress(url) {
+            const response = await fetch(url);
+            const reader = response.body.getReader();
+            let received = 0;
+            let chunks = [];
+            while(true) {
+                const {done, value} = await reader.read();
+                if (done) break;
+                chunks.push(value);
+                received += value.length;
+                loadingText.innerHTML = Math.round(received / 1000000) + " MB Loaded";
+            }
+            let fullBuffer = new Uint8Array(received);
+            let offset = 0;
+            for (let chunk of chunks) {
+                fullBuffer.set(chunk, offset);
+                offset += chunk.length;
+            }
+            return fullBuffer.buffer;
+        }
+
+        async function mergeFiles(fileParts) {
+            const buffers = await Promise.all(fileParts.map(part => fetchWithProgress(part)));
+            return URL.createObjectURL(new Blob(buffers));
+        }
+
+        (async () => {
+            const dataUrl = await mergeFiles(["Build/slimeBUILDS.data.unityweb.part1", "Build/slimeBUILDS.data.unityweb.part2", "Build/slimeBUILDS.data.unityweb.part3"]);
+
+            const json = {
+                "dataUrl": dataUrl,
+                "wasmCodeUrl": "slimeBUILDS.wasm.code.unityweb",
+                "wasmFrameworkUrl": "slimeBUILDS.framework.unityweb",
+                "TOTAL_MEMORY": 536870912,
+                "graphicsAPI": ["WebGL 2.0", "WebGL 1.0"],
+                "webglContextAttributes": {"preserveDrawingBuffer": false},
+                "splashScreenStyle": "Dark"
+            };
+
+            UnityLoader.instantiate("gameContainer", json, {
+                onRuntimeInitialized: function() {
+                    document.querySelector("#loading-text").remove();
+                },
+            });
+        })();
+    </script>
+</body>
+</html>
