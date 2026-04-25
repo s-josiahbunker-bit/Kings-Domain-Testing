@@ -3,189 +3,190 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KING'S DOMAIN</title>
-    <!-- Icons and Fonts -->
+    <title>KING'S DOMAIN | NAVIGATOR</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
 
     <style>
-        /* ==========================================
-           1. MASTER SETTINGS
-           ========================================== */
         :root {
             --Wallpaper: url('https://wallpapers.com/images/hd/persona-5-background-030o8u3u29n532no.jpg');
             --Banner-Art: url('https://images8.alphacoders.com/132/1325171.jpeg');
-            /* THE NEW MENU IMAGE URL */
-            --Menu-Icon-URL: url('https://i.ibb.co/68v8T3G/p5-menu.jpg'); 
+            --Menu-Icon: url('https://i.ibb.co/68v8T3G/p5-menu.jpg'); 
+            /* THE NAVIGATOR EYE ICON */
+            --Settings-Icon: url('https://i.ibb.co/L9YmS4H/p5-eye.png');
             
             --p5-pink-red: #ff1f44; 
             --p5-black: #000000;
             --p5-card-bg: #141414;
         }
 
-        body, html { margin: 0; padding: 0; height: 100%; background-color: var(--p5-black); }
+        body, html { margin: 0; padding: 0; height: 100%; background-color: var(--p5-black); color: white; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        body { background-image: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), var(--Wallpaper); background-size: cover; background-attachment: fixed; background-position: center; }
 
-        body {
-            background-image: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), var(--Wallpaper);
-            background-size: cover; background-attachment: fixed; background-position: center;
-            color: white; font-family: 'Inter', sans-serif; overflow-x: hidden;
-        }
-
-        /* 2. NAVBAR */
+        /* NAVBAR & ICONS */
         nav {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 10px 60px; background: #000; border-bottom: 2px solid var(--p5-pink-red);
-            position: sticky; top: 0; z-index: 1000;
-        }
-        .nav-left { display: flex; align-items: center; gap: 25px; }
-
-        /* THE NEW MENU IMAGE STYLING */
-        .menu-button {
-            height: 50px; /* Adjust height */
-            width: auto;
-            cursor: pointer;
-            transition: 0.3s;
-            /* This line makes the black background of the image transparent */
-            mix-blend-mode: screen; 
-            filter: drop-shadow(0 0 2px var(--p5-pink-red));
-        }
-        .menu-button:hover {
-            transform: scale(1.1);
-            filter: drop-shadow(0 0 12px var(--p5-pink-red));
+            position: fixed; left: 0; top: 0; height: 100%; width: 80px; 
+            display: flex; flex-direction: column; align-items: center; padding-top: 20px;
+            background: rgba(0,0,0,0.9); border-right: 2px solid var(--p5-pink-red); z-index: 1000;
         }
 
-        .logo-text { color: var(--p5-pink-red); font-weight: 900; font-size: 20px; text-transform: uppercase; }
+        .nav-icon {
+            width: 60px; height: 60px; margin-bottom: 20px; cursor: pointer; transition: 0.3s;
+            background-size: contain; background-repeat: no-repeat; background-position: center;
+        }
+        .menu-btn { background-image: var(--Menu-Icon); mix-blend-mode: screen; }
+        .settings-btn { background-image: var(--Settings-Icon); }
+        .nav-icon:hover { transform: scale(1.15); filter: drop-shadow(0 0 10px var(--p5-pink-red)); }
 
-        /* 3. SIDEBAR (Auto-close enabled) */
+        /* SIDEBAR */
         #sidebar {
             position: fixed; top: 0; left: -320px; width: 300px; height: 100%;
             background: rgba(0,0,0,0.98); border-right: 3px solid var(--p5-pink-red);
             z-index: 2001; transition: 0.5s ease; padding: 60px 20px; box-sizing: border-box;
         }
-        #sidebar.active { left: 0; }
+        #sidebar.active { left: 80px; } /* Opens next to the nav icons */
+        
+        .sidebar-header { color: var(--p5-pink-red); font-weight: 900; font-size: 22px; text-transform: uppercase; margin-bottom: 30px; border-bottom: 2px solid #222; padding-bottom: 10px; }
+        
         .sidebar-item {
-            display: flex; align-items: center; gap: 15px; padding: 18px; color: white; text-decoration: none; 
-            font-weight: 900; font-size: 20px; text-transform: uppercase; transition: 0.3s; cursor: pointer; border-bottom: 1px solid #222;
+            display: flex; align-items: center; gap: 15px; padding: 15px; color: white; text-decoration: none; 
+            font-weight: 900; font-size: 18px; text-transform: uppercase; transition: 0.3s; cursor: pointer;
         }
-        .sidebar-item:hover { color: var(--p5-pink-red); padding-left: 30px; }
+        .sidebar-item:hover { color: var(--p5-pink-red); padding-left: 25px; }
 
-        /* 4. MAIN CONTENT */
-        .container { max-width: 1200px; margin: 0 auto; padding: 30px 60px; }
+        /* PROXY SELECTOR RADIO BUTTONS */
+        .proxy-option { display: block; padding: 10px; margin: 5px 0; border: 1px solid #333; border-radius: 5px; cursor: pointer; transition: 0.3s; }
+        .proxy-option:hover { border-color: var(--p5-pink-red); }
+        .proxy-option input { margin-right: 10px; }
+        .proxy-option.selected { background: var(--p5-pink-red); border-color: white; }
+
+        /* MAIN CONTENT */
+        .container { max-width: 1100px; margin-left: 120px; padding: 40px; }
         .hero-banner {
-            width: 100%; height: 320px; border-radius: 20px; margin-bottom: 25px;
+            width: 100%; height: 250px; border-radius: 20px; margin-bottom: 30px;
             background: linear-gradient(to right, rgba(0,0,0,1) 40%, transparent), var(--Banner-Art);
             background-size: cover; background-position: center;
             display: flex; flex-direction: column; justify-content: center; padding-left: 60px; box-sizing: border-box; border: 1px solid rgba(255,255,255,0.1);
         }
-        .hero-banner h1 { font-size: 44px; margin: 0; font-weight: 900; text-transform: uppercase; }
 
-        #gameSearch {
-            width: 100%; padding: 16px 25px; background: var(--p5-card-bg); 
-            border: 1px solid #222; border-radius: 8px; color: white; margin-bottom: 30px; outline: none; box-sizing: border-box;
-        }
+        #gameSearch { width: 100%; padding: 16px 25px; background: var(--p5-card-bg); border: 1px solid #222; border-radius: 8px; color: white; margin-bottom: 30px; outline: none; }
 
-        /* 5. GRID & CARDS (FULL COVER) */
-        .grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; }
+        /* GRID */
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 20px; }
         .card {
-            background: var(--p5-card-bg); border-radius: 12px; height: 380px; 
+            background: var(--p5-card-bg); border-radius: 12px; height: 320px; 
             position: relative; overflow: hidden; border: 1px solid #1a1a1a; cursor: pointer; transition: 0.3s;
         }
         .card:hover { border-color: var(--p5-pink-red); transform: translateY(-8px); }
-        .card img { width: 100%; height: 100%; object-fit: cover; display: block; }
-        .card p {
-            position: absolute; bottom: 0; width: 100%; background: rgba(0, 0, 0, 0.85); 
-            margin: 0; padding: 15px 0; text-align: center; font-size: 12px; font-weight: 700; border-top: 1px solid var(--p5-pink-red);
-        }
+        .card img { width: 100%; height: 100%; object-fit: cover; }
+        .card p { position: absolute; bottom: 0; width: 100%; background: rgba(0,0,0,0.85); margin: 0; padding: 12px 0; text-align: center; font-size: 12px; font-weight: 700; border-top: 1px solid var(--p5-pink-red); }
 
-        /* 6. GAME PLAYER (LARGE SIZE) */
-        #player-view { 
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-            background: black; z-index: 10000; flex-direction: column; 
-        }
-        .player-bar { 
-            height: 60px; min-height: 60px; padding: 0 40px; background: #000; 
-            border-bottom: 2px solid var(--p5-pink-red); display: flex; 
-            justify-content: space-between; align-items: center; box-sizing: border-box;
-        }
-        #gameFrame { width: 100%; height: calc(100% - 60px); border: none; background: #000; }
+        /* PLAYER */
+        #player-view { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: black; z-index: 10000; flex-direction: column; }
+        .player-bar { height: 60px; padding: 0 40px; background: #000; border-bottom: 2px solid var(--p5-pink-red); display: flex; justify-content: space-between; align-items: center; }
+        #gameFrame { width: 100%; height: calc(100% - 60px); border: none; }
         .p-btn { background: var(--p5-pink-red); color: white; border: none; padding: 10px 20px; font-weight: bold; cursor: pointer; border-radius: 5px; }
 
-        footer { background: #000; padding: 40px; border-top: 2px solid var(--p5-pink-red); text-align: center; }
+        footer { margin-left: 100px; padding: 40px; text-align: center; opacity: 0.5; font-size: 12px; }
     </style>
 </head>
 <body>
 
-    <!-- SIDEBAR -->
-    <div id="sidebar" onmouseleave="closeMenu()">
-        <div style="text-align:center; margin-bottom:40px;">
-            <!-- Take your heart logo inside menu -->
-            <img src="https://i.ibb.co/vYm6vS6/Take-Your-Heart.png" style="width:130px;">
-        </div>
-        <div class="sidebar-item" onclick="goHome(); closeMenu();"><i class="fas fa-home"></i> Home</div>
-        <div class="sidebar-item" onclick="openProxy(); closeMenu();"><i class="fas fa-ghost"></i> Proxy</div>
-        <div class="sidebar-item" onclick="closeMenu();" style="color:var(--p5-pink-red); margin-top:20px; border-bottom: none;">[ CLOSE ]</div>
-    </div>
-
-    <!-- NAVBAR -->
+    <!-- NAV ICONS -->
     <nav>
-        <div class="nav-left">
-            <!-- THE IMAGE YOU PROVIDED AS THE BUTTON -->
-            <img src="https://i.ibb.co/68v8T3G/p5-menu.jpg" class="menu-button" onclick="toggleMenu()" alt="Menu">
-            <div class="logo-text">KING'S DOMAIN</div>
-        </div>
-        <div style="font-size: 13px; opacity: 0.8;">Unblocked Games</div>
+        <div class="nav-icon menu-btn" title="Menu" onclick="openSection('menu')"></div>
+        <div class="nav-icon settings-btn" title="Proxy Settings" onclick="openSection('settings')"></div>
     </nav>
 
+    <!-- SIDEBAR -->
+    <div id="sidebar" onmouseleave="closeMenu()">
+        <!-- MENU SECTION -->
+        <div id="menu-content">
+            <div class="sidebar-header">Main Menu</div>
+            <div class="sidebar-item" onclick="goHome(); closeMenu();"><i class="fas fa-home"></i> Home</div>
+            <div class="sidebar-item" onclick="launchProxy(); closeMenu();"><i class="fas fa-ghost"></i> Proxy</div>
+        </div>
+
+        <!-- SETTINGS SECTION -->
+        <div id="settings-content" style="display:none;">
+            <div class="sidebar-header">Proxy Settings</div>
+            <p style="font-size:12px; color:#888;">Select your preferred Navigator:</p>
+            
+            <div class="proxy-option" onclick="setProxy('ddg', 'https://duckduckgo.com')">
+                <input type="radio" name="proxy" id="ddg"> DuckDuckGo
+            </div>
+            <div class="proxy-option" onclick="setProxy('start', 'https://www.startpage.com')">
+                <input type="radio" name="proxy" id="start"> Startpage
+            </div>
+            <div class="proxy-option" onclick="setProxy('uv', 'https://uv.student-portal.workers.dev')">
+                <input type="radio" name="proxy" id="uv"> Ultraviolet
+            </div>
+            <div class="proxy-option" onclick="setProxy('scram', 'https://scramjet.org')">
+                <input type="radio" name="proxy" id="scram"> Scramjet
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
     <div id="home-view" class="container">
         <header class="hero-banner">
-            <h1>WELCOME BACK</h1>
-            <p>Select a game to begin your mission.</p>
+            <h1 id="welcome-text">WELCOME BACK</h1>
+            <p>Navigator active. Choose a destination.</p>
         </header>
         <input type="text" id="gameSearch" placeholder="Search for games..." onkeyup="filter()">
         <div class="grid" id="gameGrid"></div>
     </div>
 
-    <footer>
-        <div style="font-size: 10px; color: #444; letter-spacing: 2px;">© 2024 KING'S DOMAIN</div>
-    </footer>
+    <footer>© 2024 KING'S DOMAIN</footer>
 
-    <!-- PLAYER VIEW -->
+    <!-- PLAYER -->
     <div id="player-view">
         <div class="player-bar">
             <button class="p-btn" onclick="closeGame()">← BACK</button>
-            <span id="playing-title" style="font-weight:900; text-transform:uppercase;">GAME</span>
+            <span id="playing-title" style="font-weight:900;">DESTINATION</span>
             <button class="p-btn" onclick="goFull()">FULLSCREEN</button>
         </div>
         <iframe id="gameFrame" src="" allowfullscreen></iframe>
     </div>
 
     <script>
-        const PROXY_URL = "https://t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.rammerhead.org/"; 
+        // Default Proxy
+        let currentProxy = "https://duckduckgo.com";
 
         const games = [
             { name: "Slime Rancher", img: "https://sm.ign.com/ign_es/cover/s/slime-ranc/slime-rancher_j318.jpg", url: "slimerancher.html" },
             { name: "Helltaker", img: "https://files.catbox.moe/k9d5o6.png", url: "helltaker.html" },
-            { name: "Slope", img: "https://sm.ign.com/ign_br/game/s/slope/slope_69qy.jpg", url: "https://kkgames.github.io/slope/" },
-            { name: "1v1.LOL", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzY3zN8N_X1Nf5YpPZ5o8E9h-pL-lqS-mEig&s", url: "https://1v1.lol" }
+            { name: "Tuff Client", img: "https://files.catbox.moe/rbt7f1.png", url: "tuffclient.html" },
+            { name: "Slope", img: "https://classroom-6x.lol/_next/image?url=https%3A%2F%2Fcdn.shst.at%2Fimages%2Fgames%2Fslope.png&w=128&q=75", url: "https://kkgames.github.io/slope/" }
         ];
 
-        const grid = document.getElementById('gameGrid');
-        const frame = document.getElementById('gameFrame');
         const sidebar = document.getElementById('sidebar');
 
-        function toggleMenu() { sidebar.classList.toggle('active'); }
-        function closeMenu() { sidebar.classList.remove('active'); }
-        
-        function goHome() { closeGame(); }
+        function openSection(type) {
+            sidebar.classList.add('active');
+            document.getElementById('menu-content').style.display = (type === 'menu' ? 'block' : 'none');
+            document.getElementById('settings-content').style.display = (type === 'settings' ? 'block' : 'none');
+        }
 
-        function openProxy() {
+        function closeMenu() { sidebar.classList.remove('active'); }
+
+        function setProxy(id, url) {
+            currentProxy = url;
+            // Visual selection
+            document.querySelectorAll('.proxy-option').forEach(el => el.classList.remove('selected'));
+            document.getElementById(id).parentElement.classList.add('selected');
+            document.getElementById(id).checked = true;
+        }
+
+        function launchProxy() {
             document.getElementById('home-view').style.display = 'none';
             document.getElementById('player-view').style.display = 'flex';
-            frame.src = PROXY_URL;
-            document.getElementById('playing-title').innerText = "PROXY";
+            document.getElementById('gameFrame').src = currentProxy;
+            document.getElementById('playing-title').innerText = "PROXY ACTIVE";
         }
 
         function render(data) {
+            const grid = document.getElementById('gameGrid');
             grid.innerHTML = '';
             data.forEach(game => {
                 const card = document.createElement('div');
@@ -194,7 +195,7 @@
                 card.onclick = () => {
                     document.getElementById('home-view').style.display = 'none';
                     document.getElementById('player-view').style.display = 'flex';
-                    frame.src = game.url;
+                    document.getElementById('gameFrame').src = game.url;
                     document.getElementById('playing-title').innerText = game.name;
                 };
                 grid.appendChild(card);
@@ -209,14 +210,17 @@
         function closeGame() {
             document.getElementById('home-view').style.display = 'block';
             document.getElementById('player-view').style.display = 'none';
-            frame.src = '';
+            document.getElementById('gameFrame').src = '';
         }
 
         function goFull() {
+            const frame = document.getElementById('gameFrame');
             if (frame.requestFullscreen) frame.requestFullscreen();
             else if (frame.webkitRequestFullscreen) frame.webkitRequestFullscreen();
         }
 
+        // Initialize
+        setProxy('ddg', 'https://duckduckgo.com');
         render(games);
     </script>
 </body>
