@@ -3,172 +3,180 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KING'S DOMAIN | TAKE YOUR HEART</title>
+    <title>KING'S DOMAIN | PRO PLAYER</title>
+    <!-- Icons and Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+
     <style>
-        /* ============================================================
-           1. SETTINGS & COLORS
-           ============================================================ */
+        /* ==========================================
+           1. MASTER CUSTOMIZATION
+           ========================================== */
         :root {
             --Wallpaper: url('https://wallpapers.com/images/hd/persona-5-background-030o8u3u29n532no.jpg');
-            --Banner: url('https://images8.alphacoders.com/132/1325171.jpeg');
-            --p5-pink-red: #ff1f44;
+            --Banner-Art: url('https://images8.alphacoders.com/132/1325171.jpeg');
+            --Take-Your-Heart-Logo: url('https://i.ibb.co/vYm6vS6/Take-Your-Heart.png');
+            --p5-pink-red: #ff1f44; 
             --p5-black: #000000;
-            --p5-dark-grey: #141414;
+            --p5-card-bg: #141414;
         }
+
+        body, html { margin: 0; padding: 0; height: 100%; background-color: var(--p5-black); }
 
         body {
-            margin: 0; padding: 0; background-color: var(--p5-black);
             background-image: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), var(--Wallpaper);
             background-size: cover; background-attachment: fixed; background-position: center;
-            color: white; font-family: 'Inter', 'Segoe UI', sans-serif; overflow-x: hidden;
+            color: white; font-family: 'Inter', sans-serif; overflow-x: hidden;
         }
 
-        /* 2. NAVBAR WITH IMAGE MENU */
+        /* 2. NAVBAR */
         nav {
             display: flex; justify-content: space-between; align-items: center;
             padding: 10px 60px; background: #000; border-bottom: 2px solid var(--p5-pink-red);
             position: sticky; top: 0; z-index: 1000;
         }
         .nav-left { display: flex; align-items: center; gap: 20px; }
-        
-        /* THE TAKE YOUR HEART MENU BUTTON */
-        .menu-logo {
-            width: 50px; /* Adjust size */
-            height: auto;
-            cursor: pointer;
-            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            filter: drop-shadow(0 0 5px rgba(255, 31, 68, 0.5));
+        .menu-icon {
+            width: 55px; height: 55px;
+            background-image: var(--Take-Your-Heart-Logo);
+            background-size: contain; background-repeat: no-repeat;
+            cursor: pointer; transition: 0.3s;
         }
-        .menu-logo:hover {
-            transform: scale(1.2) rotate(-5deg);
-            filter: drop-shadow(0 0 15px var(--p5-pink-red));
-        }
+        .menu-icon:hover { transform: scale(1.2) rotate(-5deg); filter: drop-shadow(0 0 10px var(--p5-pink-red)); }
+        .logo-text { color: var(--p5-pink-red); font-weight: 900; font-size: 20px; text-transform: uppercase; }
 
-        .logo { color: var(--p5-pink-red); font-weight: 900; font-size: 18px; text-transform: uppercase; letter-spacing: 1px; }
-
-        /* 3. SIDEBAR MENU */
+        /* 3. SIDEBAR */
         #sidebar {
             position: fixed; top: 0; left: -320px; width: 300px; height: 100%;
             background: rgba(0,0,0,0.98); border-right: 3px solid var(--p5-pink-red);
-            z-index: 2000; transition: 0.5s cubic-bezier(0.77, 0, 0.175, 1); 
-            padding: 50px 20px; box-sizing: border-box;
-            box-shadow: 10px 0 30px rgba(0,0,0,0.9);
+            z-index: 2001; transition: 0.5s ease; padding: 60px 20px; box-sizing: border-box;
         }
         #sidebar.active { left: 0; }
         .sidebar-item {
-            display: flex; align-items: center; gap: 15px; padding: 18px;
-            color: white; text-decoration: none; font-weight: 900; font-size: 20px;
-            text-transform: uppercase; transition: 0.3s; cursor: pointer;
-            border-bottom: 1px solid #222;
+            display: flex; align-items: center; gap: 15px; padding: 18px; color: white; text-decoration: none; 
+            font-weight: 900; font-size: 20px; text-transform: uppercase; transition: 0.3s; cursor: pointer; border-bottom: 1px solid #222;
         }
         .sidebar-item:hover { color: var(--p5-pink-red); padding-left: 30px; }
-        .close-menu { position: absolute; top: 15px; right: 20px; font-size: 30px; color: var(--p5-pink-red); cursor: pointer; }
 
-        /* 4. MAIN LAYOUT */
+        /* 4. MAIN CONTENT */
         .container { max-width: 1200px; margin: 0 auto; padding: 30px 60px; }
         .hero-banner {
-            width: 100%; height: 320px; border-radius: 20px; 
-            background: linear-gradient(to right, rgba(0,0,0,1) 40%, transparent), var(--Banner);
+            width: 100%; height: 320px; border-radius: 20px; margin-bottom: 25px;
+            background: linear-gradient(to right, rgba(0,0,0,1) 40%, transparent), var(--Banner-Art);
             background-size: cover; background-position: center;
-            display: flex; flex-direction: column; justify-content: center;
-            padding-left: 60px; box-sizing: border-box; border: 1px solid rgba(255,255,255,0.1); margin-bottom: 25px;
+            display: flex; flex-direction: column; justify-content: center; padding-left: 60px; box-sizing: border-box; border: 1px solid rgba(255,255,255,0.1);
         }
-        .hero-banner h1 { font-size: 44px; margin: 0; font-weight: 800; text-transform: uppercase; }
+        .hero-banner h1 { font-size: 44px; margin: 0; font-weight: 900; text-transform: uppercase; }
 
         #gameSearch {
-            width: 100%; padding: 15px 25px; background: var(--p5-dark-grey); 
+            width: 100%; padding: 16px 25px; background: var(--p5-card-bg); 
             border: 1px solid #222; border-radius: 8px; color: white; margin-bottom: 30px; outline: none; box-sizing: border-box;
         }
 
-        /* 5. GRID & COVER CARDS */
+        /* 5. GRID & CARDS */
         .grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; }
         .card {
-            background: var(--p5-dark-grey); border-radius: 12px; height: 380px; 
+            background: var(--p5-card-bg); border-radius: 12px; height: 380px; 
             position: relative; overflow: hidden; border: 1px solid #1a1a1a; cursor: pointer; transition: 0.3s;
         }
-        .card:hover { border-color: var(--p5-pink-red); transform: translateY(-8px); box-shadow: 0 5px 15px rgba(255, 31, 68, 0.4); }
+        .card:hover { border-color: var(--p5-pink-red); transform: translateY(-8px); }
         .card img { width: 100%; height: 100%; object-fit: cover; display: block; }
         .card p {
             position: absolute; bottom: 0; width: 100%; background: rgba(0, 0, 0, 0.85); 
             margin: 0; padding: 15px 0; text-align: center; font-size: 12px; font-weight: 700; border-top: 1px solid var(--p5-pink-red);
         }
 
-        /* 6. PLAYER VIEW */
-        #player-view { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: black; z-index: 10000; flex-direction: column; }
-        .back-bar { padding: 12px 40px; background: #000; border-bottom: 2px solid var(--p5-pink-red); display: flex; justify-content: space-between; align-items: center; }
-        .btn { background: var(--p5-pink-red); color: white; border: none; padding: 10px 20px; font-weight: bold; cursor: pointer; border-radius: 5px; }
+        /* 6. FIXED GAME PLAYER (FULL SIZE) */
+        #player-view { 
+            display: none; 
+            position: fixed; 
+            top: 0; left: 0; 
+            width: 100%; 
+            height: 100%; 
+            background: black; 
+            z-index: 10000; 
+            flex-direction: column; 
+        }
+
+        .player-bar { 
+            height: 60px; /* Set a fixed height for the bar */
+            min-height: 60px;
+            padding: 0 40px; 
+            background: #000; 
+            border-bottom: 2px solid var(--p5-pink-red); 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            box-sizing: border-box;
+        }
+
+        /* THE FIX: Force Iframe to fill 100% of remaining height */
+        #gameFrame { 
+            width: 100%; 
+            height: calc(100% - 60px); /* Fill screen minus the top bar */
+            border: none; 
+            background: #000;
+        }
+
+        .p-btn { background: var(--p5-pink-red); color: white; border: none; padding: 10px 20px; font-weight: bold; cursor: pointer; border-radius: 5px; }
 
         footer { background: #000; padding: 40px; border-top: 2px solid var(--p5-pink-red); text-align: center; }
-        .social-links { display: flex; justify-content: center; gap: 30px; margin-bottom: 10px; }
-        .social-links a { color: white; font-size: 24px; transition: 0.3s; }
-        .social-links a:hover { color: var(--p5-pink-red); transform: scale(1.2); }
     </style>
 </head>
 <body>
 
-    <!-- SIDEBAR MENU -->
+    <!-- SIDEBAR -->
     <div id="sidebar">
-        <span class="close-menu" onclick="toggleMenu()">&times;</span>
-        <div style="text-align:center; margin-bottom:30px;">
-            <img src="https://i.ibb.co/vYm6vS6/Take-Your-Heart.png" style="width:120px;">
+        <div style="text-align:center; margin-bottom:40px;">
+            <img src="https://i.ibb.co/vYm6vS6/Take-Your-Heart.png" style="width:130px;">
         </div>
         <div class="sidebar-item" onclick="goHome(); toggleMenu();"><i class="fas fa-home"></i> Home</div>
-        <!-- BEST PROXY BUTTON -->
-        <div class="sidebar-item" onclick="openProxy(); toggleMenu();"><i class="fas fa-globe"></i> Web Proxy</div>
+        <div class="sidebar-item" onclick="openProxy(); toggleMenu();"><i class="fas fa-ghost"></i> Best Proxy</div>
         <div class="sidebar-item" onclick="window.location.reload();"><i class="fas fa-sync"></i> Refresh Site</div>
+        <div class="sidebar-item" onclick="toggleMenu();" style="color:var(--p5-pink-red); margin-top:20px;">[ CLOSE ]</div>
     </div>
 
     <!-- NAVBAR -->
     <nav>
         <div class="nav-left">
-            <!-- CLICKABLE LOGO MENU -->
-            <img src="https://i.ibb.co/vYm6vS6/Take-Your-Heart.png" class="menu-logo" onclick="toggleMenu()" alt="Menu">
-            <div class="logo">KING'S DOMAIN</div>
+            <div class="menu-icon" onclick="toggleMenu()"></div>
+            <div class="logo-text">KING'S DOMAIN</div>
         </div>
-        <div style="font-size: 13px;">Unblocked Games</div>
+        <div style="font-size: 13px; opacity: 0.8;">Unblocked Games</div>
     </nav>
 
     <div id="home-view" class="container">
         <header class="hero-banner">
             <h1>WELCOME BACK</h1>
-            <p>The Phantom Thieves of Unblocked Games.</p>
+            <p>Ready to steal some time? Select a game.</p>
         </header>
-
         <input type="text" id="gameSearch" placeholder="Search for games..." onkeyup="filter()">
         <div class="grid" id="gameGrid"></div>
     </div>
 
     <footer>
-        <div class="social-links">
-            <a href="#"><i class="fab fa-discord"></i></a>
-            <a href="#"><i class="fab fa-youtube"></i></a>
-            <a href="#"><i class="fab fa-x-twitter"></i></a>
-        </div>
-        <div style="font-size: 10px; color: #444;">© 2024 KING'S DOMAIN</div>
+        <div style="font-size: 10px; color: #444; letter-spacing: 2px;">© 2024 KING'S DOMAIN</div>
     </footer>
 
     <!-- PLAYER VIEW -->
     <div id="player-view">
-        <div class="back-bar">
-            <button class="btn" onclick="closeGame()">← BACK</button>
-            <span id="playing-title" style="font-weight:bold; text-transform:uppercase;">GAME</span>
-            <button class="btn" onclick="goFull()">FULLSCREEN</button>
+        <div class="player-bar">
+            <button class="p-btn" onclick="closeGame()">← BACK</button>
+            <span id="playing-title" style="font-weight:900; text-transform:uppercase;">GAME</span>
+            <button class="p-btn" onclick="goFull()">FULLSCREEN</button>
         </div>
+        <!-- Iframe is now set to 100% width and calc height -->
         <iframe id="gameFrame" src="" allowfullscreen></iframe>
     </div>
 
     <script>
-        // BEST PROXY ENGINE (Rammerhead Instance)
         const PROXY_URL = "https://t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.rammerhead.org/"; 
 
         const games = [
             { name: "Slime Rancher", img: "https://sm.ign.com/ign_es/cover/s/slime-ranc/slime-rancher_j318.jpg", url: "slimerancher.html" },
-            { name: "Helltaker", img: "https://", url: "helltaker.html" },
-            { name: "Slope", img: "https://classroom-6x.lol/_next/image?url=https%3A%2F%2Fcdn.shst.at%2Fimages%2Fgames%2Fslope.png&w=128&q=75", url: "https://kkgames.github.io/slope/" },
-            { name: "1v1.LOL", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzY3zN8N_X1Nf5YpPZ5o8E9h-pL-lqS-mEig&s", url: "https://1v1.lol" },
-            { name: "Drive Mad", img: "https://cdn.shst.at/images/games/drive-mad.png", url: "https://kkgames.github.io/drive-mad/" }
+            { name: "Helltaker", img: "https://files.catbox.moe/k9d5o6.png", url: "helltaker.html" },
+            { name: "Slope", img: "https://sm.ign.com/ign_br/game/s/slope/slope_69qy.jpg", url: "https://kkgames.github.io/slope/" },
+            { name: "1v1.LOL", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzY3zN8N_X1Nf5YpPZ5o8E9h-pL-lqS-mEig&s", url: "https://1v1.lol" }
         ];
 
         const grid = document.getElementById('gameGrid');
@@ -176,6 +184,7 @@
         const sidebar = document.getElementById('sidebar');
 
         function toggleMenu() { sidebar.classList.toggle('active'); }
+        function goHome() { closeGame(); }
 
         function openProxy() {
             document.getElementById('home-view').style.display = 'none';
