@@ -3,165 +3,224 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>King's Domain | V2</title>
+    <title>King's Domain | Premium Unblocked</title>
     <style>
+        /* 1. WALLPAPER SETTINGS */
         body {
             margin: 0;
             padding: 0;
-            background-color: #0a0a0a;
-            color: white;
-            font-family: 'Arial', sans-serif;
-        }
-
-        /* Nav */
-        .nav {
-            background: #000;
-            padding: 10px 5%;
-            border-bottom: 2px solid #ff4757;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        /* 1. SMALLER BANNER */
-        .banner {
-            width: 100%;
-            height: 120px; /* Very small height */
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
-                        url('https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=2070');
+            /* CHANGE SITE WALLPAPER BELOW */
+            background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                              url('https://images.unsplash.com/photo-1614850523296-d8c1af93d400?q=80&w=2070');
+            background-attachment: fixed; /* Background stays still while you scroll */
             background-size: cover;
             background-position: center;
+            font-family: 'Segoe UI', sans-serif;
+            color: white;
+        }
+
+        /* 2. NAVIGATION */
+        .navbar {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px); /* Blur effect behind nav */
+            padding: 15px 5%;
             display: flex;
             justify-content: center;
+            border-bottom: 2px solid #ff4757;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .logo { font-size: 26px; font-weight: bold; color: #ff4757; letter-spacing: 3px; }
+
+        /* 3. ROUNDED RECTANGLE BANNER */
+        .banner-container {
+            padding: 20px 5% 0 5%;
+            display: flex;
+            justify-content: center;
+        }
+        .hero-banner {
+            width: 100%;
+            max-width: 1000px;
+            height: 150px;
+            /* CHANGE BANNER IMAGE BELOW */
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                        url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2070');
+            background-size: cover;
+            background-position: center;
+            border-radius: 25px; /* Rounded Corners */
+            border: 2px solid #ff4757;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
             align-items: center;
+            box-shadow: 0 10px 30px rgba(255, 71, 87, 0.3); /* Glow effect */
         }
+        .hero-banner h1 { font-size: 32px; margin: 0; }
+        .hero-banner p { margin: 5px 0 0 0; color: #ccc; }
 
-        /* 2. VERY VISIBLE SEARCH BAR */
+        /* 4. SEARCH BAR SECTION */
         .search-area {
-            background: #1a1a1a;
-            padding: 20px;
             text-align: center;
+            padding: 25px 0;
         }
-
-        #search-bar {
+        #game-search {
             width: 80%;
-            max-width: 600px;
-            padding: 15px;
-            font-size: 18px;
+            max-width: 500px;
+            padding: 14px 25px;
             border-radius: 50px;
-            border: 3px solid #ff4757; /* Red border */
-            background: white; /* White background to stand out */
-            color: black;
+            border: 2px solid #ff4757;
+            background: rgba(255, 255, 255, 0.95);
+            color: #000;
+            font-size: 16px;
+            font-weight: bold;
             outline: none;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
         }
 
-        /* Grid */
+        /* 5. GAME GRID */
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            gap: 20px;
-            padding: 40px 5%;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 25px;
+            padding: 0 10% 50px 10%;
+            max-width: 1200px;
+            margin: 0 auto;
         }
-
-        .card {
-            background: #161616;
-            border-radius: 10px;
+        .game-card {
+            background: rgba(20, 20, 20, 0.8);
+            backdrop-filter: blur(5px);
+            border-radius: 15px;
             overflow: hidden;
-            border: 1px solid #333;
+            border: 1px solid #444;
             cursor: pointer;
-            transition: 0.3s;
+            transition: 0.3s ease-in-out;
+            text-align: center;
+        }
+        .game-card:hover {
+            transform: translateY(-10px);
+            border-color: #ff4757;
+            box-shadow: 0 10px 20px rgba(255, 71, 87, 0.3);
+        }
+        .game-card img {
+            width: 100%;
+            aspect-ratio: 1/1;
+            object-fit: cover;
+        }
+        .game-card p {
+            padding: 12px;
+            margin: 0;
+            font-weight: bold;
+            font-size: 14px;
         }
 
-        .card:hover { border-color: #ff4757; transform: scale(1.05); }
-        .card img { width: 100%; aspect-ratio: 1/1; object-fit: cover; }
-        .card p { text-align: center; font-weight: bold; padding: 10px; margin: 0; }
-
-        /* Game Player */
+        /* 6. PLAYER VIEW */
         #player-view {
             display: none;
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: black;
+            background: #000;
             z-index: 2000;
             flex-direction: column;
         }
-
-        .back-btn {
+        .back-bar {
+            padding: 10px 5%;
+            background: #111;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .btn-back {
             background: #ff4757;
             color: white;
-            padding: 15px;
             border: none;
+            padding: 10px 25px;
+            border-radius: 5px;
             cursor: pointer;
             font-weight: bold;
         }
-
-        iframe { width: 100%; height: 100%; border: none; }
+        iframe {
+            flex-grow: 1;
+            border: none;
+            width: 100%;
+        }
     </style>
 </head>
 <body>
 
+    <!-- HOME SCREEN -->
     <div id="home-view">
-        <div class="nav">
-            <h2 style="color:#ff4757; margin:0;">KING'S DOMAIN</h2>
+        <div class="navbar">
+            <div class="logo">KING'S DOMAIN</div>
         </div>
 
-        <div class="banner">
-            <h1>UNBLOCKED GAMES</h1>
+        <div class="banner-container">
+            <div class="hero-banner">
+                <h1>UNBLOCKED GAMES</h1>
+                <p>Fast & Free Forever</p>
+            </div>
         </div>
 
-        <!-- THE SEARCH BAR -->
         <div class="search-area">
-            <input type="text" id="search-bar" placeholder="TYPE HERE TO SEARCH..." onkeyup="doSearch()">
+            <input type="text" id="game-search" placeholder="Search for a game..." onkeyup="filterGames()">
         </div>
 
         <div class="grid" id="game-grid">
-            <!-- Games go here -->
+            <!-- Games Loaded by JS -->
         </div>
     </div>
 
-    <!-- PLAYER -->
+    <!-- PLAYER SCREEN -->
     <div id="player-view">
-        <button class="back-btn" onclick="closeGame()">← BACK TO HOME</button>
-        <iframe id="game-frame" src=""></iframe>
+        <div class="back-bar">
+            <button class="btn-back" onclick="closeGame()">← BACK TO HOME</button>
+            <h2 id="current-title" style="margin:0;">Playing Game</h2>
+            <div style="width: 100px;"></div>
+        </div>
+        <iframe id="game-iframe" src=""></iframe>
     </div>
 
     <script>
+        // YOUR GAME DATABASE
         const games = [
             { name: "Slope", img: "https://classroom-6x.lol/_next/image?url=https%3A%2F%2Fcdn.shst.at%2Fimages%2Fgames%2Fslope.png&w=128&q=75", url: "https://kkgames.github.io/slope/" },
             { name: "1v1.LOL", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzY3zN8N_X1Nf5YpPZ5o8E9h-pL-lqS-mEig&s", url: "https://1v1.lol" },
             { name: "Tunnel Rush", img: "https://edumaps.net/wp-content/uploads/2022/12/tunnel-rush.png", url: "https://kkgames.github.io/tunnel-rush/" },
-            { name: "BitLife", img: "https://play-lh.googleusercontent.com/H_f-R6U9p6M7L9f5B_R_3E5b6q9Z5F6", url: "https://bitlifeonline.io" }
+            { name: "BitLife", img: "https://play-lh.googleusercontent.com/H_f-R6U9p6M7L9f5B_R_3E5b6q9Z5F6", url: "https://bitlifeonline.io" },
+            { name: "Drive Mad", img: "https://cdn.shst.at/images/games/drive-mad.png", url: "https://kkgames.github.io/drive-mad/" }
         ];
 
-        function showGames(list) {
-            const grid = document.getElementById('game-grid');
+        const grid = document.getElementById('game-grid');
+
+        function render(data) {
             grid.innerHTML = '';
-            list.forEach(game => {
-                const item = document.createElement('div');
-                item.className = 'card';
-                item.innerHTML = `<img src="${game.img}"><p>${game.name}</p>`;
-                item.onclick = () => {
+            data.forEach(game => {
+                const card = document.createElement('div');
+                card.className = 'game-card';
+                card.innerHTML = `<img src="${game.img}"><p>${game.name}</p>`;
+                card.onclick = () => {
                     document.getElementById('home-view').style.display = 'none';
                     document.getElementById('player-view').style.display = 'flex';
-                    document.getElementById('game-frame').src = game.url;
+                    document.getElementById('game-iframe').src = game.url;
+                    document.getElementById('current-title').innerText = game.name;
                 };
-                grid.appendChild(item);
+                grid.appendChild(card);
             });
         }
 
-        function doSearch() {
-            const val = document.getElementById('search-bar').value.toLowerCase();
-            const filtered = games.filter(g => g.name.toLowerCase().includes(val));
-            showGames(filtered);
+        function filterGames() {
+            const term = document.getElementById('game-search').value.toLowerCase();
+            const filtered = games.filter(g => g.name.toLowerCase().includes(term));
+            render(filtered);
         }
 
         function closeGame() {
             document.getElementById('home-view').style.display = 'block';
             document.getElementById('player-view').style.display = 'none';
-            document.getElementById('game-frame').src = '';
+            document.getElementById('game-iframe').src = '';
         }
 
-        showGames(games);
+        render(games);
     </script>
 </body>
 </html>
