@@ -3,73 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KING'S DOMAIN | FINAL VERSION</title>
+    <title>KING'S DOMAIN | UNBLOCKED</title>
+    <!-- Icons and Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+
     <style>
-        /* 1. THE EXACT COLORS FROM YOUR IMAGE */
+        /* ============================================================
+           MASTER SETTINGS - CHANGE YOUR LINKS HERE
+           ============================================================ */
         :root {
-            --p5-pink-red: #ff1f44; /* Bright Pinkish Red */
+            /* 1. THE MAIN BACKGROUND IMAGE */
+            --Wallpaper-URL: url('https://wallpapers.com/images/hd/persona-5-background-030o8u3u29n532no.jpg');
+
+            /* 2. THE WELCOME BANNER IMAGE */
+            --Banner-URL: url('https://images8.alphacoders.com/132/1325171.jpeg');
+
+            /* 3. THE COLORS */
+            --p5-pink-red: #ff1f44;
             --p5-black: #000000;
-            --p5-dark-grey: #141414; /* Search bar & Card color */
+            --p5-dark-grey: #141414;
         }
 
+        /* ============================================================
+           DESIGN CODE (Don't change this unless you want to re-design)
+           ============================================================ */
         body {
             margin: 0;
-            padding: 0;
             background-color: var(--p5-black);
-            /* Persona 5 Diagonal Shard Background */
-            background-image: 
-                linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)),
-                url('https://wallpapers.com/images/hd/persona-5-background-030o8u3u29n532no.jpg');
+            background-image: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), var(--Wallpaper-URL);
             background-size: cover;
             background-attachment: fixed;
             background-position: center;
             color: white;
-            font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Inter', sans-serif;
             overflow-x: hidden;
         }
 
-        /* 2. NAVBAR: LOGO LEFT, TEXT RIGHT */
+        /* Navbar */
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 12px 60px; /* Precise padding from image */
+            padding: 12px 60px;
             background: #000;
             border-bottom: 2px solid var(--p5-pink-red);
         }
+        .logo { color: var(--p5-pink-red); font-weight: 900; font-size: 18px; text-transform: uppercase; letter-spacing: 1px; }
+        .nav-right { font-size: 13px; color: white; opacity: 0.8; }
 
-        .logo {
-            color: var(--p5-pink-red);
-            font-weight: 900;
-            font-size: 18px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
+        /* Container */
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px 60px; }
 
-        .nav-right {
-            font-size: 13px;
-            color: white;
-            opacity: 0.9;
-        }
-
-        /* 3. MAIN CONTAINER */
-        .main-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 30px 60px;
-        }
-
-        /* 4. BANNER: TALL & ROUNDED (320px Height) */
+        /* Welcome Banner */
         .hero-banner {
             width: 100%;
             height: 320px;
             border-radius: 20px; 
-            background: linear-gradient(to right, rgba(0,0,0,1) 40%, transparent), 
-                        url('https://images8.alphacoders.com/132/1325171.jpeg');
+            background: linear-gradient(to right, rgba(0,0,0,1) 40%, transparent), var(--Banner-URL);
             background-size: cover;
-            background-position: top center;
+            background-position: center;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -78,26 +71,10 @@
             border: 1px solid rgba(255,255,255,0.1);
             margin-bottom: 25px;
         }
+        .hero-banner h1 { font-size: 44px; margin: 0; font-weight: 800; text-transform: uppercase; }
+        .hero-banner p { font-size: 15px; color: #999; margin-top: 10px; }
 
-        .hero-banner h1 {
-            font-size: 44px;
-            margin: 0;
-            font-weight: 800;
-            letter-spacing: -1px;
-            text-transform: uppercase;
-        }
-
-        .hero-banner p {
-            font-size: 15px;
-            color: #999;
-            margin-top: 10px;
-        }
-
-        /* 5. SEARCH BAR: MATCHING THE IMAGE DARK GREY */
-        .search-area {
-            margin-bottom: 30px;
-        }
-
+        /* Search Bar */
         #gameSearch {
             width: 100%;
             padding: 15px 25px;
@@ -108,21 +85,20 @@
             font-size: 14px;
             outline: none;
             box-sizing: border-box;
+            margin-bottom: 30px;
         }
+        #gameSearch:focus { border-color: var(--p5-pink-red); }
 
-        #gameSearch::placeholder { color: #555; }
-
-        /* 6. GRID & TALL VERTICAL RECTANGLE CARDS */
+        /* Grid & Vertical Rectangle Cards */
         .grid {
             display: grid;
-            grid-template-columns: repeat(5, 1fr); /* Exactly 5 like the image */
+            grid-template-columns: repeat(5, 1fr); 
             gap: 20px;
         }
-
         .card {
             background: var(--p5-dark-grey); 
             border-radius: 12px;
-            height: 360px; /* EXACT TALL RATIO */
+            height: 360px; /* Exact tall proportions */
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -133,12 +109,11 @@
             overflow: hidden;
             text-decoration: none;
         }
-
         .card:hover {
             border-color: var(--p5-pink-red);
             transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(255, 31, 68, 0.3);
         }
-
         .card-img-wrapper {
             flex-grow: 1;
             display: flex;
@@ -146,12 +121,7 @@
             justify-content: center;
             width: 100%;
         }
-
-        .card img {
-            width: 60px; /* Small icon look from image */
-            height: auto;
-        }
-
+        .card img { width: 60px; height: auto; } /* Small icons like image */
         .card p {
             width: 100%;
             background: #111;
@@ -164,7 +134,7 @@
             border-top: 1px solid #1a1a1a;
         }
 
-        /* 7. SOCIAL FOOTER */
+        /* Footer */
         footer {
             background: #000;
             padding: 40px 60px;
@@ -174,12 +144,11 @@
             align-items: center;
             gap: 20px;
         }
-
         .social-links { display: flex; gap: 30px; }
-        .social-links a { color: white; font-size: 26px; transition: 0.3s; }
+        .social-links a { color: white; font-size: 26px; transition: 0.3s; text-decoration: none; }
         .social-links a:hover { color: var(--p5-pink-red); transform: scale(1.2); }
 
-        /* 8. GAME PLAYER */
+        /* Game Player View */
         #player-view {
             display: none;
             position: fixed;
@@ -188,7 +157,6 @@
             z-index: 10000;
             flex-direction: column;
         }
-
         .back-bar {
             padding: 12px 40px;
             background: #000;
@@ -197,7 +165,6 @@
             justify-content: space-between;
             align-items: center;
         }
-
         .btn {
             background: var(--p5-pink-red);
             color: white;
@@ -207,7 +174,6 @@
             cursor: pointer;
             border-radius: 5px;
         }
-
         iframe { flex-grow: 1; border: none; background: white; }
     </style>
 </head>
@@ -219,7 +185,7 @@
         <div class="nav-right">Unblocked Games</div>
     </nav>
 
-    <div id="home-view" class="main-content">
+    <div id="home-view" class="container">
         <!-- BANNER -->
         <header class="hero-banner">
             <h1>WELCOME BACK</h1>
@@ -227,9 +193,7 @@
         </header>
 
         <!-- SEARCH -->
-        <div class="search-area">
-            <input type="text" id="gameSearch" placeholder="Search for games..." onkeyup="filter()">
-        </div>
+        <input type="text" id="gameSearch" placeholder="Search for games..." onkeyup="filter()">
 
         <!-- GAME GRID -->
         <div class="grid" id="gameGrid"></div>
@@ -238,25 +202,26 @@
     <!-- FOOTER -->
     <footer>
         <div class="social-links">
-            <a href="#"><i class="fab fa-discord"></i></a>
-            <a href="#"><i class="fab fa-youtube"></i></a>
-            <a href="#"><i class="fab fa-x-twitter"></i></a>
-            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="https://discord.gg/yourlink" target="_blank"><i class="fab fa-discord"></i></a>
+            <a href="https://youtube.com/yourlink" target="_blank"><i class="fab fa-youtube"></i></a>
+            <a href="https://facebook.com/yourlink" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="https://x.com/yourlink" target="_blank"><i class="fab fa-x-twitter"></i></a>
         </div>
         <div style="font-size: 10px; color: #444; letter-spacing: 2px;">© 2024 KING'S DOMAIN</div>
     </footer>
 
-    <!-- PLAYER -->
+    <!-- PLAYER VIEW -->
     <div id="player-view">
         <div class="back-bar">
             <button class="btn" onclick="closeGame()">← BACK</button>
-            <span id="playing-title" style="font-weight:bold;">GAME</span>
+            <span id="playing-title" style="font-weight:bold; letter-spacing: 1px;">GAME</span>
             <button class="btn" onclick="goFull()">FULLSCREEN</button>
         </div>
         <iframe id="gameFrame" src="" allowfullscreen></iframe>
     </div>
 
     <script>
+        // ADD NEW GAMES HERE
         const games = [
             { name: "Slope", img: "https://classroom-6x.lol/_next/image?url=https%3A%2F%2Fcdn.shst.at%2Fimages%2Fgames%2Fslope.png&w=128&q=75", url: "https://kkgames.github.io/slope/" },
             { name: "1v1.LOL", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzY3zN8N_X1Nf5YpPZ5o8E9h-pL-lqS-mEig&s", url: "https://1v1.lol" },
