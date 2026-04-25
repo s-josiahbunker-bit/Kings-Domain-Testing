@@ -1,1 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KING'S DOMAIN | MASTER HUB</title>
+    <!-- Icons and Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
 
+    <style>
+        /* ==========================================
+           1. DESIGN (CSS) - Master Art Settings
+           ========================================== */
+        :root {
+            --Home-Wallpaper: url('https://wallpapers.com/images/hd/persona-5-background-030o8u3u29n532no.jpg');
+            --Movie-Wallpaper: url('https://wallpaperaccess.com/full/1531383.jpg');
+            --Proxy-Wallpaper: url('https://images.alphacoders.com/836/836569.png');
+            --Banner-Art: url('https://images8.alphacoders.com/132/1325171.jpeg');
+            
+            --Menu-Icon: url('https://i.ibb.co/68v8T3G/p5-menu.jpg'); 
+            --p5-pink-red: #ff1f44; 
+            --p5-black: #000000;
+            --p5-card-bg: #141414;
+        }
+
+        body, html { margin: 0; padding: 0; height: 100%; background-color: var(--p5-black); color: white; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        body { background-image: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), var(--Home-Wallpaper); background-size: cover; background-attachment: fixed; background-position: center; transition: background-image 0.6s ease; }
+
+        /* NAV & SIDEBAR */
+        .v-nav { position: fixed; left: 0; top: 0; height: 100%; width: 85px; background: #000; border-right: 2px solid var(--p5-pink-red); display: flex; flex-direction: column; align-items: center; padding-top: 20px; z-index: 1000; }
+        .nav-btn { width: 65px; height: 65px; background-image: var(--Menu-Icon); background-size: contain; background-repeat: no-repeat; background-position: center; cursor: pointer; transition: 0.3s; mix-blend-mode: screen; }
+        .nav-btn:hover { transform: scale(1.2) rotate(-5deg); filter: drop-shadow(0 0 10px var(--p5-pink-red)); }
+
+        #sidebar { position: fixed; top: 0; left: -320px; width: 310px; height: 100%; background: rgba(0,0,0,0.98); border-right: 4px solid var(--p5-pink-red); z-index: 2001; transition: 0.5s cubic-bezier(0.77, 0, 0.175, 1); padding: 50px 20px; box-sizing: border-box; }
+        #sidebar.active { left: 0; }
+        .sidebar-header { color: var(--p5-pink-red); font-weight: 900; font-size: 24px; text-transform: uppercase; margin-bottom: 20px; border-bottom: 2px solid #222; padding-bottom: 10px; font-style: italic; }
+        .sidebar-item { display: flex; align-items: center; gap: 15px; padding: 18px; color: white; text-decoration: none; font-weight: 900; font-size: 22px; text-transform: uppercase; transition: 0.3s; cursor: pointer; border-bottom: 1px solid #111; }
+        .sidebar-item:hover { color: var(--p5-pink-red); padding-left: 35px; }
+
+        /* LAYOUT */
+        .top-bar { margin-left: 85px; padding: 15px 50px; background: rgba(0,0,0,0.5); display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .logo-text { color: var(--p5-pink-red); font-weight: 900; font-size: 20px; text-transform: uppercase; letter-spacing: 2px; }
+        .container { margin-left: 85px; padding: 40px 60px; max-width: 1250px; }
+        
+        .hero-banner { width: 100%; height: 320px; border-radius: 20px; margin-bottom: 30px; background: linear-gradient(to right, rgba(0,0,0,1) 40%, transparent), var(--Banner-Art); background-size: cover; background-position: center; display: flex; flex-direction: column; justify-content: center; padding-left: 60px; box-sizing: border-box; border: 1px solid rgba(255,255,255,0.1); }
+        .hero-banner h1 { font-size: 44px; margin: 0; font-weight: 900; text-transform: uppercase; }
+
+        #searchBox { width: 100%; padding: 16px 25px; background: var(--p5-card-bg); border: 1px solid #222; border-radius: 8px; color: white; margin-bottom: 30px; outline: none; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 20px; }
+        .card { background: var(--p5-card-bg); border-radius: 12px; height: 380px; position: relative; overflow: hidden; border: 1px solid #1a1a1a; cursor: pointer; transition: 0.3s; }
+        .card:hover { border-color: var(--p5-pink-red); transform: translateY(-8px); box-shadow: 0 5px 15px rgba(255, 31, 68, 0.4); }
+        .card img { width: 100%; height: 100%; object-fit: cover; }
+        .card p { position: absolute; bottom: 0; width: 100%; background: rgba(0, 0, 0, 0.85); margin: 0; padding: 15px 0; text-align: center; font-size: 12px; font-weight: 700; border-top: 1px solid var(--p5-pink-red); }
+
+        /* PROXY UI */
+        #proxy-page { display: none; flex-direction: column; align-items: center; justify-content: center; height: 60vh; text-align: center; }
+        .proxy-input { width: 100%; max-width: 500px; padding: 20px; font-size: 20px; background: #000; border: 3px solid var(--p5-pink-red); color: white; transform: skewX(-5deg); outline: none; box-shadow: 10px 10px 0px var(--p5-pink-red); }
+
+        /* PLAYER */
+        #player-view { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: black; z-index: 10000; flex-direction: column; }
+        .player-bar { height: 60px; padding: 0 40px; background: #000; border-bottom: 2px solid var(--p5-pink-red); display: flex; justify-content: space-between; align-items: center; box-sizing: border-box; }
+        #gameFrame { width: 100%; height: calc(100% - 60px); border: none; background: #000; }
+        .p-btn { background: var(--p5-pink-red); color: white; border: none; padding: 10px 20px; font-weight: bold; cursor: pointer; border-radius: 5px; }
+    </style>
+</head>
+<body>
+
+    <nav class="v-nav"><div class="nav-btn" title="Open Menu" onclick="toggleSidebar()"></div></nav>
+
+    <div id="sidebar" onmouseleave="closeSidebar()">
+        <div style="text-align:center; margin-bottom:30px;"><img src="https://i.ibb.co/vYm6vS6/Take-Your-Heart.png" style="width:120px;"></div>
+        <div class="sidebar-header">NAVIGATOR</div>
+        <div class="sidebar-item" onclick="showLibrary('games'); closeSidebar();"><i class="fas fa-home"></i> Home</div>
+        <div class="sidebar-item" onclick="showLibrary('movies'); closeSidebar();"><i class="fas fa-film"></i> Movies</div>
+        <div class="sidebar-item" onclick="openProxy(); closeSidebar();"><i class="fas fa-mask"></i> Proxy</div>
+    </div>
+
+    <div class="top-bar">
+        <div class="logo-text">KING'S DOMAIN</div>
+        <div style="font-size: 11px; opacity: 0.5;">PHANTOM_CONNECTED</div>
+    </div>
+
+    <div id="home-view" class="container">
+        <div id="grid-content">
+            <header class="hero-banner">
+                <h1 id="banner-text">WELCOME BACK</h1>
+                <p>Ready to steal some time?</p>
+            </header>
+            <input type="text" id="searchBox" placeholder="Search targets..." onkeyup="filter()">
+            <div class="grid" id="mainGrid"></div>
+        </div>
+
+        <div id="proxy-page">
+            <h1 style="color:var(--p5-pink-red); font-size: 50px; margin-bottom: 20px;">PHANTOM PROXY</h1>
+            <input type="text" id="proxyInput" class="proxy-input" placeholder="Enter URL or Search..." onkeydown="if(event.key==='Enter') startProxy()">
+        </div>
+    </div>
+
+    <div id="player-view">
+        <div class="player-bar">
+            <button class="p-btn" onclick="closePlayer()">← BACK</button>
+            <span id="playing-title" style="font-weight:900; text-transform:uppercase;">DESTINATION</span>
+            <button class="p-btn" onclick="goFull()">FULLSCREEN</button>
+        </div>
+        <iframe id="gameFrame" src="" allowfullscreen></iframe>
+    </div>
+
+    <!-- ==========================================
+         2. LOGIC (JavaScript) 
+         ========================================== -->
+    <script>
+        const PROXY_ENGINE = "https://t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.rammerhead.org/";
+        let currentMode = "games";
+
+        // ADD NEW GAMES HERE
+        const games = [
+            { name: "Slime Rancher", img: "https://sm.ign.com/ign_es/cover/s/slime-ranc/slime-rancher_j318.jpg", url: "slimerancher.html" },
+            { name: "Helltaker", img: "https://files.catbox.moe/k9d5o6.png", url: "helltaker.html" },
+            { name: "Tuff Client", img: "https://files.catbox.moe/rbt7f1.png", url: "tuffclient.html" },
+            { name: "Slope", img: "https://sm.ign.com/ign_br/game/s/slope/slope_69qy.jpg", url: "https://kkgames.github.io/slope/" }
+        ];
+
+        // ADD NEW MOVIES HERE
+        const movies = [
+            { name: "SEARCH ANY MOVIE", img: "https://i.ibb.co/vYm6vS6/Take-Your-Heart.png", url: "https://movie-web.app" },
+            { name: "FlixZone", img: "https://files.catbox.moe/5m9qly.png", url: "https://flixzone.co/home" },
+            { name: "HiAnime", img: "https://files.catbox.moe/u3a033.png", url: "https://hianime.ws/home" }
+        ];
+
+        const mainGrid = document.getElementById('mainGrid');
+        const frame = document.getElementById('gameFrame');
+
+        function toggleSidebar() { document.getElementById('sidebar').classList.toggle('active'); }
+        function closeSidebar() { document.getElementById('sidebar').classList.remove('active'); }
+
+        function showLibrary(type) {
+            currentMode = type;
+            document.getElementById('grid-content').style.display = 'block';
+            document.getElementById('proxy-page').style.display = 'none';
+            if(type === 'games') {
+                document.body.style.backgroundImage = "linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), var(--Home-Wallpaper)";
+                document.getElementById('banner-text').innerText = "WELCOME BACK";
+                render(games);
+            } else {
+                document.body.style.backgroundImage = "linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), var(--Movie-Wallpaper)";
+                document.getElementById('banner-text').innerText = "MOVIE HUB";
+                render(movies);
+            }
+        }
+
+        function openProxy() {
+            document.getElementById('grid-content').style.display = 'none';
+            document.getElementById('proxy-page').style.display = 'flex';
+            document.body.style.backgroundImage = "linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), var(--Proxy-Wallpaper)";
+        }
+
+        function startProxy() {
+            let input = document.getElementById('proxyInput').value;
+            if(!input) return;
+            document.getElementById('home-view').style.display = 'none';
+            document.getElementById('player-view').style.display = 'flex';
+            frame.src = PROXY_ENGINE;
+            document.getElementById('playing-title').innerText = "PROXY ACTIVE";
+        }
+
+        function render(data) {
+            mainGrid.innerHTML = '';
+            data.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `<img src="${item.img}"><p>${item.name}</p>`;
+                card.onclick = () => {
+                    document.getElementById('home-view').style.display = 'none';
+                    document.getElementById('player-view').style.display = 'flex';
+                    frame.src = item.url;
+                    document.getElementById('playing-title').innerText = item.name;
+                };
+                mainGrid.appendChild(card);
+            });
+        }
+
+        function filter() {
+            const val = document.getElementById('searchBox').value.toLowerCase();
+            const data = (currentMode === 'games' ? games : movies);
+            render(data.filter(i => i.name.toLowerCase().includes(val)));
+        }
+
+        function closePlayer() {
+            document.getElementById('home-view').style.display = 'block';
+            document.getElementById('player-view').style.display = 'none';
+            frame.src = '';
+        }
+
+        function goFull() { if (frame.requestFullscreen) frame.requestFullscreen(); else if (frame.webkitRequestFullscreen) frame.webkitRequestFullscreen(); }
+
+        showLibrary('games');
+    </script>
+</body>
+</html>
