@@ -3,189 +3,255 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>King's Domain | Premium</title>
+    <title>KING'S DOMAIN | FINAL VERSION</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     
     <style>
-        /* ==========================================
-           1. ART SETTINGS (Change your images here)
-           ========================================== */
+        /* 1. THE EXACT COLORS FROM YOUR IMAGE */
         :root {
-            --Site-Wallpaper: url('https://wallpapers.com/images/hd/persona-5-background-030o8u3u29n532no.jpg');
-            --Banner-Art: url('https://images8.alphacoders.com/132/1325171.jpeg');
-            --p5-pink-red: #ff1f44;
+            --p5-pink-red: #ff1f44; /* Bright Pinkish Red */
             --p5-black: #000000;
-            --p5-card-bg: #121212;
+            --p5-dark-grey: #141414; /* Search bar & Card color */
         }
 
-        /* ==========================================
-           2. THE STYLES
-           ========================================== */
         body {
             margin: 0;
+            padding: 0;
             background-color: var(--p5-black);
-            background-image: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), var(--Site-Wallpaper);
+            /* Persona 5 Diagonal Shard Background */
+            background-image: 
+                linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)),
+                url('https://wallpapers.com/images/hd/persona-5-background-030o8u3u29n532no.jpg');
             background-size: cover;
             background-attachment: fixed;
             background-position: center;
             color: white;
-            font-family: 'Segoe UI', sans-serif;
+            font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
+            overflow-x: hidden;
         }
 
+        /* 2. NAVBAR: LOGO LEFT, TEXT RIGHT */
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 80px; 
-            background: rgba(0, 0, 0, 0.95);
+            padding: 12px 60px; /* Precise padding from image */
+            background: #000;
             border-bottom: 2px solid var(--p5-pink-red);
         }
-        .logo { color: var(--p5-pink-red); font-weight: 800; font-size: 22px; text-transform: uppercase; }
 
-        .container { max-width: 1250px; margin: 0 auto; padding: 40px 80px; }
+        .logo {
+            color: var(--p5-pink-red);
+            font-weight: 900;
+            font-size: 18px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
 
+        .nav-right {
+            font-size: 13px;
+            color: white;
+            opacity: 0.9;
+        }
+
+        /* 3. MAIN CONTAINER */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px 60px;
+        }
+
+        /* 4. BANNER: TALL & ROUNDED (320px Height) */
         .hero-banner {
             width: 100%;
             height: 320px;
             border-radius: 20px; 
-            background: linear-gradient(to right, rgba(0,0,0,1) 40%, transparent), var(--Banner-Art);
+            background: linear-gradient(to right, rgba(0,0,0,1) 40%, transparent), 
+                        url('https://images8.alphacoders.com/132/1325171.jpeg');
             background-size: cover;
-            background-position: center;
+            background-position: top center;
             display: flex;
             flex-direction: column;
             justify-content: center;
             padding-left: 60px;
             box-sizing: border-box;
             border: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 25px;
+        }
+
+        .hero-banner h1 {
+            font-size: 44px;
+            margin: 0;
+            font-weight: 800;
+            letter-spacing: -1px;
+            text-transform: uppercase;
+        }
+
+        .hero-banner p {
+            font-size: 15px;
+            color: #999;
+            margin-top: 10px;
+        }
+
+        /* 5. SEARCH BAR: MATCHING THE IMAGE DARK GREY */
+        .search-area {
             margin-bottom: 30px;
         }
 
         #gameSearch {
             width: 100%;
             padding: 15px 25px;
-            background: #141414; 
-            border: 1px solid #252525;
+            background: var(--p5-dark-grey); 
+            border: 1px solid #222;
             border-radius: 8px;
             color: white;
-            margin-bottom: 35px;
+            font-size: 14px;
             outline: none;
+            box-sizing: border-box;
         }
 
+        #gameSearch::placeholder { color: #555; }
+
+        /* 6. GRID & TALL VERTICAL RECTANGLE CARDS */
         .grid {
             display: grid;
-            grid-template-columns: repeat(5, 1fr); 
+            grid-template-columns: repeat(5, 1fr); /* Exactly 5 like the image */
             gap: 20px;
         }
+
         .card {
-            background: var(--p5-card-bg); 
+            background: var(--p5-dark-grey); 
             border-radius: 12px;
-            height: 350px; 
+            height: 360px; /* EXACT TALL RATIO */
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             align-items: center;
             border: 1px solid #1a1a1a;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: 0.2s ease;
             overflow: hidden;
             text-decoration: none;
-            color: white;
         }
-        .card:hover { border-color: var(--p5-pink-red); transform: translateY(-5px); }
-        .card img { width: 55px; height: auto; margin-top: auto; margin-bottom: auto; }
-        .card p { width: 100%; background: var(--p5-card-bg); margin: 0; padding: 20px 0; text-align: center; font-size: 13px; font-weight: 700; }
 
+        .card:hover {
+            border-color: var(--p5-pink-red);
+            transform: translateY(-5px);
+        }
+
+        .card-img-wrapper {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .card img {
+            width: 60px; /* Small icon look from image */
+            height: auto;
+        }
+
+        .card p {
+            width: 100%;
+            background: #111;
+            margin: 0;
+            padding: 20px 0;
+            text-align: center;
+            font-size: 12px;
+            font-weight: 700;
+            color: white;
+            border-top: 1px solid #1a1a1a;
+        }
+
+        /* 7. SOCIAL FOOTER */
         footer {
-            background: rgba(0, 0, 0, 0.95);
-            padding: 40px 80px;
+            background: #000;
+            padding: 40px 60px;
             border-top: 2px solid var(--p5-pink-red);
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 20px;
         }
+
         .social-links { display: flex; gap: 30px; }
-        .social-links a { color: white; font-size: 28px; text-decoration: none; transition: 0.3s; }
+        .social-links a { color: white; font-size: 26px; transition: 0.3s; }
         .social-links a:hover { color: var(--p5-pink-red); transform: scale(1.2); }
 
-        /* Game Player View */
-        #player-view { 
-            display: none; 
-            position: fixed; 
-            top: 0; left: 0; 
-            width: 100%; height: 100%; 
-            background: black; 
-            z-index: 10000; 
-            flex-direction: column; 
+        /* 8. GAME PLAYER */
+        #player-view {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: black;
+            z-index: 10000;
+            flex-direction: column;
         }
-        
-        .back-bar { 
-            padding: 12px 40px; 
-            background: #000; 
-            border-bottom: 2px solid var(--p5-pink-red); 
+
+        .back-bar {
+            padding: 12px 40px;
+            background: #000;
+            border-bottom: 2px solid var(--p5-pink-red);
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
-        .btn-group { display: flex; gap: 15px; }
-
-        .action-btn { 
-            background: var(--p5-pink-red); 
-            color: white; 
-            border: none; 
-            padding: 10px 20px; 
-            font-weight: bold; 
-            cursor: pointer; 
-            border-radius: 5px; 
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 14px;
+        .btn {
+            background: var(--p5-pink-red);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 5px;
         }
-        .action-btn:hover { opacity: 0.8; }
 
-        iframe { flex-grow: 1; border: none; width: 100%; height: 100%; }
+        iframe { flex-grow: 1; border: none; background: white; }
     </style>
 </head>
 <body>
 
+    <!-- NAVBAR -->
     <nav>
         <div class="logo">KING'S DOMAIN</div>
-        <div style="font-size: 14px; opacity: 0.8;">Unblocked Games</div>
+        <div class="nav-right">Unblocked Games</div>
     </nav>
 
-    <div id="home-screen" class="container">
+    <div id="home-view" class="main-content">
+        <!-- BANNER -->
         <header class="hero-banner">
-            <h1 style="font-size: 48px; margin:0;">WELCOME BACK</h1>
-            <p style="font-size: 16px; color: #ccc;">The best unblocked games, updated daily.</p>
+            <h1>WELCOME BACK</h1>
+            <p>The best unblocked games, updated daily.</p>
         </header>
 
-        <input type="text" id="gameSearch" placeholder="Search for games..." onkeyup="filter()">
+        <!-- SEARCH -->
+        <div class="search-area">
+            <input type="text" id="gameSearch" placeholder="Search for games..." onkeyup="filter()">
+        </div>
+
+        <!-- GAME GRID -->
         <div class="grid" id="gameGrid"></div>
     </div>
 
+    <!-- FOOTER -->
     <footer>
         <div class="social-links">
             <a href="#"><i class="fab fa-discord"></i></a>
             <a href="#"><i class="fab fa-youtube"></i></a>
-            <a href="#"><i class="fab fa-facebook"></i></a>
             <a href="#"><i class="fab fa-x-twitter"></i></a>
+            <a href="#"><i class="fab fa-facebook"></i></a>
         </div>
+        <div style="font-size: 10px; color: #444; letter-spacing: 2px;">© 2024 KING'S DOMAIN</div>
     </footer>
 
-    <!-- GAME PLAYER -->
+    <!-- PLAYER -->
     <div id="player-view">
         <div class="back-bar">
-            <button class="action-btn" onclick="closeGame()">
-                <i class="fas fa-arrow-left"></i> BACK TO HOME
-            </button>
-            <div id="playing-title" style="font-weight: bold; font-size: 18px;">GAME TITLE</div>
-            <div class="btn-group">
-                <button class="action-btn" onclick="toggleFullscreen()">
-                    <i class="fas fa-expand"></i> FULLSCREEN
-                </button>
-            </div>
+            <button class="btn" onclick="closeGame()">← BACK</button>
+            <span id="playing-title" style="font-weight:bold;">GAME</span>
+            <button class="btn" onclick="goFull()">FULLSCREEN</button>
         </div>
         <iframe id="gameFrame" src="" allowfullscreen></iframe>
     </div>
@@ -207,9 +273,9 @@
             data.forEach(game => {
                 const card = document.createElement('div');
                 card.className = 'card';
-                card.innerHTML = `<div style="flex-grow:1; display:flex; align-items:center; justify-content:center;"><img src="${game.img}"></div><p>${game.name}</p>`;
+                card.innerHTML = `<div class="card-img-wrapper"><img src="${game.img}"></div><p>${game.name}</p>`;
                 card.onclick = () => {
-                    document.getElementById('home-screen').style.display = 'none';
+                    document.getElementById('home-view').style.display = 'none';
                     document.getElementById('player-view').style.display = 'flex';
                     frame.src = game.url;
                     document.getElementById('playing-title').innerText = game.name;
@@ -219,16 +285,6 @@
             });
         }
 
-        function toggleFullscreen() {
-            if (frame.requestFullscreen) {
-                frame.requestFullscreen();
-            } else if (frame.webkitRequestFullscreen) { /* Safari */
-                frame.webkitRequestFullscreen();
-            } else if (frame.msRequestFullscreen) { /* IE11 */
-                frame.msRequestFullscreen();
-            }
-        }
-
         function filter() {
             const val = document.getElementById('gameSearch').value.toLowerCase();
             const f = games.filter(g => g.name.toLowerCase().includes(val));
@@ -236,9 +292,14 @@
         }
 
         function closeGame() {
-            document.getElementById('home-screen').style.display = 'block';
+            document.getElementById('home-view').style.display = 'block';
             document.getElementById('player-view').style.display = 'none';
             frame.src = '';
+        }
+
+        function goFull() {
+            if (frame.requestFullscreen) frame.requestFullscreen();
+            else if (frame.webkitRequestFullscreen) frame.webkitRequestFullscreen();
         }
 
         render(games);
