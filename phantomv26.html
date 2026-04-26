@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="referrer" content="origin">
-    <title>KING'S DOMAIN | CINEMA V25</title>
+    <title>KING'S DOMAIN | CINEMA V26</title>
     <link rel="icon" type="image/png" href="https://i.ibb.co/vYm6vS6/Take-Your-Heart.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
@@ -54,6 +54,16 @@
 
         .ep-sidebar { width: 320px; background: #0f1015; border-left: 1px solid #222; display: flex; flex-direction: column; padding: 15px; box-sizing: border-box; overflow-y: auto; }
         .ep-sidebar h3 { font-size: 14px; margin: 0 0 15px 0; color: #fff; font-weight: 400; }
+        
+        /* NEW SUB/DUB TOGGLE STYLING */
+        .sub-dub-container { display: flex; gap: 5px; margin-bottom: 15px; justify-content: flex-end; }
+        .sd-btn { 
+            background: #23242d; border: 1px solid #333; color: #aaa; padding: 5px 12px; 
+            font-size: 11px; font-weight: 900; border-radius: 4px; cursor: pointer; 
+            transition: 0.2s; text-transform: uppercase;
+        }
+        .sd-btn.active { background: var(--p5-pink-red); color: white; border-color: var(--p5-pink-red); box-shadow: 0 0 10px rgba(255, 31, 68, 0.4); }
+
         .ep-top-nav { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
         .ep-select { background: #1a1b23; border: 1px solid #333; color: #aaa; padding: 8px; border-radius: 4px; font-size: 13px; font-weight: bold; cursor: pointer; outline: none; width: 100%; }
         .ep-select:focus { border-color: var(--p5-pink-red); color: #fff; }
@@ -98,6 +108,7 @@
             </header>
             <input type="text" id="searchBox" placeholder="Search mission targets..." onkeydown="if(event.key==='Enter') searchGlobal()">
             <div class="grid" id="mainGrid"></div>
+            <div id="scroll-loader" style="text-align:center; padding: 40px; display:none; color:var(--p5-pink-red); font-weight:900;">LOADING NEXT BATCH...</div>
         </div>
 
         <div id="proxy-page">
@@ -115,14 +126,20 @@
         <div class="main-player-area">
             <iframe id="gameFrame" src="" allowfullscreen></iframe>
             <div class="ep-sidebar" id="epSidebar">
+                <!-- Sub/Dub Toggle Section -->
+                <div class="sub-dub-container" id="animeToggle" style="display:none;">
+                    <button id="btn-sub" class="sd-btn active" onclick="setLang('sub')">Sub</button>
+                    <button id="btn-dub" class="sd-btn" onclick="setLang('dub')">Dub</button>
+                </div>
+
                 <h3>List of episodes:</h3>
                 <div class="ep-top-nav">
                     <select id="seasonSelect" class="ep-select" onchange="handleSeasonChange()">
                         <option>Loading Seasons...</option>
                     </select>
                     <select id="serverSelect" class="ep-select" onchange="handleServerChange()">
-                        <option value="https://vidsrc.to/embed">Server 1 (Best)</option>
-                        <option value="https://embed.su/embed">Server 2 (Fast)</option>
+                        <option value="https://vidsrc.to/embed">Server 1 (High Quality)</option>
+                        <option value="https://embed.su/embed">Server 2 (High Success)</option>
                         <option value="https://vidsrc.xyz/embed">Server 3 (Legacy)</option>
                     </select>
                 </div>
@@ -132,13 +149,18 @@
     </div>
 
     <script>
-        const TMDB_KEY = "PASTE_YOUR_TMDB_KEY_HERE"; 
+        const TMDB_KEY = "cce36626c4c9d64a54c0731adcaa1d8f"; 
         const PROXY_ENGINE = "https://t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.rammerhead.org/";
         
         let currentID = "";
         let currentMode = "home";
         let currentShowData = null;
         let currentProvider = "https://vidsrc.to/embed";
+        let currentLang = "sub";
+        
+        let currentPage = 1;
+        let isFetching = false;
+        let canLoadMore = true;
 
         const games = [
             { name: "Slime Rancher", img: "https://sm.ign.com/ign_es/cover/s/slime-ranc/slime-rancher_j318.jpg", url: "slimerancher.html" },
@@ -149,16 +171,19 @@
 
         async function changeHub(mode) {
             currentMode = mode; closeSidebar();
+            currentPage = 1; canLoadMore = true;
             document.getElementById('grid-content').style.display = 'block';
             document.getElementById('proxy-page').style.display = 'none';
             document.getElementById('searchBox').value = '';
+            document.getElementById('mainGrid').innerHTML = '';
             
-            const searchPlaceholder = { home: "Search everything...", movie: "Search Movies only...", tv: "Search TV Shows only...", anime: "Search Anime only..." };
+            const searchPlaceholder = { home: "Search mission database...", movie: "Search Movies...", tv: "Search Series...", anime: "Search Anime..." };
             document.getElementById('searchBox').placeholder = searchPlaceholder[mode];
 
             if(mode === 'home') {
                 bgLayer.style.backgroundImage = "linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), var(--Home-Wallpaper)";
-                render(games);
+                render(games, false);
+                canLoadMore = false;
             } else {
                 let wall = (mode === 'tv') ? 'var(--Show-Wallpaper)' : (mode === 'anime' ? 'var(--Anime-Wallpaper)' : 'var(--Movie-Wallpaper)');
                 bgLayer.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), ${wall}`;
@@ -166,62 +191,87 @@
             }
         }
 
-        async function fetchAPI(type) {
-            let url = `https://api.themoviedb.org/3/discover/${type === 'movie' ? 'movie' : 'tv'}?api_key=${TMDB_KEY}&sort_by=popularity.desc&vote_count.gte=50&page=1`;
-            if (type === 'anime') url += `&with_genres=16&with_original_language=ja`; // Anime strict filter
-            const res = await fetch(url);
-            const data = await res.json();
-            render(data.results.map(i => ({ id: i.id, name: i.title || i.name, img: `https://image.tmdb.org/t/p/w500${i.poster_path}`, type: (type === 'movie' ? 'movie' : 'tv') })));
+        async function fetchAPI(type, isLoadMore = false) {
+            if (isFetching || !canLoadMore) return;
+            isFetching = true;
+            if(isLoadMore) document.getElementById('scroll-loader').style.display = 'block';
+
+            let baseUrl = `https://api.themoviedb.org/3/discover/${type === 'movie' ? 'movie' : 'tv'}?api_key=${TMDB_KEY}&sort_by=popularity.desc&vote_count.gte=50&page=${currentPage}`;
+            if (type === 'anime') baseUrl += `&with_genres=16&with_original_language=ja`;
+
+            try {
+                const res = await fetch(baseUrl);
+                const data = await res.json();
+                if(data.results && data.results.length > 0) {
+                    render(data.results.map(i => ({ id: i.id, name: i.title || i.name, img: `https://image.tmdb.org/t/p/w500${i.poster_path}`, type: (type === 'movie' ? 'movie' : 'tv'), lang: i.original_language })), isLoadMore);
+                    currentPage++;
+                } else { canLoadMore = false; }
+            } catch (e) { console.error(e); }
+            isFetching = false;
+            document.getElementById('scroll-loader').style.display = 'none';
         }
 
+        document.getElementById('workspace').addEventListener('scroll', (e) => {
+            if (currentMode === 'home') return;
+            const { scrollTop, scrollHeight, clientHeight } = e.target;
+            if (scrollTop + clientHeight >= scrollHeight - 500) { fetchAPI(currentMode, true); }
+        });
+
         async function searchGlobal() {
+            canLoadMore = false;
             const query = document.getElementById('searchBox').value;
-            let url = '';
-            
-            // Logic to restrict search based on current page
-            if (currentMode === 'movie') {
-                url = `https://api.themoviedb.org/3/search/movie?api_key=${TMDB_KEY}&query=${encodeURIComponent(query)}`;
-            } else if (currentMode === 'tv' || currentMode === 'anime') {
-                url = `https://api.themoviedb.org/3/search/tv?api_key=${TMDB_KEY}&query=${encodeURIComponent(query)}`;
-            } else {
-                url = `https://api.themoviedb.org/3/search/multi?api_key=${TMDB_KEY}&query=${encodeURIComponent(query)}`;
-            }
+            let url = (currentMode === 'movie') ? `https://api.themoviedb.org/3/search/movie?api_key=${TMDB_KEY}&query=${encodeURIComponent(query)}` : (currentMode === 'home' ? `https://api.themoviedb.org/3/search/multi?api_key=${TMDB_KEY}&query=${encodeURIComponent(query)}` : `https://api.themoviedb.org/3/search/tv?api_key=${TMDB_KEY}&query=${encodeURIComponent(query)}`);
 
             const res = await fetch(url);
             const data = await res.json();
             let results = data.results;
+            if (currentMode === 'anime') results = results.filter(i => i.genre_ids && i.genre_ids.includes(16));
 
-            // Extra filtering step for Anime search to ensure only Animation genre shows up
-            if (currentMode === 'anime') {
-                results = results.filter(i => i.genre_ids && i.genre_ids.includes(16));
-            }
-
-            render(results.filter(i => i.poster_path).map(i => ({ 
-                id: i.id, 
-                name: i.title || i.name, 
-                img: `https://image.tmdb.org/t/p/w500${i.poster_path}`, 
-                type: i.media_type || (currentMode === 'movie' ? 'movie' : 'tv') 
-            })));
+            render(results.filter(i => i.poster_path).map(i => ({ id: i.id, name: i.title || i.name, img: `https://image.tmdb.org/t/p/w500${i.poster_path}`, type: i.media_type || (currentMode === 'movie' ? 'movie' : 'tv'), lang: i.original_language })), false);
         }
 
-        function render(data) {
-            mainGrid.innerHTML = '';
+        function render(data, isLoadMore) {
+            const mainGrid = document.getElementById('mainGrid');
+            if (!isLoadMore) mainGrid.innerHTML = '';
             data.forEach(item => {
-                const card = document.createElement('div');
-                card.className = 'card';
-                card.innerHTML = `<img src="${item.img}"><p>${item.name}</p>`;
-                card.onclick = () => launchMedia(item);
-                mainGrid.appendChild(card);
+                if(item.img && !item.img.includes('null')) {
+                    const card = document.createElement('div');
+                    card.className = 'card';
+                    card.innerHTML = `<img src="${item.img}"><p>${item.name}</p>`;
+                    card.onclick = () => launchMedia(item);
+                    mainGrid.appendChild(card);
+                }
             });
+        }
+
+        // SET LANGUAGE LOGIC
+        function setLang(lang) {
+            currentLang = lang;
+            document.getElementById('btn-sub').classList.toggle('active', lang === 'sub');
+            document.getElementById('btn-dub').classList.toggle('active', lang === 'dub');
+            
+            // For free providers, Dub is usually more reliable on Server 2 (Embed.su)
+            if(lang === 'dub') {
+                currentProvider = "https://embed.su/embed";
+                document.getElementById('serverSelect').value = "https://embed.su/embed";
+            } else {
+                currentProvider = "https://vidsrc.to/embed";
+                document.getElementById('serverSelect').value = "https://vidsrc.to/embed";
+            }
+
+            const isTV = document.getElementById('epSidebar').style.display === 'flex';
+            if (isTV) handleSeasonChange(); else updateIframe('movie');
         }
 
         async function launchMedia(item) {
             currentID = item.id;
-            // Determine if it's a series (Anime usually treated as TV)
             const isShow = (item.type === 'tv' || currentMode === 'tv' || currentMode === 'anime');
             document.getElementById('player-view').style.display = 'flex';
             document.getElementById('epSidebar').style.display = isShow ? 'flex' : 'none';
             document.getElementById('playing-title').innerText = item.name.toUpperCase();
+            
+            // Show Sub/Dub toggle if it's anime or japanese original
+            document.getElementById('animeToggle').style.display = (currentMode === 'anime' || item.lang === 'ja') ? 'flex' : 'none';
             
             if(isShow) {
                 const res = await fetch(`https://api.themoviedb.org/3/tv/${item.id}?api_key=${TMDB_KEY}`);
@@ -240,9 +290,7 @@
                 seasonSelect.value = firstSeason.season_number;
                 buildEpGrid(firstSeason.season_number, firstSeason.episode_count);
                 updateIframe('tv', firstSeason.season_number, 1);
-            } else {
-                updateIframe('movie');
-            }
+            } else { updateIframe('movie'); }
         }
 
         function handleSeasonChange() {
@@ -280,6 +328,7 @@
         }
 
         function updateIframe(type, season, episode) {
+            const frame = document.getElementById('gameFrame');
             if (type === 'movie') { frame.src = `${currentProvider}/movie/${currentID}`; } 
             else { frame.src = `${currentProvider}/tv/${currentID}/${season}/${episode}`; }
         }
@@ -288,13 +337,11 @@
         function closeSidebar() { document.getElementById('sidebar').classList.remove('active'); }
         function openProxy() { closeSidebar(); document.getElementById('grid-content').style.display = 'none'; document.getElementById('proxy-page').style.display = 'flex'; bgLayer.style.backgroundImage = "linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), var(--Proxy-Wallpaper)"; }
         function startProxy() { document.getElementById('player-view').style.display = 'flex'; document.getElementById('gameFrame').src = PROXY_ENGINE; }
-        function closePlayer() { document.getElementById('player-view').style.display = 'none'; frame.src = ''; }
-        function goFull() { if (frame.requestFullscreen) frame.requestFullscreen(); else if (frame.webkitRequestFullscreen) frame.webkitRequestFullscreen(); }
+        function closePlayer() { document.getElementById('player-view').style.display = 'none'; document.getElementById('gameFrame').src = ''; }
+        function goFull() { const f = document.getElementById('gameFrame'); if (f.requestFullscreen) f.requestFullscreen(); else if (f.webkitRequestFullscreen) f.webkitRequestFullscreen(); }
 
-        const mainGrid = document.getElementById('mainGrid');
-        const frame = document.getElementById('gameFrame');
         const bgLayer = document.getElementById('bg-layer');
-        render(games);
+        render(games, false);
     </script>
 </body>
 </html>
