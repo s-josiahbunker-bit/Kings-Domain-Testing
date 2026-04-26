@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="referrer" content="origin">
-    <title>KING'S DOMAIN | CINEMA V32</title>
+    <title>KING'S DOMAIN | CINEMA V34</title>
     <link rel="icon" type="image/png" href="https://i.ibb.co/vYm6vS6/Take-Your-Heart.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
@@ -19,7 +19,7 @@
             --Banner-Art: url('https://images8.alphacoders.com/132/1325171.jpeg');
             --Menu-Img: url('https://i.ibb.co/68v8T3G/p5-menu.jpg'); 
 
-            /* --- CUSTOM PHANTOM CURSORS --- */
+            /* --- PHANTOM CURSOR ASSETS --- */
             --cursor-default: url('https://i.ibb.co/4PDX5xP/cursor-arrow.png'); /* IMAGE 1 */
             --cursor-pointer: url('https://i.ibb.co/Pj0Qp8t/cursor-dagger.png'); /* IMAGE 2 */
             --cursor-text: url('https://i.ibb.co/f4p7vWf/cursor-text.png');    /* IMAGE 3 */
@@ -32,12 +32,8 @@
             font-family: 'Inter', sans-serif; overflow: hidden; 
             cursor: var(--cursor-default), auto; 
         }
-        a, button, .card, .nav-btn, .sidebar-item, .sd-btn, .ep-btn, select, .p-btn, .nav-btn { 
-            cursor: var(--cursor-pointer), pointer !important; 
-        }
-        input[type="text"], #searchBox { 
-            cursor: var(--cursor-text), text !important; 
-        }
+        a, button, .card, .nav-btn, .sidebar-item, .sd-btn, .ep-btn, select, .p-btn { cursor: var(--cursor-pointer), pointer !important; }
+        input[type="text"], #searchBox { cursor: var(--cursor-text), text !important; }
 
         #bg-layer { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), var(--Home-Wallpaper); background-size: cover; background-attachment: fixed; background-position: center; z-index: -1; transition: background-image 0.8s ease; }
 
@@ -52,7 +48,6 @@
         .sidebar-item { display: flex; align-items: center; gap: 15px; padding: 18px; color: white; text-decoration: none; font-weight: 900; font-size: 20px; text-transform: uppercase; transition: 0.3s; }
         .sidebar-item:hover { color: var(--p5-pink-red); padding-left: 30px; background: rgba(255, 31, 68, 0.1); }
 
-        /* WORKSPACE */
         .top-bar { margin-left: 85px; padding: 15px 50px; background: rgba(0,0,0,0.5); display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); }
         .logo-text { color: var(--p5-pink-red); font-weight: 900; font-size: 20px; text-transform: uppercase; letter-spacing: 2px; }
         .workspace { margin-left: 85px; height: calc(100% - 60px); width: calc(100% - 85px); overflow-y: auto; box-sizing: border-box; position: relative; scroll-behavior: smooth; }
@@ -66,6 +61,7 @@
 
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 20px; }
         .card { background: var(--p5-card-bg); border-radius: 12px; height: 380px; position: relative; overflow: hidden; border: 1px solid #1a1a1a; transition: 0.3s; }
+        .card:hover { border-color: var(--p5-pink-red); transform: translateY(-5px); }
         .card img { width: 100%; height: 100%; object-fit: cover; }
         .card p { position: absolute; bottom: 0; width: 100%; background: rgba(0,0,0,0.85); margin: 0; padding: 12px 0; text-align: center; font-size: 11px; font-weight: 700; border-top: 1px solid var(--p5-pink-red); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
@@ -110,14 +106,14 @@
 
     <div class="top-bar">
         <div class="logo-text">KING'S DOMAIN</div>
-        <div id="status-text" style="font-size: 11px; opacity: 0.5; letter-spacing: 2px;">GHOST_PROTOCOL_V32_READY</div>
+        <div id="status-text" style="font-size: 11px; opacity: 0.5; letter-spacing: 2px;">XPS_OMEGA_V34_READY</div>
     </div>
 
     <div class="workspace" id="workspace">
         <div id="grid-content" class="container">
             <header class="hero-banner">
                 <h1 id="banner-text">WELCOME BACK</h1>
-                <p id="banner-sub">XPS Ghost Hub active. Sub/Dub injection enabled. Infinite database scan.</p>
+                <p id="banner-sub">XPS Protocol Enabled. Infinite scrolling database active.</p>
             </header>
             <input type="text" id="searchBox" placeholder="Search mission database..." onkeydown="if(event.key==='Enter') searchGlobal()">
             <div class="grid" id="mainGrid"></div>
@@ -125,11 +121,10 @@
         </div>
     </div>
 
-    <!-- SANDBOXED OMEGA PLAYER -->
     <div id="player-view">
         <div class="player-bar">
             <button class="p-btn" onclick="closePlayer()">← BACK</button>
-            <span id="playing-title" style="font-weight:900; color:var(--p5-pink-red);">MISSION IN PROGRESS</span>
+            <span id="playing-title" style="font-weight:900; color:var(--p5-pink-red);">XPS MISSION IN PROGRESS</span>
             <button class="p-btn" onclick="goFull()">FULLSCREEN</button>
         </div>
         <div class="main-player-area">
@@ -147,11 +142,11 @@
                 </div>
                 <div class="ep-top-nav" id="media-controls">
                     <select id="seasonSelect" class="ep-select" onchange="handleSeasonChange()"></select>
-                    <!-- XPS ALPHA TIER SERVERS -->
+                    <!-- NEW PREMIUM SANDBOX-STABLE SERVERS -->
                     <select id="serverSelect" class="ep-select" onchange="handleServerChange()">
-                        <option value="rive">XPS Alpha (Rive Stream - Modern)</option>
-                        <option value="vapi">XPS Beta (Vapi/NonTV - Dub Expert)</option>
-                        <option value="frembed">XPS Gamma (Frembed - Legacy High Success)</option>
+                        <option value="rive">XPS Alpha (Rive - Clean & High Bitrate)</option>
+                        <option value="drive">XPS Beta (DrivePlus - Fast & Reliable)</option>
+                        <option value="nostrm">XPS Gamma (Nostrm - Global Archive)</option>
                     </select>
                 </div>
                 <div class="ep-grid" id="epGrid"></div>
@@ -226,7 +221,6 @@
             });
         }
 
-        /* --- ARCADE ENGINE (ISOLATED) --- */
         function launchArcade(game) {
             const f = document.getElementById('gameFrame');
             document.getElementById('player-view').style.display = 'flex';
@@ -236,7 +230,6 @@
             f.src = game.url;
         }
 
-        /* --- MEDIA ENGINE (XPS GHOST PROTOCOL) --- */
         async function launchTITAN(item) {
             mission.id = item.id; mission.type = (item.type === 'tv' || currentMode === 'tv' || currentMode === 'anime') ? 'tv' : 'movie';
             document.getElementById('player-view').style.display = 'flex';
@@ -263,16 +256,14 @@
             const f = document.getElementById('gameFrame');
             let url = "";
             let s = mission.season; let e = mission.episode;
-            
-            // DUAL-AUDIO INJECTION FLAGS
-            let dubParams = (mission.lang === 'dub') ? '?lang=en&audio=en&dub=1' : '';
+            let dubFlag = (mission.lang === 'dub') ? '?dub=true&audio=en&ds=1' : '';
 
             if (mission.provider === "rive") {
-                url = `https://rive.stream/embed/${mission.type}/${mission.id}${mission.type==='tv' ? '/' + s + '/' + e : ''}${dubParams}`;
-            } else if (mission.provider === "vapi") {
-                url = `https://vapi.adob.at/embed/${mission.type}/${mission.id}${mission.type==='tv' ? '/' + s + '/' + e : ''}${dubParams}`;
-            } else if (mission.provider === "frembed") {
-                url = `https://frembed.live/api/nget?type=${mission.type}&id=${mission.id}${mission.type==='tv' ? '&s='+s+'&e='+e : ''}`;
+                url = `https://rive.stream/embed/${mission.type}/${mission.id}${mission.type==='tv' ? '/' + s + '/' + e : ''}${dubFlag}`;
+            } else if (mission.provider === "drive") {
+                url = `https://drive.plus/embed/${mission.type}/${mission.id}${mission.type==='tv' ? '/' + s + '/' + e : ''}`;
+            } else if (mission.provider === "nostrm") {
+                url = (mission.type === 'movie') ? `https://www.nostrm.com/embed/movie/${mission.id}` : `https://www.nostrm.com/embed/tv/${mission.id}/${s}/${e}`;
             }
             f.src = url;
         }
