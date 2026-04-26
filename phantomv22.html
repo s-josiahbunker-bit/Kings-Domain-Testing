@@ -55,13 +55,27 @@
         .main-player-area { display: flex; flex-direction: row; height: calc(100% - 60px); width: 100%; }
         #gameFrame { flex: 1; border: none; background: #000; }
 
-        /* EPISODE SIDEBAR (MATCHING YOUR IMAGE) */
+        /* EPISODE SIDEBAR */
         .ep-sidebar { width: 320px; background: #0f1015; border-left: 1px solid #222; display: flex; flex-direction: column; padding: 15px; box-sizing: border-box; overflow-y: auto; }
         .ep-sidebar h3 { font-size: 14px; margin: 0 0 15px 0; color: #fff; font-weight: 400; }
         
-        .ep-top-nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-        .ep-range { background: none; border: none; color: #aaa; font-size: 13px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 8px; }
-        .ep-search { background: #1a1b23; border: 1px solid #2a2b35; border-radius: 4px; padding: 6px 10px; color: #fff; width: 120px; font-size: 12px; }
+        .ep-top-nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; gap: 10px;}
+        
+        /* UPDATED SEASON SELECTOR STYLE */
+        #seasonSelect { 
+            background: #1a1b23; 
+            border: 1px solid var(--p5-pink-red); 
+            color: white; 
+            padding: 5px; 
+            font-size: 12px; 
+            font-weight: bold; 
+            border-radius: 4px;
+            outline: none;
+            cursor: pointer;
+            flex: 1;
+        }
+
+        .ep-search { background: #1a1b23; border: 1px solid #2a2b35; border-radius: 4px; padding: 6px 10px; color: #fff; width: 100px; font-size: 12px; }
 
         .ep-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
         .ep-btn { background: #23242d; border: none; color: #999; padding: 12px 0; border-radius: 4px; cursor: pointer; font-size: 13px; font-weight: bold; transition: 0.2s; }
@@ -122,26 +136,27 @@
         <div class="main-player-area">
             <iframe id="gameFrame" src="" allowfullscreen></iframe>
             
-            <!-- THE NEW EPISODE SIDEBAR -->
             <div class="ep-sidebar" id="epSidebar">
                 <h3>List of episodes:</h3>
                 <div class="ep-top-nav">
-                    <div class="ep-range"><i class="fas fa-bars"></i> EPS: 001-100 <i class="fas fa-chevron-down"></i></div>
-                    <input type="text" class="ep-search" placeholder="Number of Ep">
+                    <!-- Dynamic Season Selector -->
+                    <select id="seasonSelect" onchange="handleSeasonChange()">
+                        <option>Loading Seasons...</option>
+                    </select>
+                    <input type="text" class="ep-search" placeholder="Search Ep">
                 </div>
-                <div class="ep-grid" id="epGrid">
-                    <!-- Numbers will load here -->
-                </div>
+                <div class="ep-grid" id="epGrid"></div>
             </div>
         </div>
     </div>
 
     <script>
-        const TMDB_KEY = "cce36626c4c9d64a54c0731adcaa1d8f"; 
+        const TMDB_KEY = "PASTE_YOUR_TMDB_KEY_HERE"; 
         const PROXY_ENGINE = "https://t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.rammerhead.org/";
         
         let currentID = "";
         let currentMode = "home";
+        let showData = null; // Stores currently loaded TV show info
 
         const games = [
             { name: "Slime Rancher", img: "https://sm.ign.com/ign_es/cover/s/slime-ranc/slime-rancher_j318.jpg", url: "slimerancher.html" },
@@ -169,7 +184,7 @@
         }
 
         async function fetchAPI(type) {
-            let sort = (type === 'movie') ? 'title.asc' : 'name.asc';
+            let sort = (type === 'movie') ? 'popularity.desc' : 'popularity.desc';
             let url = `https://api.themoviedb.org/3/discover/${type === 'movie' ? 'movie' : 'tv'}?api_key=${TMDB_KEY}&sort_by=${sort}&vote_count.gte=100&page=1`;
             if (type === 'anime') url += `&with_genres=16&with_original_language=ja`;
             const res = await fetch(url);
@@ -202,17 +217,41 @@
             document.getElementById('epSidebar').style.display = isShow ? 'flex' : 'none';
             
             if(isShow) {
-                // Fetch episode count
                 const res = await fetch(`https://api.themoviedb.org/3/tv/${item.id}?api_key=${TMDB_KEY}`);
-                const data = await res.json();
-                buildEpGrid(data.seasons[0].episode_count || 24);
-                frame.src = `https://vidsrc.xyz/embed/tv?tmdb=${item.id}&season=1&episode=1`;
+                showData = await res.json();
+                
+                // Populate the Season Dropdown
+                const seasonSelect = document.getElementById('seasonSelect');
+                seasonSelect.innerHTML = '';
+                showData.seasons.forEach(s => {
+                    // Filter out Season 0 (Specials) if preferred, or keep them
+                    let opt = document.createElement('option');
+                    opt.value = s.season_number;
+                    opt.innerText = `Season ${s.season_number}`;
+                    seasonSelect.appendChild(opt);
+                });
+
+                // Default to first season in list (usually Season 1 or Season 0)
+                const firstSeason = showData.seasons[0];
+                buildEpGrid(firstSeason.season_number, firstSeason.episode_count);
+                frame.src = `https://vidsrc.xyz/embed/tv?tmdb=${item.id}&season=${firstSeason.season_number}&episode=1`;
             } else {
                 frame.src = `https://vidsrc.xyz/embed/movie?tmdb=${item.id}`;
             }
         }
 
-        function buildEpGrid(count) {
+        // Runs when you change the Season Dropdown
+        function handleSeasonChange() {
+            const seasonNum = document.getElementById('seasonSelect').value;
+            const seasonInfo = showData.seasons.find(s => s.season_number == seasonNum);
+            if(seasonInfo) {
+                buildEpGrid(seasonNum, seasonInfo.episode_count);
+                // Automatically switch player to Ep 1 of that season
+                frame.src = `https://vidsrc.xyz/embed/tv?tmdb=${currentID}&season=${seasonNum}&episode=1`;
+            }
+        }
+
+        function buildEpGrid(seasonNum, count) {
             const grid = document.getElementById('epGrid');
             grid.innerHTML = '';
             for(let i=1; i<=count; i++) {
@@ -223,7 +262,7 @@
                 btn.onclick = () => {
                     document.querySelectorAll('.ep-btn').forEach(b => b.classList.remove('active'));
                     btn.classList.add('active');
-                    frame.src = `https://vidsrc.xyz/embed/tv?tmdb=${currentID}&season=1&episode=${i}`;
+                    frame.src = `https://vidsrc.xyz/embed/tv?tmdb=${currentID}&season=${seasonNum}&episode=${i}`;
                 };
                 grid.appendChild(btn);
             }
