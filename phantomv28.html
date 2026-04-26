@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="referrer" content="origin">
-    <title>KING'S DOMAIN | CINEMA V27</title>
+    <title>KING'S DOMAIN | CINEMA V28</title>
     <link rel="icon" type="image/png" href="https://i.ibb.co/vYm6vS6/Take-Your-Heart.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
@@ -24,10 +24,11 @@
         body, html { margin: 0; padding: 0; height: 100%; background-color: var(--p5-black); color: white; font-family: 'Inter', sans-serif; overflow: hidden; }
         #bg-layer { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), var(--Home-Wallpaper); background-size: cover; background-attachment: fixed; background-position: center; z-index: -1; transition: background-image 0.8s ease; }
 
-        /* V-NAV & SIDEBAR */
+        /* V-NAV */
         .v-nav { position: fixed; left: 0; top: 0; height: 100%; width: 85px; background: #000; border-right: 2px solid var(--p5-pink-red); display: flex; flex-direction: column; align-items: center; padding-top: 20px; gap: 20px; z-index: 1000; }
         .nav-btn { width: 65px; height: 65px; background-image: var(--Menu-Img); background-size: contain; background-repeat: no-repeat; background-position: center; cursor: pointer; transition: 0.3s; mix-blend-mode: screen; }
         .nav-btn:hover { transform: scale(1.1); filter: drop-shadow(0 0 10px var(--p5-pink-red)); }
+        
         #sidebar { position: fixed; top: 0; left: -320px; width: 310px; height: 100%; background-image: linear-gradient(rgba(0,0,0,0.95), rgba(0,0,0,0.95)), var(--Sidebar-Wallpaper); background-size: cover; border-right: 4px solid var(--p5-pink-red); z-index: 2001; transition: 0.5s ease; padding: 50px 20px; box-sizing: border-box; }
         #sidebar.active { left: 0; }
         .sidebar-header { color: var(--p5-pink-red); font-weight: 900; font-size: 24px; text-transform: uppercase; margin-bottom: 20px; border-bottom: 2px solid #222; }
@@ -42,7 +43,6 @@
         .hero-banner { width: 100%; height: 280px; border-radius: 20px; margin-bottom: 30px; background: linear-gradient(to right, rgba(0,0,0,1) 40%, transparent), var(--Banner-Art); background-size: cover; background-position: center; display: flex; flex-direction: column; justify-content: center; padding-left: 60px; box-sizing: border-box; border: 1px solid rgba(255,255,255,0.1); }
         .hero-banner h1 { font-size: 44px; margin: 0; font-weight: 900; text-transform: uppercase; }
 
-        /* GRID */
         #searchBox { width: 100%; padding: 18px 25px; background: var(--p5-card-bg); border: 1px solid #222; border-radius: 8px; color: white; margin-bottom: 30px; outline: none; font-size: 16px; }
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 20px; }
         .card { background: var(--p5-card-bg); border-radius: 12px; height: 380px; position: relative; overflow: hidden; border: 1px solid #1a1a1a; cursor: pointer; transition: 0.3s; }
@@ -57,24 +57,16 @@
 
         /* EPISODE SIDEBAR */
         .ep-sidebar { width: 320px; background: #0f1015; border-left: 1px solid #222; display: flex; flex-direction: column; padding: 15px; box-sizing: border-box; overflow-y: auto; }
-        
-        .ep-header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
-        .ep-sidebar h3 { font-size: 12px; margin: 0; color: #fff; font-weight: 400; text-transform: uppercase; letter-spacing: 1px; }
+        .ep-header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px solid #222; padding-bottom: 8px; }
+        .ep-sidebar h3 { font-size: 12px; margin: 0; color: #fff; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; }
 
-        /* SUB/DUB TOGGLE (PERSONA 5 STYLE) */
-        .sd-toggle { display: flex; background: #1a1b23; border-radius: 4px; overflow: hidden; border: 1px solid #333; }
-        .sd-btn { 
-            background: transparent; border: none; color: #666; padding: 4px 10px; 
-            font-size: 10px; font-weight: 900; cursor: pointer; text-transform: uppercase; transition: 0.2s;
-        }
+        /* SUB/DUB TOGGLE (PERSONA STYLE) */
+        .sd-toggle { display: flex; background: #222; border-radius: 4px; border: 1px solid #444; overflow: hidden; }
+        .sd-btn { background: transparent; border: none; color: #888; padding: 4px 10px; font-size: 10px; font-weight: 900; cursor: pointer; text-transform: uppercase; transition: 0.2s; }
         .sd-btn.active { background: var(--p5-pink-red); color: white; }
 
         .ep-top-nav { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
-        .ep-select { 
-            background: #1a1b23; border: 1px solid #333; color: #aaa; 
-            padding: 8px; border-radius: 4px; font-size: 12px; font-weight: bold; 
-            cursor: pointer; outline: none; width: 100%; 
-        }
+        .ep-select { background: #1a1b23; border: 1px solid #333; color: #aaa; padding: 8px; border-radius: 4px; font-size: 12px; font-weight: bold; cursor: pointer; outline: none; width: 100%; }
         .ep-select:focus { border-color: var(--p5-pink-red); color: #fff; }
 
         .ep-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
@@ -113,11 +105,11 @@
         <div id="grid-content" class="container">
             <header class="hero-banner">
                 <h1 id="banner-text">WELCOME BACK</h1>
-                <p id="banner-sub">Hit ENTER to search mission database.</p>
+                <p id="banner-sub">Infinite database scrolling active. Hit ENTER to search.</p>
             </header>
-            <input type="text" id="searchBox" placeholder="Search mission targets..." onkeydown="if(event.key==='Enter') searchGlobal()">
+            <input type="text" id="searchBox" placeholder="Search mission database..." onkeydown="if(event.key==='Enter') searchGlobal()">
             <div class="grid" id="mainGrid"></div>
-            <div id="scroll-loader" style="text-align:center; padding: 40px; display:none; color:var(--p5-pink-red); font-weight:900;">LOADING NEXT BATCH...</div>
+            <div id="scroll-loader" style="text-align:center; padding: 40px; display:none; color:var(--p5-pink-red); font-weight:900;">SCANNING NEXT TARGETS...</div>
         </div>
 
         <div id="proxy-page">
@@ -135,25 +127,19 @@
         <div class="main-player-area">
             <iframe id="gameFrame" src="" allowfullscreen></iframe>
             <div class="ep-sidebar" id="epSidebar">
-                
                 <div class="ep-header-row">
                     <h3>Episode List</h3>
-                    <!-- SUB/DUB TOGGLE -->
                     <div class="sd-toggle" id="animeToggle" style="display:none;">
                         <button id="btn-sub" class="sd-btn active" onclick="setLang('sub')">Sub</button>
                         <button id="btn-dub" class="sd-btn" onclick="setLang('dub')">Dub</button>
                     </div>
                 </div>
-
                 <div class="ep-top-nav">
-                    <select id="seasonSelect" class="ep-select" onchange="handleSeasonChange()">
-                        <option>Loading Seasons...</option>
-                    </select>
-                    <!-- IMPROVED SERVERS -->
+                    <select id="seasonSelect" class="ep-select" onchange="handleSeasonChange()"></select>
                     <select id="serverSelect" class="ep-select" onchange="handleServerChange()">
-                        <option value="https://vidsrc.pro/embed">Alpha (Highest Quality)</option>
-                        <option value="https://vidlink.pro/embed">Beta (Best UI / Anime)</option>
-                        <option value="https://embed.su/embed">Gamma (High Reliability)</option>
+                        <option value="https://vidlink.pro/embed">Alpha (VidLink - Best for Anime)</option>
+                        <option value="https://vidsrc.pro/embed">Beta (VidSrc Pro - Very Fast)</option>
+                        <option value="https://vidsrc.to/embed">Gamma (VidSrc.to - Reliable)</option>
                     </select>
                 </div>
                 <div class="ep-grid" id="epGrid"></div>
@@ -168,7 +154,7 @@
         let currentID = "";
         let currentMode = "home";
         let currentShowData = null;
-        let currentProvider = "https://vidsrc.pro/embed";
+        let currentProvider = "https://vidlink.pro/embed";
         let currentLang = "sub";
         
         let currentPage = 1;
@@ -178,22 +164,22 @@
         const games = [
             { name: "Slime Rancher", img: "https://sm.ign.com/ign_es/cover/s/slime-ranc/slime-rancher_j318.jpg", url: "slimerancher.html" },
             { name: "Helltaker", img: "https://files.catbox.moe/k9d5o6.png", url: "helltaker.html" },
-            { name: "Tuff Client", img: "https://files.catbox.moe/rbt7f1.png", url: "tuffclient.html" },
             { name: "Slope", img: "https://sm.ign.com/ign_br/game/s/slope/slope_69qy.jpg", url: "https://kkgames.github.io/slope/" }
         ];
 
         async function changeHub(mode) {
-            currentMode = mode; closeSidebar();
-            currentPage = 1; canLoadMore = true;
+            currentMode = mode; closeSidebar(); currentPage = 1; canLoadMore = true;
             document.getElementById('grid-content').style.display = 'block';
             document.getElementById('proxy-page').style.display = 'none';
             document.getElementById('searchBox').value = '';
             document.getElementById('mainGrid').innerHTML = '';
             
+            const ph = { home: "Search everything...", movie: "Movies only...", tv: "TV Series only...", anime: "Anime only..." };
+            document.getElementById('searchBox').placeholder = ph[mode];
+
             if(mode === 'home') {
                 bgLayer.style.backgroundImage = "linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), var(--Home-Wallpaper)";
-                render(games, false);
-                canLoadMore = false;
+                render(games, false); canLoadMore = false;
             } else {
                 let wall = (mode === 'tv') ? 'var(--Show-Wallpaper)' : (mode === 'anime' ? 'var(--Anime-Wallpaper)' : 'var(--Movie-Wallpaper)');
                 bgLayer.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), ${wall}`;
@@ -206,23 +192,24 @@
             isFetching = true;
             if(isLoadMore) document.getElementById('scroll-loader').style.display = 'block';
 
-            let baseUrl = `https://api.themoviedb.org/3/discover/${type === 'movie' ? 'movie' : 'tv'}?api_key=${TMDB_KEY}&sort_by=popularity.desc&vote_count.gte=50&page=${currentPage}`;
-            if (type === 'anime') baseUrl += `&with_genres=16&with_original_language=ja`;
+            let url = `https://api.themoviedb.org/3/discover/${type === 'movie' ? 'movie' : 'tv'}?api_key=${TMDB_KEY}&sort_by=popularity.desc&page=${currentPage}`;
+            if (type === 'anime') url += `&with_genres=16&with_original_language=ja`;
 
-            const res = await fetch(baseUrl);
-            const data = await res.json();
-            if(data.results) {
-                render(data.results.map(i => ({ id: i.id, name: i.title || i.name, img: `https://image.tmdb.org/t/p/w500${i.poster_path}`, type: (type === 'movie' ? 'movie' : 'tv'), lang: i.original_language })), isLoadMore);
-                currentPage++;
-            }
-            isFetching = false;
-            document.getElementById('scroll-loader').style.display = 'none';
+            try {
+                const res = await fetch(url);
+                const data = await res.json();
+                if(data.results) {
+                    render(data.results.map(i => ({ id: i.id, name: i.title || i.name, img: `https://image.tmdb.org/t/p/w500${i.poster_path}`, type: (type === 'movie' ? 'movie' : 'tv'), lang: i.original_language })), isLoadMore);
+                    currentPage++;
+                } else { canLoadMore = false; }
+            } catch (e) { console.error(e); }
+            isFetching = false; document.getElementById('scroll-loader').style.display = 'none';
         }
 
         document.getElementById('workspace').addEventListener('scroll', (e) => {
             if (currentMode === 'home') return;
             const { scrollTop, scrollHeight, clientHeight } = e.target;
-            if (scrollTop + clientHeight >= scrollHeight - 500) { fetchAPI(currentMode, true); }
+            if (scrollTop + clientHeight >= scrollHeight - 600) fetchAPI(currentMode, true);
         });
 
         async function searchGlobal() {
@@ -238,33 +225,24 @@
         }
 
         function render(data, isLoadMore) {
-            const mainGrid = document.getElementById('mainGrid');
-            if (!isLoadMore) mainGrid.innerHTML = '';
+            const grid = document.getElementById('mainGrid');
+            if (!isLoadMore) grid.innerHTML = '';
             data.forEach(item => {
-                const card = document.createElement('div');
-                card.className = 'card';
-                card.innerHTML = `<img src="${item.img}"><p>${item.name}</p>`;
-                card.onclick = () => launchMedia(item);
-                mainGrid.appendChild(card);
+                if(item.img && !item.img.includes('null')) {
+                    const card = document.createElement('div');
+                    card.className = 'card';
+                    card.innerHTML = `<img src="${item.img}"><p>${item.name}</p>`;
+                    card.onclick = () => launchMedia(item);
+                    grid.appendChild(card);
+                }
             });
         }
 
-        // IMPROVED DUB LOGIC
         function setLang(lang) {
             currentLang = lang;
             document.getElementById('btn-sub').classList.toggle('active', lang === 'sub');
             document.getElementById('btn-dub').classList.toggle('active', lang === 'dub');
             
-            // VidLink (Beta) handles Dub parameters best via server side detection or specific tags
-            // Alpha (VidSrc Pro) is best for pure sub quality
-            if(lang === 'dub') {
-                currentProvider = "https://vidlink.pro/embed";
-                document.getElementById('serverSelect').value = "https://vidlink.pro/embed";
-            } else {
-                currentProvider = "https://vidsrc.pro/embed";
-                document.getElementById('serverSelect').value = "https://vidsrc.pro/embed";
-            }
-
             const isTV = document.getElementById('epSidebar').style.display === 'flex';
             const ep = document.querySelector('.ep-btn.active')?.innerText || 1;
             const season = document.getElementById('seasonSelect').value;
@@ -278,70 +256,63 @@
             document.getElementById('player-view').style.display = 'flex';
             document.getElementById('epSidebar').style.display = isShow ? 'flex' : 'none';
             document.getElementById('playing-title').innerText = item.name.toUpperCase();
-            
             document.getElementById('animeToggle').style.display = (currentMode === 'anime' || item.lang === 'ja') ? 'flex' : 'none';
             
             if(isShow) {
                 const res = await fetch(`https://api.themoviedb.org/3/tv/${item.id}?api_key=${TMDB_KEY}`);
                 currentShowData = await res.json();
-                const seasonSelect = document.getElementById('seasonSelect');
-                seasonSelect.innerHTML = '';
+                const sel = document.getElementById('seasonSelect'); sel.innerHTML = '';
                 currentShowData.seasons.forEach(s => {
                     if(s.episode_count > 0) {
-                        let opt = document.createElement('option');
-                        opt.value = s.season_number;
-                        opt.innerText = `Season ${s.season_number}`;
-                        seasonSelect.appendChild(opt);
+                        let o = document.createElement('option'); o.value = s.season_number; o.innerText = `Season ${s.season_number}`;
+                        sel.appendChild(o);
                     }
                 });
-                const firstSeason = currentShowData.seasons.find(s => s.season_number > 0) || currentShowData.seasons[0];
-                seasonSelect.value = firstSeason.season_number;
-                buildEpGrid(firstSeason.season_number, firstSeason.episode_count);
-                updateIframe('tv', firstSeason.season_number, 1);
-            } else { updateIframe('movie'); }
+                const first = currentShowData.seasons.find(s => s.season_number > 0) || currentShowData.seasons[0];
+                sel.value = first.season_number;
+                buildEpGrid(first.season_number, first.episode_count);
+                updateIframe('tv', first.season_number, 1);
+            } else updateIframe('movie');
         }
 
         function handleSeasonChange() {
-            const seasonNum = document.getElementById('seasonSelect').value;
-            const seasonInfo = currentShowData.seasons.find(s => s.season_number == seasonNum);
-            buildEpGrid(seasonNum, seasonInfo.episode_count);
-            updateIframe('tv', seasonNum, 1);
+            const sn = document.getElementById('seasonSelect').value;
+            const info = currentShowData.seasons.find(s => s.season_number == sn);
+            buildEpGrid(sn, info.episode_count);
+            updateIframe('tv', sn, 1);
         }
 
         function handleServerChange() {
             currentProvider = document.getElementById('serverSelect').value;
             const isTV = document.getElementById('epSidebar').style.display === 'flex';
             const ep = document.querySelector('.ep-btn.active')?.innerText || 1;
-            const season = document.getElementById('seasonSelect').value;
-            if (isTV) updateIframe('tv', season, ep); else updateIframe('movie');
+            const sn = document.getElementById('seasonSelect').value;
+            if (isTV) updateIframe('tv', sn, ep); else updateIframe('movie');
         }
 
-        function buildEpGrid(seasonNum, count) {
-            const grid = document.getElementById('epGrid');
-            grid.innerHTML = '';
+        function buildEpGrid(sn, count) {
+            const g = document.getElementById('epGrid'); g.innerHTML = '';
             for(let i=1; i<=count; i++) {
-                const btn = document.createElement('button');
-                btn.className = 'ep-btn';
-                btn.innerText = i;
-                if(i === 1) btn.classList.add('active');
-                btn.onclick = () => {
-                    document.querySelectorAll('.ep-btn').forEach(b => b.classList.remove('active'));
-                    btn.classList.add('active');
-                    updateIframe('tv', seasonNum, i);
+                const b = document.createElement('button'); b.className = 'ep-btn'; b.innerText = i;
+                if(i === 1) b.classList.add('active');
+                b.onclick = () => {
+                    document.querySelectorAll('.ep-btn').forEach(btn => btn.classList.remove('active'));
+                    b.classList.add('active');
+                    updateIframe('tv', sn, i);
                 };
-                grid.appendChild(btn);
+                g.appendChild(b);
             }
         }
 
-        function updateIframe(type, season, episode) {
-            const frame = document.getElementById('gameFrame');
-            // Logic to append Dub parameters if the provider supports them
-            let dubSuffix = (currentLang === 'dub') ? '?ds=1' : ''; 
+        function updateIframe(type, sn, ep) {
+            const f = document.getElementById('gameFrame');
+            // Adding dub parameter for VidLink (Alpha)
+            let dubParam = (currentLang === 'dub') ? '&dub=true' : '';
             
-            if (type === 'movie') { 
-                frame.src = `${currentProvider}/movie/${currentID}${dubSuffix}`; 
-            } else { 
-                frame.src = `${currentProvider}/tv/${currentID}/${season}/${episode}${dubSuffix}`; 
+            if (type === 'movie') {
+                f.src = `${currentProvider}/movie/${currentID}?primary_color=ff1f44${dubParam}`;
+            } else {
+                f.src = `${currentProvider}/tv/${currentID}/${sn}/${ep}?primary_color=ff1f44${dubParam}`;
             }
         }
 
