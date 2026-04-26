@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="referrer" content="origin">
-    <title>KING'S DOMAIN | CINEMA V27</title>
+    <title>KING'S DOMAIN | CINEMA V30</title>
     <link rel="icon" type="image/png" href="https://i.ibb.co/vYm6vS6/Take-Your-Heart.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
@@ -19,31 +19,25 @@
             --Banner-Art: url('https://images8.alphacoders.com/132/1325171.jpeg');
             --Menu-Img: url('https://i.ibb.co/68v8T3G/p5-menu.jpg'); 
 
-            /* --- CUSTOM CURSOR URLS --- */
+            /* --- PHANTOM CURSOR ASSETS --- */
             --cursor-default: url('https://i.ibb.co/4PDX5xP/cursor-arrow.png'); /* IMAGE 1 */
             --cursor-pointer: url('https://i.ibb.co/Pj0Qp8t/cursor-dagger.png'); /* IMAGE 2 */
             --cursor-text: url('https://i.ibb.co/f4p7vWf/cursor-text.png');    /* IMAGE 3 */
         }
 
-        /* --- PHANTOM CURSOR ENGINE --- */
+        /* --- PHANTOM CURSOR ROUTING --- */
         html, body { 
             margin: 0; padding: 0; height: 100%; 
             background-color: var(--p5-black); color: white; 
             font-family: 'Inter', sans-serif; overflow: hidden; 
             cursor: var(--cursor-default), auto; 
         }
-
-        a, button, .card, .nav-btn, .sidebar-item, .sd-btn, .ep-btn, select, .p-btn {
-            cursor: var(--cursor-pointer), pointer !important;
-        }
-
-        input[type="text"], #searchBox {
-            cursor: var(--cursor-text), text !important;
-        }
+        a, button, .card, .nav-btn, .sidebar-item, .sd-btn, .ep-btn, select, .p-btn { cursor: var(--cursor-pointer), pointer !important; }
+        input[type="text"], #searchBox { cursor: var(--cursor-text), text !important; }
 
         #bg-layer { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), var(--Home-Wallpaper); background-size: cover; background-attachment: fixed; background-position: center; z-index: -1; transition: background-image 0.8s ease; }
 
-        /* NAV */
+        /* V-NAV */
         .v-nav { position: fixed; left: 0; top: 0; height: 100%; width: 85px; background: #000; border-right: 2px solid var(--p5-pink-red); display: flex; flex-direction: column; align-items: center; padding-top: 20px; gap: 20px; z-index: 1000; }
         .nav-btn { width: 65px; height: 65px; background-image: var(--Menu-Img); background-size: contain; background-repeat: no-repeat; background-position: center; transition: 0.3s; mix-blend-mode: screen; }
         .nav-btn:hover { transform: scale(1.1); filter: drop-shadow(0 0 10px var(--p5-pink-red)); }
@@ -64,14 +58,14 @@
         .hero-banner h1 { font-size: 44px; margin: 0; font-weight: 900; text-transform: uppercase; }
 
         #searchBox { width: 100%; padding: 18px 25px; background: var(--p5-card-bg); border: 1px solid #222; border-radius: 8px; color: white; margin-bottom: 30px; outline: none; font-size: 16px; border: 1px solid transparent; }
-        #searchBox:focus { border-color: var(--p5-pink-red); }
+        #searchBox:focus { border-color: var(--p5-pink-red); box-shadow: 0 0 15px rgba(255, 31, 68, 0.3); }
 
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 20px; }
         .card { background: var(--p5-card-bg); border-radius: 12px; height: 380px; position: relative; overflow: hidden; border: 1px solid #1a1a1a; transition: 0.3s; }
         .card img { width: 100%; height: 100%; object-fit: cover; }
         .card p { position: absolute; bottom: 0; width: 100%; background: rgba(0,0,0,0.85); margin: 0; padding: 12px 0; text-align: center; font-size: 11px; font-weight: 700; border-top: 1px solid var(--p5-pink-red); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-        /* XPS TITAN PLAYER */
+        /* XPS OMEGA PLAYER */
         #player-view { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: black; z-index: 10000; flex-direction: column; }
         .player-bar { height: 60px; padding: 0 40px; background: #000; border-bottom: 2px solid var(--p5-pink-red); display: flex; justify-content: space-between; align-items: center; box-sizing: border-box; }
         .main-player-area { display: flex; flex-direction: row; height: calc(100% - 60px); width: 100%; }
@@ -103,8 +97,8 @@
 
     <div id="sidebar" onmouseleave="closeSidebar()">
         <div style="text-align:center; margin-bottom:30px;"><img src="https://i.ibb.co/vYm6vS6/Take-Your-Heart.png" style="width:120px;"></div>
-        <div class="sidebar-header">MISSIONS</div>
-        <div class="sidebar-item" onclick="changeHub('home')"><i class="fas fa-gamepad"></i> Arcade</div>
+        <div class="sidebar-header">STATIONS</div>
+        <div class="sidebar-item" onclick="changeHub('arcade')"><i class="fas fa-gamepad"></i> Arcade</div>
         <div class="sidebar-item" onclick="changeHub('movie')"><i class="fas fa-film"></i> Movies</div>
         <div class="sidebar-item" onclick="changeHub('tv')"><i class="fas fa-tv"></i> Shows</div>
         <div class="sidebar-item" onclick="changeHub('anime')"><i class="fas fa-dragon"></i> Anime</div>
@@ -112,14 +106,14 @@
 
     <div class="top-bar">
         <div class="logo-text">KING'S DOMAIN</div>
-        <div id="status-text" style="font-size: 11px; opacity: 0.5; letter-spacing: 2px;">XPS_TITAN_V27_READY</div>
+        <div id="status-text" style="font-size: 11px; opacity: 0.5; letter-spacing: 2px;">PHANTOM_CORE_V30_READY</div>
     </div>
 
     <div class="workspace" id="workspace">
         <div id="grid-content" class="container">
             <header class="hero-banner">
                 <h1 id="banner-text">WELCOME BACK</h1>
-                <p id="banner-sub">XPS Titan Engaged. Advanced non-vidlink protocol active.</p>
+                <p id="banner-sub">Legacy Aggregators Loaded. Infinite Sandbox Protocol active.</p>
             </header>
             <input type="text" id="searchBox" placeholder="Search mission database..." onkeydown="if(event.key==='Enter') searchGlobal()">
             <div class="grid" id="mainGrid"></div>
@@ -127,6 +121,7 @@
         </div>
     </div>
 
+    <!-- XPS SANDBOXED PLAYER -->
     <div id="player-view">
         <div class="player-bar">
             <button class="p-btn" onclick="closePlayer()">← BACK</button>
@@ -134,7 +129,11 @@
             <button class="p-btn" onclick="goFull()">FULLSCREEN</button>
         </div>
         <div class="main-player-area">
-            <iframe id="gameFrame" src="" allowfullscreen></iframe>
+            <!-- SANDBOX BLOCKS POPUPS PHYSICALLY -->
+            <iframe id="gameFrame" 
+                    sandbox="allow-forms allow-scripts allow-pointer-lock allow-same-origin allow-top-navigation" 
+                    src="" allowfullscreen></iframe>
+            
             <div class="ep-sidebar" id="epSidebar">
                 <div class="ep-header-row">
                     <h3>MISSION STEPS</h3>
@@ -145,11 +144,11 @@
                 </div>
                 <div class="ep-top-nav">
                     <select id="seasonSelect" class="ep-select" onchange="handleSeasonChange()"></select>
-                    <!-- NEW TITAN SERVERS (NON-VIDSRC) -->
+                    <!-- NEW LEGACY AGGREGATOR SERVERS -->
                     <select id="serverSelect" class="ep-select" onchange="handleServerChange()">
-                        <option value="moviesapi">XPS Alpha (MoviesAPI - Global Stable)</option>
-                        <option value="blackmirror">XPS Beta (BlackMirror - Best UI)</option>
-                        <option value="nontv">XPS Gamma (NonTV - Ultimate Anime)</option>
+                        <option value="2embed">XPS Alpha (2Embed - Global Prime)</option>
+                        <option value="gdrive">XPS Beta (GDrive - Cloud Backup)</option>
+                        <option value="hydra">XPS Gamma (HydraHD - Premium Sync)</option>
                     </select>
                 </div>
                 <div class="ep-grid" id="epGrid"></div>
@@ -163,15 +162,15 @@
         let mission = {
             id: "", type: "movie", season: 1, episode: 1,
             lang: localStorage.getItem('p5_pref_lang') || "sub",
-            provider: "moviesapi"
+            provider: "2embed"
         };
         
         let currentMode = "home", currentShowData = null, currentPage = 1, isFetching = false, canLoadMore = true;
 
         const games = [
-            { name: "Slime Rancher", img: "https://sm.ign.com/ign_es/cover/s/slime-ranc/slime-rancher_j318.jpg", url: "slimerancher.html", isGame: true },
-            { name: "Helltaker", img: "https://files.catbox.moe/k9d5o6.png", url: "helltaker.html", isGame: true },
-            { name: "Slope", img: "https://sm.ign.com/ign_br/game/s/slope/slope_69qy.jpg", url: "https://kkgames.github.io/slope/", isGame: true }
+            { name: "Slime Rancher", img: "https://sm.ign.com/ign_es/cover/s/slime-ranc/slime-rancher_j318.jpg", url: "slimerancher.html", isArcade: true },
+            { name: "Helltaker", img: "https://files.catbox.moe/k9d5o6.png", url: "helltaker.html", isArcade: true },
+            { name: "Slope", img: "https://sm.ign.com/ign_br/game/s/slope/slope_69qy.jpg", url: "https://kkgames.github.io/slope/", isArcade: true }
         ];
 
         async function changeHub(mode) {
@@ -179,7 +178,14 @@
             document.getElementById('grid-content').style.display = 'block';
             document.getElementById('searchBox').value = '';
             document.getElementById('mainGrid').innerHTML = '';
-            if(mode === 'home') { render(games, false); canLoadMore = false; } else { await fetchAPI(mode); }
+            if(mode === 'arcade') { 
+                bgLayer.style.backgroundImage = "linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), var(--Home-Wallpaper)";
+                render(games, false); canLoadMore = false; 
+            } else { 
+                let wall = (mode === 'tv') ? 'var(--Show-Wallpaper)' : (mode === 'anime' ? 'var(--Anime-Wallpaper)' : 'var(--Movie-Wallpaper)');
+                bgLayer.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), ${wall}`;
+                await fetchAPI(mode); 
+            }
         }
 
         async function fetchAPI(type, isLoadMore = false) {
@@ -199,7 +205,7 @@
         async function searchGlobal() {
             canLoadMore = false; const query = document.getElementById('searchBox').value;
             let url = (currentMode === 'movie') ? `https://api.themoviedb.org/3/search/movie?api_key=${TMDB_KEY}&query=${encodeURIComponent(query)}` : `https://api.themoviedb.org/3/search/tv?api_key=${TMDB_KEY}&query=${encodeURIComponent(query)}`;
-            if (currentMode === 'home') url = `https://api.themoviedb.org/3/search/multi?api_key=${TMDB_KEY}&query=${encodeURIComponent(query)}`;
+            if (currentMode === 'arcade' || currentMode === 'anime') url = `https://api.themoviedb.org/3/search/multi?api_key=${TMDB_KEY}&query=${encodeURIComponent(query)}`;
             const res = await fetch(url); const data = await res.json();
             let results = data.results;
             if (currentMode === 'anime') results = results.filter(i => i.genre_ids && i.genre_ids.includes(16));
@@ -212,18 +218,22 @@
                 if(item.img && !item.img.includes('null')) {
                     const card = document.createElement('div'); card.className = 'card';
                     card.innerHTML = `<img src="${item.img}"><p>${item.name}</p>`;
-                    card.onclick = () => item.isGame ? launchArcade(item) : launchTITAN(item); grid.appendChild(card);
+                    card.onclick = () => item.isArcade ? launchArcade(item) : launchTITAN(item); grid.appendChild(card);
                 }
             });
         }
 
+        /* --- ARCADE ENGINE (ISOLATED) --- */
         function launchArcade(game) {
+            const f = document.getElementById('gameFrame');
             document.getElementById('player-view').style.display = 'flex';
             document.getElementById('epSidebar').style.display = 'none';
             document.getElementById('playing-title').innerText = game.name.toUpperCase();
-            document.getElementById('gameFrame').src = game.url;
+            f.removeAttribute('sandbox'); // Games need access to work
+            f.src = game.url;
         }
 
+        /* --- MEDIA ENGINE (XPS) --- */
         async function launchTITAN(item) {
             mission.id = item.id; mission.type = (item.type === 'tv' || currentMode === 'tv' || currentMode === 'anime') ? 'tv' : 'movie';
             document.getElementById('player-view').style.display = 'flex';
@@ -231,6 +241,8 @@
             document.getElementById('playing-title').innerText = item.name.toUpperCase();
             document.getElementById('animeToggle').style.display = (currentMode === 'anime' || item.lang === 'ja' || mission.type === 'tv') ? 'flex' : 'none';
             document.getElementById('seasonSelect').style.display = (mission.type === 'tv') ? 'block' : 'none';
+            document.getElementById('gameFrame').setAttribute('sandbox', 'allow-forms allow-scripts allow-pointer-lock allow-same-origin allow-top-navigation');
+
             updateLangButtons();
             if(mission.type === 'tv') {
                 const res = await fetch(`https://api.themoviedb.org/3/tv/${item.id}?api_key=${TMDB_KEY}`);
@@ -247,12 +259,15 @@
         function refreshTITAN() {
             const f = document.getElementById('gameFrame');
             let url = "";
-            if (mission.provider === "moviesapi") {
-                url = `https://moviesapi.club/${mission.type}/${mission.id}${mission.type==='tv' ? '-' + mission.season + '-' + mission.episode : ''}`;
-            } else if (mission.provider === "blackmirror") {
-                url = `https://blackmirror.xyz/embed/${mission.type}/${mission.id}${mission.type==='tv' ? '/' + mission.season + '/' + mission.episode : ''}`;
-            } else if (mission.provider === "nontv") {
-                url = `https://vapi.adob.at/embed/${mission.type}/${mission.id}${mission.type==='tv' ? '/' + mission.season + '/' + mission.episode : ''}`;
+            let s = mission.season; let e = mission.episode;
+
+            if (mission.provider === "2embed") {
+                // FIXED 2Embed Logic for TV/Movie
+                url = (mission.type === 'movie') ? `https://www.2embed.cc/embed/${mission.id}` : `https://www.2embed.cc/embedtv/${mission.id}&s=${s}&e=${e}`;
+            } else if (mission.provider === "gdrive") {
+                url = `https://database.gdriveplayer.me/player.php?tmdb=${mission.id}${mission.type==='tv' ? '&type=series&season='+s+'&episode='+e : ''}`;
+            } else if (mission.provider === "hydra") {
+                url = `https://hydrahd.com/embed/${mission.type}/${mission.id}${mission.type==='tv' ? '/'+s+'/'+e : ''}`;
             }
             f.src = url;
         }
@@ -262,12 +277,13 @@
         function handleSeasonChange() { mission.season = document.getElementById('seasonSelect').value; mission.episode = 1; buildEpGrid(mission.season, currentShowData.seasons.find(s => s.season_number == mission.season).episode_count); refreshTITAN(); }
         function handleServerChange() { mission.provider = document.getElementById('serverSelect').value; refreshTITAN(); }
         function buildEpGrid(sn, count) { const g = document.getElementById('epGrid'); g.innerHTML = ''; for(let i=1; i<=count; i++) { const b = document.createElement('button'); b.className = 'ep-btn'; b.innerText = i; if(i == mission.episode) b.classList.add('active'); b.onclick = () => { mission.episode = i; document.querySelectorAll('.ep-btn').forEach(btn => btn.classList.remove('active')); b.classList.add('active'); refreshTITAN(); }; g.appendChild(b); } }
-        document.getElementById('workspace').addEventListener('scroll', (e) => { if (currentMode === 'home') return; const { scrollTop, scrollHeight, clientHeight } = e.target; if (scrollTop + clientHeight >= scrollHeight - 600) fetchAPI(currentMode, true); });
+        document.getElementById('workspace').addEventListener('scroll', (e) => { if (currentMode === 'arcade') return; const { scrollTop, scrollHeight, clientHeight } = e.target; if (scrollTop + clientHeight >= scrollHeight - 600) fetchAPI(currentMode, true); });
         function toggleSidebar() { document.getElementById('sidebar').classList.toggle('active'); }
         function closeSidebar() { document.getElementById('sidebar').classList.remove('active'); }
         function closePlayer() { document.getElementById('player-view').style.display = 'none'; document.getElementById('gameFrame').src = ''; }
         function goFull() { const f = document.getElementById('gameFrame'); if (f.requestFullscreen) f.requestFullscreen(); else if (f.webkitRequestFullscreen) f.webkitRequestFullscreen(); }
 
+        const bgLayer = document.getElementById('bg-layer');
         render(games, false);
     </script>
 </body>
