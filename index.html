@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="referrer" content="origin">
-    <title>KING'S DOMAIN | CINEMA V37</title>
+    <title>KING'S DOMAIN | CINEMA V25</title>
     <link rel="icon" type="image/png" href="https://i.ibb.co/vYm6vS6/Take-Your-Heart.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
@@ -23,17 +23,18 @@
         body, html { margin: 0; padding: 0; height: 100%; background-color: var(--p5-black); color: white; font-family: 'Inter', sans-serif; overflow: hidden; }
         #bg-layer { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), var(--Home-Wallpaper); background-size: cover; background-attachment: fixed; background-position: center; z-index: -1; transition: background-image 0.8s ease; }
 
-        /* NAVIGATION */
+        /* V-NAV */
         .v-nav { position: fixed; left: 0; top: 0; height: 100%; width: 85px; background: #000; border-right: 2px solid var(--p5-pink-red); display: flex; flex-direction: column; align-items: center; padding-top: 20px; gap: 20px; z-index: 1000; }
         .nav-btn { width: 65px; height: 65px; background-image: var(--Menu-Img); background-size: contain; background-repeat: no-repeat; background-position: center; cursor: pointer; transition: 0.3s; mix-blend-mode: screen; }
         .nav-btn:hover { transform: scale(1.1); filter: drop-shadow(0 0 10px var(--p5-pink-red)); }
+        
         #sidebar { position: fixed; top: 0; left: -320px; width: 310px; height: 100%; background-image: linear-gradient(rgba(0,0,0,0.95), rgba(0,0,0,0.95)), var(--Sidebar-Wallpaper); background-size: cover; border-right: 4px solid var(--p5-pink-red); z-index: 2001; transition: 0.5s ease; padding: 50px 20px; box-sizing: border-box; }
         #sidebar.active { left: 0; }
         .sidebar-header { color: var(--p5-pink-red); font-weight: 900; font-size: 24px; text-transform: uppercase; margin-bottom: 20px; border-bottom: 2px solid #222; }
         .sidebar-item { display: flex; align-items: center; gap: 15px; padding: 18px; color: white; text-decoration: none; font-weight: 900; font-size: 20px; text-transform: uppercase; transition: 0.3s; cursor: pointer; }
         .sidebar-item:hover { color: var(--p5-pink-red); padding-left: 30px; background: rgba(255, 31, 68, 0.1); }
 
-        /* TOP BAR */
+        /* WORKSPACE */
         .top-bar { margin-left: 85px; padding: 15px 50px; background: rgba(0,0,0,0.5); display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); }
         .logo-text { color: var(--p5-pink-red); font-weight: 900; font-size: 20px; text-transform: uppercase; letter-spacing: 2px; }
         .workspace { margin-left: 85px; height: calc(100% - 60px); width: calc(100% - 85px); overflow-y: auto; box-sizing: border-box; position: relative; scroll-behavior: smooth; }
@@ -50,7 +51,7 @@
         .card img { width: 100%; height: 100%; object-fit: cover; }
         .card p { position: absolute; bottom: 0; width: 100%; background: rgba(0,0,0,0.85); margin: 0; padding: 12px 0; text-align: center; font-size: 11px; font-weight: 700; border-top: 1px solid var(--p5-pink-red); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-        /* OMEGA PLAYER UI */
+        /* XPS PLAYER INTERFACE */
         #player-view { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: black; z-index: 10000; flex-direction: column; }
         .player-bar { height: 60px; padding: 0 40px; background: #000; border-bottom: 2px solid var(--p5-pink-red); display: flex; justify-content: space-between; align-items: center; box-sizing: border-box; }
         .main-player-area { display: flex; flex-direction: row; height: calc(100% - 60px); width: 100%; }
@@ -82,8 +83,8 @@
 
     <div id="sidebar" onmouseleave="closeSidebar()">
         <div style="text-align:center; margin-bottom:30px;"><img src="https://i.ibb.co/vYm6vS6/Take-Your-Heart.png" style="width:120px;"></div>
-        <div class="sidebar-header">TARGETS</div>
-        <div class="sidebar-item" onclick="changeHub('home')"><i class="fas fa-home"></i> Home</div>
+        <div class="sidebar-header">MISSIONS</div>
+        <div class="sidebar-item" onclick="changeHub('home')"><i class="fas fa-gamepad"></i> Arcade</div>
         <div class="sidebar-item" onclick="changeHub('movie')"><i class="fas fa-film"></i> Movies</div>
         <div class="sidebar-item" onclick="changeHub('tv')"><i class="fas fa-tv"></i> Shows</div>
         <div class="sidebar-item" onclick="changeHub('anime')"><i class="fas fa-dragon"></i> Anime</div>
@@ -91,14 +92,14 @@
 
     <div class="top-bar">
         <div class="logo-text">KING'S DOMAIN</div>
-        <div id="status-text" style="font-size: 11px; opacity: 0.5; letter-spacing: 2px;">XPS_STABILITY_V23.1_ACTIVE</div>
+        <div id="status-text" style="font-size: 11px; opacity: 0.5; letter-spacing: 2px;">XPS_ELITE_V25_READY</div>
     </div>
 
     <div class="workspace" id="workspace">
         <div id="grid-content" class="container">
             <header class="hero-banner">
                 <h1 id="banner-text">WELCOME BACK</h1>
-                <p id="banner-sub">Sub/Dub State-Memory active. Infinite aggregation engaged.</p>
+                <p id="banner-sub">XPS Protocol Enabled. Infinite database scanning active.</p>
             </header>
             <input type="text" id="searchBox" placeholder="Search mission database..." onkeydown="if(event.key==='Enter') searchGlobal()">
             <div class="grid" id="mainGrid"></div>
@@ -106,10 +107,11 @@
         </div>
     </div>
 
+    <!-- XPS PLAYER VIEW -->
     <div id="player-view">
         <div class="player-bar">
             <button class="p-btn" onclick="closePlayer()">← BACK</button>
-            <span id="playing-title" style="font-weight:900; color:var(--p5-pink-red);">MISSION IN PROGRESS</span>
+            <span id="playing-title" style="font-weight:900; color:var(--p5-pink-red);">XPS MISSION IN PROGRESS</span>
             <button class="p-btn" onclick="goFull()">FULLSCREEN</button>
         </div>
         <div class="main-player-area">
@@ -117,18 +119,18 @@
             <div class="ep-sidebar" id="epSidebar">
                 <div class="ep-header-row">
                     <h3>MISSION STEPS</h3>
-                    <!-- IMPROVED TOGGLE -->
                     <div class="sd-toggle" id="animeToggle" style="display:none;">
                         <button id="btn-sub" class="sd-btn active" onclick="setLang('sub')">Sub</button>
                         <button id="btn-dub" class="sd-btn" onclick="setLang('dub')">Dub</button>
                     </div>
                 </div>
-                <div class="ep-top-nav">
+                <div class="ep-top-nav" id="media-controls">
                     <select id="seasonSelect" class="ep-select" onchange="handleSeasonChange()"></select>
+                    <!-- ELITE ALTERNATIVE SERVERS (NON-VIDSRC) -->
                     <select id="serverSelect" class="ep-select" onchange="handleServerChange()">
-                        <option value="vidlink">XPS Alpha (VidLink - Fast Dub Support)</option>
-                        <option value="vidsrc_icu">XPS Beta (Vidsrc.icu - Most Stable)</option>
-                        <option value="embedsu">XPS Gamma (Embed.su - High Bitrate)</option>
+                        <option value="autoembed">XPS Alpha (AutoEmbed - Best for Anime)</option>
+                        <option value="smashy">XPS Beta (SmashyStream - Multi-Mirror)</option>
+                        <option value="superembed">XPS Gamma (SuperEmbed - Global Archive)</option>
                     </select>
                 </div>
                 <div class="ep-grid" id="epGrid"></div>
@@ -137,16 +139,15 @@
     </div>
 
     <script>
-        const TMDB_KEY = "cce36626c4c9d64a54c0731adcaa1d8f"; 
+        const TMDB_KEY = "PASTE_YOUR_TMDB_KEY_HERE"; 
         
-        // --- GLOBAL MISSION STATE (Prevents Bugging Out) ---
         let mission = {
             id: "",
             type: "movie",
             season: 1,
             episode: 1,
             lang: localStorage.getItem('p5_pref_lang') || "sub",
-            provider: "vidlink"
+            provider: "autoembed"
         };
         
         let currentMode = "home";
@@ -156,9 +157,9 @@
         let canLoadMore = true;
 
         const games = [
-            { name: "Slime Rancher", img: "https://sm.ign.com/ign_es/cover/s/slime-ranc/slime-rancher_j318.jpg", url: "slimerancher.html" },
-            { name: "Helltaker", img: "https://files.catbox.moe/k9d5o6.png", url: "helltaker.html" },
-            { name: "Slope", img: "https://sm.ign.com/ign_br/game/s/slope/slope_69qy.jpg", url: "https://kkgames.github.io/slope/" }
+            { name: "Slime Rancher", img: "https://sm.ign.com/ign_es/cover/s/slime-ranc/slime-rancher_j318.jpg", url: "slimerancher.html", isGame: true },
+            { name: "Helltaker", img: "https://files.catbox.moe/k9d5o6.png", url: "helltaker.html", isGame: true },
+            { name: "Slope", img: "https://sm.ign.com/ign_br/game/s/slope/slope_69qy.jpg", url: "https://kkgames.github.io/slope/", isGame: true }
         ];
 
         async function changeHub(mode) {
@@ -166,36 +167,42 @@
             document.getElementById('grid-content').style.display = 'block';
             document.getElementById('searchBox').value = '';
             document.getElementById('mainGrid').innerHTML = '';
-            if(mode === 'home') { render(games, false); canLoadMore = false; } else { await fetchAPI(mode); }
+            
+            if(mode === 'home') {
+                bgLayer.style.backgroundImage = "linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), var(--Home-Wallpaper)";
+                render(games, false); canLoadMore = false;
+            } else {
+                let wall = (mode === 'tv') ? 'var(--Show-Wallpaper)' : (mode === 'anime' ? 'var(--Anime-Wallpaper)' : 'var(--Movie-Wallpaper)');
+                bgLayer.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), ${wall}`;
+                await fetchAPI(mode);
+            }
         }
 
         async function fetchAPI(type, isLoadMore = false) {
             if (isFetching || !canLoadMore) return;
             isFetching = true;
             if(isLoadMore) document.getElementById('scroll-loader').style.display = 'block';
+
             let url = `https://api.themoviedb.org/3/discover/${type === 'movie' ? 'movie' : 'tv'}?api_key=${TMDB_KEY}&sort_by=popularity.desc&page=${currentPage}`;
             if (type === 'anime') url += `&with_genres=16&with_original_language=ja`;
+
             const res = await fetch(url); const data = await res.json();
             if(data.results && data.results.length > 0) { 
-                render(data.results.map(i => ({ id: i.id, name: i.title || i.name, img: `https://image.tmdb.org/p/w500${i.poster_path}`, type: (type === 'movie' ? 'movie' : 'tv'), lang: i.original_language })), isLoadMore); 
+                render(data.results.map(i => ({ id: i.id, name: i.title || i.name, img: `https://image.tmdb.org/t/p/w500${i.poster_path}`, type: (type === 'movie' ? 'movie' : 'tv'), lang: i.original_language })), isLoadMore); 
                 currentPage++; 
             } else { canLoadMore = false; }
             isFetching = false; document.getElementById('scroll-loader').style.display = 'none';
         }
 
-        document.getElementById('workspace').addEventListener('scroll', (e) => {
-            if (currentMode === 'home') return;
-            const { scrollTop, scrollHeight, clientHeight } = e.target;
-            if (scrollTop + clientHeight >= scrollHeight - 600) fetchAPI(currentMode, true);
-        });
-
         async function searchGlobal() {
             canLoadMore = false; const query = document.getElementById('searchBox').value;
             let url = (currentMode === 'movie') ? `https://api.themoviedb.org/3/search/movie?api_key=${TMDB_KEY}&query=${encodeURIComponent(query)}` : `https://api.themoviedb.org/3/search/tv?api_key=${TMDB_KEY}&query=${encodeURIComponent(query)}`;
+            if (currentMode === 'home') url = `https://api.themoviedb.org/3/search/multi?api_key=${TMDB_KEY}&query=${encodeURIComponent(query)}`;
+            
             const res = await fetch(url); const data = await res.json();
             let results = data.results;
             if (currentMode === 'anime') results = results.filter(i => i.genre_ids && i.genre_ids.includes(16));
-            render(results.filter(i => i.poster_path).map(i => ({ id: i.id, name: i.title || i.name, img: `https://image.tmdb.org/p/w500${i.poster_path}`, type: (currentMode === 'movie' ? 'movie' : 'tv') })), false);
+            render(results.filter(i => i.poster_path).map(i => ({ id: i.id, name: i.title || i.name, img: `https://image.tmdb.org/t/p/w500${i.poster_path}`, type: (currentMode === 'movie' ? 'movie' : 'tv') })), false);
         }
 
         function render(data, isLoadMore) {
@@ -204,53 +211,31 @@
                 if(item.img && !item.img.includes('null')) {
                     const card = document.createElement('div'); card.className = 'card';
                     card.innerHTML = `<img src="${item.img}"><p>${item.name}</p>`;
-                    card.onclick = () => launchMedia(item); grid.appendChild(card);
+                    card.onclick = () => item.isGame ? launchGame(item) : launchMedia(item); 
+                    grid.appendChild(card);
                 }
             });
         }
 
-        // --- STABLE ROUTER ENGINE ---
-        function setLang(lang) {
-            mission.lang = lang;
-            localStorage.setItem('p5_pref_lang', lang); // Remember preference
-            updateLangButtons();
-            
-            // Auto-switch to Dub-capable server if needed
-            if (lang === 'dub') {
-                mission.provider = 'vidlink';
-                document.getElementById('serverSelect').value = 'vidlink';
-            }
-            refreshPlayer();
+        /* --- ARCADE ENGINE (ISOLATED) --- */
+        function launchGame(game) {
+            document.getElementById('player-view').style.display = 'flex';
+            document.getElementById('epSidebar').style.display = 'none';
+            document.getElementById('playing-title').innerText = game.name.toUpperCase();
+            document.getElementById('gameFrame').src = game.url;
         }
 
-        function updateLangButtons() {
-            document.getElementById('btn-sub').classList.toggle('active', mission.lang === 'sub');
-            document.getElementById('btn-dub').classList.toggle('active', mission.lang === 'dub');
-        }
-
-        function refreshPlayer() {
-            const f = document.getElementById('gameFrame');
-            let url = "";
-
-            if (mission.provider === "vidlink") {
-                let dubStr = (mission.lang === 'dub') ? '&dub=true' : '';
-                url = `https://vidlink.pro/embed/${mission.type}/${mission.id}${mission.type === 'tv' ? '/' + mission.season + '/' + mission.episode : ''}?primary_color=ff1f44${dubStr}`;
-            } else if (mission.provider === "vidsrc_icu") {
-                url = `https://vidsrc.icu/embed/${mission.type}/${mission.id}${mission.type === 'tv' ? '/' + mission.season + '/' + mission.episode : ''}`;
-            } else if (mission.provider === "embedsu") {
-                url = `https://embed.su/embed/${mission.type}/${mission.id}${mission.type === 'tv' ? '/' + mission.season + '/' + mission.episode : ''}`;
-            }
-            f.src = url;
-        }
-
+        /* --- MEDIA ENGINE (XPS) --- */
         async function launchMedia(item) {
             mission.id = item.id; 
             mission.type = (item.type === 'tv' || currentMode === 'tv' || currentMode === 'anime') ? 'tv' : 'movie';
             
             document.getElementById('player-view').style.display = 'flex';
-            document.getElementById('epSidebar').style.display = (mission.type === 'tv') ? 'flex' : 'none';
+            document.getElementById('epSidebar').style.display = 'flex';
             document.getElementById('playing-title').innerText = item.name.toUpperCase();
-            document.getElementById('animeToggle').style.display = (currentMode === 'anime' || item.lang === 'ja') ? 'flex' : 'none';
+            
+            document.getElementById('animeToggle').style.display = (currentMode === 'anime' || item.lang === 'ja' || mission.type === 'tv') ? 'flex' : 'none';
+            document.getElementById('seasonSelect').style.display = (mission.type === 'tv') ? 'block' : 'none';
             
             updateLangButtons();
 
@@ -263,20 +248,46 @@
                         let o = document.createElement('option'); o.value = s.season_number; o.innerText = `Season ${s.season_number}`; sel.appendChild(o);
                     }
                 });
-                const first = currentShowData.seasons.find(s => s.season_number > 0) || currentShowData.seasons[0];
-                mission.season = first.season_number;
+                mission.season = currentShowData.seasons.find(s => s.season_number > 0)?.season_number || 0;
                 mission.episode = 1;
                 sel.value = mission.season; 
-                buildEpGrid(mission.season, first.episode_count);
+                buildEpGrid(mission.season, currentShowData.seasons.find(s => s.season_number == mission.season).episode_count);
+            } else {
+                document.getElementById('epGrid').innerHTML = '';
             }
             refreshPlayer();
+        }
+
+        function refreshPlayer() {
+            const f = document.getElementById('gameFrame');
+            let url = "";
+
+            if (mission.provider === "autoembed") {
+                let playerParam = (mission.lang === 'dub') ? '?player=dub' : '';
+                url = `https://autoembed.cc/embed/${mission.type}/${mission.id}${mission.type === 'tv' ? '/' + mission.season + '/' + mission.episode : ''}${playerParam}`;
+            } else if (mission.provider === "smashy") {
+                url = `https://embed.smashystream.com/playere.php?tmdb=${mission.id}${mission.type === 'tv' ? '&season=' + mission.season + '&episode=' + mission.episode : ''}`;
+            } else if (mission.provider === "superembed") {
+                url = `https://superembed.top/${mission.type}/${mission.id}${mission.type === 'tv' ? '/' + mission.season + '/' + mission.episode : ''}`;
+            }
+            f.src = url;
+        }
+
+        function setLang(lang) {
+            mission.lang = lang; localStorage.setItem('p5_pref_lang', lang);
+            updateLangButtons();
+            refreshPlayer();
+        }
+
+        function updateLangButtons() {
+            document.getElementById('btn-sub').classList.toggle('active', mission.lang === 'sub');
+            document.getElementById('btn-dub').classList.toggle('active', mission.lang === 'dub');
         }
 
         function handleSeasonChange() {
             mission.season = document.getElementById('seasonSelect').value;
             mission.episode = 1;
-            const info = currentShowData.seasons.find(s => s.season_number == mission.season);
-            buildEpGrid(mission.season, info.episode_count);
+            buildEpGrid(mission.season, currentShowData.seasons.find(s => s.season_number == mission.season).episode_count);
             refreshPlayer();
         }
 
@@ -293,12 +304,17 @@
                 b.onclick = () => {
                     mission.episode = i;
                     document.querySelectorAll('.ep-btn').forEach(btn => btn.classList.remove('active'));
-                    b.classList.add('active');
-                    refreshPlayer();
+                    b.classList.add('active'); refreshPlayer();
                 };
                 g.appendChild(b);
             }
         }
+
+        document.getElementById('workspace').addEventListener('scroll', (e) => {
+            if (currentMode === 'home') return;
+            const { scrollTop, scrollHeight, clientHeight } = e.target;
+            if (scrollTop + clientHeight >= scrollHeight - 600) fetchAPI(currentMode, true);
+        });
 
         function toggleSidebar() { document.getElementById('sidebar').classList.toggle('active'); }
         function closeSidebar() { document.getElementById('sidebar').classList.remove('active'); }
