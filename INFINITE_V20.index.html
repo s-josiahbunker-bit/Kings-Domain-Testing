@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KING'S DOMAIN | INFINITE V19</title>
+    <title>KING'S DOMAIN | INFINITE V20</title>
     
     <link rel="icon" type="image/png" href="https://i.ibb.co/vYm6vS6/Take-Your-Heart.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
@@ -35,15 +35,15 @@
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background-image: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), var(--Home-Wallpaper); 
             background-size: cover; background-attachment: fixed; background-position: center;
-            z-index: -1; transition: background-image 0.6s ease;
+            z-index: -1; transition: background-image 0.8s ease-in-out;
         }
 
-        /* VERTICAL NAV (MENU ONLY) */
+        /* 2. VERTICAL NAV (CLEAN) */
         .v-nav { position: fixed; left: 0; top: 0; height: 100%; width: 85px; background: #000; border-right: 2px solid var(--p5-pink-red); display: flex; flex-direction: column; align-items: center; padding-top: 20px; z-index: 1000; }
         .nav-btn { width: 65px; height: 65px; background-image: var(--Menu-Img); background-size: contain; background-repeat: no-repeat; background-position: center; cursor: pointer; transition: 0.3s; mix-blend-mode: screen; }
-        .nav-btn:hover { transform: scale(1.2) rotate(-5deg); filter: drop-shadow(0 0 15px var(--p5-pink-red)); }
+        .nav-btn:hover { transform: scale(1.2); filter: drop-shadow(0 0 15px var(--p5-pink-red)); }
 
-        /* SIDEBAR */
+        /* 3. SIDEBAR (IMAGE BG) */
         #sidebar {
             position: fixed; top: 0; left: -320px; width: 310px; height: 100%;
             background-image: linear-gradient(rgba(0,0,0,0.95), rgba(0,0,0,0.95)), var(--Sidebar-Wallpaper);
@@ -52,10 +52,10 @@
         }
         #sidebar.active { left: 0; }
         .sidebar-header { color: var(--p5-pink-red); font-weight: 900; font-size: 24px; text-transform: uppercase; margin-bottom: 20px; border-bottom: 2px solid #222; }
-        .sidebar-item { display: flex; align-items: center; gap: 15px; padding: 18px; color: white; text-decoration: none; font-weight: 900; font-size: 20px; text-transform: uppercase; transition: 0.3s; cursor: pointer; }
+        .sidebar-item { display: flex; align-items: center; gap: 15px; padding: 18px; color: white; text-decoration: none; font-weight: 900; font-size: 18px; text-transform: uppercase; transition: 0.3s; cursor: pointer; }
         .sidebar-item:hover { color: var(--p5-pink-red); padding-left: 30px; background: rgba(255, 31, 68, 0.1); }
 
-        /* WORKSPACE & LOGO */
+        /* 4. WORKSPACE */
         .top-bar { margin-left: 85px; padding: 15px 50px; background: rgba(0,0,0,0.5); display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); }
         .logo-text { color: var(--p5-pink-red); font-weight: 900; font-size: 20px; text-transform: uppercase; letter-spacing: 2px; }
         
@@ -65,10 +65,10 @@
         .hero-banner { width: 100%; height: 280px; border-radius: 20px; margin-bottom: 30px; background: linear-gradient(to right, rgba(0,0,0,1) 40%, transparent), var(--Banner-Art); background-size: cover; background-position: center; display: flex; flex-direction: column; justify-content: center; padding-left: 60px; box-sizing: border-box; border: 1px solid rgba(255,255,255,0.1); }
         .hero-banner h1 { font-size: 44px; margin: 0; font-weight: 900; text-transform: uppercase; }
 
-        #searchBox { width: 100%; padding: 18px 25px; background: var(--p5-card-bg); border: 1px solid #222; border-radius: 8px; color: white; margin-bottom: 30px; outline: none; }
+        #searchBox { width: 100%; padding: 18px 25px; background: var(--p5-card-bg); border: 1px solid #222; border-radius: 8px; color: white; margin-bottom: 30px; outline: none; font-size: 16px; }
 
-        /* GRID SYSTEM (5 ACROSS) */
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 20px; }
+        /* GRID (Vertical scrolling) */
+        .grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; }
         .card { background: var(--p5-card-bg); border-radius: 12px; height: 380px; position: relative; overflow: hidden; border: 1px solid #1a1a1a; cursor: pointer; transition: 0.3s; }
         .card:hover { border-color: var(--p5-pink-red); transform: translateY(-8px); box-shadow: 0 5px 15px rgba(255, 31, 68, 0.4); }
         .card img { width: 100%; height: 100%; object-fit: cover; }
@@ -84,9 +84,8 @@
         .player-bar { height: 60px; padding: 0 40px; background: #000; border-bottom: 2px solid var(--p5-pink-red); display: flex; justify-content: space-between; align-items: center; box-sizing: border-box; }
         #gameFrame { width: 100%; height: calc(100% - 60px); border: none; background: #000; }
         .p-btn { background: var(--p5-pink-red); color: white; border: none; padding: 10px 20px; font-weight: bold; cursor: pointer; border-radius: 5px; }
-
-        /* LOADING INDICATOR */
-        #load-msg { grid-column: 1/-1; text-align: center; padding: 30px; color: var(--p5-pink-red); font-weight: 900; letter-spacing: 2px; text-transform: uppercase; }
+        
+        .status-msg { grid-column: 1/-1; text-align: center; padding: 20px; color: var(--p5-pink-red); font-weight: 900; text-transform: uppercase; letter-spacing: 2px; }
     </style>
 </head>
 <body>
@@ -96,7 +95,7 @@
 
     <div id="sidebar" onmouseleave="closeSidebar()">
         <div style="text-align:center; margin-bottom:30px;"><img src="https://i.ibb.co/vYm6vS6/Take-Your-Heart.png" style="width:120px;"></div>
-        <div class="sidebar-header">NAVIGATOR</div>
+        <div class="sidebar-header">DESTINATIONS</div>
         <div class="sidebar-item" onclick="changeHub('home')"><i class="fas fa-home"></i> Home</div>
         <div class="sidebar-item" onclick="changeHub('movie')"><i class="fas fa-film"></i> Movies</div>
         <div class="sidebar-item" onclick="changeHub('tv')"><i class="fas fa-tv"></i> Shows</div>
@@ -106,30 +105,30 @@
 
     <div class="top-bar">
         <div class="logo-text">KING'S DOMAIN</div>
-        <div style="font-size: 11px; opacity: 0.5;">META_FETCH_V19</div>
+        <div id="status-text" style="font-size: 11px; opacity: 0.5;">DEEP_FETCH_READY</div>
     </div>
 
     <div class="workspace" id="workspace">
         <div id="grid-content" class="container">
             <header class="hero-banner">
                 <h1 id="banner-text">WELCOME BACK</h1>
-                <p id="banner-sub">Scanning database for unique targets...</p>
+                <p id="banner-sub">Scanning database... Scroll to browse the infinite Phantom library.</p>
             </header>
-            <input type="text" id="searchBox" placeholder="Filter targets..." onkeyup="filterSearch()">
+            <input type="text" id="searchBox" placeholder="Search mission targets..." onkeyup="filterSearch()">
             <div class="grid" id="mainGrid"></div>
-            <div id="load-msg" style="display:none;">Establishing Secure Connection to Next Database Page...</div>
+            <div id="load-msg" class="status-msg" style="display:none;">Establishing Secure Connection to next Page...</div>
         </div>
 
         <div id="proxy-page">
             <h1 class="proxy-title">Phantom Proxy</h1>
-            <input type="text" id="proxyInput" class="proxy-input" placeholder="Type URL or Search mission..." onkeydown="if(event.key==='Enter') startProxy()">
+            <input type="text" id="proxyInput" class="proxy-input" placeholder="Type URL or Mission..." onkeydown="if(event.key==='Enter') startProxy()">
         </div>
     </div>
 
     <div id="player-view">
         <div class="player-bar">
             <button class="p-btn" onclick="closePlayer()">← BACK</button>
-            <span id="playing-title" style="font-weight:900;">TARGET_ACQUIRED</span>
+            <span id="playing-title" style="font-weight:900;">TARGET_LOCKED</span>
             <button class="p-btn" onclick="goFull()">FULLSCREEN</button>
         </div>
         <iframe id="gameFrame" src="" allowfullscreen></iframe>
@@ -137,15 +136,15 @@
 
     <script>
         // ==========================================
-        // 3. MASTER SETTINGS & NO-LOOP LOGIC
+        // SETTINGS & DEEP FETCH LOGIC
         // ==========================================
-        const TMDB_KEY = "cce36626c4c9d64a54c0731adcaa1d8f"; 
+        const TMDB_KEY = "PASTE_YOUR_TMDB_KEY_HERE"; 
         const PROXY_ENGINE = "https://t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.rammerhead.org/";
         
         let currentMode = "home";
-        let fullData = [];      // Holds all unique items
-        let currentPage = 1;    // Tracks the current page in the database
-        let isFetching = false; // Prevents double-loading
+        let fullData = [];      
+        let currentPage = 1;    
+        let isFetching = false; 
 
         const games = [
             { name: "Slime Rancher", img: "https://sm.ign.com/ign_es/cover/s/slime-ranc/slime-rancher_j318.jpg", url: "slimerancher.html" },
@@ -161,10 +160,7 @@
         const workspace = document.getElementById('workspace');
 
         async function changeHub(mode) {
-            currentMode = mode; 
-            currentPage = 1; // Reset to page 1 for the new category
-            fullData = [];   // Clear the old data
-            closeSidebar();
+            currentMode = mode; currentPage = 1; fullData = []; closeSidebar();
             document.getElementById('grid-content').style.display = 'block';
             document.getElementById('proxy-page').style.display = 'none';
             mainGrid.innerHTML = '';
@@ -178,13 +174,11 @@
                 bgLayer.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), ${wall}`;
                 document.getElementById('banner-text').innerText = mode.toUpperCase() + " HUB";
                 
-                // Fetch the first 2 pages (40 unique items) immediately
-                await fetchDeep();
-                await fetchDeep();
+                // HYPER LOAD: Fetch first 4 pages (80 unique items) immediately
+                for(let i=0; i<4; i++) { await fetchDeep(); }
             }
         }
 
-        // DEEP FETCH ENGINE: Increments page number so content NEVER loops
         async function fetchDeep() {
             if (isFetching || currentMode === 'home') return;
             isFetching = true;
@@ -207,15 +201,15 @@
 
                     fullData = [...fullData, ...uniqueItems];
                     render(fullData);
-                    currentPage++; // Move to the NEXT unique page
+                    currentPage++; // This ensures the next scroll gets NEW unique items
                 }
-            } catch(e) { console.log("Database limit reached."); }
+            } catch(e) {}
 
             isFetching = false;
             document.getElementById('load-msg').style.display = 'none';
         }
 
-        // SCROLL SENSOR: Triggers new page load before you reach the bottom
+        // INFINITE SCROLL SENSOR
         workspace.addEventListener('scroll', () => {
             if (workspace.scrollTop + workspace.clientHeight >= workspace.scrollHeight - 1000) {
                 fetchDeep();
@@ -223,15 +217,12 @@
         });
 
         function render(data) {
-            // Optimization: Only clear on the first page load
-            if (currentPage <= 2) mainGrid.innerHTML = '';
+            if (currentPage <= 1) mainGrid.innerHTML = '';
             
-            // Re-render the full grid (Standard for small data sets)
-            // For thousands of items, we just add the new ones
-            const currentCards = mainGrid.querySelectorAll('.card').length;
-            const newSlice = data.slice(currentCards);
+            const currentCardsCount = mainGrid.querySelectorAll('.card').length;
+            const newItems = data.slice(currentCardsCount);
 
-            newSlice.forEach(item => {
+            newItems.forEach(item => {
                 const card = document.createElement('div');
                 card.className = 'card';
                 card.innerHTML = `<img src="${item.img}"><p>${item.name}</p>`;
@@ -250,9 +241,8 @@
         function startProxy() { document.getElementById('player-view').style.display = 'flex'; document.getElementById('gameFrame').src = PROXY_ENGINE; }
         function closePlayer() { document.getElementById('player-view').style.display = 'none'; frame.src = ''; }
         function filterSearch() { const val = document.getElementById('searchBox').value.toLowerCase(); const data = (currentMode === 'home' ? games : fullData); mainGrid.innerHTML = ''; render(data.filter(i => i.name.toLowerCase().includes(val))); }
-        function goFull() { if (frame.requestFullscreen) frame.requestFullscreen(); else if (frame.webkitRequestFullscreen) frame.webkitRequestFullscreen(); }
+        function goFull() { const f = document.getElementById('gameFrame'); if (f.requestFullscreen) f.requestFullscreen(); else if (f.webkitRequestFullscreen) f.webkitRequestFullscreen(); }
 
-        // Start with Games
         render(games);
     </script>
 </body>
