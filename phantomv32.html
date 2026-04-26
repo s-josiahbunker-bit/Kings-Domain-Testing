@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="referrer" content="origin">
-    <title>KING'S DOMAIN | CINEMA V31</title>
+    <title>KING'S DOMAIN | CINEMA V32</title>
     <link rel="icon" type="image/png" href="https://i.ibb.co/vYm6vS6/Take-Your-Heart.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
@@ -98,7 +98,7 @@
         <div id="grid-content" class="container">
             <header class="hero-banner">
                 <h1 id="banner-text">WELCOME BACK</h1>
-                <p id="banner-sub">Expanded Anime Engine active. Infinite scrolling engaged.</p>
+                <p id="banner-sub">Expanded Anime Engine active. Premium Alpha Servers online.</p>
             </header>
             <input type="text" id="searchBox" placeholder="Search mission database..." onkeydown="if(event.key==='Enter') searchGlobal()">
             <div class="grid" id="mainGrid"></div>
@@ -124,10 +124,11 @@
                 </div>
                 <div class="ep-top-nav">
                     <select id="seasonSelect" class="ep-select" onchange="handleSeasonChange()"></select>
+                    <!-- NEW PREMIUM PROVIDERS -->
                     <select id="serverSelect" class="ep-select" onchange="handleServerChange()">
-                        <option value="vidsrc_to">Alpha (VidSrc.to - #1 Rated)</option>
-                        <option value="vidlink">Beta (VidLink - Fast Sub/Dub)</option>
-                        <option value="embed_su">Gamma (Embed.su - High Stability)</option>
+                        <option value="vidlink">Alpha (VidLink - Cleanest UI / Anime)</option>
+                        <option value="embedsu">Beta (Embed.su - Best Bitrate / 4K)</option>
+                        <option value="autoembed">Gamma (AutoEmbed - Largest Library)</option>
                     </select>
                 </div>
                 <div class="ep-grid" id="epGrid"></div>
@@ -141,7 +142,7 @@
         let currentID = "";
         let currentMode = "home";
         let currentShowData = null;
-        let currentProvider = "vidsrc_to";
+        let currentProvider = "vidlink";
         let currentLang = "sub";
         let currentPage = 1;
         let isFetching = false;
@@ -166,7 +167,7 @@
             isFetching = true;
             if(isLoadMore) document.getElementById('scroll-loader').style.display = 'block';
 
-            // ENHANCED ANIME ENGINE: Uses genre 16 AND keyword 210024 for a massive library
+            // SUPER ANIME DISCOVERY: Genre 16 (Animation) + Keyword 210024 (Anime)
             let url = `https://api.themoviedb.org/3/discover/${type === 'movie' ? 'movie' : 'tv'}?api_key=${TMDB_KEY}&sort_by=popularity.desc&page=${currentPage}`;
             if (type === 'anime') url += `&with_genres=16&with_keywords=210024`;
 
@@ -204,19 +205,18 @@
             });
         }
 
-        // --- THE "FIXED" URL ROUTER ---
+        // --- NON-VIDSRC URL ROUTER ---
         function updateIframe(type, sn, ep) {
             const f = document.getElementById('gameFrame');
             let url = "";
             let dubParam = (currentLang === 'dub') ? '&dub=true' : '';
 
-            if (currentProvider === "vidsrc_to") {
-                url = `https://vidsrc.to/embed/${type}/${currentID}${type==='tv' ? '/' + sn + '/' + ep : ''}`;
-            } else if (currentProvider === "vidlink") {
-                // FIXED VidLink Path: /embed/tv/id/s/e
+            if (currentProvider === "vidlink") {
                 url = `https://vidlink.pro/embed/${type}/${currentID}${type==='tv' ? '/' + sn + '/' + ep : ''}?primary_color=ff1f44${dubParam}`;
-            } else if (currentProvider === "embed_su") {
+            } else if (currentProvider === "embedsu") {
                 url = `https://embed.su/embed/${type}/${currentID}${type==='tv' ? '/' + sn + '/' + ep : ''}`;
+            } else if (currentProvider === "autoembed") {
+                url = `https://autoembed.cc/embed/${type}/${currentID}${type==='tv' ? '/' + sn + '/' + ep : ''}`;
             }
             f.src = url;
         }
