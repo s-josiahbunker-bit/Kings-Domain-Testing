@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KING'S DOMAIN | CINEMA V24</title>
+    <meta name="referrer" content="origin">
+    <title>KING'S DOMAIN | CINEMA V25</title>
     <link rel="icon" type="image/png" href="https://i.ibb.co/vYm6vS6/Take-Your-Heart.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
@@ -23,17 +24,16 @@
         body, html { margin: 0; padding: 0; height: 100%; background-color: var(--p5-black); color: white; font-family: 'Inter', sans-serif; overflow: hidden; }
         #bg-layer { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), var(--Home-Wallpaper); background-size: cover; background-attachment: fixed; background-position: center; z-index: -1; transition: background-image 0.8s ease; }
 
-        /* V-NAV & SIDEBAR */
         .v-nav { position: fixed; left: 0; top: 0; height: 100%; width: 85px; background: #000; border-right: 2px solid var(--p5-pink-red); display: flex; flex-direction: column; align-items: center; padding-top: 20px; gap: 20px; z-index: 1000; }
         .nav-btn { width: 65px; height: 65px; background-image: var(--Menu-Img); background-size: contain; background-repeat: no-repeat; background-position: center; cursor: pointer; transition: 0.3s; mix-blend-mode: screen; }
         .nav-btn:hover { transform: scale(1.1); filter: drop-shadow(0 0 10px var(--p5-pink-red)); }
+        
         #sidebar { position: fixed; top: 0; left: -320px; width: 310px; height: 100%; background-image: linear-gradient(rgba(0,0,0,0.95), rgba(0,0,0,0.95)), var(--Sidebar-Wallpaper); background-size: cover; border-right: 4px solid var(--p5-pink-red); z-index: 2001; transition: 0.5s ease; padding: 50px 20px; box-sizing: border-box; }
         #sidebar.active { left: 0; }
         .sidebar-header { color: var(--p5-pink-red); font-weight: 900; font-size: 24px; text-transform: uppercase; margin-bottom: 20px; border-bottom: 2px solid #222; }
         .sidebar-item { display: flex; align-items: center; gap: 15px; padding: 18px; color: white; text-decoration: none; font-weight: 900; font-size: 20px; text-transform: uppercase; transition: 0.3s; cursor: pointer; }
         .sidebar-item:hover { color: var(--p5-pink-red); padding-left: 30px; background: rgba(255, 31, 68, 0.1); }
 
-        /* WORKSPACE */
         .top-bar { margin-left: 85px; padding: 15px 50px; background: rgba(0,0,0,0.5); display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); }
         .logo-text { color: var(--p5-pink-red); font-weight: 900; font-size: 20px; text-transform: uppercase; letter-spacing: 2px; }
         .workspace { margin-left: 85px; height: calc(100% - 60px); width: calc(100% - 85px); overflow-y: auto; box-sizing: border-box; position: relative; scroll-behavior: smooth; }
@@ -41,41 +41,22 @@
         .hero-banner { width: 100%; height: 280px; border-radius: 20px; margin-bottom: 30px; background: linear-gradient(to right, rgba(0,0,0,1) 40%, transparent), var(--Banner-Art); background-size: cover; background-position: center; display: flex; flex-direction: column; justify-content: center; padding-left: 60px; box-sizing: border-box; border: 1px solid rgba(255,255,255,0.1); }
         .hero-banner h1 { font-size: 44px; margin: 0; font-weight: 900; text-transform: uppercase; }
 
-        /* GRID */
         #searchBox { width: 100%; padding: 18px 25px; background: var(--p5-card-bg); border: 1px solid #222; border-radius: 8px; color: white; margin-bottom: 30px; outline: none; font-size: 16px; }
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 20px; }
         .card { background: var(--p5-card-bg); border-radius: 12px; height: 380px; position: relative; overflow: hidden; border: 1px solid #1a1a1a; cursor: pointer; transition: 0.3s; }
         .card img { width: 100%; height: 100%; object-fit: cover; }
         .card p { position: absolute; bottom: 0; width: 100%; background: rgba(0,0,0,0.85); margin: 0; padding: 12px 0; text-align: center; font-size: 11px; font-weight: 700; border-top: 1px solid var(--p5-pink-red); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-        /* PLAYER & EPISODE SIDEBAR LAYOUT */
         #player-view { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: black; z-index: 10000; flex-direction: column; }
         .player-bar { height: 60px; padding: 0 40px; background: #000; border-bottom: 2px solid var(--p5-pink-red); display: flex; justify-content: space-between; align-items: center; box-sizing: border-box; }
-        
         .main-player-area { display: flex; flex-direction: row; height: calc(100% - 60px); width: 100%; }
         #gameFrame { flex: 1; border: none; background: #000; }
 
-        /* EPISODE SIDEBAR */
         .ep-sidebar { width: 320px; background: #0f1015; border-left: 1px solid #222; display: flex; flex-direction: column; padding: 15px; box-sizing: border-box; overflow-y: auto; }
         .ep-sidebar h3 { font-size: 14px; margin: 0 0 15px 0; color: #fff; font-weight: 400; }
-        
-        .ep-top-nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; gap: 10px;}
-        
-        /* UPDATED SEASON SELECTOR STYLE */
-        #seasonSelect { 
-            background: #1a1b23; 
-            border: 1px solid var(--p5-pink-red); 
-            color: white; 
-            padding: 5px; 
-            font-size: 12px; 
-            font-weight: bold; 
-            border-radius: 4px;
-            outline: none;
-            cursor: pointer;
-            flex: 1;
-        }
-
-        .ep-search { background: #1a1b23; border: 1px solid #2a2b35; border-radius: 4px; padding: 6px 10px; color: #fff; width: 100px; font-size: 12px; }
+        .ep-top-nav { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+        .ep-select { background: #1a1b23; border: 1px solid #333; color: #aaa; padding: 8px; border-radius: 4px; font-size: 13px; font-weight: bold; cursor: pointer; outline: none; width: 100%; }
+        .ep-select:focus { border-color: var(--p5-pink-red); color: #fff; }
 
         .ep-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
         .ep-btn { background: #23242d; border: none; color: #999; padding: 12px 0; border-radius: 4px; cursor: pointer; font-size: 13px; font-weight: bold; transition: 0.2s; }
@@ -84,7 +65,6 @@
 
         .p-btn { background: var(--p5-pink-red); color: white; border: none; padding: 10px 20px; font-weight: bold; cursor: pointer; border-radius: 5px; }
 
-        /* PROXY UI */
         #proxy-page { display: none; flex-direction: column; align-items: center; justify-content: center; height: 100%; width: 100%; text-align: center; }
         .proxy-title { color: white; font-size: 60px; font-weight: 900; text-transform: uppercase; margin-bottom: 25px; text-shadow: 4px 4px 0px var(--p5-pink-red); transform: skewX(-5deg); }
         .proxy-input { width: 90%; max-width: 650px; padding: 25px; font-size: 22px; background: #000; border: 4px solid white; color: white; transform: skewX(-10deg); outline: none; box-shadow: 12px 12px 0px var(--p5-pink-red); font-weight: 900; }
@@ -114,7 +94,7 @@
         <div id="grid-content" class="container">
             <header class="hero-banner">
                 <h1 id="banner-text">WELCOME BACK</h1>
-                <p id="banner-sub">Hit ENTER to search global Mission database.</p>
+                <p id="banner-sub">Hit ENTER to search mission database.</p>
             </header>
             <input type="text" id="searchBox" placeholder="Search mission targets..." onkeydown="if(event.key==='Enter') searchGlobal()">
             <div class="grid" id="mainGrid"></div>
@@ -126,24 +106,25 @@
         </div>
     </div>
 
-    <!-- FULL PLAYER WITH EPISODE SIDEBAR -->
     <div id="player-view">
         <div class="player-bar">
             <button class="p-btn" onclick="closePlayer()">← BACK</button>
-            <span id="playing-title" style="font-weight:900;">EPISODE SELECTION</span>
+            <span id="playing-title" style="font-weight:900; color:var(--p5-pink-red);">MISSION IN PROGRESS</span>
             <button class="p-btn" onclick="goFull()">FULLSCREEN</button>
         </div>
         <div class="main-player-area">
             <iframe id="gameFrame" src="" allowfullscreen></iframe>
-            
             <div class="ep-sidebar" id="epSidebar">
                 <h3>List of episodes:</h3>
                 <div class="ep-top-nav">
-                    <!-- Dynamic Season Selector -->
-                    <select id="seasonSelect" onchange="handleSeasonChange()">
+                    <select id="seasonSelect" class="ep-select" onchange="handleSeasonChange()">
                         <option>Loading Seasons...</option>
                     </select>
-                    <input type="text" class="ep-search" placeholder="Search Ep">
+                    <select id="serverSelect" class="ep-select" onchange="handleServerChange()">
+                        <option value="https://vidsrc.to/embed">Server 1 (Best)</option>
+                        <option value="https://embed.su/embed">Server 2 (Fast)</option>
+                        <option value="https://vidsrc.xyz/embed">Server 3 (Legacy)</option>
+                    </select>
                 </div>
                 <div class="ep-grid" id="epGrid"></div>
             </div>
@@ -151,12 +132,13 @@
     </div>
 
     <script>
-        const TMDB_KEY = "cce36626c4c9d64a54c0731adcaa1d8f"; 
+        const TMDB_KEY = "PASTE_YOUR_TMDB_KEY_HERE"; 
         const PROXY_ENGINE = "https://t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.rammerhead.org/";
         
         let currentID = "";
         let currentMode = "home";
-        let showData = null; // Stores currently loaded TV show info
+        let currentShowData = null;
+        let currentProvider = "https://vidsrc.to/embed";
 
         const games = [
             { name: "Slime Rancher", img: "https://sm.ign.com/ign_es/cover/s/slime-ranc/slime-rancher_j318.jpg", url: "slimerancher.html" },
@@ -165,14 +147,15 @@
             { name: "Slope", img: "https://sm.ign.com/ign_br/game/s/slope/slope_69qy.jpg", url: "https://kkgames.github.io/slope/" }
         ];
 
-        const mainGrid = document.getElementById('mainGrid');
-        const frame = document.getElementById('gameFrame');
-        const bgLayer = document.getElementById('bg-layer');
-
         async function changeHub(mode) {
             currentMode = mode; closeSidebar();
             document.getElementById('grid-content').style.display = 'block';
             document.getElementById('proxy-page').style.display = 'none';
+            document.getElementById('searchBox').value = '';
+            
+            const searchPlaceholder = { home: "Search everything...", movie: "Search Movies only...", tv: "Search TV Shows only...", anime: "Search Anime only..." };
+            document.getElementById('searchBox').placeholder = searchPlaceholder[mode];
+
             if(mode === 'home') {
                 bgLayer.style.backgroundImage = "linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), var(--Home-Wallpaper)";
                 render(games);
@@ -184,9 +167,8 @@
         }
 
         async function fetchAPI(type) {
-            let sort = (type === 'movie') ? 'popularity.desc' : 'popularity.desc';
-            let url = `https://api.themoviedb.org/3/discover/${type === 'movie' ? 'movie' : 'tv'}?api_key=${TMDB_KEY}&sort_by=${sort}&vote_count.gte=100&page=1`;
-            if (type === 'anime') url += `&with_genres=16&with_original_language=ja`;
+            let url = `https://api.themoviedb.org/3/discover/${type === 'movie' ? 'movie' : 'tv'}?api_key=${TMDB_KEY}&sort_by=popularity.desc&vote_count.gte=50&page=1`;
+            if (type === 'anime') url += `&with_genres=16&with_original_language=ja`; // Anime strict filter
             const res = await fetch(url);
             const data = await res.json();
             render(data.results.map(i => ({ id: i.id, name: i.title || i.name, img: `https://image.tmdb.org/t/p/w500${i.poster_path}`, type: (type === 'movie' ? 'movie' : 'tv') })));
@@ -194,9 +176,32 @@
 
         async function searchGlobal() {
             const query = document.getElementById('searchBox').value;
-            const res = await fetch(`https://api.themoviedb.org/3/search/multi?api_key=${TMDB_KEY}&query=${encodeURIComponent(query)}`);
+            let url = '';
+            
+            // Logic to restrict search based on current page
+            if (currentMode === 'movie') {
+                url = `https://api.themoviedb.org/3/search/movie?api_key=${TMDB_KEY}&query=${encodeURIComponent(query)}`;
+            } else if (currentMode === 'tv' || currentMode === 'anime') {
+                url = `https://api.themoviedb.org/3/search/tv?api_key=${TMDB_KEY}&query=${encodeURIComponent(query)}`;
+            } else {
+                url = `https://api.themoviedb.org/3/search/multi?api_key=${TMDB_KEY}&query=${encodeURIComponent(query)}`;
+            }
+
+            const res = await fetch(url);
             const data = await res.json();
-            render(data.results.filter(i => i.poster_path).map(i => ({ id: i.id, name: i.title || i.name, img: `https://image.tmdb.org/t/p/w500${i.poster_path}`, type: i.media_type })));
+            let results = data.results;
+
+            // Extra filtering step for Anime search to ensure only Animation genre shows up
+            if (currentMode === 'anime') {
+                results = results.filter(i => i.genre_ids && i.genre_ids.includes(16));
+            }
+
+            render(results.filter(i => i.poster_path).map(i => ({ 
+                id: i.id, 
+                name: i.title || i.name, 
+                img: `https://image.tmdb.org/t/p/w500${i.poster_path}`, 
+                type: i.media_type || (currentMode === 'movie' ? 'movie' : 'tv') 
+            })));
         }
 
         function render(data) {
@@ -212,43 +217,49 @@
 
         async function launchMedia(item) {
             currentID = item.id;
+            // Determine if it's a series (Anime usually treated as TV)
             const isShow = (item.type === 'tv' || currentMode === 'tv' || currentMode === 'anime');
             document.getElementById('player-view').style.display = 'flex';
             document.getElementById('epSidebar').style.display = isShow ? 'flex' : 'none';
+            document.getElementById('playing-title').innerText = item.name.toUpperCase();
             
             if(isShow) {
                 const res = await fetch(`https://api.themoviedb.org/3/tv/${item.id}?api_key=${TMDB_KEY}`);
-                showData = await res.json();
-                
-                // Populate the Season Dropdown
+                currentShowData = await res.json();
                 const seasonSelect = document.getElementById('seasonSelect');
                 seasonSelect.innerHTML = '';
-                showData.seasons.forEach(s => {
-                    // Filter out Season 0 (Specials) if preferred, or keep them
-                    let opt = document.createElement('option');
-                    opt.value = s.season_number;
-                    opt.innerText = `Season ${s.season_number}`;
-                    seasonSelect.appendChild(opt);
+                currentShowData.seasons.forEach(s => {
+                    if(s.episode_count > 0) {
+                        let opt = document.createElement('option');
+                        opt.value = s.season_number;
+                        opt.innerText = `Season ${s.season_number}`;
+                        seasonSelect.appendChild(opt);
+                    }
                 });
-
-                // Default to first season in list (usually Season 1 or Season 0)
-                const firstSeason = showData.seasons[0];
+                const firstSeason = currentShowData.seasons.find(s => s.season_number > 0) || currentShowData.seasons[0];
+                seasonSelect.value = firstSeason.season_number;
                 buildEpGrid(firstSeason.season_number, firstSeason.episode_count);
-                frame.src = `https://vidsrc.xyz/embed/tv?tmdb=${item.id}&season=${firstSeason.season_number}&episode=1`;
+                updateIframe('tv', firstSeason.season_number, 1);
             } else {
-                frame.src = `https://vidsrc.xyz/embed/movie?tmdb=${item.id}`;
+                updateIframe('movie');
             }
         }
 
-        // Runs when you change the Season Dropdown
         function handleSeasonChange() {
             const seasonNum = document.getElementById('seasonSelect').value;
-            const seasonInfo = showData.seasons.find(s => s.season_number == seasonNum);
-            if(seasonInfo) {
-                buildEpGrid(seasonNum, seasonInfo.episode_count);
-                // Automatically switch player to Ep 1 of that season
-                frame.src = `https://vidsrc.xyz/embed/tv?tmdb=${currentID}&season=${seasonNum}&episode=1`;
-            }
+            const seasonInfo = currentShowData.seasons.find(s => s.season_number == seasonNum);
+            buildEpGrid(seasonNum, seasonInfo.episode_count);
+            updateIframe('tv', seasonNum, 1);
+        }
+
+        function handleServerChange() {
+            currentProvider = document.getElementById('serverSelect').value;
+            const isTV = document.getElementById('epSidebar').style.display === 'flex';
+            if (isTV) {
+                const season = document.getElementById('seasonSelect').value;
+                const ep = document.querySelector('.ep-btn.active')?.innerText || 1;
+                updateIframe('tv', season, ep);
+            } else { updateIframe('movie'); }
         }
 
         function buildEpGrid(seasonNum, count) {
@@ -262,10 +273,15 @@
                 btn.onclick = () => {
                     document.querySelectorAll('.ep-btn').forEach(b => b.classList.remove('active'));
                     btn.classList.add('active');
-                    frame.src = `https://vidsrc.xyz/embed/tv?tmdb=${currentID}&season=${seasonNum}&episode=${i}`;
+                    updateIframe('tv', seasonNum, i);
                 };
                 grid.appendChild(btn);
             }
+        }
+
+        function updateIframe(type, season, episode) {
+            if (type === 'movie') { frame.src = `${currentProvider}/movie/${currentID}`; } 
+            else { frame.src = `${currentProvider}/tv/${currentID}/${season}/${episode}`; }
         }
 
         function toggleSidebar() { document.getElementById('sidebar').classList.toggle('active'); }
@@ -275,6 +291,9 @@
         function closePlayer() { document.getElementById('player-view').style.display = 'none'; frame.src = ''; }
         function goFull() { if (frame.requestFullscreen) frame.requestFullscreen(); else if (frame.webkitRequestFullscreen) frame.webkitRequestFullscreen(); }
 
+        const mainGrid = document.getElementById('mainGrid');
+        const frame = document.getElementById('gameFrame');
+        const bgLayer = document.getElementById('bg-layer');
         render(games);
     </script>
 </body>
