@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="referrer" content="origin">
-    <title>KING'S DOMAIN | CINEMA V30</title>
+    <title>KING'S DOMAIN | CINEMA V32</title>
     <link rel="icon" type="image/png" href="https://i.ibb.co/vYm6vS6/Take-Your-Heart.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
@@ -19,21 +19,25 @@
             --Banner-Art: url('https://images8.alphacoders.com/132/1325171.jpeg');
             --Menu-Img: url('https://i.ibb.co/68v8T3G/p5-menu.jpg'); 
 
-            /* --- PHANTOM CURSOR ASSETS --- */
+            /* --- CUSTOM PHANTOM CURSORS --- */
             --cursor-default: url('https://i.ibb.co/4PDX5xP/cursor-arrow.png'); /* IMAGE 1 */
             --cursor-pointer: url('https://i.ibb.co/Pj0Qp8t/cursor-dagger.png'); /* IMAGE 2 */
             --cursor-text: url('https://i.ibb.co/f4p7vWf/cursor-text.png');    /* IMAGE 3 */
         }
 
-        /* --- PHANTOM CURSOR ROUTING --- */
+        /* --- GLOBAL CURSOR ROUTING --- */
         html, body { 
             margin: 0; padding: 0; height: 100%; 
             background-color: var(--p5-black); color: white; 
             font-family: 'Inter', sans-serif; overflow: hidden; 
             cursor: var(--cursor-default), auto; 
         }
-        a, button, .card, .nav-btn, .sidebar-item, .sd-btn, .ep-btn, select, .p-btn { cursor: var(--cursor-pointer), pointer !important; }
-        input[type="text"], #searchBox { cursor: var(--cursor-text), text !important; }
+        a, button, .card, .nav-btn, .sidebar-item, .sd-btn, .ep-btn, select, .p-btn, .nav-btn { 
+            cursor: var(--cursor-pointer), pointer !important; 
+        }
+        input[type="text"], #searchBox { 
+            cursor: var(--cursor-text), text !important; 
+        }
 
         #bg-layer { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), var(--Home-Wallpaper); background-size: cover; background-attachment: fixed; background-position: center; z-index: -1; transition: background-image 0.8s ease; }
 
@@ -48,7 +52,7 @@
         .sidebar-item { display: flex; align-items: center; gap: 15px; padding: 18px; color: white; text-decoration: none; font-weight: 900; font-size: 20px; text-transform: uppercase; transition: 0.3s; }
         .sidebar-item:hover { color: var(--p5-pink-red); padding-left: 30px; background: rgba(255, 31, 68, 0.1); }
 
-        /* TOP BAR */
+        /* WORKSPACE */
         .top-bar { margin-left: 85px; padding: 15px 50px; background: rgba(0,0,0,0.5); display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); }
         .logo-text { color: var(--p5-pink-red); font-weight: 900; font-size: 20px; text-transform: uppercase; letter-spacing: 2px; }
         .workspace { margin-left: 85px; height: calc(100% - 60px); width: calc(100% - 85px); overflow-y: auto; box-sizing: border-box; position: relative; scroll-behavior: smooth; }
@@ -65,7 +69,7 @@
         .card img { width: 100%; height: 100%; object-fit: cover; }
         .card p { position: absolute; bottom: 0; width: 100%; background: rgba(0,0,0,0.85); margin: 0; padding: 12px 0; text-align: center; font-size: 11px; font-weight: 700; border-top: 1px solid var(--p5-pink-red); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-        /* XPS OMEGA PLAYER */
+        /* XPS PLAYER */
         #player-view { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: black; z-index: 10000; flex-direction: column; }
         .player-bar { height: 60px; padding: 0 40px; background: #000; border-bottom: 2px solid var(--p5-pink-red); display: flex; justify-content: space-between; align-items: center; box-sizing: border-box; }
         .main-player-area { display: flex; flex-direction: row; height: calc(100% - 60px); width: 100%; }
@@ -106,14 +110,14 @@
 
     <div class="top-bar">
         <div class="logo-text">KING'S DOMAIN</div>
-        <div id="status-text" style="font-size: 11px; opacity: 0.5; letter-spacing: 2px;">PHANTOM_CORE_V30_READY</div>
+        <div id="status-text" style="font-size: 11px; opacity: 0.5; letter-spacing: 2px;">GHOST_PROTOCOL_V32_READY</div>
     </div>
 
     <div class="workspace" id="workspace">
         <div id="grid-content" class="container">
             <header class="hero-banner">
                 <h1 id="banner-text">WELCOME BACK</h1>
-                <p id="banner-sub">Legacy Aggregators Loaded. Infinite Sandbox Protocol active.</p>
+                <p id="banner-sub">XPS Ghost Hub active. Sub/Dub injection enabled. Infinite database scan.</p>
             </header>
             <input type="text" id="searchBox" placeholder="Search mission database..." onkeydown="if(event.key==='Enter') searchGlobal()">
             <div class="grid" id="mainGrid"></div>
@@ -121,17 +125,16 @@
         </div>
     </div>
 
-    <!-- XPS SANDBOXED PLAYER -->
+    <!-- SANDBOXED OMEGA PLAYER -->
     <div id="player-view">
         <div class="player-bar">
             <button class="p-btn" onclick="closePlayer()">← BACK</button>
-            <span id="playing-title" style="font-weight:900; color:var(--p5-pink-red);">XPS MISSION IN PROGRESS</span>
+            <span id="playing-title" style="font-weight:900; color:var(--p5-pink-red);">MISSION IN PROGRESS</span>
             <button class="p-btn" onclick="goFull()">FULLSCREEN</button>
         </div>
         <div class="main-player-area">
-            <!-- SANDBOX BLOCKS POPUPS PHYSICALLY -->
             <iframe id="gameFrame" 
-                    sandbox="allow-forms allow-scripts allow-pointer-lock allow-same-origin allow-top-navigation" 
+                    sandbox="allow-forms allow-scripts allow-pointer-lock allow-same-origin allow-top-navigation"
                     src="" allowfullscreen></iframe>
             
             <div class="ep-sidebar" id="epSidebar">
@@ -142,13 +145,13 @@
                         <button id="btn-dub" class="sd-btn" onclick="setLang('dub')">Dub</button>
                     </div>
                 </div>
-                <div class="ep-top-nav">
+                <div class="ep-top-nav" id="media-controls">
                     <select id="seasonSelect" class="ep-select" onchange="handleSeasonChange()"></select>
-                    <!-- NEW LEGACY AGGREGATOR SERVERS -->
+                    <!-- XPS ALPHA TIER SERVERS -->
                     <select id="serverSelect" class="ep-select" onchange="handleServerChange()">
-                        <option value="2embed">XPS Alpha (2Embed - Global Prime)</option>
-                        <option value="gdrive">XPS Beta (GDrive - Cloud Backup)</option>
-                        <option value="hydra">XPS Gamma (HydraHD - Premium Sync)</option>
+                        <option value="rive">XPS Alpha (Rive Stream - Modern)</option>
+                        <option value="vapi">XPS Beta (Vapi/NonTV - Dub Expert)</option>
+                        <option value="frembed">XPS Gamma (Frembed - Legacy High Success)</option>
                     </select>
                 </div>
                 <div class="ep-grid" id="epGrid"></div>
@@ -162,7 +165,7 @@
         let mission = {
             id: "", type: "movie", season: 1, episode: 1,
             lang: localStorage.getItem('p5_pref_lang') || "sub",
-            provider: "2embed"
+            provider: "rive"
         };
         
         let currentMode = "home", currentShowData = null, currentPage = 1, isFetching = false, canLoadMore = true;
@@ -194,97 +197,4 @@
             if(isLoadMore) document.getElementById('scroll-loader').style.display = 'block';
             let url = `https://api.themoviedb.org/3/discover/${type === 'movie' ? 'movie' : 'tv'}?api_key=${TMDB_KEY}&sort_by=popularity.desc&page=${currentPage}`;
             if (type === 'anime') url += `&with_genres=16&with_original_language=ja`;
-            const res = await fetch(url); const data = await res.json();
-            if(data.results && data.results.length > 0) { 
-                render(data.results.map(i => ({ id: i.id, name: i.title || i.name, img: `https://image.tmdb.org/t/p/w500${i.poster_path}`, type: (type === 'movie' ? 'movie' : 'tv'), lang: i.original_language })), isLoadMore); 
-                currentPage++; 
-            } else { canLoadMore = false; }
-            isFetching = false; document.getElementById('scroll-loader').style.display = 'none';
-        }
-
-        async function searchGlobal() {
-            canLoadMore = false; const query = document.getElementById('searchBox').value;
-            let url = (currentMode === 'movie') ? `https://api.themoviedb.org/3/search/movie?api_key=${TMDB_KEY}&query=${encodeURIComponent(query)}` : `https://api.themoviedb.org/3/search/tv?api_key=${TMDB_KEY}&query=${encodeURIComponent(query)}`;
-            if (currentMode === 'arcade' || currentMode === 'anime') url = `https://api.themoviedb.org/3/search/multi?api_key=${TMDB_KEY}&query=${encodeURIComponent(query)}`;
-            const res = await fetch(url); const data = await res.json();
-            let results = data.results;
-            if (currentMode === 'anime') results = results.filter(i => i.genre_ids && i.genre_ids.includes(16));
-            render(results.filter(i => i.poster_path).map(i => ({ id: i.id, name: i.title || i.name, img: `https://image.tmdb.org/t/p/w500${i.poster_path}`, type: (currentMode === 'movie' ? 'movie' : 'tv') })), false);
-        }
-
-        function render(data, isLoadMore) {
-            const grid = document.getElementById('mainGrid'); if (!isLoadMore) grid.innerHTML = '';
-            data.forEach(item => {
-                if(item.img && !item.img.includes('null')) {
-                    const card = document.createElement('div'); card.className = 'card';
-                    card.innerHTML = `<img src="${item.img}"><p>${item.name}</p>`;
-                    card.onclick = () => item.isArcade ? launchArcade(item) : launchTITAN(item); grid.appendChild(card);
-                }
-            });
-        }
-
-        /* --- ARCADE ENGINE (ISOLATED) --- */
-        function launchArcade(game) {
-            const f = document.getElementById('gameFrame');
-            document.getElementById('player-view').style.display = 'flex';
-            document.getElementById('epSidebar').style.display = 'none';
-            document.getElementById('playing-title').innerText = game.name.toUpperCase();
-            f.removeAttribute('sandbox'); // Games need access to work
-            f.src = game.url;
-        }
-
-        /* --- MEDIA ENGINE (XPS) --- */
-        async function launchTITAN(item) {
-            mission.id = item.id; mission.type = (item.type === 'tv' || currentMode === 'tv' || currentMode === 'anime') ? 'tv' : 'movie';
-            document.getElementById('player-view').style.display = 'flex';
-            document.getElementById('epSidebar').style.display = 'flex';
-            document.getElementById('playing-title').innerText = item.name.toUpperCase();
-            document.getElementById('animeToggle').style.display = (currentMode === 'anime' || item.lang === 'ja' || mission.type === 'tv') ? 'flex' : 'none';
-            document.getElementById('seasonSelect').style.display = (mission.type === 'tv') ? 'block' : 'none';
-            document.getElementById('gameFrame').setAttribute('sandbox', 'allow-forms allow-scripts allow-pointer-lock allow-same-origin allow-top-navigation');
-
-            updateLangButtons();
-            if(mission.type === 'tv') {
-                const res = await fetch(`https://api.themoviedb.org/3/tv/${item.id}?api_key=${TMDB_KEY}`);
-                currentShowData = await res.json();
-                const sel = document.getElementById('seasonSelect'); sel.innerHTML = '';
-                currentShowData.seasons.forEach(s => { if(s.episode_count > 0) { let o = document.createElement('option'); o.value = s.season_number; o.innerText = `Season ${s.season_number}`; sel.appendChild(o); } });
-                mission.season = currentShowData.seasons.find(s => s.season_number > 0)?.season_number || 0;
-                mission.episode = 1; sel.value = mission.season; 
-                buildEpGrid(mission.season, currentShowData.seasons.find(s => s.season_number == mission.season).episode_count);
-            } else { document.getElementById('epGrid').innerHTML = ''; }
-            refreshTITAN();
-        }
-
-        function refreshTITAN() {
-            const f = document.getElementById('gameFrame');
-            let url = "";
-            let s = mission.season; let e = mission.episode;
-
-            if (mission.provider === "2embed") {
-                // FIXED 2Embed Logic for TV/Movie
-                url = (mission.type === 'movie') ? `https://www.2embed.cc/embed/${mission.id}` : `https://www.2embed.cc/embedtv/${mission.id}&s=${s}&e=${e}`;
-            } else if (mission.provider === "gdrive") {
-                url = `https://database.gdriveplayer.me/player.php?tmdb=${mission.id}${mission.type==='tv' ? '&type=series&season='+s+'&episode='+e : ''}`;
-            } else if (mission.provider === "hydra") {
-                url = `https://hydrahd.com/embed/${mission.type}/${mission.id}${mission.type==='tv' ? '/'+s+'/'+e : ''}`;
-            }
-            f.src = url;
-        }
-
-        function setLang(lang) { mission.lang = lang; localStorage.setItem('p5_pref_lang', lang); updateLangButtons(); refreshTITAN(); }
-        function updateLangButtons() { document.getElementById('btn-sub').classList.toggle('active', mission.lang === 'sub'); document.getElementById('btn-dub').classList.toggle('active', mission.lang === 'dub'); }
-        function handleSeasonChange() { mission.season = document.getElementById('seasonSelect').value; mission.episode = 1; buildEpGrid(mission.season, currentShowData.seasons.find(s => s.season_number == mission.season).episode_count); refreshTITAN(); }
-        function handleServerChange() { mission.provider = document.getElementById('serverSelect').value; refreshTITAN(); }
-        function buildEpGrid(sn, count) { const g = document.getElementById('epGrid'); g.innerHTML = ''; for(let i=1; i<=count; i++) { const b = document.createElement('button'); b.className = 'ep-btn'; b.innerText = i; if(i == mission.episode) b.classList.add('active'); b.onclick = () => { mission.episode = i; document.querySelectorAll('.ep-btn').forEach(btn => btn.classList.remove('active')); b.classList.add('active'); refreshTITAN(); }; g.appendChild(b); } }
-        document.getElementById('workspace').addEventListener('scroll', (e) => { if (currentMode === 'arcade') return; const { scrollTop, scrollHeight, clientHeight } = e.target; if (scrollTop + clientHeight >= scrollHeight - 600) fetchAPI(currentMode, true); });
-        function toggleSidebar() { document.getElementById('sidebar').classList.toggle('active'); }
-        function closeSidebar() { document.getElementById('sidebar').classList.remove('active'); }
-        function closePlayer() { document.getElementById('player-view').style.display = 'none'; document.getElementById('gameFrame').src = ''; }
-        function goFull() { const f = document.getElementById('gameFrame'); if (f.requestFullscreen) f.requestFullscreen(); else if (f.webkitRequestFullscreen) f.webkitRequestFullscreen(); }
-
-        const bgLayer = document.getElementById('bg-layer');
-        render(games, false);
-    </script>
-</body>
-</html>
+            const res = await fe
