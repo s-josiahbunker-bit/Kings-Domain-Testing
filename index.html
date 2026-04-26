@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="referrer" content="origin">
-    <title>KING'S DOMAIN | CINEMA V33</title>
+    <title>KING'S DOMAIN | CINEMA V34</title>
     <link rel="icon" type="image/png" href="https://i.ibb.co/vYm6vS6/Take-Your-Heart.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
@@ -23,7 +23,6 @@
         body, html { margin: 0; padding: 0; height: 100%; background-color: var(--p5-black); color: white; font-family: 'Inter', sans-serif; overflow: hidden; }
         #bg-layer { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), var(--Home-Wallpaper); background-size: cover; background-attachment: fixed; background-position: center; z-index: -1; transition: background-image 0.8s ease; }
 
-        /* V-NAV */
         .v-nav { position: fixed; left: 0; top: 0; height: 100%; width: 85px; background: #000; border-right: 2px solid var(--p5-pink-red); display: flex; flex-direction: column; align-items: center; padding-top: 20px; gap: 20px; z-index: 1000; }
         .nav-btn { width: 65px; height: 65px; background-image: var(--Menu-Img); background-size: contain; background-repeat: no-repeat; background-position: center; cursor: pointer; transition: 0.3s; mix-blend-mode: screen; }
         .nav-btn:hover { transform: scale(1.1); filter: drop-shadow(0 0 10px var(--p5-pink-red)); }
@@ -38,7 +37,6 @@
         .logo-text { color: var(--p5-pink-red); font-weight: 900; font-size: 20px; text-transform: uppercase; letter-spacing: 2px; }
         .workspace { margin-left: 85px; height: calc(100% - 60px); width: calc(100% - 85px); overflow-y: auto; box-sizing: border-box; position: relative; scroll-behavior: smooth; }
         .container { padding: 40px 60px; max-width: 1400px; margin: 0 auto; }
-        
         .hero-banner { width: 100%; height: 280px; border-radius: 20px; margin-bottom: 30px; background: linear-gradient(to right, rgba(0,0,0,1) 40%, transparent), var(--Banner-Art); background-size: cover; background-position: center; display: flex; flex-direction: column; justify-content: center; padding-left: 60px; box-sizing: border-box; border: 1px solid rgba(255,255,255,0.1); }
         .hero-banner h1 { font-size: 44px; margin: 0; font-weight: 900; text-transform: uppercase; }
 
@@ -48,11 +46,13 @@
         .card img { width: 100%; height: 100%; object-fit: cover; }
         .card p { position: absolute; bottom: 0; width: 100%; background: rgba(0,0,0,0.85); margin: 0; padding: 12px 0; text-align: center; font-size: 11px; font-weight: 700; border-top: 1px solid var(--p5-pink-red); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
+        /* PLAYER VIEW */
         #player-view { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: black; z-index: 10000; flex-direction: column; }
         .player-bar { height: 60px; padding: 0 40px; background: #000; border-bottom: 2px solid var(--p5-pink-red); display: flex; justify-content: space-between; align-items: center; box-sizing: border-box; }
         .main-player-area { display: flex; flex-direction: row; height: calc(100% - 60px); width: 100%; }
         #gameFrame { flex: 1; border: none; background: #000; }
 
+        /* EPISODE SIDEBAR */
         .ep-sidebar { width: 320px; background: #0f1015; border-left: 1px solid #222; display: flex; flex-direction: column; padding: 15px; box-sizing: border-box; overflow-y: auto; }
         .ep-header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px solid #222; padding-bottom: 8px; }
         .ep-sidebar h3 { font-size: 12px; margin: 0; color: #fff; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; }
@@ -96,7 +96,7 @@
         <div id="grid-content" class="container">
             <header class="hero-banner">
                 <h1 id="banner-text">WELCOME BACK</h1>
-                <p id="banner-sub">Premium Aggregator Engines Online. Scroll for thousands of targets.</p>
+                <p id="banner-sub">Scanning Global Mission Database. Infinite scrolling enabled.</p>
             </header>
             <input type="text" id="searchBox" placeholder="Search mission database..." onkeydown="if(event.key==='Enter') searchGlobal()">
             <div class="grid" id="mainGrid"></div>
@@ -122,10 +122,11 @@
                 </div>
                 <div class="ep-top-nav">
                     <select id="seasonSelect" class="ep-select" onchange="handleSeasonChange()"></select>
+                    <!-- HI-ANIME QUALITY SERVERS -->
                     <select id="serverSelect" class="ep-select" onchange="handleServerChange()">
-                        <option value="embedsu">Alpha (Embed.su - Highest Reliability)</option>
-                        <option value="autoembed">Beta (AutoEmbed - Best for Anime)</option>
-                        <option value="superembed">Gamma (SuperEmbed - Global Archive)</option>
+                        <option value="vidsrc_to">Alpha (VidSrc.to - Standard #1)</option>
+                        <option value="vidsrc_pro">Beta (VidSrc.pro - High-Speed)</option>
+                        <option value="2embed">Gamma (2Embed - Global Aggregator)</option>
                     </select>
                 </div>
                 <div class="ep-grid" id="epGrid"></div>
@@ -134,12 +135,12 @@
     </div>
 
     <script>
-        const TMDB_KEY = "cce36626c4c9d64a54c0731adcaa1d8f"; 
+        const TMDB_KEY = "PASTE_YOUR_TMDB_KEY_HERE"; 
         
         let currentID = "";
         let currentMode = "home";
         let currentShowData = null;
-        let currentProvider = "embedsu";
+        let currentProvider = "vidsrc_to";
         let currentLang = "sub";
         let currentPage = 1;
         let isFetching = false;
@@ -163,15 +164,10 @@
             if (isFetching || !canLoadMore) return;
             isFetching = true;
             if(isLoadMore) document.getElementById('scroll-loader').style.display = 'block';
-
             let url = `https://api.themoviedb.org/3/discover/${type === 'movie' ? 'movie' : 'tv'}?api_key=${TMDB_KEY}&sort_by=popularity.desc&page=${currentPage}`;
             if (type === 'anime') url += `&with_genres=16&with_original_language=ja`;
-
             const res = await fetch(url); const data = await res.json();
-            if(data.results && data.results.length > 0) { 
-                render(data.results.map(i => ({ id: i.id, name: i.title || i.name, img: `https://image.tmdb.org/t/p/w500${i.poster_path}`, type: (type === 'movie' ? 'movie' : 'tv'), lang: i.original_language })), isLoadMore); 
-                currentPage++; 
-            } else { canLoadMore = false; }
+            if(data.results) { render(data.results.map(i => ({ id: i.id, name: i.title || i.name, img: `https://image.tmdb.org/t/p/w500${i.poster_path}`, type: (type === 'movie' ? 'movie' : 'tv'), lang: i.original_language })), isLoadMore); currentPage++; }
             isFetching = false; document.getElementById('scroll-loader').style.display = 'none';
         }
 
@@ -201,21 +197,22 @@
             });
         }
 
-        // --- THE "ANTI-404" AGGREGATOR ROUTER ---
+        // --- NEW HI-ANIME STYLE ROUTER ---
         function updateIframe(type, sn, ep) {
             const f = document.getElementById('gameFrame');
             let url = "";
 
-            if (currentProvider === "embedsu") {
-                // Embed.su is very reliable for series and movies
-                url = `https://embed.su/embed/${type}/${currentID}${type==='tv' ? '/' + sn + '/' + ep : ''}`;
-            } else if (currentProvider === "autoembed") {
-                // AutoEmbed has special logic for Anime Dubs
-                let dubStr = (currentLang === 'dub') ? '?player=dub' : '';
-                url = `https://autoembed.cc/embed/${type}/${currentID}${type==='tv' ? '/' + sn + '/' + ep : ''}${dubStr}`;
-            } else if (currentProvider === "superembed") {
-                // SuperEmbed pulls from many backups
-                url = `https://superembed.top/${type}/${currentID}${type==='tv' ? '/' + sn + '/' + ep : ''}`;
+            if (currentProvider === "vidsrc_to") {
+                url = `https://vidsrc.to/embed/${type}/${currentID}${type==='tv' ? '/' + sn + '/' + ep : ''}`;
+            } else if (currentProvider === "vidsrc_pro") {
+                url = `https://vidsrc.pro/embed/${type}/${currentID}${type==='tv' ? '/' + sn + '/' + ep : ''}`;
+            } else if (currentProvider === "2embed") {
+                // 2Embed uses a slightly different format
+                if (type === 'movie') {
+                    url = `https://www.2embed.cc/embed/${currentID}`;
+                } else {
+                    url = `https://www.2embed.cc/embedtv/${currentID}&s=${sn}&e=${ep}`;
+                }
             }
             
             f.src = url;
@@ -225,6 +222,8 @@
             currentLang = lang;
             document.getElementById('btn-sub').classList.toggle('active', lang === 'sub');
             document.getElementById('btn-dub').classList.toggle('active', lang === 'dub');
+            // Free providers handle sub/dub inside their player menu,
+            // we refresh to ensure the player re-scans the source list.
             const isTV = document.getElementById('epSidebar').style.display === 'flex';
             const ep = document.querySelector('.ep-btn.active')?.innerText || 1;
             const sn = document.getElementById('seasonSelect').value;
