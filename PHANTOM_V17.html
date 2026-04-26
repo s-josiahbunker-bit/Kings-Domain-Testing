@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KING'S DOMAIN | V16 FINAL</title>
+    <title>KING'S DOMAIN | V17</title>
     
     <!-- Tab Icon -->
     <link rel="icon" type="image/png" href="https://i.ibb.co/vYm6vS6/Take-Your-Heart.png">
@@ -13,21 +13,33 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
 
     <style>
-        /* 1. MASTER ART SETTINGS */
+        /* ============================================================
+           1. MASTER ART SETTINGS (Change links here)
+           ============================================================ */
         :root {
+            /* PAGE WALLPAPERS */
             --Home-Wallpaper: url('https://wallpapers.com/images/hd/persona-5-background-030o8u3u29n532no.jpg');
             --Movie-Wallpaper: url('https://wallpaperaccess.com/full/1531383.jpg');
             --Show-Wallpaper: url('https://wallpapercave.com/wp/wp4047814.jpg');
             --Anime-Wallpaper: url('https://images8.alphacoders.com/132/1325171.jpeg');
             --Proxy-Wallpaper: url('https://images.alphacoders.com/836/836569.png');
+
+            /* SIDEBAR WALLPAPER (NEW) */
+            --Sidebar-Wallpaper: url('https://images.alphacoders.com/691/691456.jpg');
+
+            /* UI IMAGES */
             --Banner-Art: url('https://images8.alphacoders.com/132/1325171.jpeg');
             --Menu-Img: url('https://i.ibb.co/68v8T3G/p5-menu.jpg'); 
             
+            /* COLORS */
             --p5-pink-red: #ff1f44; 
             --p5-black: #000000;
             --p5-card-bg: #141414;
         }
 
+        /* ============================================================
+           2. CORE DESIGN
+           ============================================================ */
         body, html { margin: 0; padding: 0; height: 100%; background-color: var(--p5-black); color: white; font-family: 'Inter', sans-serif; overflow: hidden; }
         
         #bg-layer {
@@ -37,7 +49,7 @@
             z-index: -1; transition: background-image 0.6s ease;
         }
 
-        /* 2. VERTICAL NAV (ONLY MENU ICON HERE NOW) */
+        /* VERTICAL NAV */
         .v-nav {
             position: fixed; left: 0; top: 0; height: 100%; width: 85px; 
             background: #000; border-right: 2px solid var(--p5-pink-red);
@@ -47,19 +59,21 @@
         .nav-btn { width: 65px; height: 65px; background-image: var(--Menu-Img); background-size: contain; background-repeat: no-repeat; background-position: center; cursor: pointer; transition: 0.3s; mix-blend-mode: screen; }
         .nav-btn:hover { transform: scale(1.2); filter: drop-shadow(0 0 15px var(--p5-pink-red)); }
 
-        /* 3. SIDEBAR (CONTAINS EVERYTHING) */
+        /* SIDEBAR (IMAGE BACKGROUND) */
         #sidebar {
             position: fixed; top: 0; left: -320px; width: 310px; height: 100%;
-            background: rgba(0,0,0,0.98); border-right: 4px solid var(--p5-pink-red);
-            z-index: 2001; transition: 0.5s cubic-bezier(0.77, 0, 0.175, 1); 
-            padding: 50px 20px; box-sizing: border-box;
+            /* Applies Sidebar Image with a dark overlay to keep text readable */
+            background-image: linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,0.9)), var(--Sidebar-Wallpaper);
+            background-size: cover; background-position: center;
+            border-right: 4px solid var(--p5-pink-red);
+            z-index: 2001; transition: 0.5s ease; padding: 50px 20px; box-sizing: border-box;
         }
         #sidebar.active { left: 0; }
         .sidebar-header { color: var(--p5-pink-red); font-weight: 900; font-size: 24px; text-transform: uppercase; margin-bottom: 20px; border-bottom: 2px solid #222; padding-bottom: 10px; }
-        .sidebar-item { display: flex; align-items: center; gap: 15px; padding: 18px; color: white; text-decoration: none; font-weight: 900; font-size: 20px; text-transform: uppercase; transition: 0.3s; cursor: pointer; border-bottom: 1px solid #111; }
-        .sidebar-item:hover { color: var(--p5-pink-red); padding-left: 30px; background: rgba(255, 31, 68, 0.1); }
+        .sidebar-item { display: flex; align-items: center; gap: 15px; padding: 18px; color: white; text-decoration: none; font-weight: 900; font-size: 20px; text-transform: uppercase; transition: 0.3s; cursor: pointer; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .sidebar-item:hover { color: var(--p5-pink-red); padding-left: 30px; background: rgba(255, 31, 68, 0.15); }
 
-        /* 4. WORKSPACE */
+        /* WORKSPACE */
         .top-bar { margin-left: 85px; padding: 15px 50px; background: rgba(0,0,0,0.5); display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); }
         .logo-text { color: var(--p5-pink-red); font-weight: 900; font-size: 20px; text-transform: uppercase; letter-spacing: 2px; }
         
@@ -72,9 +86,8 @@
         #searchBox { width: 100%; padding: 18px 25px; background: var(--p5-card-bg); border: 1px solid #222; border-radius: 8px; color: white; margin-bottom: 30px; outline: none; font-size: 16px; }
 
         /* GRID */
-        .grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 20px; }
         .card { background: var(--p5-card-bg); border-radius: 12px; height: 380px; position: relative; overflow: hidden; border: 1px solid #1a1a1a; cursor: pointer; transition: 0.3s; }
-        .card:hover { border-color: var(--p5-pink-red); transform: translateY(-8px); box-shadow: 0 5px 15px rgba(255, 31, 68, 0.4); }
         .card img { width: 100%; height: 100%; object-fit: cover; }
         .card p { position: absolute; bottom: 0; width: 100%; background: rgba(0, 0, 0, 0.85); margin: 0; padding: 12px 0; text-align: center; font-size: 11px; font-weight: 700; border-top: 1px solid var(--p5-pink-red); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
@@ -94,11 +107,12 @@
 <body>
 
     <div id="bg-layer"></div>
-    <nav class="v-nav"><div class="nav-btn" title="Open Hub" onclick="toggleSidebar()"></div></nav>
+    <nav class="v-nav"><div class="nav-btn" title="Open Menu" onclick="toggleSidebar()"></div></nav>
 
+    <!-- SIDEBAR -->
     <div id="sidebar" onmouseleave="closeSidebar()">
         <div style="text-align:center; margin-bottom:30px;"><img src="https://i.ibb.co/vYm6vS6/Take-Your-Heart.png" style="width:120px;"></div>
-        <div class="sidebar-header">NAVIGATOR</div>
+        <div class="sidebar-header">DESTINATIONS</div>
         <div class="sidebar-item" onclick="changeHub('home')"><i class="fas fa-home"></i> Home</div>
         <div class="sidebar-item" onclick="changeHub('movie')"><i class="fas fa-film"></i> Movies</div>
         <div class="sidebar-item" onclick="changeHub('tv')"><i class="fas fa-tv"></i> Shows</div>
@@ -108,7 +122,7 @@
 
     <div class="top-bar">
         <div class="logo-text">KING'S DOMAIN</div>
-        <div style="font-size: 11px; opacity: 0.5; letter-spacing: 2px;">V16_STABLE_LOAD</div>
+        <div style="font-size: 11px; opacity: 0.5;">HUB_V17_FULLY_ARMED</div>
     </div>
 
     <div class="workspace" id="workspace">
@@ -117,14 +131,14 @@
                 <h1 id="banner-text">WELCOME BACK</h1>
                 <p id="banner-sub">Targets acquired. Scroll to browse infinite targets.</p>
             </header>
-            <input type="text" id="searchBox" placeholder="Filter Mission Targets..." onkeyup="filterSearch()">
+            <input type="text" id="searchBox" placeholder="Filter targets..." onkeyup="filterSearch()">
             <div class="grid" id="mainGrid"></div>
             <div id="infinite-loader" class="loader" style="display:none;">HACKING MORE CONTENT...</div>
         </div>
 
         <div id="proxy-page">
             <h1 class="proxy-title">Phantom Proxy</h1>
-            <input type="text" id="proxyInput" class="proxy-input" placeholder="Enter Target URL..." onkeydown="if(event.key==='Enter') startProxy()">
+            <input type="text" id="proxyInput" class="proxy-input" placeholder="Enter URL or Search..." onkeydown="if(event.key==='Enter') startProxy()">
         </div>
     </div>
 
@@ -141,7 +155,7 @@
         // ==========================================
         // 3. SETTINGS & LOGIC
         // ==========================================
-        const TMDB_KEY = "PASTE_YOUR_TMDB_KEY_HERE"; 
+        const TMDB_KEY = "cce36626c4c9d64a54c0731adcaa1d8f"; 
         const PROXY_ENGINE = "https://t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.rammerhead.org/";
         
         let currentMode = "home";
@@ -173,10 +187,12 @@
 
             if(mode === 'home') {
                 bgLayer.style.backgroundImage = "linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), var(--Home-Wallpaper)";
+                document.getElementById('banner-text').innerText = "WELCOME BACK";
                 render(games);
             } else {
                 let wall = (mode === 'tv') ? 'var(--Show-Wallpaper)' : (mode === 'anime' ? 'var(--Anime-Wallpaper)' : 'var(--Movie-Wallpaper)');
                 bgLayer.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), ${wall}`;
+                document.getElementById('banner-text').innerText = mode.toUpperCase() + " HUB";
                 await fetchMore();
             }
         }
@@ -229,9 +245,9 @@
         function startProxy() { document.getElementById('player-view').style.display = 'flex'; document.getElementById('gameFrame').src = PROXY_ENGINE; }
         function closePlayer() { document.getElementById('player-view').style.display = 'none'; frame.src = ''; }
         function filterSearch() { const val = document.getElementById('searchBox').value.toLowerCase(); const data = (currentMode === 'home' ? games : apiData); mainGrid.innerHTML = ''; render(data.filter(i => i.name.toLowerCase().includes(val))); }
-        function goFull() { if (frame.requestFullscreen) frame.requestFullscreen(); else if (frame.webkitRequestFullscreen) frame.webkitRequestFullscreen(); }
+        function goFull() { const f = document.getElementById('gameFrame'); if (f.requestFullscreen) f.requestFullscreen(); else if (f.webkitRequestFullscreen) f.webkitRequestFullscreen(); }
 
         render(games);
     </script>
 </body>
-</html>
+</html>352
