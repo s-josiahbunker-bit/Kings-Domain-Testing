@@ -18,20 +18,42 @@
             --Sidebar-Wallpaper: url('https://images.alphacoders.com/691/691456.jpg');
             --Banner-Art: url('https://images8.alphacoders.com/132/1325171.jpeg');
             --Menu-Img: url('https://i.ibb.co/68v8T3G/p5-menu.jpg'); 
+
+            /* CUSTOM CURSOR URLS - REPLACE THESE WITH YOUR LINKS */
+            --cursor-default: url('https://www.rw-designer.com/cursor-view/214243.png');
+            --cursor-pointer: url('https://www.rw-designer.com/cursor-view/214245.png');
+            --cursor-text: url('https://www.rw-designer.com/cursor-view/214256.png');
         }
 
-        body, html { margin: 0; padding: 0; height: 100%; background-color: var(--p5-black); color: white; font-family: 'Inter', sans-serif; overflow: hidden; }
+        /* --- GLOBAL CURSOR RULES --- */
+        html, body { 
+            margin: 0; padding: 0; height: 100%; 
+            background-color: var(--p5-black); color: white; 
+            font-family: 'Inter', sans-serif; overflow: hidden; 
+            cursor: var(--cursor-default), auto; /* IMAGE 1 */
+        }
+
+        /* CLICKABLE ELEMENTS - IMAGE 2 */
+        a, button, .card, .nav-btn, .sidebar-item, .sd-btn, .ep-btn, select, .p-btn {
+            cursor: var(--cursor-pointer), pointer !important;
+        }
+
+        /* SEARCH & INPUT ELEMENTS - IMAGE 3 */
+        input[type="text"], input[type="search"], textarea {
+            cursor: var(--cursor-text), text !important;
+        }
+
         #bg-layer { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), var(--Home-Wallpaper); background-size: cover; background-attachment: fixed; background-position: center; z-index: -1; transition: background-image 0.8s ease; }
 
         /* V-NAV */
         .v-nav { position: fixed; left: 0; top: 0; height: 100%; width: 85px; background: #000; border-right: 2px solid var(--p5-pink-red); display: flex; flex-direction: column; align-items: center; padding-top: 20px; gap: 20px; z-index: 1000; }
-        .nav-btn { width: 65px; height: 65px; background-image: var(--Menu-Img); background-size: contain; background-repeat: no-repeat; background-position: center; cursor: pointer; transition: 0.3s; mix-blend-mode: screen; }
+        .nav-btn { width: 65px; height: 65px; background-image: var(--Menu-Img); background-size: contain; background-repeat: no-repeat; background-position: center; transition: 0.3s; mix-blend-mode: screen; }
         .nav-btn:hover { transform: scale(1.1); filter: drop-shadow(0 0 10px var(--p5-pink-red)); }
         
         #sidebar { position: fixed; top: 0; left: -320px; width: 310px; height: 100%; background-image: linear-gradient(rgba(0,0,0,0.95), rgba(0,0,0,0.95)), var(--Sidebar-Wallpaper); background-size: cover; border-right: 4px solid var(--p5-pink-red); z-index: 2001; transition: 0.5s ease; padding: 50px 20px; box-sizing: border-box; }
         #sidebar.active { left: 0; }
         .sidebar-header { color: var(--p5-pink-red); font-weight: 900; font-size: 24px; text-transform: uppercase; margin-bottom: 20px; border-bottom: 2px solid #222; }
-        .sidebar-item { display: flex; align-items: center; gap: 15px; padding: 18px; color: white; text-decoration: none; font-weight: 900; font-size: 20px; text-transform: uppercase; transition: 0.3s; cursor: pointer; }
+        .sidebar-item { display: flex; align-items: center; gap: 15px; padding: 18px; color: white; text-decoration: none; font-weight: 900; font-size: 20px; text-transform: uppercase; transition: 0.3s; }
         .sidebar-item:hover { color: var(--p5-pink-red); padding-left: 30px; background: rgba(255, 31, 68, 0.1); }
 
         /* WORKSPACE */
@@ -47,11 +69,11 @@
         #searchBox:focus { border-color: var(--p5-pink-red); }
 
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 20px; }
-        .card { background: var(--p5-card-bg); border-radius: 12px; height: 380px; position: relative; overflow: hidden; border: 1px solid #1a1a1a; cursor: pointer; transition: 0.3s; }
+        .card { background: var(--p5-card-bg); border-radius: 12px; height: 380px; position: relative; overflow: hidden; border: 1px solid #1a1a1a; transition: 0.3s; }
         .card img { width: 100%; height: 100%; object-fit: cover; }
         .card p { position: absolute; bottom: 0; width: 100%; background: rgba(0,0,0,0.85); margin: 0; padding: 12px 0; text-align: center; font-size: 11px; font-weight: 700; border-top: 1px solid var(--p5-pink-red); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-        /* XPS PLAYER INTERFACE */
+        /* XPS PLAYER UI */
         #player-view { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: black; z-index: 10000; flex-direction: column; }
         .player-bar { height: 60px; padding: 0 40px; background: #000; border-bottom: 2px solid var(--p5-pink-red); display: flex; justify-content: space-between; align-items: center; box-sizing: border-box; }
         .main-player-area { display: flex; flex-direction: row; height: calc(100% - 60px); width: 100%; }
@@ -62,18 +84,18 @@
         .ep-sidebar h3 { font-size: 12px; margin: 0; color: #fff; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; }
 
         .sd-toggle { display: flex; background: #222; border-radius: 4px; border: 1px solid #444; overflow: hidden; }
-        .sd-btn { background: transparent; border: none; color: #888; padding: 4px 10px; font-size: 10px; font-weight: 900; cursor: pointer; text-transform: uppercase; transition: 0.2s; }
+        .sd-btn { background: transparent; border: none; color: #888; padding: 4px 10px; font-size: 10px; font-weight: 900; text-transform: uppercase; transition: 0.2s; }
         .sd-btn.active { background: var(--p5-pink-red); color: white; }
 
         .ep-top-nav { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
-        .ep-select { background: #1a1b23; border: 1px solid #333; color: #aaa; padding: 8px; border-radius: 4px; font-size: 12px; font-weight: bold; cursor: pointer; outline: none; width: 100%; }
+        .ep-select { background: #1a1b23; border: 1px solid #333; color: #aaa; padding: 8px; border-radius: 4px; font-size: 12px; font-weight: bold; outline: none; width: 100%; }
         .ep-select:focus { border-color: var(--p5-pink-red); color: #fff; }
 
         .ep-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
-        .ep-btn { background: #23242d; border: none; color: #999; padding: 12px 0; border-radius: 4px; cursor: pointer; font-size: 13px; font-weight: bold; transition: 0.2s; }
+        .ep-btn { background: #23242d; border: none; color: #999; padding: 12px 0; border-radius: 4px; font-size: 13px; font-weight: bold; transition: 0.2s; }
         .ep-btn.active { background: linear-gradient(to bottom right, var(--p5-pink-red), #900); color: #fff; box-shadow: 0 0 10px rgba(255,31,68,0.5); }
 
-        .p-btn { background: var(--p5-pink-red); color: white; border: none; padding: 10px 20px; font-weight: bold; cursor: pointer; border-radius: 5px; text-transform: uppercase; font-size: 11px; }
+        .p-btn { background: var(--p5-pink-red); color: white; border: none; padding: 10px 20px; font-weight: bold; border-radius: 5px; text-transform: uppercase; font-size: 11px; }
     </style>
 </head>
 <body>
@@ -92,7 +114,7 @@
 
     <div class="top-bar">
         <div class="logo-text">KING'S DOMAIN</div>
-        <div id="status-text" style="font-size: 11px; opacity: 0.5; letter-spacing: 2px;">XPS_ELITE_V25_READY</div>
+        <div id="status-text" style="font-size: 11px; opacity: 0.5; letter-spacing: 2px;">XPS_ELITE_SYSTEM_READY</div>
     </div>
 
     <div class="workspace" id="workspace">
@@ -126,7 +148,6 @@
                 </div>
                 <div class="ep-top-nav" id="media-controls">
                     <select id="seasonSelect" class="ep-select" onchange="handleSeasonChange()"></select>
-                    <!-- ELITE ALTERNATIVE SERVERS (NON-VIDSRC) -->
                     <select id="serverSelect" class="ep-select" onchange="handleServerChange()">
                         <option value="autoembed">XPS Alpha (AutoEmbed - Best for Anime)</option>
                         <option value="smashy">XPS Beta (SmashyStream - Multi-Mirror)</option>
@@ -139,7 +160,7 @@
     </div>
 
     <script>
-        const TMDB_KEY = "PASTE_YOUR_TMDB_KEY_HERE"; 
+        const TMDB_KEY = "cce36626c4c9d64a54c0731adcaa1d8f"; 
         
         let mission = {
             id: "",
@@ -182,10 +203,8 @@
             if (isFetching || !canLoadMore) return;
             isFetching = true;
             if(isLoadMore) document.getElementById('scroll-loader').style.display = 'block';
-
             let url = `https://api.themoviedb.org/3/discover/${type === 'movie' ? 'movie' : 'tv'}?api_key=${TMDB_KEY}&sort_by=popularity.desc&page=${currentPage}`;
             if (type === 'anime') url += `&with_genres=16&with_original_language=ja`;
-
             const res = await fetch(url); const data = await res.json();
             if(data.results && data.results.length > 0) { 
                 render(data.results.map(i => ({ id: i.id, name: i.title || i.name, img: `https://image.tmdb.org/t/p/w500${i.poster_path}`, type: (type === 'movie' ? 'movie' : 'tv'), lang: i.original_language })), isLoadMore); 
@@ -198,7 +217,6 @@
             canLoadMore = false; const query = document.getElementById('searchBox').value;
             let url = (currentMode === 'movie') ? `https://api.themoviedb.org/3/search/movie?api_key=${TMDB_KEY}&query=${encodeURIComponent(query)}` : `https://api.themoviedb.org/3/search/tv?api_key=${TMDB_KEY}&query=${encodeURIComponent(query)}`;
             if (currentMode === 'home') url = `https://api.themoviedb.org/3/search/multi?api_key=${TMDB_KEY}&query=${encodeURIComponent(query)}`;
-            
             const res = await fetch(url); const data = await res.json();
             let results = data.results;
             if (currentMode === 'anime') results = results.filter(i => i.genre_ids && i.genre_ids.includes(16));
@@ -217,7 +235,6 @@
             });
         }
 
-        /* --- ARCADE ENGINE (ISOLATED) --- */
         function launchGame(game) {
             document.getElementById('player-view').style.display = 'flex';
             document.getElementById('epSidebar').style.display = 'none';
@@ -225,46 +242,33 @@
             document.getElementById('gameFrame').src = game.url;
         }
 
-        /* --- MEDIA ENGINE (XPS) --- */
         async function launchMedia(item) {
             mission.id = item.id; 
             mission.type = (item.type === 'tv' || currentMode === 'tv' || currentMode === 'anime') ? 'tv' : 'movie';
-            
             document.getElementById('player-view').style.display = 'flex';
             document.getElementById('epSidebar').style.display = 'flex';
             document.getElementById('playing-title').innerText = item.name.toUpperCase();
-            
             document.getElementById('animeToggle').style.display = (currentMode === 'anime' || item.lang === 'ja' || mission.type === 'tv') ? 'flex' : 'none';
             document.getElementById('seasonSelect').style.display = (mission.type === 'tv') ? 'block' : 'none';
-            
             updateLangButtons();
-
             if(mission.type === 'tv') {
                 const res = await fetch(`https://api.themoviedb.org/3/tv/${item.id}?api_key=${TMDB_KEY}`);
                 currentShowData = await res.json();
                 const sel = document.getElementById('seasonSelect'); sel.innerHTML = '';
-                currentShowData.seasons.forEach(s => {
-                    if(s.episode_count > 0) {
-                        let o = document.createElement('option'); o.value = s.season_number; o.innerText = `Season ${s.season_number}`; sel.appendChild(o);
-                    }
-                });
+                currentShowData.seasons.forEach(s => { if(s.episode_count > 0) { let o = document.createElement('option'); o.value = s.season_number; o.innerText = `Season ${s.season_number}`; sel.appendChild(o); } });
                 mission.season = currentShowData.seasons.find(s => s.season_number > 0)?.season_number || 0;
-                mission.episode = 1;
-                sel.value = mission.season; 
+                mission.episode = 1; sel.value = mission.season; 
                 buildEpGrid(mission.season, currentShowData.seasons.find(s => s.season_number == mission.season).episode_count);
-            } else {
-                document.getElementById('epGrid').innerHTML = '';
-            }
+            } else { document.getElementById('epGrid').innerHTML = ''; }
             refreshPlayer();
         }
 
         function refreshPlayer() {
             const f = document.getElementById('gameFrame');
             let url = "";
-
             if (mission.provider === "autoembed") {
-                let playerParam = (mission.lang === 'dub') ? '?player=dub' : '';
-                url = `https://autoembed.cc/embed/${mission.type}/${mission.id}${mission.type === 'tv' ? '/' + mission.season + '/' + mission.episode : ''}${playerParam}`;
+                let p = (mission.lang === 'dub') ? '?player=dub' : '';
+                url = `https://autoembed.cc/embed/${mission.type}/${mission.id}${mission.type === 'tv' ? '/' + mission.season + '/' + mission.episode : ''}${p}`;
             } else if (mission.provider === "smashy") {
                 url = `https://embed.smashystream.com/playere.php?tmdb=${mission.id}${mission.type === 'tv' ? '&season=' + mission.season + '&episode=' + mission.episode : ''}`;
             } else if (mission.provider === "superembed") {
@@ -273,49 +277,12 @@
             f.src = url;
         }
 
-        function setLang(lang) {
-            mission.lang = lang; localStorage.setItem('p5_pref_lang', lang);
-            updateLangButtons();
-            refreshPlayer();
-        }
-
-        function updateLangButtons() {
-            document.getElementById('btn-sub').classList.toggle('active', mission.lang === 'sub');
-            document.getElementById('btn-dub').classList.toggle('active', mission.lang === 'dub');
-        }
-
-        function handleSeasonChange() {
-            mission.season = document.getElementById('seasonSelect').value;
-            mission.episode = 1;
-            buildEpGrid(mission.season, currentShowData.seasons.find(s => s.season_number == mission.season).episode_count);
-            refreshPlayer();
-        }
-
-        function handleServerChange() {
-            mission.provider = document.getElementById('serverSelect').value;
-            refreshPlayer();
-        }
-
-        function buildEpGrid(sn, count) {
-            const g = document.getElementById('epGrid'); g.innerHTML = '';
-            for(let i=1; i<=count; i++) {
-                const b = document.createElement('button'); b.className = 'ep-btn'; b.innerText = i;
-                if(i == mission.episode) b.classList.add('active');
-                b.onclick = () => {
-                    mission.episode = i;
-                    document.querySelectorAll('.ep-btn').forEach(btn => btn.classList.remove('active'));
-                    b.classList.add('active'); refreshPlayer();
-                };
-                g.appendChild(b);
-            }
-        }
-
-        document.getElementById('workspace').addEventListener('scroll', (e) => {
-            if (currentMode === 'home') return;
-            const { scrollTop, scrollHeight, clientHeight } = e.target;
-            if (scrollTop + clientHeight >= scrollHeight - 600) fetchAPI(currentMode, true);
-        });
-
+        function setLang(lang) { mission.lang = lang; localStorage.setItem('p5_pref_lang', lang); updateLangButtons(); refreshPlayer(); }
+        function updateLangButtons() { document.getElementById('btn-sub').classList.toggle('active', mission.lang === 'sub'); document.getElementById('btn-dub').classList.toggle('active', mission.lang === 'dub'); }
+        function handleSeasonChange() { mission.season = document.getElementById('seasonSelect').value; mission.episode = 1; buildEpGrid(mission.season, currentShowData.seasons.find(s => s.season_number == mission.season).episode_count); refreshPlayer(); }
+        function handleServerChange() { mission.provider = document.getElementById('serverSelect').value; refreshPlayer(); }
+        function buildEpGrid(sn, count) { const g = document.getElementById('epGrid'); g.innerHTML = ''; for(let i=1; i<=count; i++) { const b = document.createElement('button'); b.className = 'ep-btn'; b.innerText = i; if(i == mission.episode) b.classList.add('active'); b.onclick = () => { mission.episode = i; document.querySelectorAll('.ep-btn').forEach(btn => btn.classList.remove('active')); b.classList.add('active'); refreshPlayer(); }; g.appendChild(b); } }
+        document.getElementById('workspace').addEventListener('scroll', (e) => { if (currentMode === 'home') return; const { scrollTop, scrollHeight, clientHeight } = e.target; if (scrollTop + clientHeight >= scrollHeight - 600) fetchAPI(currentMode, true); });
         function toggleSidebar() { document.getElementById('sidebar').classList.toggle('active'); }
         function closeSidebar() { document.getElementById('sidebar').classList.remove('active'); }
         function closePlayer() { document.getElementById('player-view').style.display = 'none'; document.getElementById('gameFrame').src = ''; }
