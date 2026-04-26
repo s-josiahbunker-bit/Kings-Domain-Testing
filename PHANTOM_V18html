@@ -3,12 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KING'S DOMAIN | V17</title>
+    <title>KING'S DOMAIN | INFINITE</title>
     
-    <!-- Tab Icon -->
     <link rel="icon" type="image/png" href="https://i.ibb.co/vYm6vS6/Take-Your-Heart.png">
-    
-    <!-- External Assets -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
 
@@ -17,28 +14,25 @@
            1. MASTER ART SETTINGS (Change links here)
            ============================================================ */
         :root {
-            /* PAGE WALLPAPERS */
             --Home-Wallpaper: url('https://wallpapers.com/images/hd/persona-5-background-030o8u3u29n532no.jpg');
             --Movie-Wallpaper: url('https://wallpaperaccess.com/full/1531383.jpg');
             --Show-Wallpaper: url('https://wallpapercave.com/wp/wp4047814.jpg');
             --Anime-Wallpaper: url('https://images8.alphacoders.com/132/1325171.jpeg');
             --Proxy-Wallpaper: url('https://images.alphacoders.com/836/836569.png');
 
-            /* SIDEBAR WALLPAPER (NEW) */
+            /* SIDEBAR WALLPAPER */
             --Sidebar-Wallpaper: url('https://images.alphacoders.com/691/691456.jpg');
 
-            /* UI IMAGES */
             --Banner-Art: url('https://images8.alphacoders.com/132/1325171.jpeg');
             --Menu-Img: url('https://i.ibb.co/68v8T3G/p5-menu.jpg'); 
             
-            /* COLORS */
             --p5-pink-red: #ff1f44; 
             --p5-black: #000000;
             --p5-card-bg: #141414;
         }
 
         /* ============================================================
-           2. CORE DESIGN
+           2. CORE SYSTEM DESIGN
            ============================================================ */
         body, html { margin: 0; padding: 0; height: 100%; background-color: var(--p5-black); color: white; font-family: 'Inter', sans-serif; overflow: hidden; }
         
@@ -49,7 +43,7 @@
             z-index: -1; transition: background-image 0.6s ease;
         }
 
-        /* VERTICAL NAV */
+        /* VERTICAL NAV (CLEAN) */
         .v-nav {
             position: fixed; left: 0; top: 0; height: 100%; width: 85px; 
             background: #000; border-right: 2px solid var(--p5-pink-red);
@@ -59,19 +53,18 @@
         .nav-btn { width: 65px; height: 65px; background-image: var(--Menu-Img); background-size: contain; background-repeat: no-repeat; background-position: center; cursor: pointer; transition: 0.3s; mix-blend-mode: screen; }
         .nav-btn:hover { transform: scale(1.2); filter: drop-shadow(0 0 15px var(--p5-pink-red)); }
 
-        /* SIDEBAR (IMAGE BACKGROUND) */
+        /* SIDEBAR WITH IMAGE BG */
         #sidebar {
             position: fixed; top: 0; left: -320px; width: 310px; height: 100%;
-            /* Applies Sidebar Image with a dark overlay to keep text readable */
-            background-image: linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,0.9)), var(--Sidebar-Wallpaper);
+            background-image: linear-gradient(rgba(0,0,0,0.95), rgba(0,0,0,0.95)), var(--Sidebar-Wallpaper);
             background-size: cover; background-position: center;
             border-right: 4px solid var(--p5-pink-red);
             z-index: 2001; transition: 0.5s ease; padding: 50px 20px; box-sizing: border-box;
         }
         #sidebar.active { left: 0; }
-        .sidebar-header { color: var(--p5-pink-red); font-weight: 900; font-size: 24px; text-transform: uppercase; margin-bottom: 20px; border-bottom: 2px solid #222; padding-bottom: 10px; }
+        .sidebar-header { color: var(--p5-pink-red); font-weight: 900; font-size: 24px; text-transform: uppercase; margin-bottom: 20px; border-bottom: 2px solid #222; }
         .sidebar-item { display: flex; align-items: center; gap: 15px; padding: 18px; color: white; text-decoration: none; font-weight: 900; font-size: 20px; text-transform: uppercase; transition: 0.3s; cursor: pointer; border-bottom: 1px solid rgba(255,255,255,0.05); }
-        .sidebar-item:hover { color: var(--p5-pink-red); padding-left: 30px; background: rgba(255, 31, 68, 0.15); }
+        .sidebar-item:hover { color: var(--p5-pink-red); padding-left: 30px; background: rgba(255, 31, 68, 0.1); }
 
         /* WORKSPACE */
         .top-bar { margin-left: 85px; padding: 15px 50px; background: rgba(0,0,0,0.5); display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); }
@@ -85,9 +78,10 @@
 
         #searchBox { width: 100%; padding: 18px 25px; background: var(--p5-card-bg); border: 1px solid #222; border-radius: 8px; color: white; margin-bottom: 30px; outline: none; font-size: 16px; }
 
-        /* GRID */
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 20px; }
+        /* GRID (Full Cover Vertical) */
+        .grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; }
         .card { background: var(--p5-card-bg); border-radius: 12px; height: 380px; position: relative; overflow: hidden; border: 1px solid #1a1a1a; cursor: pointer; transition: 0.3s; }
+        .card:hover { border-color: var(--p5-pink-red); transform: translateY(-8px); box-shadow: 0 5px 15px rgba(255, 31, 68, 0.4); }
         .card img { width: 100%; height: 100%; object-fit: cover; }
         .card p { position: absolute; bottom: 0; width: 100%; background: rgba(0, 0, 0, 0.85); margin: 0; padding: 12px 0; text-align: center; font-size: 11px; font-weight: 700; border-top: 1px solid var(--p5-pink-red); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
@@ -101,18 +95,18 @@
         .player-bar { height: 60px; padding: 0 40px; background: #000; border-bottom: 2px solid var(--p5-pink-red); display: flex; justify-content: space-between; align-items: center; box-sizing: border-box; }
         #gameFrame { width: 100%; height: calc(100% - 60px); border: none; background: #000; }
         .p-btn { background: var(--p5-pink-red); color: white; border: none; padding: 10px 20px; font-weight: bold; cursor: pointer; border-radius: 5px; }
-        .loader { grid-column: 1/-1; text-align: center; padding: 20px; color: var(--p5-pink-red); font-weight: 900; }
+        
+        .loading-text { grid-column: 1/-1; text-align: center; padding: 20px; color: var(--p5-pink-red); font-weight: 900; letter-spacing: 2px; text-transform: uppercase; }
     </style>
 </head>
 <body>
 
     <div id="bg-layer"></div>
-    <nav class="v-nav"><div class="nav-btn" title="Open Menu" onclick="toggleSidebar()"></div></nav>
+    <nav class="v-nav"><div class="nav-btn" title="Open Hub" onclick="toggleSidebar()"></div></nav>
 
-    <!-- SIDEBAR -->
     <div id="sidebar" onmouseleave="closeSidebar()">
         <div style="text-align:center; margin-bottom:30px;"><img src="https://i.ibb.co/vYm6vS6/Take-Your-Heart.png" style="width:120px;"></div>
-        <div class="sidebar-header">DESTINATIONS</div>
+        <div class="sidebar-header">NAVIGATOR</div>
         <div class="sidebar-item" onclick="changeHub('home')"><i class="fas fa-home"></i> Home</div>
         <div class="sidebar-item" onclick="changeHub('movie')"><i class="fas fa-film"></i> Movies</div>
         <div class="sidebar-item" onclick="changeHub('tv')"><i class="fas fa-tv"></i> Shows</div>
@@ -122,30 +116,30 @@
 
     <div class="top-bar">
         <div class="logo-text">KING'S DOMAIN</div>
-        <div style="font-size: 11px; opacity: 0.5;">HUB_V17_FULLY_ARMED</div>
+        <div style="font-size: 11px; opacity: 0.5; letter-spacing: 2px;">INFINITY_STREAM_ACTIVE</div>
     </div>
 
     <div class="workspace" id="workspace">
         <div id="grid-content" class="container">
             <header class="hero-banner">
                 <h1 id="banner-text">WELCOME BACK</h1>
-                <p id="banner-sub">Targets acquired. Scroll to browse infinite targets.</p>
+                <p id="banner-sub">Hacking into infinite media database... Scroll to browse.</p>
             </header>
-            <input type="text" id="searchBox" placeholder="Filter targets..." onkeyup="filterSearch()">
+            <input type="text" id="searchBox" placeholder="Filter Mission Targets..." onkeyup="filterSearch()">
             <div class="grid" id="mainGrid"></div>
-            <div id="infinite-loader" class="loader" style="display:none;">HACKING MORE CONTENT...</div>
+            <div id="load-msg" class="loading-text" style="display:none;">Establishing Secure Connection to next Page...</div>
         </div>
 
         <div id="proxy-page">
             <h1 class="proxy-title">Phantom Proxy</h1>
-            <input type="text" id="proxyInput" class="proxy-input" placeholder="Enter URL or Search..." onkeydown="if(event.key==='Enter') startProxy()">
+            <input type="text" id="proxyInput" class="proxy-input" placeholder="Enter Target URL..." onkeydown="if(event.key==='Enter') startProxy()">
         </div>
     </div>
 
     <div id="player-view">
         <div class="player-bar">
             <button class="p-btn" onclick="closePlayer()">← BACK</button>
-            <span id="playing-title" style="font-weight:900; text-transform:uppercase;">DESTINATION</span>
+            <span id="playing-title" style="font-weight:900;">TARGET_LOCKED</span>
             <button class="p-btn" onclick="goFull()">FULLSCREEN</button>
         </div>
         <iframe id="gameFrame" src="" allowfullscreen></iframe>
@@ -153,9 +147,9 @@
 
     <script>
         // ==========================================
-        // 3. SETTINGS & LOGIC
+        // 3. SETTINGS & INFINITE LOGIC
         // ==========================================
-        const TMDB_KEY = "cce36626c4c9d64a54c0731adcaa1d8f"; 
+        const TMDB_KEY = "PASTE_YOUR_TMDB_KEY_HERE"; 
         const PROXY_ENGINE = "https://t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.rammerhead.org/";
         
         let currentMode = "home";
@@ -176,9 +170,6 @@
         const bgLayer = document.getElementById('bg-layer');
         const workspace = document.getElementById('workspace');
 
-        function toggleSidebar() { document.getElementById('sidebar').classList.toggle('active'); }
-        function closeSidebar() { document.getElementById('sidebar').classList.remove('active'); }
-
         async function changeHub(mode) {
             currentMode = mode; currentPage = 1; apiData = []; closeSidebar();
             document.getElementById('grid-content').style.display = 'block';
@@ -187,24 +178,25 @@
 
             if(mode === 'home') {
                 bgLayer.style.backgroundImage = "linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), var(--Home-Wallpaper)";
-                document.getElementById('banner-text').innerText = "WELCOME BACK";
                 render(games);
             } else {
                 let wall = (mode === 'tv') ? 'var(--Show-Wallpaper)' : (mode === 'anime' ? 'var(--Anime-Wallpaper)' : 'var(--Movie-Wallpaper)');
                 bgLayer.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), ${wall}`;
                 document.getElementById('banner-text').innerText = mode.toUpperCase() + " HUB";
-                await fetchMore();
+                await fetchInfinite();
             }
         }
 
-        async function fetchMore() {
+        // INFINITE FETCH ENGINE: Cycles through unique pages until thousands are loaded
+        async function fetchInfinite() {
             if (isFetching || currentMode === 'home') return;
             isFetching = true;
-            document.getElementById('infinite-loader').style.display = 'block';
+            document.getElementById('load-msg').style.display = 'block';
 
+            // Build URL based on mode
             let type = (currentMode === 'anime') ? 'tv' : currentMode;
-            let url = `https://api.themoviedb.org/3/trending/${type}/day?api_key=${TMDB_KEY}&page=${currentPage}`;
-            if (currentMode === 'anime') url = `https://api.themoviedb.org/3/discover/tv?api_key=${TMDB_KEY}&with_genres=16&with_original_language=ja&sort_by=popularity.desc&page=${currentPage}`;
+            let url = `https://api.themoviedb.org/3/discover/${type}?api_key=${TMDB_KEY}&page=${currentPage}&sort_by=popularity.desc`;
+            if (currentMode === 'anime') url += `&with_genres=16&with_original_language=ja`;
 
             try {
                 const res = await fetch(url);
@@ -212,18 +204,27 @@
                 const newItems = data.results.map(i => ({
                     name: i.title || i.name,
                     img: i.poster_path ? `https://image.tmdb.org/t/p/w500${i.poster_path}` : 'https://via.placeholder.com/500x750?text=No+Poster',
-                    url: (currentMode === 'movie' || i.media_type === 'movie') ? `https://vidsrc.xyz/embed/movie?tmdb=${i.id}` : `https://vidsrc.xyz/embed/tv?tmdb=${i.id}&season=1&episode=1`
+                    url: (currentMode === 'movie') ? `https://vidsrc.xyz/embed/movie?tmdb=${i.id}` : `https://vidsrc.xyz/embed/tv?tmdb=${i.id}&season=1&episode=1`
                 }));
+
                 apiData = [...apiData, ...newItems];
                 render(apiData);
                 currentPage++;
-            } catch(e) {}
+                
+                // Special: Automatically load 5 pages immediately to fill screen
+                if (currentPage < 5) await fetchInfinite();
+
+            } catch(e) { console.log("Database connection limit reached."); }
+            
             isFetching = false;
-            document.getElementById('infinite-loader').style.display = 'none';
+            document.getElementById('load-msg').style.display = 'none';
         }
 
+        // SCROLL SENSOR
         workspace.addEventListener('scroll', () => {
-            if (workspace.scrollTop + workspace.clientHeight >= workspace.scrollHeight - 1000) fetchMore();
+            if (workspace.scrollTop + workspace.clientHeight >= workspace.scrollHeight - 1200) {
+                fetchInfinite();
+            }
         });
 
         function render(data) {
@@ -241,13 +242,15 @@
             });
         }
 
+        function toggleSidebar() { document.getElementById('sidebar').classList.toggle('active'); }
+        function closeSidebar() { document.getElementById('sidebar').classList.remove('active'); }
         function openProxy() { closeSidebar(); document.getElementById('grid-content').style.display = 'none'; document.getElementById('proxy-page').style.display = 'flex'; bgLayer.style.backgroundImage = "linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), var(--Proxy-Wallpaper)"; }
         function startProxy() { document.getElementById('player-view').style.display = 'flex'; document.getElementById('gameFrame').src = PROXY_ENGINE; }
         function closePlayer() { document.getElementById('player-view').style.display = 'none'; frame.src = ''; }
         function filterSearch() { const val = document.getElementById('searchBox').value.toLowerCase(); const data = (currentMode === 'home' ? games : apiData); mainGrid.innerHTML = ''; render(data.filter(i => i.name.toLowerCase().includes(val))); }
-        function goFull() { const f = document.getElementById('gameFrame'); if (f.requestFullscreen) f.requestFullscreen(); else if (f.webkitRequestFullscreen) f.webkitRequestFullscreen(); }
+        function goFull() { if (frame.requestFullscreen) frame.requestFullscreen(); else if (frame.webkitRequestFullscreen) frame.webkitRequestFullscreen(); }
 
         render(games);
     </script>
 </body>
-</html>352
+</html>
