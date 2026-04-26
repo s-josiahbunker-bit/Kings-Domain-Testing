@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="referrer" content="origin">
-    <title>KING'S DOMAIN | CINEMA V26</title>
+    <title>KING'S DOMAIN | CINEMA V27</title>
     <link rel="icon" type="image/png" href="https://i.ibb.co/vYm6vS6/Take-Your-Heart.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
@@ -19,13 +19,13 @@
             --Banner-Art: url('https://images8.alphacoders.com/132/1325171.jpeg');
             --Menu-Img: url('https://i.ibb.co/68v8T3G/p5-menu.jpg'); 
 
-            /* --- CUSTOM CURSOR URLS (INSERT YOUR LINKS HERE) --- */
+            /* --- CUSTOM CURSOR URLS --- */
             --cursor-default: url('https://i.ibb.co/4PDX5xP/cursor-arrow.png'); /* IMAGE 1 */
             --cursor-pointer: url('https://i.ibb.co/Pj0Qp8t/cursor-dagger.png'); /* IMAGE 2 */
             --cursor-text: url('https://i.ibb.co/f4p7vWf/cursor-text.png');    /* IMAGE 3 */
         }
 
-        /* --- PHANTOM CURSOR LOGIC --- */
+        /* --- PHANTOM CURSOR ENGINE --- */
         html, body { 
             margin: 0; padding: 0; height: 100%; 
             background-color: var(--p5-black); color: white; 
@@ -43,10 +43,11 @@
 
         #bg-layer { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), var(--Home-Wallpaper); background-size: cover; background-attachment: fixed; background-position: center; z-index: -1; transition: background-image 0.8s ease; }
 
-        /* V-NAV & SIDEBAR */
+        /* NAV */
         .v-nav { position: fixed; left: 0; top: 0; height: 100%; width: 85px; background: #000; border-right: 2px solid var(--p5-pink-red); display: flex; flex-direction: column; align-items: center; padding-top: 20px; gap: 20px; z-index: 1000; }
         .nav-btn { width: 65px; height: 65px; background-image: var(--Menu-Img); background-size: contain; background-repeat: no-repeat; background-position: center; transition: 0.3s; mix-blend-mode: screen; }
         .nav-btn:hover { transform: scale(1.1); filter: drop-shadow(0 0 10px var(--p5-pink-red)); }
+        
         #sidebar { position: fixed; top: 0; left: -320px; width: 310px; height: 100%; background-image: linear-gradient(rgba(0,0,0,0.95), rgba(0,0,0,0.95)), var(--Sidebar-Wallpaper); background-size: cover; border-right: 4px solid var(--p5-pink-red); z-index: 2001; transition: 0.5s ease; padding: 50px 20px; box-sizing: border-box; }
         #sidebar.active { left: 0; }
         .sidebar-header { color: var(--p5-pink-red); font-weight: 900; font-size: 24px; text-transform: uppercase; margin-bottom: 20px; border-bottom: 2px solid #222; }
@@ -70,7 +71,7 @@
         .card img { width: 100%; height: 100%; object-fit: cover; }
         .card p { position: absolute; bottom: 0; width: 100%; background: rgba(0,0,0,0.85); margin: 0; padding: 12px 0; text-align: center; font-size: 11px; font-weight: 700; border-top: 1px solid var(--p5-pink-red); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-        /* XPS PLAYER INTERFACE */
+        /* XPS TITAN PLAYER */
         #player-view { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: black; z-index: 10000; flex-direction: column; }
         .player-bar { height: 60px; padding: 0 40px; background: #000; border-bottom: 2px solid var(--p5-pink-red); display: flex; justify-content: space-between; align-items: center; box-sizing: border-box; }
         .main-player-area { display: flex; flex-direction: row; height: calc(100% - 60px); width: 100%; }
@@ -89,7 +90,7 @@
         .ep-select:focus { border-color: var(--p5-pink-red); color: #fff; }
 
         .ep-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
-        .ep-btn { background: #23242d; border: none; color: #999; padding: 12px 0; border-radius: 4px; font-size: 13px; font-weight: bold; transition: 0.2s; }
+        .ep-btn { background: #23242d; border: none; color: #999; padding: 12px 0; border-radius: 4px; cursor: pointer; font-size: 13px; font-weight: bold; transition: 0.2s; }
         .ep-btn.active { background: linear-gradient(to bottom right, var(--p5-pink-red), #900); color: #fff; box-shadow: 0 0 10px rgba(255,31,68,0.5); }
 
         .p-btn { background: var(--p5-pink-red); color: white; border: none; padding: 10px 20px; font-weight: bold; border-radius: 5px; text-transform: uppercase; font-size: 11px; }
@@ -102,7 +103,7 @@
 
     <div id="sidebar" onmouseleave="closeSidebar()">
         <div style="text-align:center; margin-bottom:30px;"><img src="https://i.ibb.co/vYm6vS6/Take-Your-Heart.png" style="width:120px;"></div>
-        <div class="sidebar-header">STATIONS</div>
+        <div class="sidebar-header">MISSIONS</div>
         <div class="sidebar-item" onclick="changeHub('home')"><i class="fas fa-gamepad"></i> Arcade</div>
         <div class="sidebar-item" onclick="changeHub('movie')"><i class="fas fa-film"></i> Movies</div>
         <div class="sidebar-item" onclick="changeHub('tv')"><i class="fas fa-tv"></i> Shows</div>
@@ -111,14 +112,14 @@
 
     <div class="top-bar">
         <div class="logo-text">KING'S DOMAIN</div>
-        <div id="status-text" style="font-size: 11px; opacity: 0.5; letter-spacing: 2px;">XPS_OMEGA_V26_ACTIVE</div>
+        <div id="status-text" style="font-size: 11px; opacity: 0.5; letter-spacing: 2px;">XPS_TITAN_V27_READY</div>
     </div>
 
     <div class="workspace" id="workspace">
         <div id="grid-content" class="container">
             <header class="hero-banner">
                 <h1 id="banner-text">WELCOME BACK</h1>
-                <p id="banner-sub">Smart Cursor Routing active. Infinite XPS database scanning engaged.</p>
+                <p id="banner-sub">XPS Titan Engaged. Advanced non-vidlink protocol active.</p>
             </header>
             <input type="text" id="searchBox" placeholder="Search mission database..." onkeydown="if(event.key==='Enter') searchGlobal()">
             <div class="grid" id="mainGrid"></div>
@@ -126,7 +127,6 @@
         </div>
     </div>
 
-    <!-- XPS OMEGA PLAYER -->
     <div id="player-view">
         <div class="player-bar">
             <button class="p-btn" onclick="closePlayer()">← BACK</button>
@@ -143,13 +143,13 @@
                         <button id="btn-dub" class="sd-btn" onclick="setLang('dub')">Dub</button>
                     </div>
                 </div>
-                <div class="ep-top-nav" id="media-controls">
+                <div class="ep-top-nav">
                     <select id="seasonSelect" class="ep-select" onchange="handleSeasonChange()"></select>
-                    <!-- NEW XPS TITAN SERVERS -->
+                    <!-- NEW TITAN SERVERS (NON-VIDSRC) -->
                     <select id="serverSelect" class="ep-select" onchange="handleServerChange()">
-                        <option value="xps_icu">XPS Alpha (Stable-Core)</option>
-                        <option value="multiembed">XPS Beta (Global Aggregator)</option>
-                        <option value="vidsrc_cc">XPS Gamma (Ghost Node)</option>
+                        <option value="moviesapi">XPS Alpha (MoviesAPI - Global Stable)</option>
+                        <option value="blackmirror">XPS Beta (BlackMirror - Best UI)</option>
+                        <option value="nontv">XPS Gamma (NonTV - Ultimate Anime)</option>
                     </select>
                 </div>
                 <div class="ep-grid" id="epGrid"></div>
@@ -163,7 +163,7 @@
         let mission = {
             id: "", type: "movie", season: 1, episode: 1,
             lang: localStorage.getItem('p5_pref_lang') || "sub",
-            provider: "xps_icu"
+            provider: "moviesapi"
         };
         
         let currentMode = "home", currentShowData = null, currentPage = 1, isFetching = false, canLoadMore = true;
@@ -212,12 +212,11 @@
                 if(item.img && !item.img.includes('null')) {
                     const card = document.createElement('div'); card.className = 'card';
                     card.innerHTML = `<img src="${item.img}"><p>${item.name}</p>`;
-                    card.onclick = () => item.isGame ? launchArcade(item) : launchXPS(item); grid.appendChild(card);
+                    card.onclick = () => item.isGame ? launchArcade(item) : launchTITAN(item); grid.appendChild(card);
                 }
             });
         }
 
-        /* --- ARCADE ENGINE (ISOLATED) --- */
         function launchArcade(game) {
             document.getElementById('player-view').style.display = 'flex';
             document.getElementById('epSidebar').style.display = 'none';
@@ -225,8 +224,7 @@
             document.getElementById('gameFrame').src = game.url;
         }
 
-        /* --- XPS TITAN MEDIA ENGINE --- */
-        async function launchXPS(item) {
+        async function launchTITAN(item) {
             mission.id = item.id; mission.type = (item.type === 'tv' || currentMode === 'tv' || currentMode === 'anime') ? 'tv' : 'movie';
             document.getElementById('player-view').style.display = 'flex';
             document.getElementById('epSidebar').style.display = 'flex';
@@ -243,36 +241,33 @@
                 mission.episode = 1; sel.value = mission.season; 
                 buildEpGrid(mission.season, currentShowData.seasons.find(s => s.season_number == mission.season).episode_count);
             } else { document.getElementById('epGrid').innerHTML = ''; }
-            refreshXPS();
+            refreshTITAN();
         }
 
-        function refreshXPS() {
+        function refreshTITAN() {
             const f = document.getElementById('gameFrame');
             let url = "";
-            let path = (mission.type === 'tv') ? `${mission.type}/${mission.id}/${mission.season}/${mission.episode}` : `${mission.type}/${mission.id}`;
-
-            if (mission.provider === "xps_icu") {
-                url = `https://vidsrc.icu/embed/${path}`;
-            } else if (mission.provider === "multiembed") {
-                url = `https://multiembed.mov/directstream.php?video_id=${mission.id}${mission.type==='tv' ? '&s='+mission.season+'&e='+mission.episode : ''}`;
-            } else if (mission.provider === "vidsrc_cc") {
-                url = `https://vidsrc.cc/v2/embed/${path}`;
+            if (mission.provider === "moviesapi") {
+                url = `https://moviesapi.club/${mission.type}/${mission.id}${mission.type==='tv' ? '-' + mission.season + '-' + mission.episode : ''}`;
+            } else if (mission.provider === "blackmirror") {
+                url = `https://blackmirror.xyz/embed/${mission.type}/${mission.id}${mission.type==='tv' ? '/' + mission.season + '/' + mission.episode : ''}`;
+            } else if (mission.provider === "nontv") {
+                url = `https://vapi.adob.at/embed/${mission.type}/${mission.id}${mission.type==='tv' ? '/' + mission.season + '/' + mission.episode : ''}`;
             }
             f.src = url;
         }
 
-        function setLang(lang) { mission.lang = lang; localStorage.setItem('p5_pref_lang', lang); updateLangButtons(); refreshXPS(); }
+        function setLang(lang) { mission.lang = lang; localStorage.setItem('p5_pref_lang', lang); updateLangButtons(); refreshTITAN(); }
         function updateLangButtons() { document.getElementById('btn-sub').classList.toggle('active', mission.lang === 'sub'); document.getElementById('btn-dub').classList.toggle('active', mission.lang === 'dub'); }
-        function handleSeasonChange() { mission.season = document.getElementById('seasonSelect').value; mission.episode = 1; buildEpGrid(mission.season, currentShowData.seasons.find(s => s.season_number == mission.season).episode_count); refreshXPS(); }
-        function handleServerChange() { mission.provider = document.getElementById('serverSelect').value; refreshXPS(); }
-        function buildEpGrid(sn, count) { const g = document.getElementById('epGrid'); g.innerHTML = ''; for(let i=1; i<=count; i++) { const b = document.createElement('button'); b.className = 'ep-btn'; b.innerText = i; if(i == mission.episode) b.classList.add('active'); b.onclick = () => { mission.episode = i; document.querySelectorAll('.ep-btn').forEach(btn => btn.classList.remove('active')); b.classList.add('active'); refreshXPS(); }; g.appendChild(b); } }
+        function handleSeasonChange() { mission.season = document.getElementById('seasonSelect').value; mission.episode = 1; buildEpGrid(mission.season, currentShowData.seasons.find(s => s.season_number == mission.season).episode_count); refreshTITAN(); }
+        function handleServerChange() { mission.provider = document.getElementById('serverSelect').value; refreshTITAN(); }
+        function buildEpGrid(sn, count) { const g = document.getElementById('epGrid'); g.innerHTML = ''; for(let i=1; i<=count; i++) { const b = document.createElement('button'); b.className = 'ep-btn'; b.innerText = i; if(i == mission.episode) b.classList.add('active'); b.onclick = () => { mission.episode = i; document.querySelectorAll('.ep-btn').forEach(btn => btn.classList.remove('active')); b.classList.add('active'); refreshTITAN(); }; g.appendChild(b); } }
         document.getElementById('workspace').addEventListener('scroll', (e) => { if (currentMode === 'home') return; const { scrollTop, scrollHeight, clientHeight } = e.target; if (scrollTop + clientHeight >= scrollHeight - 600) fetchAPI(currentMode, true); });
         function toggleSidebar() { document.getElementById('sidebar').classList.toggle('active'); }
         function closeSidebar() { document.getElementById('sidebar').classList.remove('active'); }
         function closePlayer() { document.getElementById('player-view').style.display = 'none'; document.getElementById('gameFrame').src = ''; }
         function goFull() { const f = document.getElementById('gameFrame'); if (f.requestFullscreen) f.requestFullscreen(); else if (f.webkitRequestFullscreen) f.webkitRequestFullscreen(); }
 
-        const bgLayer = document.getElementById('bg-layer');
         render(games, false);
     </script>
 </body>
