@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="referrer" content="origin">
-    <title>KING'S DOMAIN | CINEMA V32</title>
+    <title>KING'S DOMAIN | CINEMA V33</title>
     <link rel="icon" type="image/png" href="https://i.ibb.co/vYm6vS6/Take-Your-Heart.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
@@ -48,13 +48,11 @@
         .card img { width: 100%; height: 100%; object-fit: cover; }
         .card p { position: absolute; bottom: 0; width: 100%; background: rgba(0,0,0,0.85); margin: 0; padding: 12px 0; text-align: center; font-size: 11px; font-weight: 700; border-top: 1px solid var(--p5-pink-red); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-        /* PLAYER VIEW */
         #player-view { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: black; z-index: 10000; flex-direction: column; }
         .player-bar { height: 60px; padding: 0 40px; background: #000; border-bottom: 2px solid var(--p5-pink-red); display: flex; justify-content: space-between; align-items: center; box-sizing: border-box; }
         .main-player-area { display: flex; flex-direction: row; height: calc(100% - 60px); width: 100%; }
         #gameFrame { flex: 1; border: none; background: #000; }
 
-        /* SIDEBAR TERMINAL */
         .ep-sidebar { width: 320px; background: #0f1015; border-left: 1px solid #222; display: flex; flex-direction: column; padding: 15px; box-sizing: border-box; overflow-y: auto; }
         .ep-header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px solid #222; padding-bottom: 8px; }
         .ep-sidebar h3 { font-size: 12px; margin: 0; color: #fff; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; }
@@ -98,7 +96,7 @@
         <div id="grid-content" class="container">
             <header class="hero-banner">
                 <h1 id="banner-text">WELCOME BACK</h1>
-                <p id="banner-sub">Expanded Anime Engine active. Premium Alpha Servers online.</p>
+                <p id="banner-sub">Premium Aggregator Engines Online. Scroll for thousands of targets.</p>
             </header>
             <input type="text" id="searchBox" placeholder="Search mission database..." onkeydown="if(event.key==='Enter') searchGlobal()">
             <div class="grid" id="mainGrid"></div>
@@ -124,11 +122,10 @@
                 </div>
                 <div class="ep-top-nav">
                     <select id="seasonSelect" class="ep-select" onchange="handleSeasonChange()"></select>
-                    <!-- NEW PREMIUM PROVIDERS -->
                     <select id="serverSelect" class="ep-select" onchange="handleServerChange()">
-                        <option value="vidlink">Alpha (VidLink - Cleanest UI / Anime)</option>
-                        <option value="embedsu">Beta (Embed.su - Best Bitrate / 4K)</option>
-                        <option value="autoembed">Gamma (AutoEmbed - Largest Library)</option>
+                        <option value="embedsu">Alpha (Embed.su - Highest Reliability)</option>
+                        <option value="autoembed">Beta (AutoEmbed - Best for Anime)</option>
+                        <option value="superembed">Gamma (SuperEmbed - Global Archive)</option>
                     </select>
                 </div>
                 <div class="ep-grid" id="epGrid"></div>
@@ -142,7 +139,7 @@
         let currentID = "";
         let currentMode = "home";
         let currentShowData = null;
-        let currentProvider = "vidlink";
+        let currentProvider = "embedsu";
         let currentLang = "sub";
         let currentPage = 1;
         let isFetching = false;
@@ -167,9 +164,8 @@
             isFetching = true;
             if(isLoadMore) document.getElementById('scroll-loader').style.display = 'block';
 
-            // SUPER ANIME DISCOVERY: Genre 16 (Animation) + Keyword 210024 (Anime)
             let url = `https://api.themoviedb.org/3/discover/${type === 'movie' ? 'movie' : 'tv'}?api_key=${TMDB_KEY}&sort_by=popularity.desc&page=${currentPage}`;
-            if (type === 'anime') url += `&with_genres=16&with_keywords=210024`;
+            if (type === 'anime') url += `&with_genres=16&with_original_language=ja`;
 
             const res = await fetch(url); const data = await res.json();
             if(data.results && data.results.length > 0) { 
@@ -190,7 +186,7 @@
             let url = (currentMode === 'movie') ? `https://api.themoviedb.org/3/search/movie?api_key=${TMDB_KEY}&query=${encodeURIComponent(query)}` : `https://api.themoviedb.org/3/search/tv?api_key=${TMDB_KEY}&query=${encodeURIComponent(query)}`;
             const res = await fetch(url); const data = await res.json();
             let results = data.results;
-            if (currentMode === 'anime') results = results.filter(i => i.genre_ids && (i.genre_ids.includes(16) || i.genre_ids.includes(210024)));
+            if (currentMode === 'anime') results = results.filter(i => i.genre_ids && i.genre_ids.includes(16));
             render(results.filter(i => i.poster_path).map(i => ({ id: i.id, name: i.title || i.name, img: `https://image.tmdb.org/t/p/w500${i.poster_path}`, type: (currentMode === 'movie' ? 'movie' : 'tv') })), false);
         }
 
@@ -205,19 +201,23 @@
             });
         }
 
-        // --- NON-VIDSRC URL ROUTER ---
+        // --- THE "ANTI-404" AGGREGATOR ROUTER ---
         function updateIframe(type, sn, ep) {
             const f = document.getElementById('gameFrame');
             let url = "";
-            let dubParam = (currentLang === 'dub') ? '&dub=true' : '';
 
-            if (currentProvider === "vidlink") {
-                url = `https://vidlink.pro/embed/${type}/${currentID}${type==='tv' ? '/' + sn + '/' + ep : ''}?primary_color=ff1f44${dubParam}`;
-            } else if (currentProvider === "embedsu") {
+            if (currentProvider === "embedsu") {
+                // Embed.su is very reliable for series and movies
                 url = `https://embed.su/embed/${type}/${currentID}${type==='tv' ? '/' + sn + '/' + ep : ''}`;
             } else if (currentProvider === "autoembed") {
-                url = `https://autoembed.cc/embed/${type}/${currentID}${type==='tv' ? '/' + sn + '/' + ep : ''}`;
+                // AutoEmbed has special logic for Anime Dubs
+                let dubStr = (currentLang === 'dub') ? '?player=dub' : '';
+                url = `https://autoembed.cc/embed/${type}/${currentID}${type==='tv' ? '/' + sn + '/' + ep : ''}${dubStr}`;
+            } else if (currentProvider === "superembed") {
+                // SuperEmbed pulls from many backups
+                url = `https://superembed.top/${type}/${currentID}${type==='tv' ? '/' + sn + '/' + ep : ''}`;
             }
+            
             f.src = url;
         }
 
