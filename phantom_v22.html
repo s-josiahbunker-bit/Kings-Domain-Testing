@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KING'S DOMAIN | CINEMA V22</title>
+    <link rel="icon" type="image/png" href="https://i.ibb.co/vYm6vS6/Take-Your-Heart.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --Home-Wallpaper: url('https://wallpapers.com/images/hd/persona-5-background-030o8u3u29n532no.jpg');
+            --Movie-Wallpaper: url('https://wallpaperaccess.com/full/1531383.jpg');
+            --Show-Wallpaper: url('https://wallpapercave.com/wp/wp4047814.jpg');
+            --Anime-Wallpaper: url('https://images8.alphacoders.com/132/1325171.jpeg');
+            --Proxy-Wallpaper: url('https://images.alphacoders.com/836/836569.png');
+            --Sidebar-Wallpaper: url('https://images.alphacoders.com/691/691456.jpg');
+            --Banner-Art: url('https://images8.alphacoders.com/132/1325171.jpeg');
+            --Menu-Img: url('https://i.ibb.co/68v8T3G/p5-menu.jpg'); 
+            --p5-pink-red: #ff1f44; --p5-black: #000000; --p5-card-bg: #141414;
+        }
+
+        body, html { margin: 0; padding: 0; height: 100%; background-color: var(--p5-black); color: white; font-family: 'Inter', sans-serif; overflow: hidden; }
+        #bg-layer { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), var(--Home-Wallpaper); background-size: cover; background-attachment: fixed; background-position: center; z-index: -1; transition: background-image 0.8s ease; }
+
+        /* V-NAV & SIDEBAR */
+        .v-nav { position: fixed; left: 0; top: 0; height: 100%; width: 85px; background: #000; border-right: 2px solid var(--p5-pink-red); display: flex; flex-direction: column; align-items: center; padding-top: 20px; gap: 20px; z-index: 1000; }
+        .nav-btn { width: 65px; height: 65px; background-image: var(--Menu-Img); background-size: contain; background-repeat: no-repeat; background-position: center; cursor: pointer; transition: 0.3s; mix-blend-mode: screen; }
+        .nav-btn:hover { transform: scale(1.1); filter: drop-shadow(0 0 10px var(--p5-pink-red)); }
+        #sidebar { position: fixed; top: 0; left: -320px; width: 310px; height: 100%; background-image: linear-gradient(rgba(0,0,0,0.95), rgba(0,0,0,0.95)), var(--Sidebar-Wallpaper); background-size: cover; border-right: 4px solid var(--p5-pink-red); z-index: 2001; transition: 0.5s ease; padding: 50px 20px; box-sizing: border-box; }
+        #sidebar.active { left: 0; }
+        .sidebar-header { color: var(--p5-pink-red); font-weight: 900; font-size: 24px; text-transform: uppercase; margin-bottom: 20px; border-bottom: 2px solid #222; }
+        .sidebar-item { display: flex; align-items: center; gap: 15px; padding: 18px; color: white; text-decoration: none; font-weight: 900; font-size: 20px; text-transform: uppercase; transition: 0.3s; cursor: pointer; }
+        .sidebar-item:hover { color: var(--p5-pink-red); padding-left: 30px; background: rgba(255, 31, 68, 0.1); }
+
+        /* WORKSPACE */
+        .top-bar { margin-left: 85px; padding: 15px 50px; background: rgba(0,0,0,0.5); display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .logo-text { color: var(--p5-pink-red); font-weight: 900; font-size: 20px; text-transform: uppercase; letter-spacing: 2px; }
+        .workspace { margin-left: 85px; height: calc(100% - 60px); width: calc(100% - 85px); overflow-y: auto; box-sizing: border-box; position: relative; scroll-behavior: smooth; }
+        .container { padding: 40px 60px; max-width: 1400px; margin: 0 auto; }
+        .hero-banner { width: 100%; height: 280px; border-radius: 20px; margin-bottom: 30px; background: linear-gradient(to right, rgba(0,0,0,1) 40%, transparent), var(--Banner-Art); background-size: cover; background-position: center; display: flex; flex-direction: column; justify-content: center; padding-left: 60px; box-sizing: border-box; border: 1px solid rgba(255,255,255,0.1); }
+        .hero-banner h1 { font-size: 44px; margin: 0; font-weight: 900; text-transform: uppercase; }
+
+        /* GRID */
+        #searchBox { width: 100%; padding: 18px 25px; background: var(--p5-card-bg); border: 1px solid #222; border-radius: 8px; color: white; margin-bottom: 30px; outline: none; font-size: 16px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 20px; }
+        .card { background: var(--p5-card-bg); border-radius: 12px; height: 380px; position: relative; overflow: hidden; border: 1px solid #1a1a1a; cursor: pointer; transition: 0.3s; }
+        .card img { width: 100%; height: 100%; object-fit: cover; }
+        .card p { position: absolute; bottom: 0; width: 100%; background: rgba(0,0,0,0.85); margin: 0; padding: 12px 0; text-align: center; font-size: 11px; font-weight: 700; border-top: 1px solid var(--p5-pink-red); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+        /* PLAYER & EPISODE SIDEBAR LAYOUT */
+        #player-view { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: black; z-index: 10000; flex-direction: column; }
+        .player-bar { height: 60px; padding: 0 40px; background: #000; border-bottom: 2px solid var(--p5-pink-red); display: flex; justify-content: space-between; align-items: center; box-sizing: border-box; }
+        
+        .main-player-area { display: flex; flex-direction: row; height: calc(100% - 60px); width: 100%; }
+        #gameFrame { flex: 1; border: none; background: #000; }
+
+        /* EPISODE SIDEBAR (MATCHING YOUR IMAGE) */
+        .ep-sidebar { width: 320px; background: #0f1015; border-left: 1px solid #222; display: flex; flex-direction: column; padding: 15px; box-sizing: border-box; overflow-y: auto; }
+        .ep-sidebar h3 { font-size: 14px; margin: 0 0 15px 0; color: #fff; font-weight: 400; }
+        
+        .ep-top-nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .ep-range { background: none; border: none; color: #aaa; font-size: 13px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 8px; }
+        .ep-search { background: #1a1b23; border: 1px solid #2a2b35; border-radius: 4px; padding: 6px 10px; color: #fff; width: 120px; font-size: 12px; }
+
+        .ep-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+        .ep-btn { background: #23242d; border: none; color: #999; padding: 12px 0; border-radius: 4px; cursor: pointer; font-size: 13px; font-weight: bold; transition: 0.2s; }
+        .ep-btn:hover { background: #333; color: #fff; }
+        .ep-btn.active { background: linear-gradient(to bottom right, var(--p5-pink-red), #900); color: #fff; box-shadow: 0 0 10px rgba(255,31,68,0.5); }
+
+        .p-btn { background: var(--p5-pink-red); color: white; border: none; padding: 10px 20px; font-weight: bold; cursor: pointer; border-radius: 5px; }
+
+        /* PROXY UI */
+        #proxy-page { display: none; flex-direction: column; align-items: center; justify-content: center; height: 100%; width: 100%; text-align: center; }
+        .proxy-title { color: white; font-size: 60px; font-weight: 900; text-transform: uppercase; margin-bottom: 25px; text-shadow: 4px 4px 0px var(--p5-pink-red); transform: skewX(-5deg); }
+        .proxy-input { width: 90%; max-width: 650px; padding: 25px; font-size: 22px; background: #000; border: 4px solid white; color: white; transform: skewX(-10deg); outline: none; box-shadow: 12px 12px 0px var(--p5-pink-red); font-weight: 900; }
+    </style>
+</head>
+<body>
+
+    <div id="bg-layer"></div>
+    <nav class="v-nav"><div class="nav-btn" onclick="toggleSidebar()"></div></nav>
+
+    <div id="sidebar" onmouseleave="closeSidebar()">
+        <div style="text-align:center; margin-bottom:30px;"><img src="https://i.ibb.co/vYm6vS6/Take-Your-Heart.png" style="width:120px;"></div>
+        <div class="sidebar-header">TARGETS</div>
+        <div class="sidebar-item" onclick="changeHub('home')"><i class="fas fa-home"></i> Home</div>
+        <div class="sidebar-item" onclick="changeHub('movie')"><i class="fas fa-film"></i> Movies</div>
+        <div class="sidebar-item" onclick="changeHub('tv')"><i class="fas fa-tv"></i> Shows</div>
+        <div class="sidebar-item" onclick="changeHub('anime')"><i class="fas fa-dragon"></i> Anime</div>
+        <div class="sidebar-item" onclick="openProxy()"><i class="fas fa-mask"></i> Proxy</div>
+    </div>
+
+    <div class="top-bar">
+        <div class="logo-text">KING'S DOMAIN</div>
+        <div id="status-text" style="font-size: 11px; opacity: 0.5; letter-spacing: 2px;">V22_EPISODE_ENGINE_ACTIVE</div>
+    </div>
+
+    <div class="workspace" id="workspace">
+        <div id="grid-content" class="container">
+            <header class="hero-banner">
+                <h1 id="banner-text">WELCOME BACK</h1>
+                <p id="banner-sub">Hit ENTER to search global Mission database.</p>
+            </header>
+            <input type="text" id="searchBox" placeholder="Search mission targets..." onkeydown="if(event.key==='Enter') searchGlobal()">
+            <div class="grid" id="mainGrid"></div>
+        </div>
+
+        <div id="proxy-page">
+            <h1 class="proxy-title">Phantom Proxy</h1>
+            <input type="text" id="proxyInput" class="proxy-input" placeholder="Enter Target URL..." onkeydown="if(event.key==='Enter') startProxy()">
+        </div>
+    </div>
+
+    <!-- FULL PLAYER WITH EPISODE SIDEBAR -->
+    <div id="player-view">
+        <div class="player-bar">
+            <button class="p-btn" onclick="closePlayer()">← BACK</button>
+            <span id="playing-title" style="font-weight:900;">EPISODE SELECTION</span>
+            <button class="p-btn" onclick="goFull()">FULLSCREEN</button>
+        </div>
+        <div class="main-player-area">
+            <iframe id="gameFrame" src="" allowfullscreen></iframe>
+            
+            <!-- THE NEW EPISODE SIDEBAR -->
+            <div class="ep-sidebar" id="epSidebar">
+                <h3>List of episodes:</h3>
+                <div class="ep-top-nav">
+                    <div class="ep-range"><i class="fas fa-bars"></i> EPS: 001-100 <i class="fas fa-chevron-down"></i></div>
+                    <input type="text" class="ep-search" placeholder="Number of Ep">
+                </div>
+                <div class="ep-grid" id="epGrid">
+                    <!-- Numbers will load here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const TMDB_KEY = "cce36626c4c9d64a54c0731adcaa1d8f"; 
+        const PROXY_ENGINE = "https://t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.t0.rammerhead.org/";
+        
+        let currentID = "";
+        let currentMode = "home";
+
+        const games = [
+            { name: "Slime Rancher", img: "https://sm.ign.com/ign_es/cover/s/slime-ranc/slime-rancher_j318.jpg", url: "slimerancher.html" },
+            { name: "Helltaker", img: "https://files.catbox.moe/k9d5o6.png", url: "helltaker.html" },
+            { name: "Tuff Client", img: "https://files.catbox.moe/rbt7f1.png", url: "tuffclient.html" },
+            { name: "Slope", img: "https://sm.ign.com/ign_br/game/s/slope/slope_69qy.jpg", url: "https://kkgames.github.io/slope/" }
+        ];
+
+        const mainGrid = document.getElementById('mainGrid');
+        const frame = document.getElementById('gameFrame');
+        const bgLayer = document.getElementById('bg-layer');
+
+        async function changeHub(mode) {
+            currentMode = mode; closeSidebar();
+            document.getElementById('grid-content').style.display = 'block';
+            document.getElementById('proxy-page').style.display = 'none';
+            if(mode === 'home') {
+                bgLayer.style.backgroundImage = "linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), var(--Home-Wallpaper)";
+                render(games);
+            } else {
+                let wall = (mode === 'tv') ? 'var(--Show-Wallpaper)' : (mode === 'anime' ? 'var(--Anime-Wallpaper)' : 'var(--Movie-Wallpaper)');
+                bgLayer.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), ${wall}`;
+                await fetchAPI(mode);
+            }
+        }
+
+        async function fetchAPI(type) {
+            let sort = (type === 'movie') ? 'title.asc' : 'name.asc';
+            let url = `https://api.themoviedb.org/3/discover/${type === 'movie' ? 'movie' : 'tv'}?api_key=${TMDB_KEY}&sort_by=${sort}&vote_count.gte=100&page=1`;
+            if (type === 'anime') url += `&with_genres=16&with_original_language=ja`;
+            const res = await fetch(url);
+            const data = await res.json();
+            render(data.results.map(i => ({ id: i.id, name: i.title || i.name, img: `https://image.tmdb.org/t/p/w500${i.poster_path}`, type: (type === 'movie' ? 'movie' : 'tv') })));
+        }
+
+        async function searchGlobal() {
+            const query = document.getElementById('searchBox').value;
+            const res = await fetch(`https://api.themoviedb.org/3/search/multi?api_key=${TMDB_KEY}&query=${encodeURIComponent(query)}`);
+            const data = await res.json();
+            render(data.results.filter(i => i.poster_path).map(i => ({ id: i.id, name: i.title || i.name, img: `https://image.tmdb.org/t/p/w500${i.poster_path}`, type: i.media_type })));
+        }
+
+        function render(data) {
+            mainGrid.innerHTML = '';
+            data.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `<img src="${item.img}"><p>${item.name}</p>`;
+                card.onclick = () => launchMedia(item);
+                mainGrid.appendChild(card);
+            });
+        }
+
+        async function launchMedia(item) {
+            currentID = item.id;
+            const isShow = (item.type === 'tv' || currentMode === 'tv' || currentMode === 'anime');
+            document.getElementById('player-view').style.display = 'flex';
+            document.getElementById('epSidebar').style.display = isShow ? 'flex' : 'none';
+            
+            if(isShow) {
+                // Fetch episode count
+                const res = await fetch(`https://api.themoviedb.org/3/tv/${item.id}?api_key=${TMDB_KEY}`);
+                const data = await res.json();
+                buildEpGrid(data.seasons[0].episode_count || 24);
+                frame.src = `https://vidsrc.xyz/embed/tv?tmdb=${item.id}&season=1&episode=1`;
+            } else {
+                frame.src = `https://vidsrc.xyz/embed/movie?tmdb=${item.id}`;
+            }
+        }
+
+        function buildEpGrid(count) {
+            const grid = document.getElementById('epGrid');
+            grid.innerHTML = '';
+            for(let i=1; i<=count; i++) {
+                const btn = document.createElement('button');
+                btn.className = 'ep-btn';
+                btn.innerText = i;
+                if(i === 1) btn.classList.add('active');
+                btn.onclick = () => {
+                    document.querySelectorAll('.ep-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    frame.src = `https://vidsrc.xyz/embed/tv?tmdb=${currentID}&season=1&episode=${i}`;
+                };
+                grid.appendChild(btn);
+            }
+        }
+
+        function toggleSidebar() { document.getElementById('sidebar').classList.toggle('active'); }
+        function closeSidebar() { document.getElementById('sidebar').classList.remove('active'); }
+        function openProxy() { closeSidebar(); document.getElementById('grid-content').style.display = 'none'; document.getElementById('proxy-page').style.display = 'flex'; bgLayer.style.backgroundImage = "linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), var(--Proxy-Wallpaper)"; }
+        function startProxy() { document.getElementById('player-view').style.display = 'flex'; document.getElementById('gameFrame').src = PROXY_ENGINE; }
+        function closePlayer() { document.getElementById('player-view').style.display = 'none'; frame.src = ''; }
+        function goFull() { if (frame.requestFullscreen) frame.requestFullscreen(); else if (frame.webkitRequestFullscreen) frame.webkitRequestFullscreen(); }
+
+        render(games);
+    </script>
+</body>
+</html>
