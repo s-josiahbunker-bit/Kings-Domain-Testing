@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="referrer" content="origin">
-    <title>KING'S DOMAIN | CINEMA V69</title>
+    <title>KING'S DOMAIN | CINEMA V72</title>
     <link rel="icon" type="image/png" href="https://i.ibb.co/vYm6vS6/Take-Your-Heart.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
@@ -19,13 +19,13 @@
             --Banner-Art: url('https://images8.alphacoders.com/132/1325171.jpeg');
             --Menu-Img: url('https://i.ibb.co/68v8T3G/p5-menu.jpg'); 
 
-            /* --- CUSTOM PHANTOM CURSORS --- */
+            /* --- PHANTOM CURSOR ASSETS --- */
             --cursor-default: url('https://i.ibb.co/4PDX5xP/cursor-arrow.png'); /* IMAGE 1 */
             --cursor-pointer: url('https://i.ibb.co/Pj0Qp8t/cursor-dagger.png'); /* IMAGE 2 */
             --cursor-text: url('https://i.ibb.co/f4p7vWf/cursor-text.png');    /* IMAGE 3 */
         }
 
-        /* --- GLOBAL CURSOR ROUTING --- */
+        /* --- PHANTOM CURSOR ENGINE --- */
         html, body { 
             margin: 0; padding: 0; height: 100%; 
             background-color: var(--p5-black); color: white; 
@@ -110,14 +110,14 @@
 
     <div class="top-bar">
         <div class="logo-text">KING'S DOMAIN</div>
-        <div id="status-text" style="font-size: 11px; opacity: 0.5; letter-spacing: 2px;">APEX_PROTOCOL_V69_READY</div>
+        <div id="status-text" style="font-size: 11px; opacity: 0.5; letter-spacing: 2px;">HYDRO_GRID_V72_READY</div>
     </div>
 
     <div class="workspace" id="workspace">
         <div id="grid-content" class="container">
             <header class="hero-banner">
-                <h1 id="banner-text">MISSION HUB</h1>
-                <p id="banner-sub">MegaCloud Apex Node Active. Sandbox Popups blocked. Infinite scrolling enabled.</p>
+                <h1 id="banner-text">MISSION LOGS</h1>
+                <p id="banner-sub">Hydro-Grid Apex Active. Sandbox physically blocks popups. Infinite scroll database scan.</p>
             </header>
             <input type="text" id="searchBox" placeholder="Search mission database..." onkeydown="if(event.key==='Enter') searchGlobal()">
             <div class="grid" id="mainGrid"></div>
@@ -133,7 +133,7 @@
             <button class="p-btn" onclick="goFull()">FULLSCREEN</button>
         </div>
         <div class="main-player-area">
-            <!-- SANDBOX ATTRIBUTE BLOCKS ALL POPUPS PHYSICALLY -->
+            <!-- SANDBOX ATTRIBUTE PHYSICALLY BLOCKS ALL POPUPS -->
             <iframe id="gameFrame" 
                     sandbox="allow-forms allow-scripts allow-pointer-lock allow-same-origin allow-top-navigation-by-user-activation"
                     src="" allowfullscreen></iframe>
@@ -148,11 +148,11 @@
                 </div>
                 <div class="ep-top-nav" id="media-controls">
                     <select id="seasonSelect" class="ep-select" onchange="handleSeasonChange()"></select>
-                    <!-- NON-EXCLUDED INFRASTRUCTURE MIRROR NODES -->
+                    <!-- NEW HYDRO-GRID SERVERS -->
                     <select id="serverSelect" class="ep-select" onchange="handleServerChange()">
-                        <option value="rabbit">XPS Alpha (Rabbit-Mirror - HiAnime Storage)</option>
-                        <option value="cloud">XPS Beta (CloudStream - Stable Series)</option>
-                        <option value="ghost">XPS Gamma (GhostNode - Anime Archive)</option>
+                        <option value="hydro">XPS Alpha (Hydro.quest - HiAnime/MegaCloud)</option>
+                        <option value="embedvip">XPS Beta (Embed.vip - Sandbox Stable)</option>
+                        <option value="viewvault">XPS Gamma (ViewVault - Global Archive)</option>
                     </select>
                 </div>
                 <div class="ep-grid" id="epGrid"></div>
@@ -166,7 +166,7 @@
         let mission = {
             id: "", type: "movie", season: 1, episode: 1,
             lang: localStorage.getItem('p5_pref_lang') || "sub",
-            provider: "rabbit"
+            provider: "hydro"
         };
         
         let currentMode = "home", currentShowData = null, currentPage = 1, isFetching = false, canLoadMore = true;
@@ -227,7 +227,7 @@
             });
         }
 
-        /* --- ARCADE ENGINE (ISOLATED) --- */
+        /* --- ARCADE LOGIC --- */
         function launchArcade(game) {
             const f = document.getElementById('gameFrame');
             document.getElementById('player-view').style.display = 'flex';
@@ -237,7 +237,7 @@
             f.src = game.url;
         }
 
-        /* --- MEDIA ENGINE (SANDBOXED) --- */
+        /* --- MEDIA ENGINE --- */
         async function launchTITAN(item) {
             mission.id = item.id; mission.type = (item.type === 'tv' || currentMode === 'tv' || currentMode === 'anime') ? 'tv' : 'movie';
             document.getElementById('player-view').style.display = 'flex';
@@ -266,12 +266,12 @@
             let s = mission.season; let e = mission.episode;
             let dub = (mission.lang === 'dub') ? '?audio=en' : '';
 
-            if (mission.provider === "rabbit") {
-                url = `https://vidsrc.me/embed/${mission.type}?tmdb=${mission.id}${mission.type==='tv' ? '&season=' + s + '&episode=' + e : ''}${dub}`;
-            } else if (mission.provider === "cloud") {
-                url = `https://anyembed.win/embed/${mission.type}/${mission.id}${mission.type==='tv' ? '/' + s + '/' + e : ''}`;
-            } else if (mission.provider === "ghost") {
-                url = `https://vidsrc.pm/embed/${mission.type}/${mission.id}${mission.type==='tv' ? '/' + s + '/' + e : ''}${dub}`;
+            if (mission.provider === "hydro") {
+                url = `https://hydro.quest/embed/${mission.type}/${mission.id}${mission.type==='tv' ? '/' + s + '/' + e : ''}${dub}`;
+            } else if (mission.provider === "embedvip") {
+                url = `https://embed.vip/embed/${mission.type}/${mission.id}${mission.type==='tv' ? '/' + s + '/' + e : ''}`;
+            } else if (mission.provider === "viewvault") {
+                url = `https://viewvault.org/embed/${mission.type}/${mission.id}${mission.type==='tv' ? '/' + s + '/' + e : ''}`;
             }
             f.src = url;
         }
