@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="referrer" content="origin">
-    <title>KING'S DOMAIN | CINEMA V34</title>
+    <title>KING'S DOMAIN | CINEMA V36</title>
     <link rel="icon" type="image/png" href="https://i.ibb.co/vYm6vS6/Take-Your-Heart.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
@@ -19,25 +19,29 @@
             --Banner-Art: url('https://images8.alphacoders.com/132/1325171.jpeg');
             --Menu-Img: url('https://i.ibb.co/68v8T3G/p5-menu.jpg'); 
 
-            /* --- PHANTOM CURSOR ASSETS --- */
+            /* --- CUSTOM PHANTOM CURSORS --- */
             --cursor-default: url('https://i.ibb.co/4PDX5xP/cursor-arrow.png'); /* IMAGE 1 */
             --cursor-pointer: url('https://i.ibb.co/Pj0Qp8t/cursor-dagger.png'); /* IMAGE 2 */
             --cursor-text: url('https://i.ibb.co/f4p7vWf/cursor-text.png');    /* IMAGE 3 */
         }
 
-        /* --- GLOBAL CURSOR ROUTING --- */
+        /* --- PHANTOM CURSOR ROUTING --- */
         html, body { 
             margin: 0; padding: 0; height: 100%; 
             background-color: var(--p5-black); color: white; 
             font-family: 'Inter', sans-serif; overflow: hidden; 
             cursor: var(--cursor-default), auto; 
         }
-        a, button, .card, .nav-btn, .sidebar-item, .sd-btn, .ep-btn, select, .p-btn { cursor: var(--cursor-pointer), pointer !important; }
-        input[type="text"], #searchBox { cursor: var(--cursor-text), text !important; }
+        a, button, .card, .nav-btn, .sidebar-item, .sd-btn, .ep-btn, select, .p-btn { 
+            cursor: var(--cursor-pointer), pointer !important; 
+        }
+        input[type="text"], #searchBox { 
+            cursor: var(--cursor-text), text !important; 
+        }
 
         #bg-layer { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), var(--Home-Wallpaper); background-size: cover; background-attachment: fixed; background-position: center; z-index: -1; transition: background-image 0.8s ease; }
 
-        /* V-NAV */
+        /* NAV */
         .v-nav { position: fixed; left: 0; top: 0; height: 100%; width: 85px; background: #000; border-right: 2px solid var(--p5-pink-red); display: flex; flex-direction: column; align-items: center; padding-top: 20px; gap: 20px; z-index: 1000; }
         .nav-btn { width: 65px; height: 65px; background-image: var(--Menu-Img); background-size: contain; background-repeat: no-repeat; background-position: center; transition: 0.3s; mix-blend-mode: screen; }
         .nav-btn:hover { transform: scale(1.1); filter: drop-shadow(0 0 10px var(--p5-pink-red)); }
@@ -48,6 +52,7 @@
         .sidebar-item { display: flex; align-items: center; gap: 15px; padding: 18px; color: white; text-decoration: none; font-weight: 900; font-size: 20px; text-transform: uppercase; transition: 0.3s; }
         .sidebar-item:hover { color: var(--p5-pink-red); padding-left: 30px; background: rgba(255, 31, 68, 0.1); }
 
+        /* WORKSPACE */
         .top-bar { margin-left: 85px; padding: 15px 50px; background: rgba(0,0,0,0.5); display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); }
         .logo-text { color: var(--p5-pink-red); font-weight: 900; font-size: 20px; text-transform: uppercase; letter-spacing: 2px; }
         .workspace { margin-left: 85px; height: calc(100% - 60px); width: calc(100% - 85px); overflow-y: auto; box-sizing: border-box; position: relative; scroll-behavior: smooth; }
@@ -57,7 +62,7 @@
         .hero-banner h1 { font-size: 44px; margin: 0; font-weight: 900; text-transform: uppercase; }
 
         #searchBox { width: 100%; padding: 18px 25px; background: var(--p5-card-bg); border: 1px solid #222; border-radius: 8px; color: white; margin-bottom: 30px; outline: none; font-size: 16px; border: 1px solid transparent; }
-        #searchBox:focus { border-color: var(--p5-pink-red); box-shadow: 0 0 15px rgba(255, 31, 68, 0.3); }
+        #searchBox:focus { border-color: var(--p5-pink-red); }
 
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 20px; }
         .card { background: var(--p5-card-bg); border-radius: 12px; height: 380px; position: relative; overflow: hidden; border: 1px solid #1a1a1a; transition: 0.3s; }
@@ -106,14 +111,14 @@
 
     <div class="top-bar">
         <div class="logo-text">KING'S DOMAIN</div>
-        <div id="status-text" style="font-size: 11px; opacity: 0.5; letter-spacing: 2px;">XPS_OMEGA_V34_READY</div>
+        <div id="status-text" style="font-size: 11px; opacity: 0.5; letter-spacing: 2px;">ABSOLUTE_PROTOCOL_V36_READY</div>
     </div>
 
     <div class="workspace" id="workspace">
         <div id="grid-content" class="container">
             <header class="hero-banner">
-                <h1 id="banner-text">WELCOME BACK</h1>
-                <p id="banner-sub">XPS Protocol Enabled. Infinite scrolling database active.</p>
+                <h1 id="banner-text">MISSION READY</h1>
+                <p id="banner-sub">Phantom Aggregators Enabled. Sandbox Popup-Shield active. Infinite Scrolling engaged.</p>
             </header>
             <input type="text" id="searchBox" placeholder="Search mission database..." onkeydown="if(event.key==='Enter') searchGlobal()">
             <div class="grid" id="mainGrid"></div>
@@ -121,10 +126,11 @@
         </div>
     </div>
 
+    <!-- XPS SANDBOXED PLAYER -->
     <div id="player-view">
         <div class="player-bar">
             <button class="p-btn" onclick="closePlayer()">← BACK</button>
-            <span id="playing-title" style="font-weight:900; color:var(--p5-pink-red);">XPS MISSION IN PROGRESS</span>
+            <span id="playing-title" style="font-weight:900; color:var(--p5-pink-red);">MISSION IN PROGRESS</span>
             <button class="p-btn" onclick="goFull()">FULLSCREEN</button>
         </div>
         <div class="main-player-area">
@@ -142,11 +148,11 @@
                 </div>
                 <div class="ep-top-nav" id="media-controls">
                     <select id="seasonSelect" class="ep-select" onchange="handleSeasonChange()"></select>
-                    <!-- NEW PREMIUM SANDBOX-STABLE SERVERS -->
+                    <!-- NON-EXCLUDED UNDERGROUND SERVERS -->
                     <select id="serverSelect" class="ep-select" onchange="handleServerChange()">
-                        <option value="rive">XPS Alpha (Rive - Clean & High Bitrate)</option>
-                        <option value="drive">XPS Beta (DrivePlus - Fast & Reliable)</option>
-                        <option value="nostrm">XPS Gamma (Nostrm - Global Archive)</option>
+                        <option value="whvx">XPS Alpha (Whvx - Elite Aggregator)</option>
+                        <option value="consume">XPS Beta (Consume - No Ads)</option>
+                        <option value="cloud">XPS Gamma (Direct-Cloud Mirror)</option>
                     </select>
                 </div>
                 <div class="ep-grid" id="epGrid"></div>
@@ -160,7 +166,7 @@
         let mission = {
             id: "", type: "movie", season: 1, episode: 1,
             lang: localStorage.getItem('p5_pref_lang') || "sub",
-            provider: "rive"
+            provider: "whvx"
         };
         
         let currentMode = "home", currentShowData = null, currentPage = 1, isFetching = false, canLoadMore = true;
@@ -190,11 +196,14 @@
             if (isFetching || !canLoadMore) return;
             isFetching = true;
             if(isLoadMore) document.getElementById('scroll-loader').style.display = 'block';
+            
+            // SUPER ANIME FILTER: Genre 16 (Animation) + Original Language Japanese
             let url = `https://api.themoviedb.org/3/discover/${type === 'movie' ? 'movie' : 'tv'}?api_key=${TMDB_KEY}&sort_by=popularity.desc&page=${currentPage}`;
             if (type === 'anime') url += `&with_genres=16&with_original_language=ja`;
+            
             const res = await fetch(url); const data = await res.json();
             if(data.results && data.results.length > 0) { 
-                render(data.results.map(i => ({ id: i.id, name: i.title || i.name, img: `https://image.tmdb.org/t/p/w500${i.poster_path}`, type: (type === 'movie' ? 'movie' : 'tv'), lang: i.original_language })), isLoadMore); 
+                render(data.results.map(i => ({ id: i.id, name: i.title || i.name, img: `https://image.tmdb.org/t/p/w500${i.poster_path}`, type: (type === 'movie' ? 'movie' : 'tv') })), isLoadMore); 
                 currentPage++; 
             } else { canLoadMore = false; }
             isFetching = false; document.getElementById('scroll-loader').style.display = 'none';
@@ -203,7 +212,7 @@
         async function searchGlobal() {
             canLoadMore = false; const query = document.getElementById('searchBox').value;
             let url = (currentMode === 'movie') ? `https://api.themoviedb.org/3/search/movie?api_key=${TMDB_KEY}&query=${encodeURIComponent(query)}` : `https://api.themoviedb.org/3/search/tv?api_key=${TMDB_KEY}&query=${encodeURIComponent(query)}`;
-            if (currentMode === 'arcade' || currentMode === 'anime') url = `https://api.themoviedb.org/3/search/multi?api_key=${TMDB_KEY}&query=${encodeURIComponent(query)}`;
+            if (currentMode === 'arcade' || currentMode === 'anime' || currentMode === 'home') url = `https://api.themoviedb.org/3/search/multi?api_key=${TMDB_KEY}&query=${encodeURIComponent(query)}`;
             const res = await fetch(url); const data = await res.json();
             let results = data.results;
             if (currentMode === 'anime') results = results.filter(i => i.genre_ids && i.genre_ids.includes(16));
@@ -221,21 +230,23 @@
             });
         }
 
+        /* --- ARCADE ENGINE --- */
         function launchArcade(game) {
             const f = document.getElementById('gameFrame');
             document.getElementById('player-view').style.display = 'flex';
             document.getElementById('epSidebar').style.display = 'none';
             document.getElementById('playing-title').innerText = game.name.toUpperCase();
-            f.removeAttribute('sandbox'); // Games need access to function
+            f.removeAttribute('sandbox'); 
             f.src = game.url;
         }
 
+        /* --- TITAN MEDIA ENGINE --- */
         async function launchTITAN(item) {
             mission.id = item.id; mission.type = (item.type === 'tv' || currentMode === 'tv' || currentMode === 'anime') ? 'tv' : 'movie';
             document.getElementById('player-view').style.display = 'flex';
             document.getElementById('epSidebar').style.display = 'flex';
             document.getElementById('playing-title').innerText = item.name.toUpperCase();
-            document.getElementById('animeToggle').style.display = (currentMode === 'anime' || item.lang === 'ja' || mission.type === 'tv') ? 'flex' : 'none';
+            document.getElementById('animeToggle').style.display = (currentMode === 'anime' || mission.type === 'tv') ? 'flex' : 'none';
             document.getElementById('seasonSelect').style.display = (mission.type === 'tv') ? 'block' : 'none';
             document.getElementById('gameFrame').setAttribute('sandbox', 'allow-forms allow-scripts allow-pointer-lock allow-same-origin allow-top-navigation');
 
@@ -256,14 +267,14 @@
             const f = document.getElementById('gameFrame');
             let url = "";
             let s = mission.season; let e = mission.episode;
-            let dubFlag = (mission.lang === 'dub') ? '?dub=true&audio=en&ds=1' : '';
+            let dub = (mission.lang === 'dub') ? '&dub=true' : '';
 
-            if (mission.provider === "rive") {
-                url = `https://rive.stream/embed/${mission.type}/${mission.id}${mission.type==='tv' ? '/' + s + '/' + e : ''}${dubFlag}`;
-            } else if (mission.provider === "drive") {
-                url = `https://drive.plus/embed/${mission.type}/${mission.id}${mission.type==='tv' ? '/' + s + '/' + e : ''}`;
-            } else if (mission.provider === "nostrm") {
-                url = (mission.type === 'movie') ? `https://www.nostrm.com/embed/movie/${mission.id}` : `https://www.nostrm.com/embed/tv/${mission.id}/${s}/${e}`;
+            if (mission.provider === "whvx") {
+                url = `https://whvx.net/embed/${mission.type}/${mission.id}${mission.type==='tv' ? '/' + s + '/' + e : ''}`;
+            } else if (mission.provider === "consume") {
+                url = `https://consume.pm/watch/${mission.type}/${mission.id}${mission.type==='tv' ? '/' + s + '/' + e : ''}${dub}`;
+            } else if (mission.provider === "cloud") {
+                url = `https://anyembed.icu/embed/${mission.type}/${mission.id}${mission.type==='tv' ? '/' + s + '/' + e : ''}`;
             }
             f.src = url;
         }
