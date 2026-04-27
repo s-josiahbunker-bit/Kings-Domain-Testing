@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="referrer" content="origin">
-    <title>KING'S DOMAIN | CINEMA V55</title>
+    <title>KING'S DOMAIN | CINEMA V56</title>
     <link rel="icon" type="image/png" href="https://i.ibb.co/vYm6vS6/Take-Your-Heart.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
@@ -19,7 +19,7 @@
             --Banner-Art: url('https://images8.alphacoders.com/132/1325171.jpeg');
             --Menu-Img: url('https://i.ibb.co/68v8T3G/p5-menu.jpg'); 
 
-            /* --- CUSTOM PHANTOM CURSORS --- */
+            /* --- PHANTOM CURSOR ASSETS --- */
             --cursor-default: url('https://i.ibb.co/4PDX5xP/cursor-arrow.png'); /* IMAGE 1 */
             --cursor-pointer: url('https://i.ibb.co/Pj0Qp8t/cursor-dagger.png'); /* IMAGE 2 */
             --cursor-text: url('https://i.ibb.co/f4p7vWf/cursor-text.png');    /* IMAGE 3 */
@@ -45,7 +45,6 @@
         .v-nav { position: fixed; left: 0; top: 0; height: 100%; width: 85px; background: #000; border-right: 2px solid var(--p5-pink-red); display: flex; flex-direction: column; align-items: center; padding-top: 20px; gap: 20px; z-index: 1000; }
         .nav-btn { width: 65px; height: 65px; background-image: var(--Menu-Img); background-size: contain; background-repeat: no-repeat; background-position: center; transition: 0.3s; mix-blend-mode: screen; }
         .nav-btn:hover { transform: scale(1.1); filter: drop-shadow(0 0 10px var(--p5-pink-red)); }
-        
         #sidebar { position: fixed; top: 0; left: -320px; width: 310px; height: 100%; background-image: linear-gradient(rgba(0,0,0,0.95), rgba(0,0,0,0.95)), var(--Sidebar-Wallpaper); background-size: cover; border-right: 4px solid var(--p5-pink-red); z-index: 2001; transition: 0.5s ease; padding: 50px 20px; box-sizing: border-box; }
         #sidebar.active { left: 0; }
         .sidebar-header { color: var(--p5-pink-red); font-weight: 900; font-size: 24px; text-transform: uppercase; margin-bottom: 20px; border-bottom: 2px solid #222; }
@@ -111,14 +110,14 @@
 
     <div class="top-bar">
         <div class="logo-text">KING'S DOMAIN</div>
-        <div id="status-text" style="font-size: 11px; opacity: 0.5; letter-spacing: 2px;">MEGACLOUD_V55_READY</div>
+        <div id="status-text" style="font-size: 11px; opacity: 0.5; letter-spacing: 2px;">APEX_PROTOCOL_V56_READY</div>
     </div>
 
     <div class="workspace" id="workspace">
         <div id="grid-content" class="container">
             <header class="hero-banner">
                 <h1 id="banner-text">MISSION LOGS</h1>
-                <p id="banner-sub">MegaCloud Infrastructure Apex active. Sandbox Shield engaged. Infinite scroll enabled.</p>
+                <p id="banner-sub">Infrastructure Apex Node active. Popups Physically Blocked. Infinite database scroll.</p>
             </header>
             <input type="text" id="searchBox" placeholder="Search mission database..." onkeydown="if(event.key==='Enter') searchGlobal()">
             <div class="grid" id="mainGrid"></div>
@@ -134,7 +133,7 @@
             <button class="p-btn" onclick="goFull()">FULLSCREEN</button>
         </div>
         <div class="main-player-area">
-            <!-- SANDBOX ATTRIBUTE BLOCKS ALL POPUPS PHYSICALLY -->
+            <!-- SANDBOX ATTRIBUTE BLOCKS ALL POPUPS -->
             <iframe id="gameFrame" 
                     sandbox="allow-forms allow-scripts allow-pointer-lock allow-same-origin allow-top-navigation-by-user-activation"
                     src="" allowfullscreen></iframe>
@@ -149,11 +148,11 @@
                 </div>
                 <div class="ep-top-nav" id="media-controls">
                     <select id="seasonSelect" class="ep-select" onchange="handleSeasonChange()"></select>
-                    <!-- NON-EXCLUDED CLOUD-DIRECT INFRASTRUCTURE SERVERS -->
+                    <!-- NON-EXCLUDED CLOUD-DIRECT APEX SERVERS -->
                     <select id="serverSelect" class="ep-select" onchange="handleServerChange()">
-                        <option value="aura">XPS Alpha (Aura - MegaCloud Hub)</option>
-                        <option value="autoplayer">XPS Beta (AutoPlayer - Stable Series)</option>
-                        <option value="nostrem">XPS Gamma (Nostrem - Global Mirror)</option>
+                        <option value="animejoy">XPS Alpha (AnimeJoy - MegaCloud Hub)</option>
+                        <option value="mivids">XPS Beta (Mivids - High Bitrate)</option>
+                        <option value="strmirror">XPS Gamma (StreamMirror - Standard Mirror)</option>
                     </select>
                 </div>
                 <div class="ep-grid" id="epGrid"></div>
@@ -167,7 +166,7 @@
         let mission = {
             id: "", type: "movie", season: 1, episode: 1,
             lang: localStorage.getItem('p5_pref_lang') || "sub",
-            provider: "aura"
+            provider: "animejoy"
         };
         
         let currentMode = "home", currentShowData = null, currentPage = 1, isFetching = false, canLoadMore = true;
@@ -228,7 +227,7 @@
             });
         }
 
-        /* --- ARCADE LOGIC (NO SANDBOX) --- */
+        /* --- ARCADE ENGINE (ISOLATED) --- */
         function launchArcade(game) {
             const f = document.getElementById('gameFrame');
             document.getElementById('player-view').style.display = 'flex';
@@ -238,7 +237,7 @@
             f.src = game.url;
         }
 
-        /* --- TITAN MEDIA ENGINE --- */
+        /* --- MEDIA ENGINE --- */
         async function launchTITAN(item) {
             mission.id = item.id; mission.type = (item.type === 'tv' || currentMode === 'tv' || currentMode === 'anime') ? 'tv' : 'movie';
             document.getElementById('player-view').style.display = 'flex';
@@ -265,14 +264,14 @@
             const f = document.getElementById('gameFrame');
             let url = "";
             let s = mission.season; let e = mission.episode;
-            let dub = (mission.lang === 'dub') ? '?audio=en' : '';
+            let dub = (mission.lang === 'dub') ? '?audio=en&lang=en' : '';
 
-            if (mission.provider === "aura") {
-                url = `https://ajs.best/embed/${mission.type}/${mission.id}${mission.type==='tv' ? '/' + s + '/' + e : ''}${dub}`;
-            } else if (mission.provider === "autoplayer") {
-                url = `https://autoplayer.xyz/embed/${mission.type}/${mission.id}${mission.type==='tv' ? '/' + s + '/' + e : ''}`;
-            } else if (mission.provider === "nostrem") {
-                url = `https://nostrem.me/embed/${mission.type}/${mission.id}${mission.type==='tv' ? '/' + s + '/' + e : ''}`;
+            if (mission.provider === "animejoy") {
+                url = `https://animejoy.site/embed/${mission.type}/${mission.id}${mission.type==='tv' ? '/' + s + '/' + e : ''}${dub}`;
+            } else if (mission.provider === "mivids") {
+                url = `https://mivids.com/embed/${mission.type}/${mission.id}${mission.type==='tv' ? '/' + s + '/' + e : ''}`;
+            } else if (mission.provider === "strmirror") {
+                url = `https://streamirror.site/embed/${mission.type}/${mission.id}${mission.type==='tv' ? '/' + s + '/' + e : ''}`;
             }
             f.src = url;
         }
