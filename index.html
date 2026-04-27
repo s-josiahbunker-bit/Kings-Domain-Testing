@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="referrer" content="origin">
-    <title>KING'S DOMAIN | CINEMA V40</title>
+    <title>KING'S DOMAIN | CINEMA V41</title>
     <link rel="icon" type="image/png" href="https://i.ibb.co/vYm6vS6/Take-Your-Heart.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
@@ -41,7 +41,7 @@
 
         #bg-layer { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), var(--Home-Wallpaper); background-size: cover; background-attachment: fixed; background-position: center; z-index: -1; transition: background-image 0.8s ease; }
 
-        /* V-NAV & SIDEBAR */
+        /* V-NAV */
         .v-nav { position: fixed; left: 0; top: 0; height: 100%; width: 85px; background: #000; border-right: 2px solid var(--p5-pink-red); display: flex; flex-direction: column; align-items: center; padding-top: 20px; gap: 20px; z-index: 1000; }
         .nav-btn { width: 65px; height: 65px; background-image: var(--Menu-Img); background-size: contain; background-repeat: no-repeat; background-position: center; transition: 0.3s; mix-blend-mode: screen; }
         .nav-btn:hover { transform: scale(1.1); filter: drop-shadow(0 0 10px var(--p5-pink-red)); }
@@ -69,7 +69,7 @@
         .card img { width: 100%; height: 100%; object-fit: cover; }
         .card p { position: absolute; bottom: 0; width: 100%; background: rgba(0,0,0,0.85); margin: 0; padding: 12px 0; text-align: center; font-size: 11px; font-weight: 700; border-top: 1px solid var(--p5-pink-red); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-        /* XPS OMEGA PLAYER UI */
+        /* OMEGA PLAYER UI */
         #player-view { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: black; z-index: 10000; flex-direction: column; }
         .player-bar { height: 60px; padding: 0 40px; background: #000; border-bottom: 2px solid var(--p5-pink-red); display: flex; justify-content: space-between; align-items: center; box-sizing: border-box; }
         .main-player-area { display: flex; flex-direction: row; height: calc(100% - 60px); width: 100%; }
@@ -110,14 +110,14 @@
 
     <div class="top-bar">
         <div class="logo-text">KING'S DOMAIN</div>
-        <div id="status-text" style="font-size: 11px; opacity: 0.5; letter-spacing: 2px;">SOVEREIGN_CORE_V40_READY</div>
+        <div id="status-text" style="font-size: 11px; opacity: 0.5; letter-spacing: 2px;">SHADOW_SOVEREIGN_V41_READY</div>
     </div>
 
     <div class="workspace" id="workspace">
         <div id="grid-content" class="container">
             <header class="hero-banner">
-                <h1 id="banner-text">MISSION LOGS</h1>
-                <p id="banner-sub">Sovereign Cluster Active. Popups physically disabled. Infinite database scrolling engaged.</p>
+                <h1 id="banner-text">PHANTOM ARCHIVE</h1>
+                <p id="banner-sub">Shadow Servers Engaged. Safe-Sandbox Active. Infinite database scroll.</p>
             </header>
             <input type="text" id="searchBox" placeholder="Search mission database..." onkeydown="if(event.key==='Enter') searchGlobal()">
             <div class="grid" id="mainGrid"></div>
@@ -129,7 +129,7 @@
     <div id="player-view">
         <div class="player-bar">
             <button class="p-btn" onclick="closePlayer()">← BACK</button>
-            <span id="playing-title" style="font-weight:900; color:var(--p5-pink-red);">MISSION IN PROGRESS</span>
+            <span id="playing-title" style="font-weight:900; color:var(--p5-pink-red);">XPS MISSION IN PROGRESS</span>
             <button class="p-btn" onclick="goFull()">FULLSCREEN</button>
         </div>
         <div class="main-player-area">
@@ -148,11 +148,11 @@
                 </div>
                 <div class="ep-top-nav">
                     <select id="seasonSelect" class="ep-select" onchange="handleSeasonChange()"></select>
-                    <!-- THE ELITE SOVEREIGN SERVERS (NON-EXCLUDED) -->
+                    <!-- THE SHADOW MIRROR CLUSTER (NON-EXCLUDED) -->
                     <select id="serverSelect" class="ep-select" onchange="handleServerChange()">
-                        <option value="aura">XPS Alpha (Aura - Clean Mirror)</option>
-                        <option value="autoembed">XPS Beta (AutoEmbed - Dub Expert)</option>
-                        <option value="nontongo">XPS Gamma (NontonGo - Stable Stream)</option>
+                        <option value="hexa">XPS Alpha (Hexa - High Success)</option>
+                        <option value="vapi">XPS Beta (Vapi - Sandboxed)</option>
+                        <option value="embedstream">XPS Gamma (EmbedStream - High Bitrate)</option>
                     </select>
                 </div>
                 <div class="ep-grid" id="epGrid"></div>
@@ -166,7 +166,7 @@
         let mission = {
             id: "", type: "movie", season: 1, episode: 1,
             lang: localStorage.getItem('p5_pref_lang') || "sub",
-            provider: "aura"
+            provider: "hexa"
         };
         
         let currentMode = "home", currentShowData = null, currentPage = 1, isFetching = false, canLoadMore = true;
@@ -196,11 +196,8 @@
             if (isFetching || !canLoadMore) return;
             isFetching = true;
             if(isLoadMore) document.getElementById('scroll-loader').style.display = 'block';
-
-            // MEGA ANIME FILTER: Genre 16 + Keyword 210024
             let url = `https://api.themoviedb.org/3/discover/${type === 'movie' ? 'movie' : 'tv'}?api_key=${TMDB_KEY}&sort_by=popularity.desc&page=${currentPage}`;
-            if (type === 'anime') url += `&with_genres=16&with_keywords=210024`;
-
+            if (type === 'anime') url += `&with_genres=16&with_original_language=ja`;
             const res = await fetch(url); const data = await res.json();
             if(data.results && data.results.length > 0) { 
                 render(data.results.map(i => ({ id: i.id, name: i.title || i.name, img: `https://image.tmdb.org/t/p/w500${i.poster_path}`, type: (type === 'movie' ? 'movie' : 'tv') })), isLoadMore); 
@@ -225,23 +222,23 @@
                 if(item.img && !item.img.includes('null')) {
                     const card = document.createElement('div'); card.className = 'card';
                     card.innerHTML = `<img src="${item.img}"><p>${item.name}</p>`;
-                    card.onclick = () => item.isArcade ? launchArcade(item) : launchTITAN(item); grid.appendChild(card);
+                    card.onclick = () => item.isArcade ? launchArcade(item) : launchXPS(item); grid.appendChild(card);
                 }
             });
         }
 
-        /* --- ARCADE ENGINE (ISOLATED) --- */
+        /* --- ARCADE ENGINE (NO MEDIA SIDEBAR) --- */
         function launchArcade(game) {
             const f = document.getElementById('gameFrame');
             document.getElementById('player-view').style.display = 'flex';
             document.getElementById('epSidebar').style.display = 'none';
             document.getElementById('playing-title').innerText = game.name.toUpperCase();
-            f.removeAttribute('sandbox'); // Games need access to save state
+            f.removeAttribute('sandbox'); 
             f.src = game.url;
         }
 
-        /* --- MEDIA ENGINE (SANDBOXED) --- */
-        async function launchTITAN(item) {
+        /* --- SHADOW MEDIA ENGINE (SANDBOXED) --- */
+        async function launchXPS(item) {
             mission.id = item.id; mission.type = (item.type === 'tv' || currentMode === 'tv' || currentMode === 'anime') ? 'tv' : 'movie';
             document.getElementById('player-view').style.display = 'flex';
             document.getElementById('epSidebar').style.display = 'flex';
@@ -260,30 +257,30 @@
                 mission.episode = 1; sel.value = mission.season; 
                 buildEpGrid(mission.season, currentShowData.seasons.find(s => s.season_number == mission.season).episode_count);
             } else { document.getElementById('epGrid').innerHTML = ''; }
-            refreshTITAN();
+            refreshXPS();
         }
 
-        function refreshTITAN() {
+        function refreshXPS() {
             const f = document.getElementById('gameFrame');
             let url = "";
             let s = mission.season; let e = mission.episode;
-            let dubFlag = (mission.lang === 'dub') ? '?lang=en&audio=en' : '';
+            let dub = (mission.lang === 'dub') ? '?audio=en&dub=true' : '';
 
-            if (mission.provider === "aura") {
-                url = `https://auraplayer.com/embed/${mission.type}/${mission.id}${mission.type==='tv' ? '/' + s + '/' + e : ''}${dubFlag}`;
-            } else if (mission.provider === "autoembed") {
-                url = `https://autoembed.stream/embed/${mission.type}/${mission.id}${mission.type==='tv' ? '/' + s + '/' + e : ''}${dubFlag}`;
-            } else if (mission.provider === "nontongo") {
-                url = `https://nontongo.win/embed/${mission.type}/${mission.id}${mission.type==='tv' ? '/' + s + '/' + e : ''}`;
+            if (mission.provider === "hexa") {
+                url = `https://hexa.rip/embed/${mission.type}/${mission.id}${mission.type==='tv' ? '/' + s + '/' + e : ''}${dub}`;
+            } else if (mission.provider === "vapi") {
+                url = `https://vapi.adob.at/embed/${mission.type}/${mission.id}${mission.type==='tv' ? '/' + s + '/' + e : ''}${dub}`;
+            } else if (mission.provider === "embedstream") {
+                url = `https://embed.stream/embed/${mission.type}/${mission.id}${mission.type==='tv' ? '/' + s + '/' + e : ''}`;
             }
             f.src = url;
         }
 
-        function setLang(lang) { mission.lang = lang; localStorage.setItem('p5_pref_lang', lang); updateLangButtons(); refreshTITAN(); }
+        function setLang(lang) { mission.lang = lang; localStorage.setItem('p5_pref_lang', lang); updateLangButtons(); refreshXPS(); }
         function updateLangButtons() { document.getElementById('btn-sub').classList.toggle('active', mission.lang === 'sub'); document.getElementById('btn-dub').classList.toggle('active', mission.lang === 'dub'); }
-        function handleSeasonChange() { mission.season = document.getElementById('seasonSelect').value; mission.episode = 1; buildEpGrid(mission.season, currentShowData.seasons.find(s => s.season_number == mission.season).episode_count); refreshTITAN(); }
-        function handleServerChange() { mission.provider = document.getElementById('serverSelect').value; refreshTITAN(); }
-        function buildEpGrid(sn, count) { const g = document.getElementById('epGrid'); g.innerHTML = ''; for(let i=1; i<=count; i++) { const b = document.createElement('button'); b.className = 'ep-btn'; b.innerText = i; if(i == mission.episode) b.classList.add('active'); b.onclick = () => { mission.episode = i; document.querySelectorAll('.ep-btn').forEach(btn => btn.classList.remove('active')); b.classList.add('active'); refreshTITAN(); }; g.appendChild(b); } }
+        function handleSeasonChange() { mission.season = document.getElementById('seasonSelect').value; mission.episode = 1; buildEpGrid(mission.season, currentShowData.seasons.find(s => s.season_number == mission.season).episode_count); refreshXPS(); }
+        function handleServerChange() { mission.provider = document.getElementById('serverSelect').value; refreshXPS(); }
+        function buildEpGrid(sn, count) { const g = document.getElementById('epGrid'); g.innerHTML = ''; for(let i=1; i<=count; i++) { const b = document.createElement('button'); b.className = 'ep-btn'; b.innerText = i; if(i == mission.episode) b.classList.add('active'); b.onclick = () => { mission.episode = i; document.querySelectorAll('.ep-btn').forEach(btn => btn.classList.remove('active')); b.classList.add('active'); refreshXPS(); }; g.appendChild(b); } }
         document.getElementById('workspace').addEventListener('scroll', (e) => { if (currentMode === 'arcade') return; const { scrollTop, scrollHeight, clientHeight } = e.target; if (scrollTop + clientHeight >= scrollHeight - 600) fetchAPI(currentMode, true); });
         function toggleSidebar() { document.getElementById('sidebar').classList.toggle('active'); }
         function closeSidebar() { document.getElementById('sidebar').classList.remove('active'); }
