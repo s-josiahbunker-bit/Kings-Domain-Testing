@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KING'S DOMAIN | SHADOW V60</title>
+    <!-- [Include your original CSS here] -->
+    <style>
+        :root { --p5-pink-red: #ff1f44; --p5-black: #000000; --p5-card-bg: #141414; }
+        body { margin:0; background:var(--p5-black); color:white; font-family: sans-serif; }
+        .v-nav { position:fixed; left:0; top:0; width:85px; height:100%; border-right:2px solid var(--p5-pink-red); background:#000; }
+        .workspace { margin-left:85px; padding:40px; }
+        .grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(180px, 1fr)); gap:20px; }
+        .card { background:var(--p5-card-bg); height:380px; cursor:pointer; border:1px solid #1a1a1a; }
+        .card img { width:100%; height:85%; object-fit:cover; }
+        #player-view { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:black; z-index:9999; flex-direction:column; }
+        .sd-btn { padding:10px; background:#222; color:white; cursor:pointer; border:none; }
+        .sd-btn.active { background:var(--p5-pink-red); }
+        .sv-node { padding:10px; background:#222; margin:5px; cursor:pointer; }
+        .sv-node.active { background:var(--p5-pink-red); }
+        .api-modal { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); display:flex; justify-content:center; align-items:center; z-index:99999; }
+    </style>
+</head>
+<body>
+    <nav class="v-nav">
+        <div onclick="changeHub('movie')" style="padding:20px; cursor:pointer;">Movies</div>
+        <div onclick="changeHub('tv')" style="padding:20px; cursor:pointer;">Shows</div>
+        <div onclick="changeHub('anime')" style="padding:20px; cursor:pointer;">Anime</div>
+    </nav>
+    <div class="workspace">
+        <div class="grid" id="mainGrid"></div>
+    </div>
+
+    <div id="player-view">
+        <div class="player-bar" style="padding:20px;">
+            <button onclick="closePlayer()">BACK</button>
+            <button id="btn-sub" class="sd-btn active" onclick="setLang('sub')">SUB</button>
+            <button id="btn-dub" class="sd-btn" onclick="setLang('dub')">DUB</button>
+            <div id="serverHub"></div>
+        </div>
+        <iframe id="gameFrame" src="" style="width:100%; height:80vh; border:none;"></iframe>
+    </div>
+
+    <div class="api-modal" id="apiModal" style="display:none;">
+        <div style="background:#111; padding:40px; border:1px solid red;">
+            <h2>TMDB API KEY REQUIRED</h2>
+            <input type="text" id="apiKeyInput">
+            <button onclick="saveKey()">ACTIVATE</button>
+        </div>
+    </div>
+
+    <script>
+        let TMDB_KEY = localStorage.getItem('tmdb_api_key') || "";
+        let mission = { id:"", type:"movie", lang:"sub", season:1, episode:1, provider:"node1" };
+
+        const SERVER_NODES = {
+            node1: {
+                name: "111Movies",
+                buildUrl: (type, id, s, e, lang) => {
+                    const l = lang === 'dub' ? '&lang=en' : '&lang=jp';
+                    return type === 'movie' ? `https://111movies.net/movie/${id}${l}` : `https://111movies.net/tv/${id}/${s}/${e}${l}`;
+                }
+            },
+            node2: {
+                name: "MultiEmbed",
+                buildUrl: (type, id, s, e, lang) => {
+                    const audio = lang === 'dub' ? 'eng' : 'jpn';
+                    return type === 'movie' ? `https://multiembed.mov/?video_id=${id}&tmdb=1&audio=${audio}` : `https://multiembed.mov/?video_id=${id}&tmdb=1&s=${s}&e=${e}&audio=${audio}`;
+                }
+            }
+        };
+
+        function saveKey() {
+            TMDB_KEY = document.getElementById('apiKeyInput').value;
+            localStorage.setItem('tmdb_api_key', TMDB_KEY);
+            document.getElementById('apiModal').style.display = 'none';
+            changeHub('movie');
+        }
+
+        async function changeHub(mode) {
+            if(!TMDB_KEY) { document.getElementById('apiModal').style.display = 'flex'; return; }
+            const res = await fetch(`https://api.themoviedb.org/3/discover/${mode === 'movie'?'movie':'tv'}?api_key=${TMDB_KEY}`);
+            const data = await res.json();
+            const grid = document.getElementById('mainGrid');
+            grid.innerHTML = '';
+            data.results.forEach(i => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `<img src="https://image.tmdb.org/t/p/w500${i.poster_path}"><p>${i.title || i.name}</p>`;
+                card.onclick = () => { mission.id = i.id; mission.type = mode === 'movie'?'movie':'tv'; openPlayer(); };
+                grid.appendChild(card);
+            });
+        }
+
+        function openPlayer() {
+            document.getElementById('player-view').style.display = 'flex';
+            buildServerButtons();
+            refreshTITAN();
+        }
+
+        function buildServerButtons() {
+            const hub = document.getElementById('serverHub');
+            hub.innerHTML = '';
+            Object.keys(SERVER_NODES).forEach(key => {
+                const btn = document.createElement('button');
+                btn.className = 'sv-node ' + (mission.provider === key ? 'active' : '');
+                btn.innerText = SERVER_NODES[key].name;
+                btn.onclick = () => { mission.provider = key; buildServerButtons(); refreshTITAN(); };
+                hub.appendChild(btn);
+            });
+        }
+
+        function refreshTITAN() {
+            const node = SERVER_NODES[mission.provider];
+            document.getElementById('gameFrame').src = node.buildUrl(mission.type, mission.id, mission.season, mission.episode, mission.lang);
+        }
+
+        function setLang(l) {
+            mission.lang = l;
+            document.getElementById('btn-sub').classList.toggle('active', l === 'sub');
+            document.getElementById('btn-dub').classList.toggle('active', l === 'dub');
+            refreshTITAN();
+        }
+
+        function closePlayer() { document.getElementById('player-view').style.display = 'none'; }
+
+        if(!TMDB_KEY) document.getElementById('apiModal').style.display = 'flex';
+        else changeHub('movie');
+    </script>
+</body>
+</html>
