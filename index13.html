@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KING'S DOMAIN | SHADOW V80</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        /* [Keep all your original CSS here exactly as it was] */
+        :root { --p5-pink-red: #ff1f44; --p5-black: #000000; --p5-card-bg: #141414; }
+        body { margin: 0; background: #000; color: white; font-family: 'Inter', sans-serif; overflow: hidden; }
+        .v-nav { position: fixed; left: 0; top: 0; height: 100%; width: 85px; background: #000; z-index: 1000; border-right: 2px solid var(--p5-pink-red); }
+        #sidebar { position: fixed; top: 0; left: -320px; width: 310px; height: 100%; background: #111; z-index: 2001; transition: 0.5s; padding: 50px 20px; }
+        #sidebar.active { left: 0; }
+        .sidebar-item { cursor: pointer; padding: 20px; text-transform: uppercase; font-weight: 900; }
+        .workspace { margin-left: 85px; height: 100vh; overflow-y: auto; padding: 40px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 20px; }
+        .card { background: #141414; height: 380px; cursor: pointer; position: relative; border-radius: 12px; overflow: hidden; }
+        .card img { width: 100%; height: 100%; object-fit: cover; }
+        #player-view { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: black; z-index: 10000; }
+    </style>
+</head>
+<body>
+
+    <nav class="v-nav"><div class="nav-btn" onclick="toggleSidebar()" style="width:65px; height:65px; background:red; cursor:pointer;"></div></nav>
+    <div id="sidebar" onmouseleave="closeSidebar()">
+        <div class="sidebar-item" onclick="changeHub('arcade')">Arcade</div>
+        <div class="sidebar-item" onclick="changeHub('movie')">Movies</div>
+        <div class="sidebar-item" onclick="changeHub('tv')">Shows</div>
+        <div class="sidebar-item" onclick="changeHub('anime')">Anime</div>
+    </div>
+
+    <div class="workspace" id="workspace">
+        <input type="text" id="searchBox" placeholder="Search..." onkeydown="if(event.key==='Enter') searchGlobal()">
+        <div class="grid" id="mainGrid"></div>
+    </div>
+
+    <div id="player-view">
+        <button onclick="closePlayer()">BACK</button>
+        <iframe id="gameFrame" style="width:100%; height:80%; border:none;"></iframe>
+        <div id="epSidebar">
+            <button id="btn-sub" class="sd-btn" onclick="setLang('sub')">Sub</button>
+            <button id="btn-dub" class="sd-btn" onclick="setLang('dub')">Dub</button>
+            <select id="seasonSelect" onchange="handleSeasonChange()"></select>
+            <div id="epGrid"></div>
+        </div>
+    </div>
+
+    <script>
+        let TMDB_KEY = localStorage.getItem('tmdb_api_key') || '';
+        let mission = { id:"", type:"movie", season:1, episode:1, lang:localStorage.getItem('p5_pref_lang') || "sub", provider:"node1" };
+        let currentMode = "home";
+
+        const SERVER_NODES = {
+            node1: { name: "Node Alpha", buildUrl: (t, id, s, e, l) => t === 'movie' ? `https://111movies.net/movie/${id}` : `https://111movies.net/tv/${id}/${s}/${e}?lang=${l}` },
+            node2: { name: "Node Beta", buildUrl: (t, id, s, e, l) => t === 'movie' ? `https://multiembed.mov/?video_id=${id}&tmdb=1` : `https://multiembed.mov/?video_id=${id}&tmdb=1&s=${s}&e=${e}&lang=${l === 'dub' ? '1' : '0'}` }
+        };
+
+        async function changeHub(mode) {
+            currentMode = mode; closeSidebar();
+            document.getElementById('mainGrid').innerHTML = 'Loading...';
+            const res = await fetch(`https://api.themoviedb.org/3/discover/${mode === 'movie' ? 'movie' : 'tv'}?api_key=${TMDB_KEY}&sort_by=popularity.desc`).then(r => r.json());
+            render(res.results.map(i => ({id:i.id, name:i.title||i.name, img:`https://image.tmdb.org/t/p/w500${i.poster_path}`, type:mode==='movie'?'movie':'tv'})), false);
+        }
+
+        async function searchGlobal() {
+            const query = document.getElementById('searchBox').value.trim();
+            let allResults = [];
+            for(let i = 1; i <= 10; i++) {
+                const res = await fetch(`https://api.themoviedb.org/3/search/multi?api_key=${TMDB_KEY}&query=${encodeURIComponent(query)}&page=${i}`).then(r => r.json());
+                if(res.results) allResults = allResults.concat(res.results);
+            }
+            render(allResults.filter(i => i.poster_path).map(i => ({id:i.id, name:i.title||i.name, img:`https://image.tmdb.org/t/p/w500${i.poster_path}`, type:i.media_type})), false);
+        }
+
+        function refreshTITAN() {
+            const node = SERVER_NODES[mission.provider];
+            document.getElementById('gameFrame').src = node.buildUrl(mission.type, mission.id, mission.season, mission.episode, mission.lang);
+        }
+
+        function setLang(lang) { mission.lang = lang; localStorage.setItem('p5_pref_lang', lang); refreshTITAN(); }
+        function toggleSidebar() { document.getElementById('sidebar').classList.add('active'); }
+        function closeSidebar() { document.getElementById('sidebar').classList.remove('active'); }
+        function closePlayer() { document.getElementById('player-view').style.display = 'none'; }
+        function render(data, isLoadMore) {
+            const grid = document.getElementById('mainGrid');
+            grid.innerHTML = '';
+            data.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `<img src="${item.img}"><p>${item.name}</p>`;
+                card.onclick = () => launchTITAN(item);
+                grid.appendChild(card);
+            });
+        }
+        function launchTITAN(item) {
+            mission.id = item.id; mission.type = item.type;
+            document.getElementById('player-view').style.display = 'flex';
+            refreshTITAN();
+        }
+    </script>
+</body>
+</html>
