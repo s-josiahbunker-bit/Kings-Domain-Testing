@@ -221,7 +221,7 @@
                 buildUrl: (type, id, s, e, lang) => {
                     const suffix = lang === 'dub' ? '?sub_dub=dub' : '';
                     if (type === 'movie') return `https://111movies.net/movie/${id}${suffix}`;
-                    return `blob:https://111movies.net/tv/${id}/${s}/${e}${suffix}`;
+                    return `https://111movies.net/tv/${id}/${s}/${e}${suffix}`;
                 }
             },
             node2: {
@@ -229,7 +229,7 @@
                 buildUrl: (type, id, s, e, lang) => {
                     const suffix = lang === 'dub' ? '&sub_dub=dub' : '';
                     if (type === 'movie') return `https://multiembed.mov/?video_id=${id}&tmdb=1${suffix}`;
-                    return `blob:https://multiembed.mov/?video_id=${id}&tmdb=1&s=${s}&e=${e}${suffix}`;
+                    return `https://multiembed.mov/?video_id=${id}&tmdb=1&s=${s}&e=${e}${suffix}`;
                 }
             },
             node3: {
