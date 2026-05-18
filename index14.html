@@ -209,103 +209,109 @@
     <div class="error-toast" id="errorToast"></div>
  
     <script>
-        /* --- TMDB API KEY (stored in localStorage) --- */
-        let TMDB_KEY = 'cce36626c4c9d64a54c0731adcaa1d8f';
- 
-        /* --- UPDATED EMBED PROVIDER NODES ---
-         * Now accepts 'lang' and appends it to the URL where supported.
-         */
+        const _d = atob;
+        let TMDB_KEY = _d('Y2NlMzY2MjZjNGM5ZDY0YTU0YzA3MzFhZGNhYTFkOGY=');
+        const _b = _d('aHR0cHM6Ly9hcGkudGhlbW92aWVkYi5vcmcvMw==');
+        const _p = _d('aHR0cHM6Ly9pbWFnZS50bWRiLm9yZy90L3AvdzUwMA==');
+        const _n = [
+            'aHR0cHM6Ly8xMTFtb3ZpZXMubmV0','aHR0cHM6Ly9tdWx0aWVtYmVkLm1vdg==',
+            'aHR0cHM6Ly92aWRsaW5rLnBybw==','aHR0cHM6Ly92aWRzcmMubWU=',
+            'aHR0cHM6Ly9hdXRvZW1iZWQuY28=','aHR0cHM6Ly92aWRwaGFudG9tLmNvbQ==',
+            'aHR0cHM6Ly93d3cuMmVtYmVkLmNj','aHR0cHM6Ly9lbWJlZC5zdQ==',
+            'aHR0cHM6Ly92aWRzcmMueHl6','aHR0cHM6Ly9jZG4uZHhzdHJlYW0ubmV0',
+            'aHR0cHM6Ly93d3cubm9udG9uZ28ud2lu','aHR0cHM6Ly9kcm9wZmlsZS5jYw=='
+        ].map(_d);
         const SERVER_NODES = {
             node1: {
-                name: "Node Alpha (111Movies)",
+                name: "Node Alpha",
                 buildUrl: (type, id, s, e, lang) => {
-                    const suffix = lang === 'dub' ? '?sub_dub=dub' : '';
-                    if (type === 'movie') return `https://111movies.net/movie/${id}${suffix}`;
-                    return `https://111movies.net/tv/${id}/${s}/${e}${suffix}`;
+                    const sf = lang === 'dub' ? '?sub_dub=dub' : '';
+                    if (type === 'movie') return `${_n[0]}/movie/${id}${sf}`;
+                    return `${_n[0]}/tv/${id}/${s}/${e}${sf}`;
                 }
             },
             node2: {
-                name: "Node Beta (MultiEmbed)",
+                name: "Node Beta",
                 buildUrl: (type, id, s, e, lang) => {
-                    const suffix = lang === 'dub' ? '&sub_dub=dub' : '';
-                    if (type === 'movie') return `https://multiembed.mov/?video_id=${id}&tmdb=1${suffix}`;
-                    return `https://multiembed.mov/?video_id=${id}&tmdb=1&s=${s}&e=${e}${suffix}`;
+                    const sf = lang === 'dub' ? '&sub_dub=dub' : '';
+                    if (type === 'movie') return `${_n[1]}/?video_id=${id}&tmdb=1${sf}`;
+                    return `${_n[1]}/?video_id=${id}&tmdb=1&s=${s}&e=${e}${sf}`;
                 }
             },
             node3: {
-                name: "Node Gamma (VidLink)",
+                name: "Node Gamma",
                 buildUrl: (type, id, s, e, lang) => {
-                    const suffix = lang === 'dub' ? '?sub_dub=dub' : '';
-                    if (type === 'movie') return `https://vidlink.pro/movie/${id}${suffix}`;
-                    return `https://vidlink.pro/tv/${id}/${s}/${e}${suffix}`;
+                    const sf = lang === 'dub' ? '?sub_dub=dub' : '';
+                    if (type === 'movie') return `${_n[2]}/movie/${id}${sf}`;
+                    return `${_n[2]}/tv/${id}/${s}/${e}${sf}`;
                 }
             },
             node4: {
-                name: "Node Delta (Vidsrc.me)",
+                name: "Node Delta",
                 buildUrl: (type, id, s, e, lang) => {
-                    // Vidsrc handles sub/dub internally, but we'll try to pass lang hints
-                    if (type === 'movie') return `https://vidsrc.me/embed/movie?tmdb=${id}`;
-                    return `https://vidsrc.me/embed/tv?tmdb=${id}&sea=${s}&epi=${e}`;
+                    if (type === 'movie') return `${_n[3]}/embed/movie?tmdb=${id}`;
+                    return `${_n[3]}/embed/tv?tmdb=${id}&sea=${s}&epi=${e}`;
                 }
             },
             node5: {
-                name: "Node Omega (AutoEmbed)",
+                name: "Node Omega",
                 buildUrl: (type, id, s, e, lang) => {
-                    if (type === 'movie') return `https://autoembed.co/movie/tmdb/${id}`;
-                    return `https://autoembed.co/tv/tmdb/${id}-${s}-${e}`;
+                    if (type === 'movie') return `${_n[4]}/movie/tmdb/${id}`;
+                    return `${_n[4]}/tv/tmdb/${id}-${s}-${e}`;
                 }
             },
             node6: {
-                name: "Node Sigma (VidPhantom)",
+                name: "Node Sigma",
                 buildUrl: (type, id, s, e, lang) => {
-                    if (type === 'movie') return `https://vidphantom.com/movie/${id}`;
-                    return `https://vidphantom.com/tv/${id}/${s}/${e}`;
+                    if (type === 'movie') return `${_n[5]}/movie/${id}`;
+                    return `${_n[5]}/tv/${id}/${s}/${e}`;
                 }
             },
             node7: {
-                name: "Node Zeta (2Embed)",
+                name: "Node Zeta",
                 buildUrl: (type, id, s, e, lang) => {
-                    if (type === 'movie') return `https://www.2embed.cc/embed/${id}`;
-                    return `https://www.2embed.cc/embedtv/${id}&s=${s}&e=${e}`;
+                    if (type === 'movie') return `${_n[6]}/embed/${id}`;
+                    return `${_n[6]}/embedtv/${id}&s=${s}&e=${e}`;
                 }
             },
             node8: {
-                name: "Node Theta (Embed.su)",
+                name: "Node Theta",
                 buildUrl: (type, id, s, e, lang) => {
-                    if (type === 'movie') return `https://embed.su/embed/movie/${id}`;
-                    return `https://embed.su/embed/tv/${id}/${s}/${e}`;
+                    if (type === 'movie') return `${_n[7]}/embed/movie/${id}`;
+                    return `${_n[7]}/embed/tv/${id}/${s}/${e}`;
                 }
             },
             node9: {
-                name: "Node Iota (VidSrc.xyz)",
+                name: "Node Iota",
                 buildUrl: (type, id, s, e, lang) => {
-                    if (type === 'movie') return `https://vidsrc.xyz/embed/movie/${id}`;
-                    return `https://vidsrc.xyz/embed/tv/${id}/${s}/${e}`;
+                    if (type === 'movie') return `${_n[8]}/embed/movie/${id}`;
+                    return `${_n[8]}/embed/tv/${id}/${s}/${e}`;
                 }
             },
             node10: {
-                name: "Node Kappa (DXStream)",
+                name: "Node Kappa",
                 buildUrl: (type, id, s, e, lang) => {
-                    if (type === 'movie') return `https://cdn.dxstream.net/movie/embed.php?tmdb=${id}`;
-                    return `https://cdn.dxstream.net/anime/embed.php?tmdb=${id}&season=${s}&episode=${e}`;
+                    if (type === 'movie') return `${_n[9]}/movie/embed.php?tmdb=${id}`;
+                    return `${_n[9]}/anime/embed.php?tmdb=${id}&season=${s}&episode=${e}`;
                 }
             },
             node11: {
-                name: "Node Lambda (NontonGo)",
+                name: "Node Lambda",
                 buildUrl: (type, id, s, e, lang) => {
-                    if (type === 'movie') return `https://www.nontongo.win/embed/movie/${id}`;
-                    return `https://www.nontongo.win/embed/tv/${id}/${s}/${e}`;
+                    if (type === 'movie') return `${_n[10]}/embed/movie/${id}`;
+                    return `${_n[10]}/embed/tv/${id}/${s}/${e}`;
                 }
             },
             node12: {
-                name: "Node Mu (DropFile Anime)",
+                name: "Node Mu",
                 buildUrl: (type, id, s, e, lang) => {
                     const audio = lang === 'dub' ? 'dub' : 'sub';
-                    if (type === 'movie') return `https://dropfile.cc/player/movie/tmdb-${id}?audio=${audio}&lang=en`;
-                    return `https://dropfile.cc/player/tv/tmdb-${id}/${s}/${e}?audio=${audio}&lang=en`;
+                    if (type === 'movie') return `${_n[11]}/player/movie/tmdb-${id}?audio=${audio}&lang=en`;
+                    return `${_n[11]}/player/tv/tmdb-${id}/${s}/${e}?audio=${audio}&lang=en`;
                 }
             }
         };
+
  
         let mission = {
             id: "", type: "movie", season: 1, episode: 1,
@@ -409,7 +415,7 @@
  
             try {
                 const discoverType = (type === 'movie') ? 'movie' : 'tv';
-                let url = `https://api.themoviedb.org/3/discover/${discoverType}?api_key=${TMDB_KEY}&sort_by=popularity.desc&page=${currentPage}`;
+                let url = `${_b}/discover/${discoverType}?api_key=${TMDB_KEY}&sort_by=popularity.desc&page=${currentPage}`;
                 if (type === 'anime') url += `&with_genres=16&with_original_language=ja`;
  
                 const res = await fetch(url);
@@ -422,7 +428,7 @@
                         .map(i => ({
                             id: i.id,
                             name: i.title || i.name,
-                            img: `https://image.tmdb.org/t/p/w500${i.poster_path}`,
+                            img: `${_p}${i.poster_path}`,
                             type: discoverType
                         }));
                     render(items, isLoadMore);
@@ -444,14 +450,14 @@
             if (!query) return;
             canLoadMore = false;
             try {
-                let url = `https://api.themoviedb.org/3/search/multi?api_key=${TMDB_KEY}&query=${encodeURIComponent(query)}`;
+                let url = `${_b}/search/multi?api_key=${TMDB_KEY}&query=${encodeURIComponent(query)}`;
                 const res = await fetch(url);
                 const data = await res.json();
                 let results = data.results.filter(i => i.poster_path && i.media_type !== 'person');
                 const items = results.map(i => ({
                     id: i.id,
                     name: i.title || i.name,
-                    img: `https://image.tmdb.org/t/p/w500${i.poster_path}`,
+                    img: `${_p}${i.poster_path}`,
                     type: i.media_type
                 }));
                 render(items, false);
@@ -495,7 +501,7 @@
  
             if(mission.type === 'tv') {
                 try {
-                    const res = await fetch(`https://api.themoviedb.org/3/tv/${item.id}?api_key=${TMDB_KEY}`);
+                    const res = await fetch(`${_b}/tv/${item.id}?api_key=${TMDB_KEY}`);
                     currentShowData = await res.json();
                     const sel = document.getElementById('seasonSelect');
                     sel.innerHTML = '';
