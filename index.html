@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="referrer" content="origin">
-    <title>KING'S DOMAIN | APEX V77</title>
+    <title>KING'S DOMAIN | NEXUS V79</title>
     <link rel="icon" type="image/png" href="https://i.ibb.co/vYm6vS6/Take-Your-Heart.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
@@ -61,7 +61,7 @@
         .hero-banner h1 { font-size: 44px; margin: 0; font-weight: 900; text-transform: uppercase; }
 
         #searchBox { width: 100%; padding: 18px 25px; background: var(--p5-card-bg); border: 1px solid #222; border-radius: 8px; color: white; margin-bottom: 30px; outline: none; font-size: 16px; border: 1px solid transparent; }
-        #searchBox:focus { border-color: var(--p5-pink-red); }
+        #searchBox:focus { border-color: var(--p5-pink-red); box-shadow: 0 0 15px rgba(255, 31, 68, 0.3); }
 
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 20px; }
         .card { background: var(--p5-card-bg); border-radius: 12px; height: 380px; position: relative; overflow: hidden; border: 1px solid #1a1a1a; transition: 0.3s; }
@@ -69,23 +69,23 @@
         .card img { width: 100%; height: 100%; object-fit: cover; }
         .card p { position: absolute; bottom: 0; width: 100%; background: rgba(0,0,0,0.85); margin: 0; padding: 12px 0; text-align: center; font-size: 11px; font-weight: 700; border-top: 1px solid var(--p5-pink-red); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-        /* APEX PLAYER TERMINAL */
+        /* XPS PLAYER TERMINAL */
         #player-view { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: black; z-index: 10000; flex-direction: column; }
         .player-bar { height: 60px; padding: 0 40px; background: #000; border-bottom: 2px solid var(--p5-pink-red); display: flex; justify-content: space-between; align-items: center; box-sizing: border-box; }
         .main-player-area { display: flex; flex-direction: row; height: calc(100% - 60px); width: 100%; }
         #gameFrame { flex: 1; border: none; background: #000; }
 
         .ep-sidebar { width: 320px; background: #0f1015; border-left: 1px solid #222; display: flex; flex-direction: column; padding: 15px; box-sizing: border-box; overflow-y: auto; }
-        .ep-header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 1px solid #222; padding-bottom: 8px; }
-        .ep-sidebar h3 { font-size: 11px; margin: 0; color: #fff; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; }
+        .ep-header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px solid #222; padding-bottom: 8px; }
+        .ep-sidebar h3 { font-size: 12px; margin: 0; color: #fff; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; }
 
         .sd-toggle { display: flex; background: #222; border-radius: 4px; border: 1px solid #444; overflow: hidden; }
         .sd-btn { background: transparent; border: none; color: #888; padding: 4px 10px; font-size: 10px; font-weight: 900; cursor: pointer; text-transform: uppercase; transition: 0.2s; }
         .sd-btn.active { background: var(--p5-pink-red); color: white; }
 
-        /* MIRROR NODE HUB */
+        /* MODULAR MIRROR HUB */
         .mirror-hub { display: flex; flex-direction: column; gap: 6px; margin-bottom: 20px; padding: 10px; background: #141414; border: 1px solid #222; border-radius: 8px; }
-        .sv-node { background: #1a1b23; border: 1px solid #333; color: #777; padding: 10px; border-radius: 4px; font-size: 11px; font-weight: 900; text-align: left; text-transform: uppercase; }
+        .sv-node { background: #1a1b23; border: 1px solid #333; color: #777; padding: 10px; border-radius: 4px; font-size: 11px; font-weight: 900; text-align: left; text-transform: uppercase; list-style: none; }
         .sv-node:hover { border-color: var(--p5-pink-red); color: #fff; }
         .sv-node.active { border-color: var(--p5-pink-red); color: #fff; background: rgba(255, 31, 68, 0.1); }
 
@@ -115,14 +115,14 @@
 
     <div class="top-bar">
         <div class="logo-text">KING'S DOMAIN</div>
-        <div id="status-text" style="font-size: 11px; opacity: 0.5; letter-spacing: 2px;">SOVEREIGN_APEX_V77_READY</div>
+        <div id="status-text" style="font-size: 11px; opacity: 0.5; letter-spacing: 2px;">NEXUS_CORE_V79_READY</div>
     </div>
 
     <div class="workspace" id="workspace">
         <div id="grid-content" class="container">
             <header class="hero-banner">
                 <h1 id="banner-text">MISSION HUB</h1>
-                <p id="banner-sub">Aggregate Protocol Active. All popups physically sandboxed. Infinite database scroll.</p>
+                <p id="banner-sub">Nexus Infrastructure Active. Sandbox shield engaged. Infinite scroll enabled.</p>
             </header>
             <input type="text" id="searchBox" placeholder="Search mission database..." onkeydown="if(event.key==='Enter') searchGlobal()">
             <div class="grid" id="mainGrid"></div>
@@ -138,6 +138,7 @@
             <button class="p-btn" onclick="goFull()">FULLSCREEN</button>
         </div>
         <div class="main-player-area">
+            <!-- SANDBOX ATTRIBUTE PHYSICALLY BLOCKS ALL POPUPS -->
             <iframe id="gameFrame" 
                     sandbox="allow-forms allow-scripts allow-pointer-lock allow-same-origin allow-top-navigation-by-user-activation"
                     src="" allowfullscreen></iframe>
@@ -151,12 +152,12 @@
                     </div>
                 </div>
 
-                <!-- MODULAR MIRROR NODE HUB -->
+                <!-- MODULAR MIRROR HUB (INPUT YOUR AUTHORIZED DOMAINS HERE) -->
                 <div class="mirror-hub" id="serverHub">
                     <h3>Mirror Nodes</h3>
-                    <button class="sv-node active" onclick="handleServerChange('alpha')">Node Alpha (Primary Mirror)</button>
-                    <button class="sv-node" onclick="handleServerChange('beta')">Node Beta (Infrastructure Mirror)</button>
-                    <button class="sv-node" onclick="handleServerChange('gamma')">Node Gamma (Fallback Node)</button>
+                    <button class="sv-node active" onclick="handleServerChange('node1')">Node Alpha (Vidstream Hub)</button>
+                    <button class="sv-node" onclick="handleServerChange('node2')">Node Beta (Cloud Node)</button>
+                    <button class="sv-node" onclick="handleServerChange('node3')">Node Gamma (Mirror Archive)</button>
                 </div>
                 
                 <div class="ep-top-nav">
@@ -170,17 +171,17 @@
     <script>
         const TMDB_KEY = "cce36626c4c9d64a54c0731adcaa1d8f"; 
         
-        /* --- SOVEREIGN ROUTER CONFIG (EDIT THESE BASE URLS) --- */
-        const SERVER_CONFIG = {
-            alpha: "https://vidstream.lat/embed",
-            beta: "https://vidcloud1.com/embed",
-            gamma: "https://https://cineby.mx//embed",
+        /* --- GLOBAL SERVER CONFIGURATION --- */
+        const XPS_NEXUS = {
+            node1: "https://mappl.tv/embed",
+            node2: "cineby.mx/embed",
+            node3: "https://www.111movies.net/embed"
         };
         
         let mission = {
             id: "", type: "movie", season: 1, episode: 1,
             lang: localStorage.getItem('p5_pref_lang') || "sub",
-            provider: "alpha"
+            provider: "node1"
         };
         
         let currentMode = "home", currentShowData = null, currentPage = 1, isFetching = false, canLoadMore = true;
@@ -274,9 +275,9 @@
 
         function refreshTITAN() {
             const f = document.getElementById('gameFrame');
-            const base = SERVER_CONFIG[mission.provider];
+            const base = XPS_NEXUS[mission.provider];
             let s = mission.season; let e = mission.episode;
-            let dub = (mission.lang === 'dub') ? '?audio=en' : '';
+            let dub = (mission.lang === 'dub') ? '?audio=en&lang=en' : '';
             f.src = (mission.type === 'movie') ? `${base}/movie/${mission.id}${dub}` : `${base}/tv/${mission.id}/${s}/${e}${dub}`;
         }
 
@@ -291,7 +292,7 @@
         function updateLangButtons() { document.getElementById('btn-sub').classList.toggle('active', mission.lang === 'sub'); document.getElementById('btn-dub').classList.toggle('active', mission.lang === 'dub'); }
         function handleSeasonChange() { mission.season = document.getElementById('seasonSelect').value; mission.episode = 1; buildEpGrid(mission.season, currentShowData.seasons.find(s => s.season_number == mission.season).episode_count); refreshTITAN(); }
         function buildEpGrid(sn, count) { const g = document.getElementById('epGrid'); g.innerHTML = ''; for(let i=1; i<=count; i++) { const b = document.createElement('button'); b.className = 'ep-btn'; b.innerText = i; if(i == mission.episode) b.classList.add('active'); b.onclick = () => { mission.episode = i; document.querySelectorAll('.ep-btn').forEach(btn => btn.classList.remove('active')); b.classList.add('active'); refreshTITAN(); }; g.appendChild(b); } }
-        document.getElementById('workspace').addEventListener('scroll', (e) => { if (currentMode === 'arcade') return; const { scrollTop, scrollHeight, clientHeight } = e.target; if (scrollTop + clientHeight >= scrollHeight - 600) fetchAPI(currentMode, true); });
+        document.getElementById('workspace').addEventListener('scroll', (e) => { if (currentMode === 'home') return; const { scrollTop, scrollHeight, clientHeight } = e.target; if (scrollTop + clientHeight >= scrollHeight - 600) fetchAPI(currentMode, true); });
         function toggleSidebar() { document.getElementById('sidebar').classList.toggle('active'); }
         function closeSidebar() { document.getElementById('sidebar').classList.remove('active'); }
         function closePlayer() { document.getElementById('player-view').style.display = 'none'; document.getElementById('gameFrame').src = ''; }
