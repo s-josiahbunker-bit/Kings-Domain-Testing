@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>KING'S DOMAIN | SHADOW V80</title>
+    <!-- [PASTE YOUR ORIGINAL CSS HERE] -->
+    <style>
+        :root { --p5-pink-red: #ff1f44; --p5-black: #000; }
+        body { margin:0; background:var(--p5-black); color:white; font-family:'Inter', sans-serif; overflow:hidden; }
+        .v-nav { position:fixed; left:0; top:0; width:85px; height:100%; border-right:2px solid var(--p5-pink-red); background:#000; z-index:1000; }
+        .workspace { margin-left:85px; height:100vh; overflow-y:auto; padding:40px; }
+        .grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(180px, 1fr)); gap:20px; }
+        .card { background:#141414; border-radius:12px; height:380px; border:1px solid #1a1a1a; cursor:pointer; }
+        .card img { width:100%; height:85%; object-fit:cover; }
+        #player-view { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:black; z-index:9999; flex-direction:column; }
+        .ep-grid { display:grid; grid-template-columns:repeat(5, 1fr); gap:5px; margin-top:10px; width:300px; }
+        .ep-btn { background:#23242d; border:none; color:#999; padding:15px; cursor:pointer; }
+        .ep-btn.active { background:var(--p5-pink-red); color:white; }
+        .sv-node { padding:10px; background:#222; margin:5px; cursor:pointer; border:1px solid #444; }
+        .sv-node.active { border-color:var(--p5-pink-red); }
+    </style>
+</head>
+<body>
+    <nav class="v-nav">
+        <div onclick="changeHub('arcade')" style="padding:20px; cursor:pointer;">🎮</div>
+        <div onclick="changeHub('movie')" style="padding:20px; cursor:pointer;">🎬</div>
+        <div onclick="changeHub('tv')" style="padding:20px; cursor:pointer;">📺</div>
+        <div onclick="changeHub('anime')" style="padding:20px; cursor:pointer;">🐉</div>
+    </nav>
+
+    <div class="workspace" id="workspace">
+        <div class="grid" id="mainGrid"></div>
+    </div>
+
+    <div id="player-view">
+        <div style="padding:20px;">
+            <button onclick="document.getElementById('player-view').style.display='none'">BACK</button>
+            <div id="animeControls" style="display:none;">
+                <button id="btn-sub" class="ep-btn" onclick="setLang('sub')">SUB</button>
+                <button id="btn-dub" class="ep-btn" onclick="setLang('dub')">DUB</button>
+                <div id="serverHub"></div>
+                <select id="seasonSelect" onchange="buildEpisodes()"></select>
+                <div id="epGrid" class="ep-grid"></div>
+            </div>
+        </div>
+        <iframe id="gameFrame" src="" style="width:100%; height:100vh; border:none;"></iframe>
+    </div>
+
+    <script>
+        let TMDB_KEY = localStorage.getItem('tmdb_api_key') || prompt("Enter TMDB API Key:");
+        if(TMDB_KEY) localStorage.setItem('tmdb_api_key', TMDB_KEY);
+
+        let state = { id:"", mode:"", season:1, episode:1, provider:"VidSrc", lang:"sub" };
+        const games = [
+            { name: "Slime Rancher", img: "https://sm.ign.com/ign_es/cover/s/slime-ranc/slime-rancher_j318.jpg", url: "slimerancher.html", isArcade: true },
+            { name: "Helltaker", img: "https://files.catbox.moe/k9d5o6.png", url: "helltaker.html", isArcade: true }
+        ];
+
+        // 1. Hub Loader
+        async function changeHub(mode) {
+            state.mode = mode;
+            const grid = document.getElementById('mainGrid');
+            grid.innerHTML = '';
+            if(mode === 'arcade') {
+                games.forEach(g => renderCard(g, true));
+            } else {
+                let url = `https://api.themoviedb.org/3/discover/${mode === 'anime' ? 'tv' : mode}?api_key=${TMDB_KEY}${mode === 'anime' ? '&with_genres=16' : ''}`;
+                const res = await fetch(url);
+                const data = await res.json();
+                data.results.forEach(i => renderCard({id:i.id, name:i.title||i.name, img:'https://image.tmdb.org/t/p/w500'+i.poster_path, type:mode}, false));
+            }
+        }
+
+        function renderCard(item, isGame) {
+            const grid = document.getElementById('mainGrid');
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `<img src="${item.img}"><p>${item.name}</p>`;
+            card.onclick = () => openPlayer(item, isGame);
+            grid.appendChild(card);
+        }
+
+        // 2. Player Controller
+        async function openPlayer(item, isGame) {
+            document.getElementById('player-view').style.display = 'flex';
+            if(isGame) {
+                document.getElementById('animeControls').style.display = 'none';
+                document.getElementById('gameFrame').src = item.url;
+            } else {
+                state.id = item.id;
+                document.getElementById('animeControls').style.display = (state.mode !== 'movie') ? 'block' : 'none';
+                if(state.mode !== 'movie') {
+                    const res = await fetch(`https://api.themoviedb.org/3/tv/${item.id}?api_key=${TMDB_KEY}`);
+                    const data = await res.json();
+                    document.getElementById('seasonSelect').innerHTML = data.seasons.map(s => `<option value="${s.season_number}">Season ${s.season_number}</option>`).join('');
+                    buildEpisodes();
+                } else {
+                    refreshPlayer();
+                }
+                buildServerButtons();
+            }
+        }
+
+        function buildEpisodes() {
+            const sn = document.getElementById('seasonSelect').value;
+            fetch(`https://api.themoviedb.org/3/tv/${state.id}/season/${sn}?api_key=${TMDB_KEY}`)
+            .then(r => r.json()).then(d => {
+                const grid = document.getElementById('epGrid'); grid.innerHTML = '';
+                d.episodes.forEach(ep => {
+                    const b = document.createElement('button');
+                    b.className = 'ep-btn'; b.innerText = ep.episode_number;
+                    b.onclick = () => { state.season = sn; state.episode = ep.episode_number; refreshPlayer(); };
+                    grid.appendChild(b);
+                });
+            });
+        }
+
+        function refreshPlayer() {
+            const l = (state.lang === 'dub') ? '&dub=1' : '&sub=1';
+            const url = state.provider === 'VidSrc' 
+                ? `https://vidsrc.xyz/embed/${state.mode === 'movie' ? 'movie/' + state.id : 'tv/' + state.id + '/' + state.season + '/' + state.episode + l}`
+                : `https://multiembed.mov/?video_id=${state.id}${state.mode !== 'movie' ? '&s='+state.season+'&e='+state.episode : ''}`;
+            document.getElementById('gameFrame').src = url;
+        }
+
+        function setLang(l) {
+            state.lang = l;
+            document.getElementById('btn-sub').classList.toggle('active', l === 'sub');
+            document.getElementById('btn-dub').classList.toggle('active', l === 'dub');
+            refreshPlayer();
+        }
+
+        function buildServerButtons() {
+            const hub = document.getElementById('serverHub'); hub.innerHTML = '';
+            ['VidSrc', 'MultiEmbed'].forEach(name => {
+                const btn = document.createElement('button');
+                btn.className = 'sv-node ' + (state.provider === name ? 'active' : '');
+                btn.innerText = name;
+                btn.onclick = () => { state.provider = name; refreshPlayer(); buildServerButtons(); };
+                hub.appendChild(btn);
+            });
+        }
+
+        changeHub('movie'); // Startup
+    </script>
+</body>
+</html>
