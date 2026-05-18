@@ -251,15 +251,15 @@
             node5: {
                 name: "Node Omega (AutoEmbed)",
                 buildUrl: (type, id, s, e, lang) => {
-                    if (type === 'movie') return `https://player.autoembed.cc/embed/movie/${id}`;
-                    return `https://player.autoembed.cc/embed/tv/${id}/${s}/${e}`;
+                    if (type === 'movie') return `https://autoembed.co/movie/tmdb/${id}`;
+                    return `https://autoembed.co/tv/tmdb/${id}-${s}-${e}`;
                 }
             },
             node6: {
-                name: "Node Sigma (SmashyStream)",
+                name: "Node Sigma (VidPhantom)",
                 buildUrl: (type, id, s, e, lang) => {
-                    if (type === 'movie') return `https://player.smashy.stream/movie/${id}`;
-                    return `https://player.smashy.stream/tv/${id}?s=${s}&e=${e}`;
+                    if (type === 'movie') return `https://vidphantom.com/movie/${id}`;
+                    return `https://vidphantom.com/tv/${id}/${s}/${e}`;
                 }
             },
             node7: {
@@ -291,10 +291,10 @@
                 }
             },
             node11: {
-                name: "Node Lambda (LetsEmbed)",
+                name: "Node Lambda (NontonGo)",
                 buildUrl: (type, id, s, e, lang) => {
-                    if (type === 'movie') return `https://letsembed.cc/embed/movie/?id=${id}`;
-                    return `https://letsembed.cc/embed/anime/?id=${id}/${s}/${e}`;
+                    if (type === 'movie') return `https://www.nontongo.win/embed/movie/${id}`;
+                    return `https://www.nontongo.win/embed/tv/${id}/${s}/${e}`;
                 }
             },
             node12: {
