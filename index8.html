@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>KING'S DOMAIN | SHADOW V20</title>
+    <!-- Add your original CSS here -->
+    <style>
+        :root { --p5-pink-red: #ff1f44; --p5-black: #000; }
+        body { margin:0; background:var(--p5-black); color:white; font-family:'Inter', sans-serif; overflow:hidden; }
+        .v-nav { position:fixed; left:0; top:0; width:85px; height:100%; border-right:2px solid var(--p5-pink-red); background:#000; z-index:1000; }
+        .workspace { margin-left:85px; height:100vh; overflow-y:auto; padding:40px; }
+        .grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(180px, 1fr)); gap:20px; }
+        .card { background:#141414; border-radius:12px; height:380px; border:1px solid #1a1a1a; cursor:pointer; }
+        .card img { width:100%; height:85%; object-fit:cover; }
+        #player-view { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:black; z-index:9999; }
+        .ep-grid { display:grid; grid-template-columns:repeat(5, 1fr); gap:5px; margin-top:10px; }
+        .ep-btn { background:#23242d; border:none; color:#999; padding:15px; cursor:pointer; }
+        .ep-btn.active { background:var(--p5-pink-red); color:white; }
+        .sv-node { background:#1a1b23; border:1px solid #333; color:#aaa; padding:10px; margin:5px; cursor:pointer; }
+        .sv-node.active { border-color:var(--p5-pink-red); color:white; }
+        .api-modal { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.95); display:flex; justify-content:center; align-items:center; z-index:99999; }
+    </style>
+</head>
+<body>
+    <nav class="v-nav">
+        <div onclick="changeHub('arcade')" style="padding:20px; cursor:pointer;">ARCADE</div>
+        <div onclick="changeHub('movie')" style="padding:20px; cursor:pointer;">MOVIES</div>
+        <div onclick="changeHub('tv')" style="padding:20px; cursor:pointer;">TV</div>
+        <div onclick="changeHub('anime')" style="padding:20px; cursor:pointer;">ANIME</div>
+    </nav>
+
+    <div class="workspace" id="workspace">
+        <div class="grid" id="mainGrid"></div>
+    </div>
+
+    <div id="player-view">
+        <button onclick="document.getElementById('player-view').style.display='none'">BACK</button>
+        <div id="animeControls" style="display:none;">
+            <div id="serverHub"></div>
+            <select id="seasonSelect" onchange="buildEpisodes()"></select>
+            <div id="epGrid" class="ep-grid"></div>
+        </div>
+        <iframe id="gameFrame" src="" style="width:100%; height:60vh; border:none;"></iframe>
+    </div>
+
+    <div class="api-modal" id="apiModal" style="display:none;">
+        <div style="background:#111; padding:40px; border:2px solid var(--p5-pink-red);">
+            <h2>TMDB API KEY</h2>
+            <input type="text" id="apiKeyInput">
+            <button onclick="saveKey()">ACTIVATE</button>
+        </div>
+    </div>
+
+    <script>
+        let TMDB_KEY = localStorage.getItem('tmdb_api_key') || "";
+        let state = { id:"", mode:"", season:1, episode:1, provider:"node1" };
+
+        const NODES = {
+            node1: { name:"VidSrc", url:"https://vidsrc.xyz/embed/" },
+            node2: { name:"MultiEmbed", url:"https://multiembed.mov/?video_id=" }
+        };
+
+        const games = [
+            { name: "Slime Rancher", img: "https://sm.ign.com/ign_es/cover/s/slime-ranc/slime-rancher_j318.jpg", url: "slimerancher.html", isArcade: true },
+            { name: "Helltaker", img: "https://files.catbox.moe/k9d5o6.png", url: "helltaker.html", isArcade: true }
+        ];
+
+        async function changeHub(mode) {
+            if(!TMDB_KEY) { document.getElementById('apiModal').style.display = 'flex'; return; }
+            state.mode = mode;
+            let url = `https://api.themoviedb.org/3/discover/${mode === 'anime' ? 'tv' : mode}?api_key=${TMDB_KEY}${mode === 'anime' ? '&with_genres=16' : ''}`;
+            const res = await fetch(url);
+            const data = await res.json();
+            render(data.results);
+        }
+
+        function render(results) {
+            const grid = document.getElementById('mainGrid');
+            grid.innerHTML = '';
+            results.forEach(i => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `<img src="https://image.tmdb.org/t/p/w500${i.poster_path}"><p>${i.title || i.name}</p>`;
+                card.onclick = () => openPlayer(i);
+                grid.appendChild(card);
+            });
+        }
+
+        async function openPlayer(item) {
+            state.id = item.id;
+            document.getElementById('player-view').style.display = 'flex';
+            const isAnimeOrTV = (state.mode === 'anime' || state.mode === 'tv');
+            document.getElementById('animeControls').style.display = isAnimeOrTV ? 'block' : 'none';
+            
+            if(isAnimeOrTV) {
+                const res = await fetch(`https://api.themoviedb.org/3/tv/${item.id}?api_key=${TMDB_KEY}`);
+                const data = await res.json();
+                document.getElementById('seasonSelect').innerHTML = data.seasons.map(s => `<option value="${s.season_number}">Season ${s.season_number}</option>`).join('');
+                buildEpisodes();
+            } else {
+                document.getElementById('gameFrame').src = `${NODES.node1}movie/${item.id}`;
+            }
+            buildServerButtons();
+        }
+
+        function buildEpisodes() {
+            const sn = document.getElementById('seasonSelect').value;
+            fetch(`https://api.themoviedb.org/3/tv/${state.id}/season/${sn}?api_key=${TMDB_KEY}`)
+            .then(r => r.json()).then(d => {
+                const grid = document.getElementById('epGrid');
+                grid.innerHTML = '';
+                d.episodes.forEach(ep => {
+                    const b = document.createElement('button');
+                    b.className = 'ep-btn';
+                    b.innerText = ep.episode_number;
+                    b.onclick = () => { state.episode = ep.episode_number; state.season = sn; refreshPlayer(); };
+                    grid.appendChild(b);
+                });
+            });
+        }
+
+        function buildServerButtons() {
+            const hub = document.getElementById('serverHub');
+            hub.innerHTML = '';
+            Object.keys(NODES).forEach(key => {
+                const btn = document.createElement('button');
+                btn.className = 'sv-node ' + (state.provider === key ? 'active' : '');
+                btn.innerText = NODES[key].name;
+                btn.onclick = () => { state.provider = key; buildServerButtons(); refreshPlayer(); };
+                hub.appendChild(btn);
+            });
+        }
+
+        function refreshPlayer() {
+            const url = state.provider === 'node1' 
+                ? `${NODES.node1}tv/${state.id}/${state.season}/${state.episode}`
+                : `${NODES.node2}${state.id}&tmdb=1&s=${state.season}&e=${state.episode}`;
+            document.getElementById('gameFrame').src = url;
+        }
+
+        function saveKey() {
+            TMDB_KEY = document.getElementById('apiKeyInput').value;
+            localStorage.setItem('tmdb_api_key', TMDB_KEY);
+            document.getElementById('apiModal').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
