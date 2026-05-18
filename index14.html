@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="origin">
+    <title>KING'S DOMAIN | SHADOW V80</title>
+    <link rel="icon" type="image/png" href="https://i.ibb.co/vYm6vS6/Take-Your-Heart.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --p5-pink-red: #ff1f44; --p5-black: #000000; --p5-card-bg: #141414;
+            --Home-Wallpaper: url('https://wallpapers.com/images/hd/persona-5-background-030o8u3u29n532no.jpg');
+            --Movie-Wallpaper: url('https://wallpaperaccess.com/full/1531383.jpg');
+            --Show-Wallpaper: url('https://wallpapercave.com/wp/wp4047814.jpg');
+            --Anime-Wallpaper: url('https://images8.alphacoders.com/132/1325171.jpeg');
+            --Sidebar-Wallpaper: url('https://images.alphacoders.com/691/691456.jpg');
+            --Banner-Art: url('https://images8.alphacoders.com/132/1325171.jpeg');
+            --Menu-Img: url('https://i.ibb.co/68v8T3G/p5-menu.jpg');
+            --cursor-default: url('https://i.ibb.co/4PDX5xP/cursor-arrow.png');
+            --cursor-pointer: url('https://i.ibb.co/Pj0Qp8t/cursor-dagger.png');
+            --cursor-text: url('https://i.ibb.co/f4p7vWf/cursor-text.png');
+        }
+ 
+        html, body {
+            margin: 0; padding: 0; height: 100%;
+            background-color: var(--p5-black); color: white;
+            font-family: 'Inter', sans-serif; overflow: hidden;
+            cursor: var(--cursor-default), auto;
+        }
+        a, button, .card, .nav-btn, .sidebar-item, .sd-btn, .ep-btn, select, .p-btn, .logo-text, .sv-node {
+            cursor: var(--cursor-pointer), pointer !important;
+        }
+        input[type="text"], #searchBox, #apiKeyInput {
+            cursor: var(--cursor-text), text !important;
+        }
+ 
+        #bg-layer { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), var(--Home-Wallpaper); background-size: cover; background-attachment: fixed; background-position: center; z-index: -1; transition: background-image 0.8s ease; }
+ 
+        /* NAV */
+        .v-nav { position: fixed; left: 0; top: 0; height: 100%; width: 85px; background: #000; border-right: 2px solid var(--p5-pink-red); display: flex; flex-direction: column; align-items: center; padding-top: 20px; gap: 20px; z-index: 1000; }
+        .nav-btn { width: 65px; height: 65px; background-image: var(--Menu-Img); background-size: contain; background-repeat: no-repeat; background-position: center; transition: 0.3s; mix-blend-mode: screen; }
+        .nav-btn:hover { transform: scale(1.1); filter: drop-shadow(0 0 10px var(--p5-pink-red)); }
+        #sidebar { position: fixed; top: 0; left: -320px; width: 310px; height: 100%; background-image: linear-gradient(rgba(0,0,0,0.95), rgba(0,0,0,0.95)), var(--Sidebar-Wallpaper); background-size: cover; border-right: 4px solid var(--p5-pink-red); z-index: 2001; transition: 0.5s ease; padding: 50px 20px; box-sizing: border-box; }
+        #sidebar.active { left: 0; }
+        .sidebar-header { color: var(--p5-pink-red); font-weight: 900; font-size: 24px; text-transform: uppercase; margin-bottom: 20px; border-bottom: 2px solid #222; }
+        .sidebar-item { display: flex; align-items: center; gap: 15px; padding: 18px; color: white; text-decoration: none; font-weight: 900; font-size: 20px; text-transform: uppercase; transition: 0.3s; }
+        .sidebar-item:hover { color: var(--p5-pink-red); padding-left: 30px; background: rgba(255, 31, 68, 0.1); }
+ 
+        /* WORKSPACE */
+        .top-bar { margin-left: 85px; padding: 15px 50px; background: rgba(0,0,0,0.5); display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .logo-text { color: var(--p5-pink-red); font-weight: 900; font-size: 20px; text-transform: uppercase; letter-spacing: 2px; }
+        .workspace { margin-left: 85px; height: calc(100% - 60px); width: calc(100% - 85px); overflow-y: auto; box-sizing: border-box; position: relative; scroll-behavior: smooth; }
+        .container { padding: 40px 60px; max-width: 1400px; margin: 0 auto; }
+ 
+        .hero-banner { width: 100%; height: 280px; border-radius: 20px; margin-bottom: 30px; background: linear-gradient(to right, rgba(0,0,0,1) 40%, transparent), var(--Banner-Art); background-size: cover; background-position: center; display: flex; flex-direction: column; justify-content: center; padding-left: 60px; box-sizing: border-box; border: 1px solid rgba(255,255,255,0.1); }
+        .hero-banner h1 { font-size: 44px; margin: 0; font-weight: 900; text-transform: uppercase; }
+ 
+        #searchBox { width: 100%; padding: 18px 25px; background: var(--p5-card-bg); border: 1px solid #222; border-radius: 8px; color: white; margin-bottom: 30px; outline: none; font-size: 16px; border: 1px solid transparent; box-sizing: border-box; }
+        #searchBox:focus { border-color: var(--p5-pink-red); box-shadow: 0 0 15px rgba(255, 31, 68, 0.3); }
+ 
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 20px; }
+        .card { background: var(--p5-card-bg); border-radius: 12px; height: 380px; position: relative; overflow: hidden; border: 1px solid #1a1a1a; transition: 0.3s; }
+        .card:hover { border-color: var(--p5-pink-red); transform: translateY(-5px); }
+        .card img { width: 100%; height: 100%; object-fit: cover; }
+        .card p { position: absolute; bottom: 0; width: 100%; background: rgba(0,0,0,0.85); margin: 0; padding: 12px 0; text-align: center; font-size: 11px; font-weight: 700; border-top: 1px solid var(--p5-pink-red); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+ 
+        /* PLAYER */
+        #player-view { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: black; z-index: 10000; flex-direction: column; }
+        .player-bar { height: 60px; padding: 0 40px; background: #000; border-bottom: 2px solid var(--p5-pink-red); display: flex; justify-content: space-between; align-items: center; box-sizing: border-box; }
+        .main-player-area { display: flex; flex-direction: row; height: calc(100% - 60px); width: 100%; }
+        #gameFrame { flex: 1; border: none; background: #000; }
+ 
+        .ep-sidebar { width: 320px; background: #0f1015; border-left: 1px solid #222; display: flex; flex-direction: column; padding: 15px; box-sizing: border-box; overflow-y: auto; }
+        .ep-header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px solid #222; padding-bottom: 8px; }
+        .ep-sidebar h3 { font-size: 12px; margin: 0; color: #fff; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; }
+ 
+        .sd-toggle { display: flex; background: #222; border-radius: 4px; border: 1px solid #444; overflow: hidden; }
+        .sd-btn { background: transparent; border: none; color: #888; padding: 4px 10px; font-size: 10px; font-weight: 900; cursor: pointer; text-transform: uppercase; transition: 0.2s; }
+        .sd-btn.active { background: var(--p5-pink-red); color: white; }
+ 
+        /* MIRROR NODE HUB */
+        .mirror-hub { display: flex; flex-direction: column; gap: 6px; margin-bottom: 20px; padding: 10px; background: #141414; border: 1px solid #222; border-radius: 8px; }
+        .sv-node { background: #1a1b23; border: 1px solid #333; color: #aaa; padding: 10px; border-radius: 4px; font-size: 11px; font-weight: 900; text-align: left; text-transform: uppercase; transition: 0.2s; }
+        .sv-node:hover { border-color: var(--p5-pink-red); color: white; }
+        .sv-node.active { background: var(--p5-pink-red); color: white; border-color: var(--p5-pink-red); }
+ 
+        .ep-top-nav { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
+        .ep-select { background: #1a1b23; border: 1px solid #333; color: #aaa; padding: 8px; border-radius: 4px; font-size: 12px; font-weight: bold; outline: none; width: 100%; }
+ 
+        .ep-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+        .ep-btn { background: #23242d; border: none; color: #999; padding: 12px 0; border-radius: 4px; cursor: pointer; font-size: 13px; font-weight: bold; transition: 0.2s; }
+        .ep-btn.active { background: linear-gradient(to bottom right, var(--p5-pink-red), #900); color: #fff; box-shadow: 0 0 10px rgba(255,31,68,0.5); }
+ 
+        .p-btn { background: var(--p5-pink-red); color: white; border: none; padding: 10px 20px; font-weight: bold; border-radius: 5px; text-transform: uppercase; font-size: 11px; }
+ 
+        /* API KEY MODAL */
+        .api-modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.95); z-index: 99999;
+            display: flex; justify-content: center; align-items: center;
+        }
+        .api-modal-box {
+            background: #111; border: 2px solid var(--p5-pink-red); border-radius: 16px;
+            padding: 50px; text-align: center; max-width: 500px; width: 90%;
+        }
+        .api-modal-box h2 { color: var(--p5-pink-red); font-size: 28px; margin: 0 0 10px 0; text-transform: uppercase; }
+        .api-modal-box p { color: #888; font-size: 14px; margin-bottom: 25px; }
+        .api-modal-box a { color: var(--p5-pink-red); }
+        #apiKeyInput {
+            width: 100%; padding: 15px 20px; background: #1a1a1a; border: 1px solid #333;
+            border-radius: 8px; color: white; font-size: 14px; outline: none;
+            margin-bottom: 20px; box-sizing: border-box;
+        }
+        #apiKeyInput:focus { border-color: var(--p5-pink-red); }
+        .api-modal-box button {
+            background: var(--p5-pink-red); color: white; border: none;
+            padding: 14px 40px; font-weight: 900; border-radius: 8px;
+            text-transform: uppercase; font-size: 14px; letter-spacing: 2px;
+        }
+ 
+        /* ERROR TOAST */
+        .error-toast {
+            position: fixed; bottom: 30px; right: 30px; background: #1a1a1a;
+            border: 1px solid var(--p5-pink-red); border-radius: 8px; padding: 16px 24px;
+            color: white; font-size: 13px; z-index: 100000; display: none;
+            max-width: 400px; box-shadow: 0 0 20px rgba(255,31,68,0.3);
+        }
+    </style>
+</head>
+<body>
+ 
+    <div id="bg-layer"></div>
+    <nav class="v-nav"><div class="nav-btn" onclick="toggleSidebar()"></div></nav>
+ 
+    <div id="sidebar" onmouseleave="closeSidebar()">
+        <div style="text-align:center; margin-bottom:30px;"><img src="https://i.ibb.co/vYm6vS6/Take-Your-Heart.png" style="width:120px;"></div>
+        <div class="sidebar-header">STATIONS</div>
+        <div class="sidebar-item" onclick="changeHub('arcade')"><i class="fas fa-gamepad"></i> Arcade</div>
+        <div class="sidebar-item" onclick="changeHub('movie')"><i class="fas fa-film"></i> Movies</div>
+        <div class="sidebar-item" onclick="changeHub('tv')"><i class="fas fa-tv"></i> Shows</div>
+        <div class="sidebar-item" onclick="changeHub('anime')"><i class="fas fa-dragon"></i> Anime</div>
+    </div>
+ 
+    <div class="top-bar">
+        <div class="logo-text">KING'S DOMAIN</div>
+        <div id="status-text" style="font-size: 11px; opacity: 0.5; letter-spacing: 2px;">SHADOW_BLOB_V80_READY</div>
+    </div>
+ 
+    <div class="workspace" id="workspace">
+        <div id="grid-content" class="container">
+            <header class="hero-banner">
+                <h1 id="banner-text">MISSION HUB</h1>
+                <p id="banner-sub">Shadow Blob Masking Enabled. Sandbox blocks popups. Infinite scroll enabled.</p>
+            </header>
+            <input type="text" id="searchBox" placeholder="Search mission database..." onkeydown="if(event.key==='Enter') searchGlobal()">
+            <div class="grid" id="mainGrid"></div>
+            <div id="scroll-loader" style="text-align:center; padding: 40px; display:none; color:var(--p5-pink-red); font-weight:900;">SCANNING NEXT TARGETS...</div>
+        </div>
+    </div>
+ 
+    <!-- PLAYER VIEW -->
+    <div id="player-view">
+        <div class="player-bar">
+            <button class="p-btn" onclick="closePlayer()">&#8592; BACK</button>
+            <span id="playing-title" style="font-weight:900; color:var(--p5-pink-red);">MISSION IN PROGRESS</span>
+            <button class="p-btn" onclick="goFull()">FULLSCREEN</button>
+        </div>
+        <div class="main-player-area">
+            <iframe id="gameFrame"
+                    src="" allowfullscreen></iframe>
+ 
+            <div class="ep-sidebar" id="epSidebar">
+                <div class="ep-header-row">
+                    <h3>MISSION STEPS</h3>
+                    <div class="sd-toggle" id="animeToggle" style="display:none;">
+                        <button id="btn-sub" class="sd-btn active" onclick="setLang('sub')">Sub</button>
+                        <button id="btn-dub" class="sd-btn" onclick="setLang('dub')">Dub</button>
+                    </div>
+                </div>
+ 
+                <!-- DYNAMIC MIRROR NODE HUB (built by JS) -->
+                <div class="mirror-hub" id="serverHub">
+                    <h3>Mirror Nodes</h3>
+                </div>
+ 
+                <div class="ep-top-nav">
+                    <select id="seasonSelect" class="ep-select" onchange="handleSeasonChange()"></select>
+                </div>
+                <div class="ep-grid" id="epGrid"></div>
+            </div>
+        </div>
+    </div>
+ 
+    <!-- API KEY MODAL -->
+    <div class="api-modal-overlay" id="apiModal" style="display:none;">
+        <div class="api-modal-box">
+            <h2>TMDB API KEY REQUIRED</h2>
+            <p>Get a free API key at <a href="https://www.themoviedb.org/settings/api" target="_blank">themoviedb.org/settings/api</a><br>
+            (Create account &rarr; Settings &rarr; API &rarr; Copy your API Key v3 auth)</p>
+            <input type="text" id="apiKeyInput" placeholder="Paste your TMDB API key here...">
+            <br>
+            <button onclick="saveApiKey()">ACTIVATE SYSTEM</button>
+        </div>
+    </div>
+ 
+    <!-- ERROR TOAST -->
+    <div class="error-toast" id="errorToast"></div>
+ 
+    <script>
+        /* --- TMDB API KEY (stored in localStorage) --- */
+        let TMDB_KEY = localStorage.getItem('tmdb_api_key') || '';
+ 
+        /* --- UPDATED EMBED PROVIDER NODES ---
+         * Now accepts 'lang' and appends it to the URL where supported.
+         */
+        const SERVER_NODES = {
+            node1: {
+                name: "Node Alpha (111Movies)",
+                buildUrl: (type, id, s, e, lang) => {
+                    const suffix = lang === 'dub' ? '?sub_dub=dub' : '';
+                    if (type === 'movie') return `https://111movies.net/movie/${id}${suffix}`;
+                    return `https://111movies.net/tv/${id}/${s}/${e}${suffix}`;
+                }
+            },
+            node2: {
+                name: "Node Beta (MultiEmbed)",
+                buildUrl: (type, id, s, e, lang) => {
+                    const suffix = lang === 'dub' ? '&sub_dub=dub' : '';
+                    if (type === 'movie') return `https://multiembed.mov/?video_id=${id}&tmdb=1${suffix}`;
+                    return `https://multiembed.mov/?video_id=${id}&tmdb=1&s=${s}&e=${e}${suffix}`;
+                }
+            },
+            node3: {
+                name: "Node Gamma (VidLink)",
+                buildUrl: (type, id, s, e, lang) => {
+                    const suffix = lang === 'dub' ? '?sub_dub=dub' : '';
+                    if (type === 'movie') return `https://vidlink.pro/movie/${id}${suffix}`;
+                    return `https://vidlink.pro/tv/${id}/${s}/${e}${suffix}`;
+                }
+            },
+            node4: {
+                name: "Node Delta (Vidsrc.me)",
+                buildUrl: (type, id, s, e, lang) => {
+                    // Vidsrc handles sub/dub internally, but we'll try to pass lang hints
+                    if (type === 'movie') return `https://vidsrc.me/embed/movie?tmdb=${id}`;
+                    return `https://vidsrc.me/embed/tv?tmdb=${id}&sea=${s}&epi=${e}`;
+                }
+            },
+            node5: {
+                name: "Node Omega (AutoEmbed)",
+                buildUrl: (type, id, s, e, lang) => {
+                    if (type === 'movie') return `https://player.autoembed.cc/embed/movie/${id}`;
+                    return `https://player.autoembed.cc/embed/tv/${id}/${s}/${e}`;
+                }
+            }
+        };
+ 
+        let mission = {
+            id: "", type: "movie", season: 1, episode: 1,
+            lang: localStorage.getItem('p5_pref_lang') || "sub",
+            provider: localStorage.getItem('p5_pref_provider') || "node1"
+        };
+ 
+        let currentMode = "home", currentShowData = null, currentPage = 1, isFetching = false, canLoadMore = true;
+ 
+        const games = [
+            { name: "Slime Rancher", img: "https://sm.ign.com/ign_es/cover/s/slime-ranc/slime-rancher_j318.jpg", url: "slimerancher.html", isArcade: true },
+            { name: "Helltaker", img: "https://files.catbox.moe/k9d5o6.png", url: "helltaker.html", isArcade: true },
+            { name: "Slope", img: "https://sm.ign.com/ign_br/game/s/slope/slope_69qy.jpg", url: "https://kkgames.github.io/slope/", isArcade: true }
+        ];
+ 
+        const bgLayer = document.getElementById('bg-layer');
+ 
+        /* --- INIT --- */
+        (function init() {
+            if (!TMDB_KEY) {
+                document.getElementById('apiModal').style.display = 'flex';
+            }
+            buildServerButtons();
+            updateLangButtons();
+            render(games, false);
+        })();
+ 
+        function saveApiKey() {
+            const key = document.getElementById('apiKeyInput').value.trim();
+            if (key.length < 10) { showToast('API key looks too short. Please paste a valid TMDB v3 key.'); return; }
+            TMDB_KEY = key;
+            localStorage.setItem('tmdb_api_key', key);
+            document.getElementById('apiModal').style.display = 'none';
+            showToast('TMDB key saved! System activated.');
+        }
+ 
+        /* --- BUILD MIRROR NODE BUTTONS DYNAMICALLY --- */
+        function buildServerButtons() {
+            const hub = document.getElementById('serverHub');
+            hub.innerHTML = '<h3>Mirror Nodes</h3>';
+            for (const [key, node] of Object.entries(SERVER_NODES)) {
+                const btn = document.createElement('button');
+                btn.className = 'sv-node' + (key === mission.provider ? ' active' : '');
+                btn.textContent = node.name;
+                btn.onclick = () => handleServerChange(key, btn);
+                hub.appendChild(btn);
+            }
+        }
+ 
+        /* --- ERROR TOAST --- */
+        function showToast(msg, duration) {
+            const t = document.getElementById('errorToast');
+            t.textContent = msg;
+            t.style.display = 'block';
+            clearTimeout(t._timer);
+            t._timer = setTimeout(() => { t.style.display = 'none'; }, duration || 4000);
+        }
+ 
+        /* --- HUB SWITCHING --- */
+        async function changeHub(mode) {
+            if (!TMDB_KEY && mode !== 'arcade') {
+                document.getElementById('apiModal').style.display = 'flex';
+                return;
+            }
+            currentMode = mode; closeSidebar(); currentPage = 1; canLoadMore = true;
+            document.getElementById('grid-content').style.display = 'block';
+            document.getElementById('searchBox').value = '';
+            document.getElementById('mainGrid').innerHTML = '';
+ 
+            const bannerText = document.getElementById('banner-text');
+            const bannerSub = document.getElementById('banner-sub');
+ 
+            if (mode === 'arcade') {
+                bgLayer.style.backgroundImage = "linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), var(--Home-Wallpaper)";
+                bannerText.textContent = 'ARCADE';
+                bannerSub.textContent = 'Play browser games. No popups. No ads.';
+                render(games, false); canLoadMore = false;
+            } else if (mode === 'movie') {
+                bgLayer.style.backgroundImage = "linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), var(--Movie-Wallpaper)";
+                bannerText.textContent = 'MOVIES';
+                bannerSub.textContent = 'Trending movies worldwide. Click to watch.';
+                await fetchAPI(mode);
+            } else if (mode === 'tv') {
+                bgLayer.style.backgroundImage = "linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), var(--Show-Wallpaper)";
+                bannerText.textContent = 'TV SHOWS';
+                bannerSub.textContent = 'Popular shows with full season/episode navigation.';
+                await fetchAPI(mode);
+            } else if (mode === 'anime') {
+                bgLayer.style.backgroundImage = "linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), var(--Anime-Wallpaper)";
+                bannerText.textContent = 'ANIME';
+                bannerSub.textContent = 'Japanese animation. Sub and Dub support.';
+                await fetchAPI(mode);
+            }
+        }
+ 
+        /* --- TMDB FETCH --- */
+        async function fetchAPI(type, isLoadMore = false) {
+            if (isFetching || !canLoadMore || !TMDB_KEY) return;
+            isFetching = true;
+            if (isLoadMore) document.getElementById('scroll-loader').style.display = 'block';
+ 
+            try {
+                const discoverType = (type === 'movie') ? 'movie' : 'tv';
+                let url = `https://api.themoviedb.org/3/discover/${discoverType}?api_key=${TMDB_KEY}&sort_by=popularity.desc&page=${currentPage}`;
+                if (type === 'anime') url += `&with_genres=16&with_original_language=ja`;
+ 
+                const res = await fetch(url);
+                if (!res.ok) throw new Error(`TMDB API error: ${res.status}`);
+                const data = await res.json();
+ 
+                if (data.results && data.results.length > 0) {
+                    const items = data.results
+                        .filter(i => i.poster_path)
+                        .map(i => ({
+                            id: i.id,
+                            name: i.title || i.name,
+                            img: `https://image.tmdb.org/t/p/w500${i.poster_path}`,
+                            type: discoverType
+                        }));
+                    render(items, isLoadMore);
+                    currentPage++;
+                } else {
+                    canLoadMore = false;
+                }
+            } catch (err) {
+                showToast('Fetch error: ' + err.message);
+            }
+ 
+            isFetching = false;
+            document.getElementById('scroll-loader').style.display = 'none';
+        }
+ 
+        /* --- SEARCH --- */
+        async function searchGlobal() {
+            const query = document.getElementById('searchBox').value.trim();
+            if (!query) return;
+            canLoadMore = false;
+            try {
+                let url = `https://api.themoviedb.org/3/search/multi?api_key=${TMDB_KEY}&query=${encodeURIComponent(query)}`;
+                const res = await fetch(url);
+                const data = await res.json();
+                let results = data.results.filter(i => i.poster_path && i.media_type !== 'person');
+                const items = results.map(i => ({
+                    id: i.id,
+                    name: i.title || i.name,
+                    img: `https://image.tmdb.org/t/p/w500${i.poster_path}`,
+                    type: i.media_type
+                }));
+                render(items, false);
+            } catch (err) { showToast('Search failed'); }
+        }
+ 
+        /* --- RENDER GRID --- */
+        function render(data, isLoadMore) {
+            const grid = document.getElementById('mainGrid');
+            if (!isLoadMore) grid.innerHTML = '';
+            data.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `<img src="${item.img}" loading="lazy"><p>${item.name}</p>`;
+                card.onclick = () => item.isArcade ? launchArcade(item) : launchTITAN(item);
+                grid.appendChild(card);
+            });
+        }
+ 
+        /* --- LAUNCH ARCADE --- */
+        function launchArcade(game) {
+            const f = document.getElementById('gameFrame');
+            document.getElementById('player-view').style.display = 'flex';
+            document.getElementById('epSidebar').style.display = 'none';
+            document.getElementById('playing-title').innerText = game.name.toUpperCase();
+            f.src = game.url;
+        }
+ 
+        /* --- LAUNCH MOVIE/TV/ANIME PLAYER --- */
+        async function launchTITAN(item) {
+            mission.id = item.id;
+            mission.type = (item.type === 'movie') ? 'movie' : 'tv';
+ 
+            document.getElementById('player-view').style.display = 'flex';
+            document.getElementById('epSidebar').style.display = 'flex';
+            document.getElementById('playing-title').innerText = item.name.toUpperCase();
+ 
+            // Only show Sub/Dub for Anime and TV
+            document.getElementById('animeToggle').style.display = (mission.type === 'tv') ? 'flex' : 'none';
+            document.getElementById('seasonSelect').style.display = (mission.type === 'tv') ? 'block' : 'none';
+ 
+            if(mission.type === 'tv') {
+                try {
+                    const res = await fetch(`https://api.themoviedb.org/3/tv/${item.id}?api_key=${TMDB_KEY}`);
+                    currentShowData = await res.json();
+                    const sel = document.getElementById('seasonSelect');
+                    sel.innerHTML = '';
+                    currentShowData.seasons.forEach(s => {
+                        const o = document.createElement('option');
+                        o.value = s.season_number;
+                        o.innerText = `Season ${s.season_number}`;
+                        sel.appendChild(o);
+                    });
+                    mission.season = 1;
+                    sel.value = 1;
+                    buildEpGrid(1, currentShowData.seasons.find(s => s.season_number == 1).episode_count);
+                } catch (err) { showToast('Show data error'); }
+            }
+            refreshTITAN();
+        }
+ 
+        /* --- REFRESH PLAYER IFRAME (FIXED) --- */
+        function refreshTITAN() {
+            const f = document.getElementById('gameFrame');
+            const node = SERVER_NODES[mission.provider];
+            if (!node) return;
+ 
+            // We now pass the 'mission.lang' to the buildUrl function
+            const target = node.buildUrl(mission.type, mission.id, mission.season, mission.episode, mission.lang);
+            f.src = target;
+        }
+ 
+        /* --- SERVER NODE SWITCH --- */
+        function handleServerChange(nodeKey, btnEl) {
+            mission.provider = nodeKey;
+            localStorage.setItem('p5_pref_provider', nodeKey);
+            document.querySelectorAll('.sv-node').forEach(btn => btn.classList.remove('active'));
+            btnEl.classList.add('active');
+            refreshTITAN();
+        }
+ 
+        /* --- SUB/DUB (FIXED) --- */
+        function setLang(lang) {
+            mission.lang = lang;
+            localStorage.setItem('p5_pref_lang', lang);
+            updateLangButtons();
+            // Trigger refresh so the iframe reloads with the new language parameter
+            refreshTITAN();
+        }
+        function updateLangButtons() {
+            document.getElementById('btn-sub').classList.toggle('active', mission.lang === 'sub');
+            document.getElementById('btn-dub').classList.toggle('active', mission.lang === 'dub');
+        }
+ 
+        /* --- SEASON/EPISODE NAVIGATION --- */
+        function handleSeasonChange() {
+            mission.season = parseInt(document.getElementById('seasonSelect').value);
+            mission.episode = 1;
+            const sData = currentShowData.seasons.find(s => s.season_number == mission.season);
+            buildEpGrid(mission.season, sData.episode_count);
+            refreshTITAN();
+        }
+ 
+        function buildEpGrid(sn, count) {
+            const g = document.getElementById('epGrid');
+            g.innerHTML = '';
+            for (let i = 1; i <= count; i++) {
+                const b = document.createElement('button');
+                b.className = 'ep-btn';
+                b.innerText = i;
+                if (i == mission.episode) b.classList.add('active');
+                b.onclick = () => {
+                    mission.episode = i;
+                    document.querySelectorAll('.ep-btn').forEach(btn => btn.classList.remove('active'));
+                    b.classList.add('active');
+                    refreshTITAN();
+                };
+                g.appendChild(b);
+            }
+        }
+ 
+        /* --- UI HELPERS --- */
+        function toggleSidebar() { document.getElementById('sidebar').classList.toggle('active'); }
+        function closeSidebar() { document.getElementById('sidebar').classList.remove('active'); }
+        function closePlayer() {
+            document.getElementById('player-view').style.display = 'none';
+            document.getElementById('gameFrame').src = '';
+        }
+        function goFull() {
+            const f = document.getElementById('gameFrame');
+            if (f.requestFullscreen) f.requestFullscreen();
+            else if (f.webkitRequestFullscreen) f.webkitRequestFullscreen();
+        }
+ 
+        document.getElementById('workspace').addEventListener('scroll', (e) => {
+            const { scrollTop, scrollHeight, clientHeight } = e.target;
+            if (scrollTop + clientHeight >= scrollHeight - 600) fetchAPI(currentMode, true);
+        });
+    </script>
+</body>
+</html>
